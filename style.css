@@ -1,0 +1,87 @@
+body{
+    margin: 0;
+    
+}
+
+header{
+    position: fixed;
+    width: 100%;
+    max-width: calc(100vw - 388px);
+    height: 96px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px 20px 348px;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+h1{
+    width: 319px;
+    height: 24px;
+    font-size: 20px;
+    line-height: 24px;
+
+}
+
+.headerIcons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    width: 104px;
+    height: 56px;
+}
+
+.sidebar-container{
+    position: fixed;
+    width: 232px;
+    height: 100vh;
+    background-color: #2A3647;
+    padding: 64px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1;
+
+}
+
+.sideBarLinks{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 229px;
+    width: 232px;
+    gap: 15px;
+}
+
+.tasks{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 46px;
+    gap: 8px;
+    width: 100px;
+    color: white;
+}
+
+.linksBottom{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    height: 317px;
+
+}
+
+.joinlogo{
+    width: 100px;
+    height: 122px;
+}
+
+.img-sideBar{
+    width: 30px;
+    height: 30px;
+}
