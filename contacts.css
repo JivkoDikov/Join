@@ -1,0 +1,51 @@
+.contactContainer{
+    position: fixed;
+    width: 456px;
+height: 928px;
+top: 96px;
+left: 232px;
+overflow-y: scroll;
+display: flex;
+justify-content: center;
+align-items: flex-start;
+
+
+}
+
+.addContactButton{
+    width: 352px;
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #2A3647;
+    border-radius: 10px;
+    padding: 12px 0px 12px 0px;
+    background-color: #2A3647;
+    margin-top: 22.5px;
+    cursor: pointer;
+
+}
+
+.addContactButton:hover{
+    background-color: rgb(41, 171, 226);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
+    border: none;
+    cursor: pointer;
+}
+
+.addContactButtonContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    gap: 16px;
+}
+
+.addContactButtonText{
+    width: 175px;
+    height: 25px;
+    font-size: 21px;
+    line-height: 25.2px;
+    font-weight: 700;
+}

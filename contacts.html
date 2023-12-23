@@ -4,12 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="templates.css">
+    <link rel="stylesheet" href="contacts.css">
+    <link rel="stylesheet" href="fonts.css">
     <script src="script.js"></script>
 </head>
 <body onload="render()">
     <div w3-include-html="./assets/templates/join_side_bar.html"></div>
     <div w3-include-html="./assets/templates/header.html"></div>
-    
+    <div class="contactContainer">
+    <button class="addContactButton">
+        <div class="addContactButtonContainer">
+            <p class="addContactButtonText">Add New Contact</p>
+            <img src="assets/img/person_add.png" alt="">
+        </div>
+
+    </button>
+    </div>
 </body>
 </html>
