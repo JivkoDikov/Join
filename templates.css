@@ -1,6 +1,7 @@
 body{
     margin: 0;
     font-family: "Inter",sans-serif;
+    overflow: hidden;
     
 }
 
@@ -70,7 +71,6 @@ color: #29ABE2;
     width: 232px;
     height: 100vh;
     background-color: #2A3647;
-    padding: 64px 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -89,7 +89,7 @@ color: #29ABE2;
     gap: 15px;
 }
 
-.tasks{
+.links{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -101,7 +101,7 @@ color: #29ABE2;
 
 }
 
-.tasks:hover{
+.links:hover{
     background-color:#2A3D59 ;
 }
 
@@ -114,7 +114,7 @@ color: #29ABE2;
     align-items: flex-start;
     justify-content: center;
     gap: 8px;
-    height: 317px;
+    padding-bottom: 64px;
     
     
 
@@ -139,6 +139,7 @@ color: #29ABE2;
 }
 
 .joinlogo{
+    padding-top: 64px;
     width: 100px;
     height: 122px;
 }

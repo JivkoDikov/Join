@@ -8,13 +8,14 @@
     <link rel="stylesheet" href="contacts.css">
     <link rel="stylesheet" href="fonts.css">
     <script src="script.js"></script>
+    <script src="contacts.js"></script>
 </head>
-<body onload="render()">
+<body id="body"onload="render()">
     <div w3-include-html="./assets/templates/join_side_bar.html"></div>
     <div w3-include-html="./assets/templates/header.html"></div>
     <div class="contentContact">
     <div class="addcontactContainer">
-    <button class="addContactButton">
+    <button onclick="addNewContact()"class="addContactButton">
         <div class="addContactButtonContainer">
             <p class="addContactButtonText">Add New Contact</p>
             <img src="assets/img/person_add.png" alt="">
@@ -28,9 +29,78 @@
             <p class="vector">|</p>
             <h3>Better with a team</h3>
         </div>
-
-
     </div>
     </div>
+     
+    </div>
+    </div>
+    <div id="addnewcontact" class="addNewContactBackPopUpContainer overlay-addNewContactPopUpContainer">
+    <div class="addNewContactPopUpContainer ">
+        <div class="addContactPopUpLeftContainer">
+            <div class="addContactPopUpLeft">
+            <img class="addContactJoinLogo"src="assets/img/joinlogo.png" alt="">
+            <p class="addContactHeadline">Add contact</p>
+            <p class="addContactParagraph">Tasks are better with a team!</p>
+            <img class="vectorContactPopUp" src="assets/img/vector.png" alt=""> 
+            </div>
+        </div>
+        <div class="addContactPopUpRightContainer">
+            <div class="profileContactContainer">
+            <img class="profileContact"src="assets/img/profilecontact.png" alt="">
+            </div>
+              <div class="closeInputButtonsContainer">
+                <div class="xContactButton">
+                  <p onclick="closeAddNewContact()"class="closeAddContact">x</p>
+                </div>
+                <div class="inputButtonsContainer">
+                <form onsubmit="createContact()">
+                <div class="contactInput">
+                
+                <div class="inputIconsContainer">
+                <div class="contactDetails">
+                <input required minlength="3" id="name"class="input"  type="text" placeholder="Name">
+                <img class="inputIcons"src="assets/img/person.png" alt="">
+                </div>
+                </div>
+
+                <div class="inputIconsContainer">
+                <div class="contactDetails">
+                <input required id="email"class="input"   type="email" placeholder="Email">
+                <img class="inputIcons"src="assets/img/mail.png" alt="">
+                </div>
+                </div>
+
+                <div class="inputIconsContainer">
+                <div class="contactDetails">
+                <input required id="tel"class="input"  type="tel" placeholder="Phone">
+                <img class="inputIcons"src="assets/img/call.png" alt="">
+                </div>
+                
+                </div>
+                
+                </div>
+                
+
+                <div class="cancelCreateContactButtons">
+                    <button onclick="closeAddNewContact()"class="cancelBtn">
+                        <span class="cancelX">
+                    <p class="cancelText">Cancel</p>
+                    <p class="x">x</p>
+                      </span>
+                
+                    </button>
+                   <button class="createCheckBtn">
+                    <span class="createCheck">
+                    <p class="createText">Create contact</p>
+                    <img src="assets/img/check.png" alt="">
+                     </span>
+                   </button>
+                    </div>
+                    </form>
+                 </div>
+              </div>
+        </div>
+</div>
+</div>
 </body>
 </html>
