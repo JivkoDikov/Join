@@ -105,6 +105,10 @@ color: #29ABE2;
     background-color:#2A3D59 ;
 }
 
+.links:focus{
+    background-color: black;
+}
+
 
 
 

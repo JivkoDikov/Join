@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="templates.css">
     <link rel="stylesheet" href="contacts.css">
     <link rel="stylesheet" href="fonts.css">
-    <script src="script.js"></script>
-    <script src="contacts.js"></script>
+    <script defer src="script.js"></script>
+    
 </head>
 <body id="body"onload="render()">
     <div w3-include-html="./assets/templates/join_side_bar.html"></div>
     <div w3-include-html="./assets/templates/header.html"></div>
     <div class="contentContact">
-    <div class="addcontactContainer">
+    <div id="addcontactContainer" class="addcontactContainer">
     <button onclick="addNewContact()"class="addContactButton">
         <div class="addContactButtonContainer">
             <p class="addContactButtonText">Add New Contact</p>
@@ -53,26 +53,26 @@
                   <p onclick="closeAddNewContact()"class="closeAddContact">x</p>
                 </div>
                 <div class="inputButtonsContainer">
-                <form onsubmit="createContact()">
+                <form onsubmit="createContact();return false">
                 <div class="contactInput">
                 
                 <div class="inputIconsContainer">
                 <div class="contactDetails">
-                <input required minlength="3" id="name"class="input"  type="text" placeholder="Name">
+                <input required minlength="3" id="name"class="input"  type="text" placeholder="Name" autocomplete="name">
                 <img class="inputIcons"src="assets/img/person.png" alt="">
                 </div>
                 </div>
 
                 <div class="inputIconsContainer">
                 <div class="contactDetails">
-                <input required id="email"class="input"   type="email" placeholder="Email">
+                <input required id="email"class="input"   type="email" placeholder="Email" autocomplete="email">
                 <img class="inputIcons"src="assets/img/mail.png" alt="">
                 </div>
                 </div>
 
                 <div class="inputIconsContainer">
                 <div class="contactDetails">
-                <input required id="tel"class="input"  type="tel" placeholder="Phone">
+                <input required id="tel"class="input"  type="tel" placeholder="Phone" autocomplete="tel">
                 <img class="inputIcons"src="assets/img/call.png" alt="">
                 </div>
                 
@@ -103,4 +103,5 @@
 </div>
 </div>
 </body>
+<script src="contacts.js"></script>
 </html>
