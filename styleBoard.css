@@ -1,0 +1,338 @@
+
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    top: 200px;
+    left: 233px;
+    width: 1208px;
+}
+
+.boardHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1056px;
+}
+
+.boardHeader > h1 {
+    font-size: 61px;
+}
+
+.findTask {
+    display: flex;
+    justify-content: space-between;
+    width: 504px;
+    
+}
+
+.searchBar {
+    display: flex;
+    justify-content: space-between;
+    width: 280px;
+    border: solid 1px #A8A8A8;
+    border-radius: 10px;
+    background-color: #FFF;
+    padding: 8px 16px 8px 16px;
+}
+
+.searchBar > input {
+    border: none;
+    width: 200px;
+    color: #A8A8A8;
+}
+
+.searchBar > input:focus {
+    outline: none;
+}
+
+.searchBar > .btn-search {
+    border: none;
+    background: none;
+}
+
+.btn-AddTask {
+    display: flex;
+    align-items: center;
+    width: 160px;
+    height: 48px;
+    border: solid 1px #2A3647;
+    border-radius: 10px;
+    padding: 8px 16px 8px 16px;
+    font-size: 21px;
+    font-weight: 700;
+    color: #FFF;
+    background-color: #2A3647;
+}
+
+.btn-AddTask > svg > path{
+    width: 32px;
+    height: 32px;
+    fill: #FFF;
+    z-index: 3;
+}
+
+.listOfKanban {
+    display: flex;
+    justify-content: space-evenly;
+    width: 1208px;
+}
+
+.addKanban {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 252px;
+}
+
+.addKanban > svg {
+    width: 8px;
+    height: 8px;
+    border: solid 2px #2A3647;
+    border-radius: 8px;
+    padding: 3px;
+}
+
+.addKanban > span {
+    font-size: 20px;
+    font-weight: 700;
+    color: #42526E;
+}
+
+.boardDistribution {
+    display: flex;
+    justify-content: space-between;
+    align-items: space-between;
+    width: 1208px;
+    
+}
+
+.column {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 16px;
+    width: 252px;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 220px;
+    border-radius: 24px;
+    box-shadow: 0px 0px 10px 3px #00000014;
+    padding: 16px;
+}
+
+.empty {
+    border-radius: 10px;
+    border: dotted 1px #161616;
+    padding: 16px;
+    width: 220px;
+    background-color: #A8A8A8;
+}
+
+.empty > span {
+    color: #E7E7E7;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.labelsBoardCard {
+    font-size: 16px;
+    font-weight: 400;
+    padding: 4px 16px 4px 16px;
+    margin: 0;
+    border-radius: 8px;
+    background-color: #0038FF;
+    color: #FFF;
+}
+
+.content {
+    margin: 10px 0;
+}
+
+.content > h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2A3647;
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.content > span {
+    font-size: 16px;
+    font-weight: 400;
+    color: #A8A8A8;
+}
+
+.progressBar {
+    margin-bottom: 20px;
+}
+
+.progressBar > span {
+    font-size: 12px;
+}
+
+.containerProfile {
+    position: relative;
+}
+
+.imgProfile {
+    position: absolute;
+    left: 20px;
+}
+
+
+.labelProfile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 220px;
+}
+
+.overlayCard {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 525px;
+    padding: 48px 40px 48px 40px;
+    border-radius: 30px;
+    box-shadow: 0px 0px 4px 0px #00000029;
+}
+
+.overlayCard > .labelContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.overlayContent {
+    margin: 10px 0;
+}
+
+.overlayContent > h3 {
+    font-size: 61px;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.overlayContent > span {
+    font-size: 20px;
+    font-weight: 400;
+    color: #000;
+}
+
+.overlayDate {
+    display: flex;
+    margin: 25px 0;
+}
+
+.overlayDate > span:nth-child(2) {
+    margin-left: 10px;
+    color: #000;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.overlayDate > span:nth-child(1) {
+    color: #2A3647;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.overlayPriority {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlayPriority > span:nth-child(2) {
+    display: flex;
+    align-items: center;
+    margin-left: 25px;
+    font-weight: 400;
+    font-size: 20px;
+    color: #000;
+}
+
+.overlayPriority > span:nth-child(1) {
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+    font-size: 20px;
+    color: #2A3647;
+}
+
+.containerProfileName {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.containerProfileName > span {
+    font-weight: 400;
+    font-size: 20px;
+    color: #2A3647;
+}
+
+.profileName {
+    display: flex;
+    align-items: center;
+    margin: 8px;
+    color: #000;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.profileName > span {
+    margin-left: 10px;
+}
+
+.subtasks {
+    margin-top: 8px;
+}
+
+.subtasks > span {
+    font-weight: 400;
+    font-size: 20px;
+    color: #2A3647;
+}
+
+.subtasks > div > ul > li {
+    list-style: none;
+    padding: 6px 16px 6px 16px;
+    color: #000;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+input[type=checkbox]:before {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #555555;
+    border-radius: 3px;
+    background-color: white;
+}
+
+.subtasks > div > ul {
+    padding-left: 5px;
+}
+
+.btn-close {
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+}

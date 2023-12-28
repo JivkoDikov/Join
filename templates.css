@@ -1,8 +1,14 @@
 body{
     margin: 0;
+<<<<<<< HEAD:style.css
+    padding: 0;
+    font-family: Inter;
+    background-color: #dad7d720;
+=======
     font-family: "Inter",sans-serif;
     overflow: hidden;
     
+>>>>>>> c50e6429e3f2313f592b08d064516eed38029518:templates.css
 }
 
 header{
@@ -153,4 +159,7 @@ color: #29ABE2;
     height: 30px;
 }
 
+<<<<<<< HEAD:style.css
+=======
 
+>>>>>>> c50e6429e3f2313f592b08d064516eed38029518:templates.css
