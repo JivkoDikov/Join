@@ -1,20 +1,25 @@
 body{
     margin: 0;
+<<<<<<< HEAD:style.css
     padding: 0;
     font-family: Inter;
     background-color: #dad7d720;
+=======
+    font-family: "Inter",sans-serif;
+    overflow: hidden;
+    
+>>>>>>> c50e6429e3f2313f592b08d064516eed38029518:templates.css
 }
 
 header{
     position: fixed;
     width: 100%;
     max-width: calc(100vw - 388px);
-    height: 96px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 40px 20px 348px;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.1);
 }
 
 h1{
@@ -22,7 +27,40 @@ h1{
     height: 24px;
     font-size: 20px;
     line-height: 24px;
+    font-weight: 400;
 
+}
+
+.helpIcon{
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.helpIcon:hover{
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.user{
+    width: 56px;
+    height: 56px;
+    border: 3px solid #2A3647;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.user:hover{
+    background-color: #E1E5EC;
+    cursor: pointer;
+
+}
+
+.userText{
+color: #29ABE2;
 }
 
 .headerIcons{
@@ -39,7 +77,6 @@ h1{
     width: 232px;
     height: 100vh;
     background-color: #2A3647;
-    padding: 64px 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -58,7 +95,7 @@ h1{
     gap: 15px;
 }
 
-.tasks{
+.links{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -70,13 +107,12 @@ h1{
 
 }
 
-.tasks:hover{
+.links:hover{
     background-color:#2A3D59 ;
 }
 
-.tasks:active{
-    background-color: #091931;
-}
+
+
 
 .linksBottom{
     display: flex;
@@ -84,7 +120,7 @@ h1{
     align-items: flex-start;
     justify-content: center;
     gap: 8px;
-    height: 317px;
+    padding-bottom: 64px;
     
     
 
@@ -104,11 +140,12 @@ h1{
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 100px;
+    width: 110px;
     gap: 8px;
 }
 
 .joinlogo{
+    padding-top: 64px;
     width: 100px;
     height: 122px;
 }
@@ -118,3 +155,7 @@ h1{
     height: 30px;
 }
 
+<<<<<<< HEAD:style.css
+=======
+
+>>>>>>> c50e6429e3f2313f592b08d064516eed38029518:templates.css
