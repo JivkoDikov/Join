@@ -1,6 +1,8 @@
 body{
     margin: 0;
-    
+    padding: 0;
+    font-family: Inter;
+    background-color: #dad7d720;
 }
 
 header{
@@ -115,3 +117,4 @@ h1{
     width: 30px;
     height: 30px;
 }
+
