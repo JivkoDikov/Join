@@ -1,27 +1,27 @@
 @font-face {
     font-family: 'Inter Regular';
-    src: url('fonts/Inter/static/Inter-Regular.ttf') format('truetype');
+    src: url('/fonts/inter-v13-latin-regular.woff2') format('truetype');
 
 }
 @font-face {
     font-family: 'Inter 700';
-    src: url('fonts/Inter/static/Inter-Bold.ttf') format('truetype');
+    src: url('/fonts/inter-v13-latin-700.woff2') format('truetype');
 
 }
 @font-face {
     font-family: 'Inter 600';
-    src: url('fonts/Inter/static/Inter-SemiBold.ttf') format('truetype');
+    src: url('/fonts/inter-v13-latin-600.woff2') format('truetype');
 
 }
 
-body{
+/*body{
     margin: 0;
     font-family: 'Inter Regular', sans-serif;
     font-size: 18px;
     background-color: rgba(246, 247, 248, 1);
     height: 100vh;
     
-}
+}*/
 .d-none{
     display: none;
 }
@@ -58,7 +58,7 @@ a:hover{
     gap: 13px;
     flex-shrink: 0;
 }
-p{
+.doneCount p{
     font-family: 'Inter 600', sans-serif;
     text-align: center;
     font-size: 64px;
@@ -108,8 +108,8 @@ span{
 .bodySummary{
     position: relative;
     width: 560px;
-    height: 562px;
-    top: 335px;
+    height: 300px;
+    top: 240px;
     left: 328px;
     /*border: 2px solid red;*/
     
@@ -201,6 +201,7 @@ span{
     font-weight: 400;
     line-height: 120%; /* 19.2px */
     text-align: left;
+    font-family: 'Inter Regular',sans-serif;
 }
 
 
@@ -214,6 +215,9 @@ span{
 }
 
 .greetings{
+    position: relative;
+    top: 170px;
+    left: 968px;
     width: 385px;
     height: 136px;
     display: inline-flex;
@@ -221,8 +225,10 @@ span{
     justify-content: center;
     align-items: flex-start;
     gap: 3px;
-
-
+}
+.greetings p{
+    margin-block-start: 0;
+    margin-block-end: 0;
 }
 .greetings p:first-child{
     font-family: 'Inter 500',sans-serif;

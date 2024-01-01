@@ -3,9 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/templates.css">
     <title>Kanban Projekt Management Tool</title>
 </head>
 <body>
+    <div class="logo-container">
+        <img src="/assets/img/joinlogo.png" alt="Logo" class="logo">
+    </div>
     
+    <script>  
+    document.addEventListener('DOMContentLoaded', function() {
+        var logoContainer = document.querySelector('.logo-container');
+        setTimeout(function() {
+            logoContainer.classList.add('animate');
+        }, 1000);
+    });
+    </script>
 </body>
 </html>

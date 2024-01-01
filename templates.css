@@ -1,14 +1,8 @@
 body{
     margin: 0;
-<<<<<<< HEAD:style.css
     padding: 0;
     font-family: Inter;
     background-color: #dad7d720;
-=======
-    font-family: "Inter",sans-serif;
-    overflow: hidden;
-    
->>>>>>> c50e6429e3f2313f592b08d064516eed38029518:templates.css
 }
 
 header{
@@ -155,7 +149,43 @@ color: #29ABE2;
     height: 30px;
 }
 
-<<<<<<< HEAD:style.css
-=======
+/*Anpassungen von Juri*/
+.logo-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
->>>>>>> c50e6429e3f2313f592b08d064516eed38029518:templates.css
+.logo {
+    max-width: 100%;
+    max-height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Keyframe-Animationen */
+@keyframes slideAndFade {
+    0% {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-100%, -100%);
+        opacity: 0;
+    }
+}
+
+/* Animation auf das .logo-container-Element anwenden */
+.logo-container.animate {
+    animation: slideAndFade 1s 1s forwards;
+}
+
+/* Nach 1 Sekunde die Animation starten */
+.logo-container.animate .logo {
+    animation: slideAndFade 1s 1s forwards;
+}
