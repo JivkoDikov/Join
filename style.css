@@ -6,12 +6,14 @@ body{
 }
 
 header{
+    width: 100%;
     max-width: calc(100vw - 388px);
+    height: 96px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 40px 20px 348px;
-    box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
 }
 
 h1{
@@ -19,40 +21,7 @@ h1{
     height: 24px;
     font-size: 20px;
     line-height: 24px;
-    font-weight: 400;
 
-}
-
-.helpIcon{
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-}
-
-.helpIcon:hover{
-    transform: scale(1.2);
-    cursor: pointer;
-}
-
-.user{
-    width: 56px;
-    height: 56px;
-    border: 3px solid #2A3647;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-
-.user:hover{
-    background-color: #E1E5EC;
-    cursor: pointer;
-
-}
-
-.userText{
-color: #29ABE2;
 }
 
 .headerIcons{
@@ -69,6 +38,7 @@ color: #29ABE2;
     width: 232px;
     height: 100vh;
     background-color: #2A3647;
+    padding: 64px 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -87,7 +57,7 @@ color: #29ABE2;
     gap: 15px;
 }
 
-.links{
+.tasks{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -99,12 +69,13 @@ color: #29ABE2;
 
 }
 
-.links:hover{
+.tasks:hover{
     background-color:#2A3D59 ;
 }
 
-
-
+.tasks:active{
+    background-color: #091931;
+}
 
 .linksBottom{
     display: flex;
@@ -112,7 +83,7 @@ color: #29ABE2;
     align-items: flex-start;
     justify-content: center;
     gap: 8px;
-    padding-bottom: 64px;
+    height: 317px;
     
     
 
@@ -132,12 +103,11 @@ color: #29ABE2;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 110px;
+    width: 100px;
     gap: 8px;
 }
 
 .joinlogo{
-    padding-top: 64px;
     width: 100px;
     height: 122px;
 }
