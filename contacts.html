@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="contacts.css">
     <link rel="stylesheet" href="fonts.css">
     <script defer src="script.js"></script>
+    <script defer src="contacts.js"></script>
     
 </head>
 <body id="body"onload="render()">
@@ -23,12 +24,13 @@
 
     </button>
     </div>
-    <div class="contactContainer">
+    <div id="contactContainer"class="contactContainer">
         <div class="contactHeadline">
             <h2>Contacts</h2>
             <p class="vector">|</p>
             <h3>Better with a team</h3>
         </div>
+        <div id="showContact" class="contactContainerAllInfo"></div>
     </div>
     </div>
      
@@ -37,8 +39,12 @@
     <div id="addnewcontact" class="addNewContactBackPopUpContainer overlay-addNewContactPopUpContainer">
     <div class="addNewContactPopUpContainer ">
         <div class="addContactPopUpLeftContainer">
+            <div class="xButtonResponsiveContainer">
+                <p class="xButtonResponsive d-none" onclick="closeAddNewContact()">x</p>
+              </div>
             <div class="addContactPopUpLeft">
             <img class="addContactJoinLogo"src="assets/img/joinlogo.png" alt="">
+           
             <p class="addContactHeadline">Add contact</p>
             <p class="addContactParagraph">Tasks are better with a team!</p>
             <img class="vectorContactPopUp" src="assets/img/vector.png" alt=""> 
@@ -103,5 +109,5 @@
 </div>
 </div>
 </body>
-<script src="contacts.js"></script>
+
 </html>

@@ -1,19 +1,11 @@
 body{
     margin: 0;
-<<<<<<< HEAD:style.css
-    padding: 0;
-    font-family: Inter;
+    overflow-x: hidden;
+    font-family: "Inter", sans-serif;
     background-color: #dad7d720;
-=======
-    font-family: "Inter",sans-serif;
-    overflow: hidden;
-    
->>>>>>> c50e6429e3f2313f592b08d064516eed38029518:templates.css
 }
 
 header{
-    position: fixed;
-    width: 100%;
     max-width: calc(100vw - 388px);
     display: flex;
     justify-content: space-between;
@@ -104,6 +96,7 @@ color: #29ABE2;
     width: 232px;
     color: white;
     text-decoration: none;
+    background-color: #2A3647;
 
 }
 
@@ -111,9 +104,6 @@ color: #29ABE2;
     background-color:#2A3D59 ;
 }
 
-.links:focus{
-    background-color: black;
-}
 
 
 
@@ -125,6 +115,7 @@ color: #29ABE2;
     justify-content: center;
     gap: 8px;
     padding-bottom: 64px;
+    
     
     
 
@@ -159,7 +150,9 @@ color: #29ABE2;
     height: 30px;
 }
 
-<<<<<<< HEAD:style.css
-=======
+.active-link {
+    background-color: black; 
+    color: #fff; 
+  }
+  
 
->>>>>>> c50e6429e3f2313f592b08d064516eed38029518:templates.css
