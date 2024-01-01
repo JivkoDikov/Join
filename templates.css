@@ -1,19 +1,11 @@
 body{
     margin: 0;
-<<<<<<< HEAD:style.css
-    padding: 0;
-    font-family: Inter;
-    background-color: #dad7d720;
-=======
     font-family: "Inter",sans-serif;
-    overflow: hidden;
+    overflow-x: hidden;
     
->>>>>>> c50e6429e3f2313f592b08d064516eed38029518:templates.css
 }
 
 header{
-    position: fixed;
-    width: 100%;
     max-width: calc(100vw - 388px);
     display: flex;
     justify-content: space-between;
@@ -155,7 +147,3 @@ color: #29ABE2;
     height: 30px;
 }
 
-<<<<<<< HEAD:style.css
-=======
-
->>>>>>> c50e6429e3f2313f592b08d064516eed38029518:templates.css
