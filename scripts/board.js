@@ -7,53 +7,61 @@ let cards = [
         "progressBar" : 1,
         "user": "",
         "priority": "1",
-        "category": "open"
+        "category": "todo"
     },
     {
         "id" : 1,
         "label" : "User Story",
-        "headline" : "Kochwelt Page & Recipe Recommender",
+        "headline" : "Page & Recipe Recommender",
         "text": "Build start page with recipe recommendation...",
         "progressBar" : 1,
         "user": "",
         "priority": "1",
-        "category": "open"
+        "category": "todo"
     },
     {
         "id" : 2,
         "label" : "User Story",
-        "headline" : "Kochwelt Page & Recipe Recommender",
+        "headline" : "Recipe Recommender",
         "text": "Build start page with recipe recommendation...",
         "progressBar" : 1,
         "user": "",
         "priority": "1",
-        "category": "closed"
+        "category": "todo"
     },
 ]
 
 let currentDraggedElement;
 
 function updateHTML() {
-    let open = cards.filter(t => t["category"] == 'open');
-
-    document.getElementById('open').innerHTML = '';
-
-    for (let i = 0; i < open.length; i++) {
-        const element = open[i];
-        
-        document.getElementById('open').innerHTML += generateCardHTML(element);
+    let todo = cards.filter(t => t["category"] == 'todo');
+    document.getElementById('todo').innerHTML = '';
+    for (let i = 0; i < todo.length; i++) {
+        const element = todo[i];   
+        document.getElementById('todo').innerHTML += generateCardHTML(element);
     }
 
 
+    let progress = cards.filter(t => t['category'] == 'progress');
+    document.getElementById('progress').innerHTML = '';
+    for (let j = 0; j < progress.length; j++) {
+        const element = progress[j];
+        document.getElementById('progress').innerHTML += generateCardHTML(element);
+    }
 
 
-    let closed = cards.filter(t => t['category'] == 'closed');
-
-    document.getElementById('closed').innerHTML = '';
-
-    for (let j = 0; j < closed.length; j++) {
-        const element = closed[j];
-        document.getElementById('closed').innerHTML += generateCardHTML(element);
+    let feedback = cards.filter(t => t['category'] == 'feedback');
+    document.getElementById('feedback').innerHTML = '';
+    for (let j = 0; j < feedback.length; j++) {
+        const element = feedback[j];
+        document.getElementById('feedback').innerHTML += generateCardHTML(element);
+    }
+    
+    let done = cards.filter(t => t['category'] == 'done');
+    document.getElementById('done').innerHTML = '';
+    for (let j = 0; j < done.length; j++) {
+        const element = done[j];
+        document.getElementById('done').innerHTML += generateCardHTML(element);
     }
 }
 
@@ -73,10 +81,54 @@ function moveTo(category) {
     updateHTML();
 }
 
+function priority () {
+
+}
+
+function search() {
+    let search = document.getElementById('search').value.toLowerCase();
+    
+    let cardTodo = document.getElementById('todo');
+    let cardProgress = document.getElementById('progress');
+    let cardFeedback = document.getElementById('feedback');
+    let cardDone = document.getElementById('done');
+
+    updateCategory(cardTodo, 'todo', search);
+    updateCategory(cardProgress, 'progress', search);
+    updateCategory(cardFeedback, 'feedback', search);
+    updateCategory(cardDone, 'done', search);
+}
+
+function updateCategory(card, category, search) {
+    card.innerHTML = '';
+
+    for (let i = 0; i < cards.length; i++) {
+        const element = cards[i];
+        if (element['category'] === category && (element['headline'].toLowerCase().includes(search) || search === '')) {
+            card.innerHTML += generateCardHTML(element);
+        }
+    }
+}
+
+function openOverview(i) { 
+    let removeClass = document.getElementById('overlay');
+    removeClass.classList.remove('d-none');
+}
+
+
+function closeOverview() {
+    document.getElementById('openOverview').addEventListener('click', function(event) {
+        if (event.target.id === 'openOverview') {
+            let overviewElement = document.getElementById('openOverview');
+            overviewElement.classList.add('d-none');
+        }
+    });
+}
+
 
 function generateCardHTML(element) {
     return `
-    <div class="cards" draggable="true" ondragstart="startDragging(${element['id']})">
+    <div class="cards" draggable="true" ondragstart="startDragging(${element['id']})" onclick="openOverview(${element['id']})">
     <h2 class="labelsBoardCard">${element['label']}</h2>
     <div class="content">
         <h3>${element['headline']}</h3>
