@@ -3,17 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/scripts/loginscript.js"></script>
     <script src="/script.js"></script>
-    <link rel="stylesheet" href="/summaryStyle.css" />
+    <link rel="stylesheet" href="/css/summaryStyle.css" />
+    <link rel="stylesheet" href="/templates.css" />
     <title>summary</title>
   </head>
-<body>
+<body onload="render()">
+
+  <div w3-include-html="/assets/templates/join_side_bar.html"></div>
+  <div w3-include-html="/assets/templates/header.html"></div>
 
     <div class="headline">
         <h2>Join 360</h2>
         <div></div>
         <p>Key Metrics at a Glance</p>
     </div>
+
 
     <div class="bodySummary">
       <div class="summarySelektor1">
@@ -34,16 +40,14 @@
           </div>
         </div>
       </div>
-      <div class="summarySelektor2 tile">
-          <div class=""><div class="group7"><img src="/assets/img/Prio alta.svg" alt=""></div></div>
-          <div class=""><img src="/assets/img/vector.svg" alt=""></div>
-          <div class="frame68">
-            <p>October 16, 2022</p>
-            <p>Upcoming Deadline</p>
-          </div>
-          <div class="greetings">
-            <p>Good Morning,</p>
-            <p>Sofia Müller</p>
+      <div class=" tile">
+        <div class="summarySelektor2">
+          <div ><div class="group7"><img src="/assets/img/Prio alta.svg" alt=""></div></div>
+            <div ><img src="/assets/img/vector.svg" alt=""></div>
+            <div class="frame68">
+              <p>October 16, 2022</p>
+              <p>Upcoming Deadline</p>
+            </div>
           </div>
       </div>
       <div class="summarySelektor3">
@@ -66,8 +70,12 @@
           </div>
       </div>
     </div>
+    </div>
 
-
+    <div class="greetings">
+      <p>Good Morning,</p>
+      <p>Sofia Müller</p>
+    </div>
 
 </body>
 </html>

@@ -1,24 +1,29 @@
 let contactDetails = [];
+const backgroundColors = [
+  { color: 'red', },
+  { color: 'blue', },
+  { color: 'green', },
+  { color: 'yellow', },
+  
+];
 save();
 load();
-
+i= 0;
 
 async function addNewContact() {
-  document
-    .getElementById("addnewcontact")
-    .classList.add("showOverlay-addNewContactPopUpContainer");
-  document.getElementById('addnewcontact').classList.add('bodyopacity');
+  document.getElementById("addnewcontact").classList.add("showOverlay-addNewContactPopUpContainer");
+  document.getElementById('backGroundOpacityContainer').classList.remove('d-none');
+  
 }
 
 function closeAddNewContact() {
-  document
-    .getElementById("addnewcontact")
-    .classList.remove("showOverlay-addNewContactPopUpContainer");
+  document.getElementById("addnewcontact").classList.remove("showOverlay-addNewContactPopUpContainer");
+  document.getElementById('backGroundOpacityContainer').classList.add('d-none');
 }
 
 function createContact() {
   document.getElementById("addnewcontact").classList.remove("showOverlay-addNewContactPopUpContainer");
-
+  document.getElementById('backGroundOpacityContainer').classList.add('d-none');
   let name = document.getElementById("name");
   let email = document.getElementById("email");
   let tel = document.getElementById("tel");
@@ -34,13 +39,21 @@ function createContact() {
   email.value = "";
   tel.value = "";
 
+  document.getElementById("renderContactContainer").innerHTML = "";
+
   for (let i = 0; i < contactDetails.length; i++) {
     const detail = contactDetails[i];
 
-    document.getElementById("addcontactContainer").innerHTML += /*html*/ `
-  <div onclick="renderContact()"id="iconNameEmailContainer"class="iconNameEmailContainer">
+    const backgroundColor = backgroundColors[i % backgroundColors.length];
+
+    const firstLetter = detail["name"][0].toUpperCase(); 
+    const lastLetter = detail["name"].split(' ')[1]?.[0]?.toUpperCase() || ''; 
+
+    document.getElementById("renderContactContainer").innerHTML += /*html*/ `
+    <div id="firstLetterContainer" class="firstLetterContainer">${firstLetter}</div>
+  <div onclick="renderContact(${i})"id="iconNameEmailContainer"class="iconNameEmailContainer" >
     <div class="iconNameEmail">
-    <div class="firstLastLetter">JD</div>
+    <div id="firstLastLetter"class="firstLastLetter" style="background-color: ${backgroundColor.color};">${firstLetter}${lastLetter}</div>
     <div class="nameEmail">
   <div class="name">${detail["name"]}</div>
   <div class="email">${detail["email"]}</div>
@@ -53,14 +66,20 @@ function createContact() {
 
   for (let i = 0; i < contactDetails.length; i++) {
     const detail = contactDetails[i];
+    
+    
+
+    const firstLetter = detail["name"][0].toUpperCase(); 
+    const lastLetter = detail["name"].split(' ')[1]?.[0]?.toUpperCase() || ''; 
+   
     document.getElementById("showContact").innerHTML = /*html*/ `
-  <div id="contactContainerContact" class="contactContainerContact overlay-contactContainerContact">
+  <div id="contactContainerContact" class="contactContainerContact overlay-contactContainerContact ">
     <div class="contactContainerContactIconName">
-      <div class="contactContainerContactIcon">JD</div>
+      <div id="contactContainerContactIcon"class="contactContainerContactIcon">${firstLetter}${lastLetter}</div>
       <div class="nameEditDelete">
-        <div class="contactContainerContactName">${detail["name"]}</div>
+        <div id="contactContainerContactName"class="contactContainerContactName">${detail["name"]}</div>
         <div class="editDeleteContainer">
-        <div class="iconEdit">
+        <div onclick="editContact()"class="iconEdit">
         <svg class="svgIcons"width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <mask id="mask0_119188_2072" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
             <rect width="24" height="24" fill="#D9D9D9"/>
@@ -93,25 +112,42 @@ function createContact() {
     <div class="emailPhone">
       <div class="emailContainer">
         <p class="emailtext">Email</p>
-        <p class="emailadress">${detail["email"]}</p>
+        <p id="emailadress"class="emailadress">${detail["email"]}</p>
       </div>
       <div class="phoneContainer">
         <p class="phone">Phone</p>
-        <p class="tel">${detail["tel"]}</p>
+        <p id="telnumber"class="tel">${detail["tel"]}</p>
       </div>
     </div>
   </div>
   `;
+ 
+ const lastAddedBackgroundColor = backgroundColors[(contactDetails.length - 1) % backgroundColors.length];
+  document.getElementById("contactContainerContactIcon").style.backgroundColor = lastAddedBackgroundColor.color;
+}
 
 }
-}
 
-function renderContact() {
-  
-  
 
+function renderContact(index) {
+  const selectedContact = contactDetails[index];
 document.getElementById('contactContainer').classList.add('backgroundColorContact');
 document.getElementById('contactContainerContact').classList.add('showoverlay-contactContainerContact');
+document.getElementById('contactContainerContactName').innerHTML = selectedContact.name;
+document.getElementById('emailadress').innerHTML = selectedContact.email;
+document.getElementById('telnumber').innerHTML = selectedContact.tel;
+  }
+
+  function editContact(){
+    document.getElementById("editcontact").classList.add("showOverlay-addNewContactPopUpContainer");
+  document.getElementById('backGroundOpacityContainer').classList.remove('d-none');
+document.getElementById('editname').value =`${contactDetails[i]["name"]}`;
+document.getElementById('editemail').value =`${contactDetails[i]["email"]}`;
+document.getElementById('edittel').value =`${contactDetails[i]["tel"]}`;
+  }
+  function closeEditContact(){
+    document.getElementById("editcontact").classList.remove("showOverlay-addNewContactPopUpContainer");
+    document.getElementById('backGroundOpacityContainer').classList.add('d-none');
   }
 
 function save() {

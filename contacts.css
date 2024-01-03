@@ -76,9 +76,15 @@ h2 {
   color: #000000;
 }
 
-.vector {
-  font-size: 42px;
-  color: #29abe2;
+.vectorPerpendicularContainer {
+  height: 59px;
+  border: 3px solid #29abe2;
+}
+.vectorPerpendicularContainerh3{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
 }
 
 h3 {
@@ -91,7 +97,6 @@ h3 {
 }
 
 .addNewContactPopUpContainer {
-  padding-bottom: 15px;
   display: flex;
   width: 1212px;
   height: 592px;
@@ -107,6 +112,15 @@ h3 {
 .showOverlay-addNewContactPopUpContainer {
   transform: translateX(0) !important;
   transition: all 225ms ease-in-out;
+}
+
+.backGroundOpacityContainer{
+  background-color: rgba(0,0,0,0.2);
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  position: absolute;
+  top: 0;
 }
 
 .addNewContactBackPopUpContainer {
@@ -392,17 +406,16 @@ input:focus {
   font-family: "Inter", sans-serif;
 }
 
-.bodyopacity {
-  background-color: rgba(0, 0, 0, 0.2);
-}
+
 
 .iconNameEmailContainer {
   display: flex;
   width: 352px;
-  padding: 15px 24px;
+ 
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   cursor: pointer;
+  border-radius: 10px;
 }
 
 .iconNameEmailContainer:hover {
@@ -414,10 +427,10 @@ input:focus {
   justify-content: center;
   align-items: center;
   gap: 35px;
+  padding: 15px 24px;
 }
 
 .firstLastLetter {
-  background: orangered;
   border-radius: 45px;
   width: 42px;
   height: 42px;
@@ -630,138 +643,12 @@ input:focus {
   transition: all 225ms ease-in-out;
 }
 
+.d-inline{
+  display: inline !important;
+}
+
 .d-none{
   display: none;
 }
 
-@media (max-width: 1230px) {
-  .addNewContactPopUpContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 760px;
-    width: 396px;
-    border-radius: 30px;
-  }
-  .addContactPopUpLeftContainer {
-    width: 396px;
-    height: 352px;
-    gap: 12px;
-    border-bottom-left-radius: 0px;
-    border-top-right-radius: 30px;
-    border-top-left-radius: 30px;
-    justify-content: unset;
-    align-items: unset;
-  }
-  .addContactPopUpRightContainer {
-    width: 396px;
-    height: 408px;
-    display: flex;
-    flex-direction: column;
-    border-bottom-right-radius: 0px;
-    border-top-right-radius: 0px;
-  }
-
-  .profileContactContainer {
-    margin-top: -60px;
-  }
-
-  .cancelCreateContactButtons {
-    padding-top: 0;
-  }
-
-  .inputButtonsContainer {
-    padding-top: 0;
-  }
-
-  .closeInputButtonsContainer {
-    padding-top: 0;
-    padding-right: 0;
-    border-bottom-right-radius: 0px;
-  }
-
-  .contactInput {
-    gap: 15px;
-    width: 364px;
-  }
-
-  .addContactPopUpLeft {
-    padding-top: 24px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 24px;
-    gap: 16px;
-    width: 282px;
-    height: 104px;
-  }
-
-  .addContactJoinLogo {
-    display: none;
-  }
-
-  .addContactHeadline {
-    width: 282px;
-    height: 56px;
-    line-height: 56.4px;
-    font-size: 47px;
-  }
-
-  .addContactParagraph {
-    width: 275px;
-    height: 24px;
-    line-height: 24px;
-    font-size: 20px;
-  }
-
-  .inputIconsContainer {
-    height: 41px;
-    padding: 13px 21px;
-    gap: 10px;
-    width: auto;
-  }
-
-  .xContactButton {
-    display: none;
-  }
-
-  .cancelBtn {
-    display: none;
-  }
-
-  .cancelCreateContactButtons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .createCheckBtn {
-    width: 202px;
-    height: 51px;
-    padding: 18px, 10px;
-    border-radius: 10px;
-    gap: 4px;
-  }
-
-
-  .xButtonResponsiveContainer{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-  
-  .xButtonResponsive{
-    text-align: center;
-    width: 67px;
-    height: 32px;
-    font-size: 24px;
-    cursor: pointer;
-    display: inline !important;
-
-  }
-
-  .xButtonResponsive:hover{
-    transform: scale(1.2);
-  }
-}
 
