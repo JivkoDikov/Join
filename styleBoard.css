@@ -1,4 +1,7 @@
 
+.d-none {
+    display: none;
+}
 
 main {
     display: flex;
@@ -21,8 +24,7 @@ main {
 .findTask {
     display: flex;
     justify-content: space-between;
-    width: 504px;
-    
+    width: 504px;  
 }
 
 .searchBar {
@@ -335,3 +337,4 @@ input[type=checkbox]:before {
 .dropWindow {
     height: 100%;
 }
+
