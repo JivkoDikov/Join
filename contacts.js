@@ -25,6 +25,4 @@ function createContact(){
 
   contactDetails.push(contactDetail);
   console.log(contactDetails);
-  
-
 }
