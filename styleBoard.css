@@ -1,7 +1,4 @@
 
-.d-none {
-    display: none;
-}
 
 main {
     display: flex;
@@ -205,6 +202,7 @@ main {
     padding: 48px 40px 48px 40px;
     border-radius: 30px;
     box-shadow: 0px 0px 4px 0px #00000029;
+    background-color: #FFF;
 }
 
 .overlayCard > .labelContent {
@@ -338,3 +336,20 @@ input[type=checkbox]:before {
     height: 100%;
 }
 
+
+.d-none {
+    display: none;
+}
+
+.overview {
+    background-color: rgba(85, 85, 85, 0.145);
+    z-index: 9999;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
