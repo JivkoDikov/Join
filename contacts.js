@@ -1,4 +1,19 @@
-let contactDetails = [];
+let profile ={
+  "id" : 0,
+  "label" : "User Story",
+  "headline" : "Kochwelt Page & Recipe Recommender",
+  "text": "Build start page with recipe recommendation...",
+  "progressBar" : 1,
+  "user": "",
+  "priority": "1",
+  "category": "progress",
+  "contactDetails":[]
+}
+  
+
+
+
+
 const backgroundColors = [
   { color: 'red', },
   { color: 'blue', },
@@ -33,16 +48,16 @@ function createContact() {
     email: email.value,
     tel: tel.value,
   };
-  contactDetails.push(contactDetail);
-  console.log(contactDetails);
+  profile["contactDetails"].push(contactDetail);
+  console.log(profile);
   name.value = "";
   email.value = "";
   tel.value = "";
 
   document.getElementById("renderContactContainer").innerHTML = "";
 
-  for (let i = 0; i < contactDetails.length; i++) {
-    const detail = contactDetails[i];
+  for (let i = 0; i < profile["contactDetails"].length; i++) {
+    const detail = profile["contactDetails"][i];
 
     const backgroundColor = backgroundColors[i % backgroundColors.length];
 
@@ -64,8 +79,8 @@ function createContact() {
   `;
   }
 
-  for (let i = 0; i < contactDetails.length; i++) {
-    const detail = contactDetails[i];
+  for (let i = 0; i < profile["contactDetails"].length; i++) {
+    const detail = profile["contactDetails"][i];
     
     
 
@@ -122,7 +137,7 @@ function createContact() {
   </div>
   `;
  
- const lastAddedBackgroundColor = backgroundColors[(contactDetails.length - 1) % backgroundColors.length];
+ const lastAddedBackgroundColor = backgroundColors[(profile["contactDetails"].length - 1) % backgroundColors.length];
   document.getElementById("contactContainerContactIcon").style.backgroundColor = lastAddedBackgroundColor.color;
 }
 
@@ -130,7 +145,7 @@ function createContact() {
 
 
 function renderContact(index) {
-  const selectedContact = contactDetails[index];
+  const selectedContact =  profile["contactDetails"][index];
 document.getElementById('contactContainer').classList.add('backgroundColorContact');
 document.getElementById('contactContainerContact').classList.add('showoverlay-contactContainerContact');
 document.getElementById('contactContainerContactName').innerHTML = selectedContact.name;
@@ -141,9 +156,9 @@ document.getElementById('telnumber').innerHTML = selectedContact.tel;
   function editContact(){
     document.getElementById("editcontact").classList.add("showOverlay-addNewContactPopUpContainer");
   document.getElementById('backGroundOpacityContainer').classList.remove('d-none');
-document.getElementById('editname').value =`${contactDetails[i]["name"]}`;
-document.getElementById('editemail').value =`${contactDetails[i]["email"]}`;
-document.getElementById('edittel').value =`${contactDetails[i]["tel"]}`;
+document.getElementById('editname').value =`${profile["contactDetails"][i]["name"]}`;
+document.getElementById('editemail').value =`${profile["contactDetails"][i]["email"]}`;
+document.getElementById('edittel').value =`${profile["contactDetails"][i]["tel"]}`;
   }
   function closeEditContact(){
     document.getElementById("editcontact").classList.remove("showOverlay-addNewContactPopUpContainer");
@@ -151,14 +166,14 @@ document.getElementById('edittel').value =`${contactDetails[i]["tel"]}`;
   }
 
 function save() {
-  let contactDetailsAsText = JSON.stringify(contactDetails);
-  localStorage.setItem("contactDetails", contactDetailsAsText);
+  let profileAsText = JSON.stringify(profile);
+  localStorage.setItem( "profile", profileAsText);
 }
 
 function load() {
-  let contactDetailsAsText = localStorage.getItem("contactDetails");
-  if (contactDetailsAsText) {
-    contactDetails = JSON.parse(contactDetailsAsText);
+  let profileAsText = localStorage.getItem("profile");
+  if(profileAsText){
+    profile = JSON.parse(profileAsText);
   }
 }
 
