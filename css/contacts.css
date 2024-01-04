@@ -666,9 +666,9 @@ input:focus {
   transition: all 225ms ease-in-out;
 }
 
-.showoverlay-contactContainerContact{
-  transform: translateX(0px);
-  transition: all 225ms ease-in-out;
+.showOverlay-contactContainerContact{
+  transform: translateX(0px) !important;
+  transition: all 225ms ease-in-out !important;
 }
 
 .d-inline{

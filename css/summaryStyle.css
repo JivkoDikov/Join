@@ -209,7 +209,7 @@ span{
 .summarySelektor3{
     display: flex;
     height: 170px;
-    padding: 1px 0px;
+    padding-bottom: 25px;
     justify-content: center;
     align-items: flex-start;
     gap: 28px;
