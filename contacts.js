@@ -7,18 +7,26 @@ let profile ={
   "user": "",
   "priority": "1",
   "category": "progress",
-  "contactDetails":[]
+  "contactDetails":[],
+  "backgroundColors": [
+    { color: 'rgb(147, 39, 255)', },
+    { color: 'rgb(110, 82, 255)', },
+    { color: 'rgb(252, 113, 255)', },
+    { color: 'rgb(255, 122, 0)', },
+    { color: 'rgb(31, 215, 193)', },
+    { color: 'rgb(70, 47, 138)', }
+    
+  ]
+
 }
   
-
-
-
-
-const backgroundColors = [
-  { color: 'red', },
-  { color: 'blue', },
-  { color: 'green', },
-  { color: 'yellow', },
+ const backgroundColors = [
+  { color: 'rgb(147, 39, 255)', },
+  { color: 'rgb(110, 82, 255)', },
+  { color: 'rgb(252, 113, 255)', },
+  { color: 'rgb(255, 112, 0)', },
+  { color: 'rgb(31, 215, 193)', },
+  { color: 'rgb(70, 47, 138)', }
   
 ];
 save();
@@ -88,7 +96,7 @@ function createContact() {
     const lastLetter = detail["name"].split(' ')[1]?.[0]?.toUpperCase() || ''; 
    
     document.getElementById("showContact").innerHTML = /*html*/ `
-  <div id="contactContainerContact" class="contactContainerContact overlay-contactContainerContact ">
+  <div id="contactContainerContact" class="contactContainerContact ">
     <div class="contactContainerContactIconName">
       <div id="contactContainerContactIcon"class="contactContainerContactIcon">${firstLetter}${lastLetter}</div>
       <div class="nameEditDelete">
@@ -141,16 +149,19 @@ function createContact() {
   document.getElementById("contactContainerContactIcon").style.backgroundColor = lastAddedBackgroundColor.color;
 }
 
+
 }
 
 
 function renderContact(index) {
+  
   const selectedContact =  profile["contactDetails"][index];
 document.getElementById('contactContainer').classList.add('backgroundColorContact');
 document.getElementById('contactContainerContact').classList.add('showoverlay-contactContainerContact');
 document.getElementById('contactContainerContactName').innerHTML = selectedContact.name;
 document.getElementById('emailadress').innerHTML = selectedContact.email;
 document.getElementById('telnumber').innerHTML = selectedContact.tel;
+
   }
 
   function editContact(){
