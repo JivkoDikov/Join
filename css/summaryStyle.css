@@ -83,7 +83,7 @@ span{
     font-family: 'Inter 700', sans-serif;
     font-size: 61px;
     height: 73px;
-    top: 206px;
+    top: 100px;
     left: 328px;
 }
 
@@ -109,7 +109,7 @@ span{
     position: relative;
     width: 560px;
     height: 300px;
-    top: 240px;
+    top: 150px;
     left: 328px;
     /*border: 2px solid red;*/
     
@@ -139,7 +139,6 @@ span{
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 .doneImg{
     width: 69px;
@@ -183,7 +182,7 @@ span{
     justify-content: center;
     align-items: center;
 }
-.frame68 p:first-child{
+.frame68 span:first-child{
     text-align: left;
     display: flex;
     flex-direction: column;
@@ -193,8 +192,9 @@ span{
     font-family: 'Inter 700',sans-serif;
     font-size: 21px !important;
     font-style: normal;
+    width: auto;
 }
-.frame68 p:nth-child(2){
+.frame68 span:nth-child(2){
     color: #2A3647;
     font-size: 16px;
     font-style: normal;
@@ -216,7 +216,7 @@ span{
 
 .greetings{
     position: relative;
-    top: 170px;
+    top: 95px;
     left: 968px;
     width: 385px;
     height: 136px;
@@ -286,4 +286,13 @@ span{
     text-align: center;
     letter-spacing: 0;
     line-height: 25.2px;
+  }
+
+  .hoverCube:hover,
+  .hoverCube:hover span {
+      transform: scale(1.05);
+      background-color: #2A3647;
+      transition: transform 0.3s ease-in-out;
+      color: white;
+      border-radius: 30px;
   }
