@@ -1,0 +1,29 @@
+
+@media screen and (max-width: 879px){
+    .login {
+        padding: 48px 0px;
+
+
+    }
+}
+@media screen and (max-width: 655px){
+    .login {
+        width: 500px;
+
+
+    }
+}
+@media screen and (max-width: 507px){
+    .login {
+        width: 400px;
+    }
+    .input-container {
+        width: auto;
+    }
+    .footerLoginForm {
+        width: auto;
+    }
+    .login form {
+        width: auto;
+    }
+}
