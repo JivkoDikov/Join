@@ -110,7 +110,15 @@ color: #29ABE2;
 }
 
 
+.link-text{
+font-family: "Inter",sans-serif;
+font-size: 16px;
+font-weight: 400;
+line-height: 19px;
+letter-spacing: 0em;
+text-align: center;
 
+}
 
 
 .linksBottom{
