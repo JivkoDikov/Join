@@ -15,7 +15,7 @@ async function includeHTML() {
 
  function render(){
  includeHTML();
- 
+ addActiveStyle();
 
 
 
@@ -33,5 +33,7 @@ function addActiveStyle(){
   
 
 }
+
+
 
 

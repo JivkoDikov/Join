@@ -240,3 +240,17 @@ function load() {
 }
 
 
+function openOrCloseHeaderLinksPopUp(){
+ let isClicked = true;
+ if(isClicked){
+  document.getElementById('headerLinkPopUp').classList.remove('d-none');
+  isClicked = false;
+ }else{
+  document.getElementById('headerLinkPopUp').classList.add('d-none');
+  isClicked = true;
+
+
+ }
+
+}
+
