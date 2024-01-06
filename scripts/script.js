@@ -15,7 +15,8 @@ async function includeHTML() {
 
  function render(){
  includeHTML();
-updateHTML();
+ 
+
 
 
 }
