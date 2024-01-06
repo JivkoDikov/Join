@@ -1,0 +1,51 @@
+@media screen and (max-width: 1440px){
+    .greetings p:first-child{
+        font-family: 'Inter 500',sans-serif;
+        font-size: 40px;
+        color: #2A3647;
+    }
+    .greetings p:nth-child(2){
+        font-family: 'Inter 700',sans-serif;
+        font-size: 50px;
+        color: rgba(41, 171, 226, 1);
+    }
+}
+@media screen and (max-width: 1280px){
+    .greetings{
+        display: none;
+    }
+
+}
+@media screen and (max-width: 1017px){
+    .headline h2{
+        font-size: 50px;
+        width: auto;
+        height: auto;
+    }
+    
+    .headline div {
+        height:40px;
+        width: 3px;
+        background-color: rgba(41, 171, 226, 1);
+        margin-right: 16px;
+    }
+    .headline p{
+        font-family: 'Inter 400',sans-serif;
+        font-size: 27px;
+        color: rgba(42, 54, 71, 1);
+    }
+
+}
+
+@media screen and (max-width: 971px){
+    .headline {
+        left: 250px;
+    }
+    .bodySummary{
+        left: 250px;
+    }
+    .headline h2{
+        font-size: 42px;
+
+    }
+}
