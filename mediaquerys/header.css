@@ -1,0 +1,30 @@
+@media (max-width:810px){
+    h1{
+        text-align: center;
+    }
+}
+
+@media (max-width:800px){
+    h1,.helpIcon{
+        display: none;
+    }
+
+    header{
+        max-width: unset;
+        padding: 20px 40px 20px;
+    }
+
+    .headerIcons{
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+    }
+
+    .joinlogoHeader{
+        display: inline !important;
+        width: 32px;
+        height: 39px;
+    }
+}

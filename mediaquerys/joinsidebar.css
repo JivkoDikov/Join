@@ -35,8 +35,8 @@
     width: 76px;
 }
 
-.links:hover{
-    border-radius: 8px;
+.links:hover,.link-container:hover{
+    border-radius: 20px;
 }
     
 .link-text{
