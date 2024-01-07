@@ -17,8 +17,6 @@ async function includeHTML() {
  includeHTML();
  addActiveStyle();
 
-
-
 }
 
 function addActiveStyle(){
@@ -30,10 +28,4 @@ function addActiveStyle(){
     });
   });
 
-  
-
 }
-
-
-
-

@@ -11,7 +11,10 @@
 
     header{
         max-width: unset;
-        padding: 20px 40px 20px;
+        height: 80px;
+        width: 100vw;
+        padding: unset;
+        
     }
 
     .headerIcons{
@@ -19,6 +22,7 @@
         display: flex;
         justify-content: flex-end;
         align-items: center;
+        padding-right: 16px;
 
     }
 
@@ -26,5 +30,10 @@
         display: inline !important;
         width: 32px;
         height: 39px;
+        padding-left: 16px;
+    }
+    .user{
+        width: 40px;
+        height: 40px;
     }
 }
