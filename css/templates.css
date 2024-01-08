@@ -2,17 +2,75 @@ body{
     margin: 0;
     overflow-x: hidden;
     font-family: "Inter", sans-serif;
-    background-color: #dad7d720;
+    
 }
 
 header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     max-width: calc(100vw - 388px);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 40px 20px 348px;
     box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    background-color: #fff;
 }
+
+
+.headerLinkPopUp{
+    height: 158px;
+    width: 150px;
+    position: absolute;
+    top: 96px;
+    right: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #2A3647;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 10px;
+    margin-right: 12px;
+
+    
+
+}
+
+.headerLinks{
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    height: 46px;
+    width: 130px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 24px;
+    font-size: 16px;
+    font-family: 'Inter',sans-serif;
+    font-weight: 400;
+ 
+}
+
+.headerLinks:hover{
+    background-color: #2A3D59;
+}
+
+.headerLinksContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
 
 h1{
     width: 319px;
@@ -73,7 +131,7 @@ color: #29ABE2;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    z-index: 1;
+    z-index: 2;
 
 }
 
@@ -105,8 +163,19 @@ color: #29ABE2;
 }
 
 
+.link-text{
+font-family: "Inter",sans-serif;
+font-size: 16px;
+font-weight: 400;
+line-height: 19px;
+letter-spacing: 0em;
+text-align: center;
 
+}
 
+.links.active{
+    background-color: black;
+}
 
 .linksBottom{
     display: flex;

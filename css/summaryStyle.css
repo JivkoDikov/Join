@@ -83,7 +83,7 @@ span{
     font-family: 'Inter 700', sans-serif;
     font-size: 61px;
     height: 73px;
-    top: 80px;
+    top: 120px;
     left: 328px;
     max-width: calc(100vw - 388px);
 }
@@ -95,10 +95,10 @@ span{
 }
 
 .headline div {
-    height:59px; /* Höhe des Strichs */
+    height:59px;
     width: 3px;
     background-color: rgba(41, 171, 226, 1);
-    margin-right: 16px; /* Abstand zwischen dem Strich und dem Text */
+    margin-right: 16px;
 }
 .headline p{
     font-family: 'Inter 400',sans-serif;
@@ -110,7 +110,7 @@ span{
     position: relative;
     width: 560px;
     height: 300px;
-    top: 130px;
+    top: 180px;
     left: 328px;
     /*border: 2px solid red;*/
     
@@ -217,9 +217,9 @@ span{
 
 .greetings{
     position: relative;
-    top: 25px;
+    top: 77px;
     left: 968px;
-    width: 385px;
+    width: auto;
     height: 136px;
     display: inline-flex;
     flex-direction: column;

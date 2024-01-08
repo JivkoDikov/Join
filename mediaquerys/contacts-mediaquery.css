@@ -37,28 +37,6 @@
   
 }
 
-@media (max-width:1030px){
-  .contactHeadline,.contactContainerAllInfo{
-    padding-left: 0;
-  }
-
-  h2,.contactContainerContactName{
-    font-size: 27px;
-  }
-
-  h3{
-    font-size: 20px;
-  }
-
-  .addcontactContainer{
-    width: 380px;
-  }
-
-  .contactContainer{
-    width: calc(100vw - 610px);
-  }
-  
-}
 
 @media (max-width: 1230px) {
     .addNewContactPopUpContainer {
@@ -193,36 +171,58 @@
     }
   }
 
+  @media (max-width:1030px){
+    .contactHeadline,.contactContainerAllInfo{
+      padding-left: 0;
+    }
+  
+    h2,.contactContainerContactName{
+      font-size: 27px;
+    }
+  
+    h3{
+      font-size: 20px;
+    }
+  
+    .addcontactContainer{
+      width: 380px;
+    }
+  
+    .contactContainer{
+      width: calc(100vw - 610px);
+    }
+    
+  }
+
+  @media (max-width:800px){
+    .contentContact{
+      padding-left: 0;
+    }
+
+    .addButtonContainer,.contactContainer{
+      display: none;
+    }
+    .addcontactContainer{
+      width: 100vw;
+    }
+
+  }
+
+  @media (max-width:760px){
+    .addContactPopUpLeftContainer,.addContactPopUpRightContainer{
+      width: 100%;
+    }
+
+    .addNewContactPopUpContainer{
+      width: 100%;
+      height: 100%;
+    }
+
+  }
   
 
   @media (max-width: 480px) {
-    .addNewContactPopUpContainer {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 760px;
-      width: 396px;
-      border-radius: 30px;
-    }
-    .addContactPopUpLeftContainer {
-      width: 396px;
-      height: 352px;
-      gap: 12px;
-      border-bottom-left-radius: 0px;
-      border-top-right-radius: 30px;
-      border-top-left-radius: 30px;
-      justify-content: unset;
-      align-items: unset;
-    }
-    .addContactPopUpRightContainer {
-      width: 396px;
-      height: 408px;
-      display: flex;
-      flex-direction: column;
-      border-bottom-right-radius: 0px;
-      border-top-right-radius: 0px;
-    }
+   
   
     .profileContactContainer {
       margin-top: -60px;
@@ -236,15 +236,10 @@
       padding-top: 0;
     }
   
-    .closeInputButtonsContainer {
-      padding-top: 0;
-      padding-right: 0;
-      border-bottom-right-radius: 0px;
-    }
   
     .contactInput {
       gap: 15px;
-      width: 364px;
+      width: 330px;
     }
   
     .addContactPopUpLeft {

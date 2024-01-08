@@ -1,12 +1,4 @@
 let profile ={
-  "id" : 0,
-  "label" : "User Story",
-  "headline" : "Kochwelt Page & Recipe Recommender",
-  "text": "Build start page with recipe recommendation...",
-  "progressBar" : 1,
-  "user": "",
-  "priority": "1",
-  "category": "progress",
   "contactDetails":[],
   "backgroundColors": [
     { color: 'rgb(147, 39, 255)', },
@@ -71,6 +63,7 @@ function createContact() {
 
     const firstLetter = detail["name"][0].toUpperCase(); 
     const lastLetter = detail["name"].split(' ')[1]?.[0]?.toUpperCase() || ''; 
+    
 
     document.getElementById("renderContactContainer").innerHTML += /*html*/ `
     <div id="firstLetterContainer" class="firstLetterContainer">${firstLetter}</div>
@@ -86,6 +79,7 @@ function createContact() {
   </div>
   `;
   }
+   
 
   for (let i = 0; i < profile["contactDetails"].length; i++) {
     const detail = profile["contactDetails"][i];
@@ -102,7 +96,7 @@ function createContact() {
       <div class="nameEditDelete">
         <div id="contactContainerContactName"class="contactContainerContactName">${detail["name"]}</div>
         <div class="editDeleteContainer">
-        <div onclick="editContact()"class="iconEdit">
+        <div onclick="editContact(${i})"class="iconEdit">
         <svg class="svgIcons"width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <mask id="mask0_119188_2072" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
             <rect width="24" height="24" fill="#D9D9D9"/>
@@ -114,7 +108,7 @@ function createContact() {
           <p>Edit</p>
         </div>
 
-      <div class="iconDelete">
+      <div onclick="deleteContact(${i})"class="iconDelete">
       <svg class="svgIcons"width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
            <mask id="mask0_119188_3520" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
            <rect width="24" height="24" fill="#D9D9D9"/>
@@ -153,23 +147,72 @@ function createContact() {
 }
 
 
+
+
+
+
+
+
+function renderContacts() {
+  document.getElementById("renderContactContainer").innerHTML = "";
+
+  for (let i = 0; i < profile["contactDetails"].length; i++) {
+    const detail = profile["contactDetails"][i];
+
+    const backgroundColor = backgroundColors[i % backgroundColors.length];
+
+    const firstLetter = detail["name"][0].toUpperCase();
+    const lastLetter =
+      detail["name"].split(" ")[1]?.[0]?.toUpperCase() || "";
+
+    document.getElementById("renderContactContainer").innerHTML += /*html*/ `
+    <div id="firstLetterContainer" class="firstLetterContainer">${firstLetter}</div>
+    <div onclick="renderContact(${i})" id="iconNameEmailContainer" class="iconNameEmailContainer" >
+      <div class="iconNameEmail">
+      <div id="firstLastLetter" class="firstLastLetter" style="background-color: ${backgroundColor.color};">${firstLetter}${lastLetter}</div>
+      <div class="nameEmail">
+    <div class="name">${detail["name"]}</div>
+    <div class="email">${detail["email"]}</div>
+    </div>
+    </div>
+
+    </div>
+    `;
+  }
+}
+
+
 function renderContact(index) {
   
   const selectedContact =  profile["contactDetails"][index];
 document.getElementById('contactContainer').classList.add('backgroundColorContact');
-document.getElementById('contactContainerContact').classList.add('showoverlay-contactContainerContact');
+document.getElementById('contactContainerContact').classList.add('showOverlay-contactContainerContact');
+document.getElementById('showContact').classList.remove('overlay-contactContainerContact')
 document.getElementById('contactContainerContactName').innerHTML = selectedContact.name;
 document.getElementById('emailadress').innerHTML = selectedContact.email;
 document.getElementById('telnumber').innerHTML = selectedContact.tel;
+document.getElementById('contactContainerContactIcon').innerHTML = `${firstLetter+lastLetter}`;
+document.getElementById('contactContainerContactIcon').style.backgroundColor = backgroundColor.color;
 
-  }
+}
 
-  function editContact(){
+function deleteContact(index){
+  profile["contactDetails"].splice(index, 1);
+  save();
+  load();
+  renderContacts();
+  document.getElementById('showContact').classList.add('overlay-contactContainerContact');
+  document.getElementById('showContact').classList.remove('showOverlay-contactContainerContact');
+console.log(profile)
+}
+
+  function editContact(index){
+    const selectedContact =  profile["contactDetails"][index];
     document.getElementById("editcontact").classList.add("showOverlay-addNewContactPopUpContainer");
   document.getElementById('backGroundOpacityContainer').classList.remove('d-none');
-document.getElementById('editname').value =`${profile["contactDetails"][i]["name"]}`;
-document.getElementById('editemail').value =`${profile["contactDetails"][i]["email"]}`;
-document.getElementById('edittel').value =`${profile["contactDetails"][i]["tel"]}`;
+document.getElementById('editname').value = selectedContact.name;
+document.getElementById('editemail').value = selectedContact.email;
+document.getElementById('edittel').value = selectedContact.tel;
   }
   function closeEditContact(){
     document.getElementById("editcontact").classList.remove("showOverlay-addNewContactPopUpContainer");
@@ -187,3 +230,19 @@ function load() {
     profile = JSON.parse(profileAsText);
   }
 }
+
+
+function openOrCloseHeaderLinksPopUp(){
+ let isClicked = true;
+ if(isClicked){
+  document.getElementById('headerLinkPopUp').classList.remove('d-none');
+  isClicked = false;
+ }else{
+  document.getElementById('headerLinkPopUp').classList.add('d-none');
+  isClicked = true;
+
+
+ }
+
+}
+

@@ -1,10 +1,20 @@
 
 <header>
+    <img class="joinlogoHeader d-none"src="/assets/img/join.png" alt="">
     <h1>Kanban Project Management Tool</h1>
     <div class="headerIcons">
         <img class="helpIcon"src="/assets/img/help.png" alt="">
-        <div class="user">
+        <div onclick="openOrCloseHeaderLinksPopUp()" class="user">
             <p class="userText">SM</p>
         </div>
+    </div>
+    <div id="headerLinkPopUp" class="headerLinkPopUp d-none">
+        <div class="headerLinksContainer ">
+        <a class="headerLinks"href=" ">Help</a>
+        <a class="headerLinks"href=" ">Legal Notice</a>
+        <a class="headerLinks"href=" ">Privacy Policy</a>
+        <a class="headerLinks"href=" ">Log Out</a>
+        </div>
+    
     </div>
 </header>

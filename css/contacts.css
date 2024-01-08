@@ -1,6 +1,7 @@
 .contentContact {
   padding-left: 232px;
   display: flex;
+  padding-top: 96px;
 }
 
 .addcontactContainer {
@@ -13,14 +14,12 @@
   align-items: center;
 }
 
-.renderContactContainer{
+.renderContactContainer {
   display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 10px;
-
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 100px;
 }
-
 
 .addContactButton {
   width: 352px;
@@ -58,11 +57,13 @@
   line-height: 25.2px;
   font-weight: 700;
 }
+.addButtonContainer {
+  position: fixed;
+  
+}
 
-
-.contactContainer{
+.contactContainer {
   width: calc(100vw - 687px);
-
 }
 
 .contactHeadline {
@@ -89,7 +90,7 @@ h2 {
   height: 59px;
   border: 3px solid #29abe2;
 }
-.vectorPerpendicularContainerh3{
+.vectorPerpendicularContainerh3 {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -123,8 +124,8 @@ h3 {
   transition: all 225ms ease-in-out;
 }
 
-.backGroundOpacityContainer{
-  background-color: rgba(0,0,0,0.2);
+.backGroundOpacityContainer {
+  background-color: rgba(0, 0, 0, 0.2);
   width: 100vw;
   height: 100vh;
   z-index: 2;
@@ -415,7 +416,7 @@ input:focus {
   font-family: "Inter", sans-serif;
 }
 
-.firstLetterContainer{
+.firstLetterContainer {
   display: flex;
   padding: 15px 24px;
   justify-content: flex-start;
@@ -423,17 +424,13 @@ input:focus {
   font-size: 20px;
   font-family: "Inter", sans-serif;
   font-weight: 400;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-
-
-
-
 
 .iconNameEmailContainer {
   display: flex;
   width: 352px;
- 
+
   align-items: center;
   justify-content: flex-start;
   cursor: pointer;
@@ -656,27 +653,24 @@ input:focus {
   height: 19px;
 }
 
-
-.backgroundColorContact{
-  background-color: #F1F2F3;
+.backgroundColorContact {
+  background-color: #f1f2f3;
 }
 
-.overlay-contactContainerContact{
+.overlay-contactContainerContact {
   transform: translateX(1200px);
   transition: all 225ms ease-in-out;
 }
 
-.showOverlay-contactContainerContact{
-  transform: translateX(0px) !important;
-  transition: all 225ms ease-in-out !important;
+.showOverlay-contactContainerContact {
+  transform: translateX(0px);
+  transition: all 225ms ease-in-out;
 }
 
-.d-inline{
+.d-inline {
   display: inline !important;
 }
 
-.d-none{
+.d-none {
   display: none;
 }
-
-

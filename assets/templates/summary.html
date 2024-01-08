@@ -6,7 +6,13 @@
     <script src="/scripts/loginscript.js"></script>
     <script src="/scripts/script.js"></script>
     <link rel="stylesheet" href="/css/summaryStyle.css" />
+    <link rel="stylesheet" href="/mediaquerys/summary.css" />
+    <link rel="stylesheet" href="/mediaquerys/joinsidebar.css" />
     <link rel="stylesheet" href="/css/templates.css" />
+    <link rel="stylesheet" href="/mediaquerys/joinsidebar.css">
+    <link rel="stylesheet" href="/mediaquerys/header.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+    <link rel="icon" type="image/x-icon" href="/assets/img/join.png">
     <title>summary</title>
   </head>
 <body onload="render()">
@@ -25,7 +31,8 @@
       <div class="summarySelektor1">
         <div class="todo tile hoverCube">
           <div class="doneImg">
-            <img src="/assets/img/todo.svg" alt="">
+            <img src="/assets/img/todo.svg" alt="" class="svgImgNormal">
+            <img src="/assets/img/todo_invert.svg" alt="" class="svgImgHoverTodo">
           </div>
           <div class="doneCount hoverCube">
             <p>1<span>To-do</span></p>
@@ -33,7 +40,8 @@
         </div>
         <div class="done tile hoverCube">
           <div class="doneImg">
-            <img src="/assets/img/done.svg" alt="">
+            <img src="/assets/img/done.svg" alt="" class="svgImgNormal">
+            <img src="/assets/img/done_invert.svg" alt="" class="svgImgHoverDone">
           </div>
           <div class="doneCount">
             <p>1<span>Done</span></p>
@@ -42,7 +50,14 @@
       </div>
       <div class=" tile">
         <div class="summarySelektor2 hoverCube">
-          <div ><div class="group7"><img src="/assets/img/Prio alta.svg" alt=""></div></div>
+          <div class="urgent" >
+            <div class="group7">
+              <img src="/assets/img/Prio alta.svg" alt="">
+            </div>
+            <div class="doneCount">
+              <p>1<span>Urgent</span></p>
+            </div>
+          </div>
             <div ><img src="/assets/img/vector.svg" alt=""></div>
             <div class="frame68">
               <span>October 16, 2022</span>
