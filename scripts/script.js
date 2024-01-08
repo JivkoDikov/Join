@@ -14,10 +14,8 @@ async function includeHTML() {
 
 
  function render(){
- includeHTML();
-updateHTML();
-
-
+  includeHTML();
+  updateHTML();
 }
 
 function addActiveStyle(){
@@ -28,9 +26,6 @@ function addActiveStyle(){
       link.classList.add('active-link');
     });
   });
-
-  
-
 }
 
 
