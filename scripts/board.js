@@ -6,7 +6,7 @@ let cards = [
         "text": "Build start page with recipe recommendation...",
         "progressBar" : 1,
         "user": "",
-        "priority": 0,
+        "priority": 1,
         "category": "progress"
     },
     {
@@ -16,7 +16,7 @@ let cards = [
         "text": "Build start page with recipe recommendation...",
         "progressBar" : 1,
         "user": "",
-        "priority": 0,
+        "priority": 1,
         "category": "todo"
     },
     {
@@ -26,9 +26,10 @@ let cards = [
         "text": "Build start page with recipe recommendation...",
         "progressBar" : 1,
         "user": "",
-        "priority": 2,
+        "priority": 1,
         "category": "todo"
     },
+
 ]
 
 
@@ -36,6 +37,14 @@ let currentDraggedElement;
 
 const STORAGE_TOKEN = 'Y2B64H33P1ZFHWE7S0HF0V8EC9OTCQZV1FG8B8B5';
 const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
+
+
+async function setItem(key, value) {
+    const payload = { key, value, token: STORAGE_TOKEN };
+    return fetch(STORAGE_URL, { method: 'POST', body: JSON.stringify(payload)})
+    .then(res => res.json());
+}
+
 
 
 async function getItem(key, numberOfItems) {
@@ -53,7 +62,21 @@ async function getItem(key, numberOfItems) {
 }
 
 
+function test() {
+    setItem('board', {
+        "id" : 2,
+        "label" : "User Story",
+        "headline" : "Recipe Recommender",
+        "text": "Build start page with recipe recommendation...",
+        "progressBar" : 1,
+        "user": "",
+        "priority": 1,
+        "category": "todo"
+    });
+}
+
 function updateHTML() {
+    test();
     getItem('board', 10);
     let todo = cards.filter(t => t["category"] == 'todo');
     document.getElementById('todo').innerHTML = '';
@@ -102,9 +125,6 @@ function moveTo(category) {
     updateHTML();
 }
 
-function priority () {
-
-}
 
 function search() {
     let search = document.getElementById('search').value.toLowerCase();
