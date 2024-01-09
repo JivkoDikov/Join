@@ -424,7 +424,14 @@ input:focus {
   font-size: 20px;
   font-family: "Inter", sans-serif;
   font-weight: 400;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.line{
+  width: 352px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  border-top: 1px solid  #D1D1D1;
+  ;
 }
 
 .iconNameEmailContainer {

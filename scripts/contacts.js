@@ -69,6 +69,7 @@ function createContact() {
 
     document.getElementById("renderContactContainer").innerHTML += /*html*/ `
     <div id="firstLetterContainer" class="firstLetterContainer">${firstLetter}</div>
+    <div class="line"></div>
   <div onclick="renderContact(${i})"id="iconNameEmailContainer"class="iconNameEmailContainer" >
     <div class="iconNameEmail">
     <div id="firstLastLetter"class="firstLastLetter" style="background-color: ${backgroundColor.color};">${firstLetter}${lastLetter}</div>
@@ -240,7 +241,7 @@ function load() {
 }
 
 
-function openOrCloseHeaderLinksPopUp(){
+/*function openOrCloseHeaderLinksPopUp(){
  let isClicked = true;
  if(isClicked){
   document.getElementById('headerLinkPopUp').classList.remove('d-none');
@@ -252,5 +253,5 @@ function openOrCloseHeaderLinksPopUp(){
 
  }
 
-}
+}*/
 

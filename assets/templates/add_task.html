@@ -1,14 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="/assets/img/join.png">
-    <link rel="stylesheet" href="/mediaquerys/joinsidebar.css">
-    <link rel="stylesheet" href="/mediaquerys/header.css">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/assets/img/join.png" />
+    <link rel="stylesheet" href="/css/templates.css" />
+    <link rel="stylesheet" href="/css/addTask.css" />
+    <link rel="stylesheet" href="/fonts.css" />
+    <link rel="stylesheet" href="/mediaquerys/joinsidebar.css" />
+    <link rel="stylesheet" href="/mediaquerys/header.css" />
+    <script defer src="/scripts/script.js"></script>
+    <title>Add Task</title>
+  </head>
+
+  <body onload="render()">
+    <div w3-include-html="/assets/templates/join_side_bar.html"></div>
+    <div w3-include-html="/assets/templates/header.html"></div>
+
+    <div class="contentAddTask">
+      <h1>Add Task</h1>
+
+      <div class="contentLeft-Right">
+
+        <div class="contentLeft">
+            <div class="titleInputContainer">
+                <div class="titleStar">
+                <p class="title">Title</p><p class="star">*</p>
+                </div>
+                <input class="inputTitle"type="text" placeholder="Enter a Title">
+            </div>
+            <div class="textareaDescrition">
+                <p class="title">Description</p>
+                <textarea name="" id="" cols="30" rows="10" placeholder="Enter a Description"></textarea>
+            </div>
+
+            <div class="assignedContainer">
+                <p class="title">Assignes to</p>
+                <input type="text" placeholder=""><br>oder von bootstrap dropdownButton
+                <img src="" alt="">
+
+            </div>
+
+        </div>
+
+        <div class="contentRight">
+            <div>
+                <div class="titleStar">
+                <p class="title">Due date</p><p>*</p>
+                </div>
+                    <div class="dateInputImg">
+                <input type="text" placeholder="dd/mm/yyyy">
+                <img src="" alt="">
+                    </div>
+            </div>
+
+                <div class="prioContainer">
+                    <p class="title">Prio</p>
+                    <div class="prioButtonContainer">
+                        <button>Urgent</button>
+                        <button>Medium</button>
+                        <button>Low</button>
+                    </div>
+                </div>
+                <div class="categoryContainer">
+                    <div class="titleStar">
+                    <p class="title">Category</p><p>*</p>
+                    </div>
+                        <div>
+                    <div class="selectTaskCategory">Select task category</div>
+                    <img src="" alt="">
+                        </div>
+                    </div>
+
+                    <div class="subtasksContainer">
+                        <p class="title">Subtasks</p>
+                        <div class="addNewSubtask">
+                            <div aria-placeholder="Add new subtask"></div>
+                            <img src="" alt="">
+                        </div>
+
+                    </div>
+
+            
+
+        
+
+
+
+        </div>
+
+
+</div>
+      
+    </div>
+  </body>
 </html>

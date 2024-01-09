@@ -1,0 +1,10 @@
+.contentAddTask{
+    width: 100vh;
+    height: calc(100vh - 96px);
+    padding-left: 232px;
+    padding-top: 96px;
+}
+
+.contentLeft-Right{
+    display: flex;
+}
