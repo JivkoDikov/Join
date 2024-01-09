@@ -107,9 +107,16 @@ function testData(){
     document.getElementById('passwordInputConfirm').value = "1234"
 }
 
+
 document.addEventListener('DOMContentLoaded', function() {
-    let logoContainer = document.querySelector('.logo-container');
+    let logoImage = document.querySelector('.centeredImage');
     setTimeout(function() {
-        logoContainer.classList.add('animate');
+        logoImage.classList.add('disappear');
     }, 1000);
+    setTimeout(function() {
+        logoImage.classList.remove('disappear');
+        logoImage.classList.remove('centeredImage');
+    }, 2800);
+    
+    
 });
