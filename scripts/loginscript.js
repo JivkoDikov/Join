@@ -106,3 +106,10 @@ function testData(){
     document.getElementById('passwordInput').value = "12345"
     document.getElementById('passwordInputConfirm').value = "1234"
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    let logoContainer = document.querySelector('.logo-container');
+    setTimeout(function() {
+        logoContainer.classList.add('animate');
+    }, 1000);
+});
