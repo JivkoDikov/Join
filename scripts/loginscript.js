@@ -106,3 +106,37 @@ function testData(){
     document.getElementById('passwordInput').value = "12345"
     document.getElementById('passwordInputConfirm').value = "1234"
 }
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    let logoImage = document.querySelector('.centeredImage');
+
+    // Speichere die ursprüngliche Position
+    let originalPosition = {
+        top: logoImage.offsetTop,
+        left: logoImage.offsetLeft
+    };
+
+    // Setze das Bild in die Mitte des Bildschirms
+    logoImage.style.top = '50%';
+    logoImage.style.left = '50%';
+    logoImage.style.transform = 'translate(-50%, -50%)';
+
+    // Berechne die Verschiebung
+    let verticalDifference = originalPosition.top - logoImage.offsetTop;
+    let horizontalDifference = originalPosition.left - logoImage.offsetLeft;
+
+    // Starte die fadeOut-Animation nach 1 Sekunde
+    setTimeout(function() {
+        logoImage.style.transition = 'transform 1s ease-out'; // Füge eine zusätzliche Transition für die Transform-Eigenschaft hinzu
+        logoImage.style.transform = `translate(${horizontalDifference}px, ${verticalDifference}px)`;
+        logoImage.classList.add('disappear');
+    }, 1000);
+
+    // Entferne alle Style-Elemente und Klassen nach 2 Sekunden
+    setTimeout(function() {
+        logoImage.removeAttribute('style');
+        logoImage.classList.remove('disappear');
+        logoImage.classList.remove('centeredImage');
+    }, 2000);
+});
