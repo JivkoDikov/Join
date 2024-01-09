@@ -8,3 +8,39 @@
 .contentLeft-Right{
     display: flex;
 }
+
+.addTaskHeadline{
+    padding-left: 96px;
+    padding-top: 110px;
+    font-family: "Inter";
+    font-size: 61px;
+    font-weight: 700;
+    line-height: 73px;
+    letter-spacing: 0em;
+    text-align: left;
+    
+
+}
+
+.contentLeft{
+    padding-left: 96px;
+}
+
+.titleStar{
+    display: flex;
+}
+
+.inputTitle{
+    width: 440px;
+    height: 48px;
+    border-radius: 10px;
+    border: 1px solid  #D1D1D1;
+    
+}
+
+textarea{
+    width: 440px;
+    height: 120px;
+
+
+}
