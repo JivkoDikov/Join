@@ -18,16 +18,6 @@ await includeHTML();
  restoreSelectedLink();
 
 }
-
-/*function addActiveStyle(){
-  const links = document.querySelectorAll('.links');
-  links.forEach(link => {
-    link.addEventListener('click', function() {
-      links.forEach(otherLink => otherLink.classList.remove('active-link'));
-      link.classList.add('active-link');
-    });
-  });
-}*/
   
 
 function addActiveStyle(linkId) {
