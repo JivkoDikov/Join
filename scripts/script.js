@@ -35,7 +35,7 @@ function addActiveStyle(linkId) {
 }
 
 function restoreSelectedLink() {
-  var selectedLink = sessionStorage.getItem('selectedMenu');
+  let selectedLink = sessionStorage.getItem('selectedMenu');
   if (selectedLink) {
       sidebarBG(selectedLink);
   }
@@ -43,13 +43,13 @@ function restoreSelectedLink() {
 
 function sidebarBG(linkId) {
  
-  var links = document.querySelectorAll('.links');
+  let links = document.querySelectorAll('.links');
   links.forEach(link => {
       link.classList.remove('active');
   });
 
 
-  var selectedLink = document.getElementById(linkId);
+  let selectedLink = document.getElementById(linkId);
   if (selectedLink) {
       selectedLink.classList.add('active');
       addActiveStyle(linkId);
