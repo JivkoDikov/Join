@@ -298,3 +298,33 @@ span{
       border-radius: 30px;
       cursor: pointer;
   }
+  .doneImg {
+    position: relative;
+  }
+  
+  .svgImgHoverDone {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease; /* Optional: Fügt eine sanfte Animation hinzu */
+  }
+  
+  .done.tile.hoverCube:hover .svgImgHoverDone {
+    opacity: 1;
+  }
+  .doneImg {
+    position: relative;
+  }
+  
+  .svgImgHoverTodo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease; /* Optional: Fügt eine sanfte Animation hinzu */
+  }
+  
+  .todo.tile.hoverCube:hover .svgImgHoverTodo {
+    opacity: 1;
+  }

@@ -23,12 +23,11 @@ let profile ={
 ];
 save();
 load();
-
+i= 0;
 
 async function addNewContact() {
   document.getElementById("addnewcontact").classList.add("showOverlay-addNewContactPopUpContainer");
   document.getElementById('backGroundOpacityContainer').classList.remove('d-none');
- 
   
 }
 
@@ -40,7 +39,6 @@ function closeAddNewContact() {
 function createContact() {
   document.getElementById("addnewcontact").classList.remove("showOverlay-addNewContactPopUpContainer");
   document.getElementById('backGroundOpacityContainer').classList.add('d-none');
-  
   let name = document.getElementById("name");
   let email = document.getElementById("email");
   let tel = document.getElementById("tel");
@@ -146,8 +144,6 @@ function createContact() {
   document.getElementById("contactContainerContactIcon").style.backgroundColor = lastAddedBackgroundColor.color;
 }
 
-document.getElementById("showContact").classList.add("showOverlay-contactContainerContact");
-document.getElementById("showContact").classList.remove("overlay-contactContainerContact");
 
 }
 
@@ -188,10 +184,6 @@ function renderContacts() {
 
 
 function renderContact(index) {
-  const backgroundColor = backgroundColors[index % backgroundColors.length];
-
-  const firstLetter = profile["contactDetails"][index]["name"][0].toUpperCase(); 
-  const lastLetter = profile["contactDetails"][index]["name"].split(' ')[1]?.[0]?.toUpperCase() || ''; 
   
   const selectedContact =  profile["contactDetails"][index];
 document.getElementById('contactContainer').classList.add('backgroundColorContact');

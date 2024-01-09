@@ -14,7 +14,8 @@
         height: 80px;
         width: 100vw;
         padding: unset;
-        
+        z-index: 2;
+        background-color: #fff;
     }
 
     .headerIcons{

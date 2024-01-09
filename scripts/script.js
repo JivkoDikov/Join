@@ -27,5 +27,4 @@ function addActiveStyle(){
       link.classList.add('active-link');
     });
   });
-
 }

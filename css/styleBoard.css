@@ -3,6 +3,7 @@ main {
     align-items: center;
     flex-direction: column;
     padding-left: 230px;
+    padding-top: 150px;
 }
 
 .boardHeader {
@@ -14,6 +15,7 @@ main {
 
 .boardHeader > h1 {
     font-size: 61px;
+    font-weight: bold;
 }
 
 .findTask {
@@ -332,6 +334,7 @@ input[type=checkbox]:before {
 
 .dropWindow {
     height: 100%;
+    min-height: 80px;
 }
 
 
@@ -350,4 +353,86 @@ input[type=checkbox]:before {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@media (max-width:1350px) {
+    .boardHeader {
+        justify-content: flex-start;
+        width: 900px;
+    }
+}
+
+@media (max-width:1160px) {
+    .boardHeader {
+        justify-content: center;
+    }
+}
+
+@media (max-width:1100px) {
+    .boardHeader > h1 {
+        font-size: 40px;
+        width: 180px;
+        
+        
+    }
+
+    .findTask {
+        width: 420px;
+    }
+
+    .searchBar {
+        width: 200px;
+        height: 25px;
+    }
+}
+
+@media (max-width: 900px) {
+    .findTask {
+        width: 420px;
+    }
+
+    .searchBar {
+        width: 150px;
+        height: 20px;
+    }
+
+    .searchBar > input {
+        width: 110px;
+    }
+
+    .boardHeader > h1 {
+        font-size: 32px;
+        width: 150px;
+        
+        
+    }
+}
+
+@media (max-width: 800px) {
+    main {
+        padding-left: 0;
+        padding-bottom: 100px;
+    }
+
+    .boardDistribution {
+        justify-content: center;
+    }
+
+    .findTask {
+        width: 100%;
+        flex-direction: column-reverse;
+    }
+
+    .searchBar {
+        width: 150px;
+        height: 20px;
+    }
+
+    .searchBar > input {
+        width: 110px;
+    }
+
+    .boardHeader > h1 {
+        display: block;
+    }
 }

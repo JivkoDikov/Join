@@ -19,7 +19,6 @@
 @media screen and (max-width: 1017px){
     .headline h2{
         font-size: 50px;
-        width: auto;
         height: auto;
     }
     
@@ -33,6 +32,7 @@
         font-family: 'Inter 400',sans-serif;
         font-size: 27px;
         color: rgba(42, 54, 71, 1);
+        width: 270px;
     }
 
 }
@@ -48,34 +48,109 @@
         font-size: 42px;
 
     }
+    .headline p{
+        font-size: 18px;
+    }
+    .headline h2{
+        font-size: 30px;
+    }
 }
-.doneImg {
-    position: relative;
-  }
-  
-  .svgImgHoverDone {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    transition: opacity 0.3s ease; /* Optional: Fügt eine sanfte Animation hinzu */
-  }
-  
-  .done.tile.hoverCube:hover .svgImgHoverDone {
-    opacity: 1;
-  }
-  .doneImg {
-    position: relative;
-  }
-  
-  .svgImgHoverTodo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    transition: opacity 0.3s ease; /* Optional: Fügt eine sanfte Animation hinzu */
-  }
-  
-  .todo.tile.hoverCube:hover .svgImgHoverTodo {
-    opacity: 1;
-  }
+
+@media screen and (max-width: 800px){
+    .bodySummary{
+        left: 120px;
+}
+
+    .headline {
+        left: 120px;
+        height: 215px;
+        flex-direction: column; /* Change to column layout */
+        align-items: flex-start;
+        gap: 0px;
+        margin-top: -80px;
+        margin-bottom: -10px;
+    }
+
+    .headline h2{
+        font-size: 65px;
+        width: 400px;
+    }
+    .headline div {
+        height: 3px;
+        width: 140px; /* Switch height and width for rotation */
+        background-color: rgba(41, 171, 226, 1);
+        margin-bottom: 2px;
+        transform: rotate(180deg); /* Rotate by 90 degrees */
+    }
+    .headline p{
+        margin-top: -50px;
+        font-size: 30px;
+        width: 400px;
+    }
+}
+@media screen and (max-width: 688px){
+    .bodySummary{
+        left: 15px;
+    }
+    .headline{
+        left: 15px;
+    }
+    }
+@media screen and (max-width: 583px){
+    .bodySummary{
+        width: 460px;
+        left: 30px;
+    }
+    .summarySelektor2{
+        gap: 25px;
+    }
+}
+@media screen and (max-width: 488px){
+    .bodySummary{
+        width: 400px;
+        left: 20px;
+    }
+    .doneCount p{
+        font-size: 40px;
+    }
+    .summarySelektor2{
+        gap: 25px;
+    }
+    .square-button .element{
+        font-size: 40px;
+    }
+    .frame68 span:first-child{
+        font-size: 18px !important;
+        width: 157px;
+    }
+    span{
+        font-size: 16px;
+    }
+    .summarySelektor1{
+        gap: 25px;
+    }
+}
+@media screen and (max-width: 403px){
+    .bodySummary{
+        width: 320px;
+    }
+}
+@media screen and (max-width: 350px){
+    .bodySummary{
+        width: 318px;
+        left: 0px;
+    }
+    .frame68{
+        margin-left: -15px;
+    }
+    .group7{
+        margin-left: 10px;
+    }
+    .doneCount{
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+    .summarySelektor1{
+        gap: 15px;
+    }
+}
