@@ -178,9 +178,9 @@ text-align: center;
 
 }
 
-.links.active{
+/*.links.active{
     background-color: black;
-}
+}*/
 
 .linksBottom{
     display: flex;
@@ -274,3 +274,6 @@ text-align: center;
 .d-none{
     display: none;
 }
+.active{
+    background-color: rgba(0, 0, 0, 0.1);
+    }
