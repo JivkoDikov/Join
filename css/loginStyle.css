@@ -119,14 +119,25 @@ a:hover{
 }
 .centeredImage {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     z-index: 1000;
     opacity: 1;
     visibility: visible;
     transition: opacity 1s ease-out, visibility 1s ease-out;
 }
+/* Keyframe-Animationen */
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(-50%, -50%); /* Beginne bei der aktuellen Position */
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+        transform: translate(0%, 0%); /* Bewege das Bild zurück an den Ursprung */
+    }
+}
+
 .centeredImage.disappear {
     animation: fadeOut 1s ease-out 1s forwards;
 }
