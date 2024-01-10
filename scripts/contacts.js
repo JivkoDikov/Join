@@ -23,7 +23,6 @@ let profile ={
 ];
 save();
 load();
-i= 0;
 
 async function addNewContact() {
   document.getElementById("addnewcontact").classList.add("showOverlay-addNewContactPopUpContainer");
