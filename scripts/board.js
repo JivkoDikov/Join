@@ -50,7 +50,7 @@ async function setItem(key, value) {
 
 
 
-async function getItem(key, numberOfItems) {
+async function getItem(key, ) {
     const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
 
     let fetchPromises = Array.from({ length: numberOfItems }, (_, i) =>
