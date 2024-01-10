@@ -18,16 +18,6 @@ await includeHTML();
  restoreSelectedLink();
  
 }
-
-/*function addActiveStyle(){
-  const links = document.querySelectorAll('.links');
-  links.forEach(link => {
-    link.addEventListener('click', function() {
-      links.forEach(otherLink => otherLink.classList.remove('active-link'));
-      link.classList.add('active-link');
-    });
-  });
-}*/
   
 
 function addActiveStyle(linkId) {
@@ -36,14 +26,31 @@ function addActiveStyle(linkId) {
 
 function restoreSelectedLink() {
   let selectedLink = sessionStorage.getItem('selectedMenu');
-  if (selectedLink) {
-      sidebarBG(selectedLink);
+  if (selectedLink === 5 || selectedLink === 6) {
+    sidebarBGTerms(selectedLink)
+  } else {
+    sidebarBG(selectedLink);
   }
 }
 
 function sidebarBG(linkId) {
  
   let links = document.querySelectorAll('.links');
+  links.forEach(link => {
+      link.classList.remove('active');
+  });
+
+
+  let selectedLink = document.getElementById(linkId);
+  if (selectedLink) {
+      selectedLink.classList.add('active');
+      addActiveStyle(linkId);
+  }
+}
+
+function sidebarBGTerms(linkId) {
+ 
+  let links = document.querySelectorAll('.linksBottomStyle');
   links.forEach(link => {
       link.classList.remove('active');
   });

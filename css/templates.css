@@ -178,9 +178,6 @@ text-align: center;
 
 }
 
-/*.links.active{
-    background-color: black;
-}*/
 
 .linksBottom{
     display: flex;
@@ -189,10 +186,6 @@ text-align: center;
     justify-content: center;
     gap: 8px;
     padding-bottom: 64px;
-    
-    
-    
-
 }
 
 .linksBottomStyle{

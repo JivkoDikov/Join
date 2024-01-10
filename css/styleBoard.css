@@ -53,6 +53,7 @@ main {
 .btn-AddTask {
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
     width: 160px;
     height: 48px;
     border: solid 1px #2A3647;
@@ -62,6 +63,7 @@ main {
     font-weight: 700;
     color: #FFF;
     background-color: #2A3647;
+    gap: 4px
 }
 
 .btn-AddTask > svg > path{
