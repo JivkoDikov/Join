@@ -197,15 +197,6 @@ text-align: center;
     color: rgb(41, 171, 226)
 
 }
-.terms{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 229px;
-    width: 232px;
-    gap: 15px;
-}
 
 .link-container{
     display: flex;
