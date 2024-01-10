@@ -3,24 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="assets/img/join.png">
-    <link rel="stylesheet" href="css/templates.css">
-    <link rel="stylesheet" href="css/loginStyle.css">
-    <script src="scripts/loginscript.js"></script>
-    <title>Kanban Projekt Management Tool</title>
+    <script src="/scripts/loginscript.js"></script>
+    <link rel="stylesheet" href="/css/templates.css">
+    <link rel="stylesheet" href="/css/loginStyle.css" />
+    <link rel="stylesheet" href="/mediaquerys/login.css" />
+    <title>Login</title>
 </head>
 <body>
-    <div class="logo-container">
-        <img src="/assets/img/joinlogo.png" alt="Logo" class="logo">
+    <div class="background-container"></div>
+    <div class="headerLogin">
+        <img class="centeredImage" src="/assets/img/Capa 2.png" alt="">
+        <div class="signupHeader">
+            <p>Not a Join user?</p>
+            <a href="/assets/templates/signup.html"><button class="hoverDarkBtn">Sign up</button></a>
+        </div>
+    </div>
+    <div class="login">
+        <div class="headlineLoginForm"><span>Log in</span>
+            <div class="underline"></div>
+        </div>
+        <div class="form-container">
+            <form id="loginForm" onsubmit="submitForm(event)">
+                <div class="input-container">
+                    <input oninput="checkEmail()" id="emailInput" required type="email" placeholder="Email">
+                    <img src="/assets/img/mail.png" alt="picture of mail">
+                </div>
+                <div id="emailError" class="d-none">Invalid email address</div>
+                <div class="input-container">
+                    <input id="passwordInput" required type="password" placeholder="Password">
+                    <img src="/assets/img/lock.png" alt="picture of Lock">
+                </div>
+                <div class="footerLoginForm">
+                        <div class="rememberme">
+                            <input id="rememberCheckbox" type="checkbox">
+                            <p onclick="toggleCheckbox()">Remember me</p>
+                        </div>
+                    <a class="d-none"> Forgot my password</a>
+                </div>
+                <div class="loginBtn">
+                    <input class="hoverDarkBtn" type="submit" value="Log in">
+                    <div onclick="guestLogin()"> Guest Log in</div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="loginFooter">
+        <div class="legalNotice">
+            <a>Privacy Policy</a>
+            <a>Legal notice</a>
+        </div>
     </div>
     
-    <script>  
-    document.addEventListener('DOMContentLoaded', function() {
-        var logoContainer = document.querySelector('.logo-container');
-        setTimeout(function() {
-            logoContainer.classList.add('animate');
-        }, 1000);
-    });
-    </script>
 </body>
 </html>

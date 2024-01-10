@@ -6,6 +6,7 @@ main {
     padding-top: 150px;
 }
 
+
 .boardHeader {
     display: flex;
     align-items: center;
@@ -52,6 +53,7 @@ main {
 .btn-AddTask {
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
     width: 160px;
     height: 48px;
     border: solid 1px #2A3647;
@@ -61,6 +63,7 @@ main {
     font-weight: 700;
     color: #FFF;
     background-color: #2A3647;
+    gap: 4px
 }
 
 .btn-AddTask > svg > path{
@@ -353,6 +356,124 @@ input[type=checkbox]:before {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.deleteUedit {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 90%;
+}
+
+.delete {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 15px;
+    color: #2A3647;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.edit {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: #2A3647;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.deleteEdit {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: #2A3647;
+    font-size: 16px;
+    font-weight: 400;
+    width: 85%;
+}
+
+.headline {
+    display: flex;
+    flex-direction: column;
+    width: 445px;
+}
+
+.headline > span{
+    font-size: 20px;
+    font-weight: 400;
+    color: #2A3647;
+}
+
+.headline > span{
+    font-size: 20px;
+    font-weight: 400;
+    color: #2A3647;
+}
+
+.textarea {
+    display: flex;
+    flex-direction: column;
+    width: 445px;
+}
+
+.textarea > span{
+    font-size: 20px;
+    font-weight: 400;
+    color: #2A3647;
+}
+
+.dueDate {
+    display: flex;
+    flex-direction: column;
+    width: 445px;
+}
+
+.dueDate > span{
+    font-size: 20px;
+    font-weight: 400;
+    color: #2A3647;
+}
+
+.editDropdown {
+    display: flex;
+    flex-direction: column;
+    width: 445px;
+}
+
+.editDropdown > span{
+    font-size: 20px;
+    font-weight: 400;
+    color: #2A3647;
+}
+
+.overlayCardEdit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.onsubmitEdit {
+    width: 89px;
+    height: 57px;
+    padding: 16px;
+    gap: 4px;
+    background-color: #2A3647;
+    border-radius: 10px;
+    border: none;
+    color: #FFF;
+    font-size: 21px;
+    font-weight: 700;
+}
+.submitEdit {
+    width: 85%;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    margin-top: 20px;
 }
 
 @media (max-width:1350px) {
