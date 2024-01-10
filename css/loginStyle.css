@@ -222,6 +222,7 @@ a:hover{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-left: -40px;
 }
 
 .rememberme{
@@ -241,6 +242,7 @@ a:hover{
     border: 5px solid black;
     accent-color: white;
     mix-blend-mode: multiply;
+    
     
 }
 .footerLoginForm .rememberme input[type="checkbox"]:checked {
@@ -327,9 +329,10 @@ a:hover{
     margin-top: -15px;
 }
 .signupFooter{
+    display: none;
     gap: 35px;
-    margin-top: 24px;
-    margin-bottom: 15px;
+    margin-top: 35px;
+    margin-bottom: 45px;
     
     
 }

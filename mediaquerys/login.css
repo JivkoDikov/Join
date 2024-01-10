@@ -57,4 +57,20 @@
     .rememberme{
         margin-left: -160px;
     }
+    .signupFooter{
+        display: flex;
+    }
+    .privacyTerm{
+        margin-left: 0px;
+        margin-top: 50px;
+    }
+    .signupfooter{
+        margin-top: 110px;
+    }
+    .mobilesignupBtn{
+        margin-top: -30px;
+    }
+    .footerLoginForm{
+        margin-left: 0px;
+    }
 }
