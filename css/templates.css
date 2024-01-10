@@ -178,9 +178,6 @@ text-align: center;
 
 }
 
-/*.links.active{
-    background-color: black;
-}*/
 
 .linksBottom{
     display: flex;
@@ -189,10 +186,6 @@ text-align: center;
     justify-content: center;
     gap: 8px;
     padding-bottom: 64px;
-    
-    
-    
-
 }
 
 .linksBottomStyle{
@@ -203,6 +196,15 @@ text-align: center;
 .linksBottomStyle:hover{
     color: rgb(41, 171, 226)
 
+}
+.terms{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 229px;
+    width: 232px;
+    gap: 15px;
 }
 
 .link-container{
