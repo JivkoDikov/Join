@@ -123,6 +123,12 @@
     .summarySelektor1{
         gap: 25px;
     }
+    .square-button{
+        height: 80px;
+    }
+    .square-button .element{
+        line-height: 40px;
+    }
 
 }
 @media screen and (max-width: 432px){
