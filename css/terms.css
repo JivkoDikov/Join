@@ -9,6 +9,7 @@
     padding-bottom: 20%;
     word-wrap: break-word;
     padding-right: 3%; /* Abstand zum rechten Rand */
+    text-align: justify;
   }
 
   .bodyTerms h1{
