@@ -29,7 +29,7 @@ function toggleCheckbox() {
 
 function guestLogin(){
     alert('Welcom Guest')
-    sessionStorage.setItem('loginStatus', 'guest');
+    sessionStorage.setItem('user', 'guest');
 }
 
 function signup(){
