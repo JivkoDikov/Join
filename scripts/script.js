@@ -16,12 +16,37 @@ async function includeHTML() {
 async function render(){
 await includeHTML();
  restoreSelectedLink();
+ termsStatus();
+ 
  
 }
   
 
 function addActiveStyle(linkId) {
   sessionStorage.setItem('selectedMenu', linkId);
+}
+
+function termsStatus() {
+  let loginStatus = sessionStorage.getItem('user');
+
+  if (!loginStatus) {
+    for (let i = 1; i <= 4; i++) {
+      let element = document.getElementById(i);
+      if (element) {
+        element.classList.add('d-none');
+      }
+    }
+  }
+}
+
+function checkUser() {
+  let loginStatus = sessionStorage.getItem('user');
+
+  if (loginStatus) {
+    window.location.href = '/assets/templates/summary.html';
+  } else {
+    window.location.href = '/assets/templates/login.html';
+  }
 }
 
 function restoreSelectedLink() {

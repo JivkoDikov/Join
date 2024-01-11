@@ -29,6 +29,7 @@ function toggleCheckbox() {
 
 function guestLogin(){
     alert('Welcom Guest')
+    sessionStorage.setItem('loginStatus', 'guest');
 }
 
 function signup(){
@@ -140,3 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
         logoImage.classList.remove('centeredImage');
     }, 2000);
 });
+
+function termsSite(){
+
+}
