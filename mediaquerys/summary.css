@@ -56,9 +56,10 @@
     }
 }
 
-@media screen and (max-width: 800px){
+@media screen and (max-width: 800px ) {
     .bodySummary{
         left: 120px;
+        top: 140px;
 }
 
     .headline {
@@ -73,7 +74,7 @@
 
     .headline h2{
         font-size: 65px;
-        width: 400px;
+        width: 320px;
     }
     .headline div {
         height: 3px;
@@ -85,7 +86,7 @@
     .headline p{
         margin-top: -50px;
         font-size: 30px;
-        width: 400px;
+        width: 320px;
     }
 }
 @media screen and (max-width: 688px){
@@ -93,7 +94,7 @@
         left: 15px;
     }
     .headline{
-        left: 15px;
+        left: 27px;
     }
     }
 @media screen and (max-width: 583px){
@@ -107,14 +108,11 @@
 }
 @media screen and (max-width: 488px){
     .bodySummary{
-        width: 400px;
+        width: 360px;
         left: 20px;
     }
     .doneCount p{
         font-size: 40px;
-    }
-    .summarySelektor2{
-        gap: 25px;
     }
     .square-button .element{
         font-size: 40px;
@@ -129,10 +127,17 @@
     .summarySelektor1{
         gap: 25px;
     }
+
 }
-@media screen and (max-width: 403px){
+@media screen and (max-width: 432px){
     .bodySummary{
         width: 320px;
+    }
+    .headline p{
+        width: 320px;
+    }
+    .summarySelektor2{
+        gap: 11px;
     }
 }
 @media screen and (max-width: 350px){
@@ -152,5 +157,14 @@
     }
     .summarySelektor1{
         gap: 15px;
+    }
+    .headline p{
+        font-size: 28px;
+    }
+    .summarySelektor2{
+        gap: 26px;
+    }
+    .headline{
+        left: 9px;
     }
 }
