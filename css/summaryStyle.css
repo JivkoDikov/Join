@@ -67,6 +67,7 @@ a:hover{
     margin: 0;
     flex-direction: column;
     display: flex;
+    color: #000000;
 }
 span{
     font-size: 20px;
@@ -217,8 +218,8 @@ span{
 
 .greetings{
     position: relative;
-    top: 77px;
-    left: 968px;
+    top: -357px;
+    left: 587px;
     width: auto;
     height: 136px;
     display: inline-flex;
@@ -290,6 +291,7 @@ span{
   }
 
   .hoverCube:hover,
+  .hoverCube:hover p,
   .hoverCube:hover span {
       transform: scale(1.05);
       background-color: #2A3647;
