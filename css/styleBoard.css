@@ -63,7 +63,8 @@ main {
     font-weight: 700;
     color: #FFF;
     background-color: #2A3647;
-    gap: 4px
+    gap: 4px;
+    cursor: pointer;
 }
 
 .btn-AddTask > svg > path{
@@ -134,6 +135,7 @@ main {
     padding: 16px;
     width: 220px;
     background-color: #A8A8A8;
+    margin-top: 35px;
 }
 
 .empty > span {
@@ -172,10 +174,14 @@ main {
 
 .progressBar {
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .progressBar > span {
     font-size: 12px;
+    margin-left: 10px;
 }
 
 .containerProfile {
@@ -474,6 +480,25 @@ input[type=checkbox]:before {
     align-items: flex-end;
     flex-direction: column;
     margin-top: 20px;
+}
+
+.progress-container {
+    width: 128px;
+    height: 8px;
+    background-color: #F4F4F4;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 0;
+    height: 8px;
+    background-color: #4589FF;
+    color: #F4F4F4;
+    text-align: center;
+    
+    border-radius: 16px;
+    transition: width 0.3s ease-in-out;
 }
 
 @media (max-width:1350px) {
