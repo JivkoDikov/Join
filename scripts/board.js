@@ -4,29 +4,32 @@ let cards = [
         "label" : "User Story",
         "headline" : "Recommender",
         "text": "Build start page with recipe recommendation...",
-        "progressBar" : 1,
+        "progressBar" : 50,
+        "subtasks": 50,
         "user": "",
         "priority": 1,
         "category": "progress",
-        "date": 1151
+        "date": 1151,
     },
     {
         "id" : 1,
         "label" : "User Story",
         "headline" : "Page",
         "text": "Build start page with recipe recommendation...",
-        "progressBar" : 1,
+        "progressBar" : 30,
+        "subtasks": 50,
         "user": "",
         "priority": 1,
         "category": "todo",
-        "date": 1151
+        "date": 1151,
     },
     {
         "id" : 2,
         "label" : "User Story",
         "headline" : "Recipe Recommender",
         "text": "Build start page with recipe recommendation...",
-        "progressBar" : 1,
+        "progressBar" : 11,
+        "subtasks": 50,
         "user": "",
         "priority": 1,
         "category": "todo",
@@ -53,7 +56,7 @@ async function setItem(key, value) {
 async function getItem(key, ) {
     const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
 
-    let fetchPromises = Array.from({ length: numberOfItems }, (_, i) =>
+    let fetchPromises = Array.from( (_, i) =>
         fetch(url).then(res => res.json()).then(res => res.data.value)
     );
 
@@ -61,7 +64,7 @@ async function getItem(key, ) {
 
     cards.push(results);
 
-    console.log(cards);
+    
 }
 
 
@@ -80,13 +83,14 @@ function test() {
 }
 
 function updateHTML() {
-    test();
+    
     getItem('board', 10);
     let todo = cards.filter(t => t["category"] == 'todo');
     document.getElementById('todo').innerHTML = '';
     for (let i = 0; i < todo.length; i++) {
         const element = todo[i];   
         document.getElementById('todo').innerHTML += generateCardHTML(element);
+        
     }
 
 
@@ -95,6 +99,7 @@ function updateHTML() {
     for (let j = 0; j < progress.length; j++) {
         const element = progress[j];
         document.getElementById('progress').innerHTML += generateCardHTML(element);
+        
     }
 
 
@@ -103,6 +108,7 @@ function updateHTML() {
     for (let j = 0; j < feedback.length; j++) {
         const element = feedback[j];
         document.getElementById('feedback').innerHTML += generateCardHTML(element);
+        
     }
     
     let done = cards.filter(t => t['category'] == 'done');
@@ -110,13 +116,16 @@ function updateHTML() {
     for (let j = 0; j < done.length; j++) {
         const element = done[j];
         document.getElementById('done').innerHTML += generateCardHTML(element);
+        
     }
+
+    emptyCategory();
 }
 
 function startDragging(id) {
     currentDraggedElement = id;
 
-
+    
 }
 
 function allowDrop(ev) {
@@ -154,7 +163,57 @@ function updateCategory(card, category, search) {
             card.innerHTML += generateCardHTML(element);
         }
     }
+    emptyCategory();
 }
+
+
+function emptyCategory() {
+    let emptytodo = document.getElementById('todo');
+    let emptyprogress = document.getElementById('progress');
+    let emptyfeedback = document.getElementById('feedback');
+    let emptydone = document.getElementById('done');
+
+    if(emptytodo.innerHTML === "") {
+        emptytodo.innerHTML += `
+                <div class="dropWindow" id="todo" ondrop="moveTo('todo')" ondragover="allowDrop(event)">
+                    <div class="empty">
+                        <span>No task To do</span>
+                    </div>
+                </div>
+        `;
+    }
+
+    if(emptyprogress.innerHTML === "") {
+        emptyprogress.innerHTML += `
+                <div class="dropWindow" id="todo" ondrop="moveTo('todo')" ondragover="allowDrop(event)">
+                    <div class="empty">
+                        <span>No task Progress</span>
+                    </div>
+                </div>
+        `;
+    }
+
+    if(emptyfeedback.innerHTML === "") {
+        emptyfeedback.innerHTML += `
+                <div class="dropWindow" id="todo" ondrop="moveTo('todo')" ondragover="allowDrop(event)">
+                    <div class="empty">
+                        <span>No task Feedback</span>
+                    </div>
+                </div>
+        `;
+    }
+
+    if(emptydone.innerHTML === "") {
+        emptydone.innerHTML += `
+                <div class="dropWindow" id="todo" ondrop="moveTo('todo')" ondragover="allowDrop(event)">
+                    <div class="empty">
+                        <span>No task Done</span>
+                    </div>
+                </div>
+        `;
+    }
+}
+
 
 function openOverview(i) {
     let infoArrayCard = cards[i] 
@@ -162,6 +221,7 @@ function openOverview(i) {
     removeClass.innerHTML = '';
     removeClass.innerHTML = generateOverviewHTML(infoArrayCard);
     removeClass.classList.remove('d-none');
+    
 }
 
 
@@ -172,6 +232,22 @@ function closeOverview() {
         
     });
 }
+
+// function updateProgressBar(element) {
+//     for (let j = 0; j < cards.length; j++) {
+//         let infoArrayCard = cards[j]['progressBar'];
+//         let progressBarId = `myProgressBar${cards[j]['id']}`;
+//         let progressBar = document.getElementById(progressBarId);
+
+//         progressBar.style.width = infoArrayCard + '%';
+//         progressBar.innerHTML = infoArrayCard + '%';
+
+//         if (infoArrayCard < 100) {
+//             infoArrayCard += 10;
+//         }
+//     }
+// }
+
 
 function priorityCheck(element) {
     const priority = element['priority'];
@@ -219,6 +295,7 @@ function priorityCheck(element) {
 
 function generateCardHTML(element) {
     let prioritySVG = priorityCheck(element);
+    
     return `
     <div class="cards" draggable="true" ondragstart="startDragging(${element['id']})" onclick="openOverview(${element['id']})">
     <h2 class="labelsBoardCard">${element['label']}</h2>
@@ -227,11 +304,10 @@ function generateCardHTML(element) {
         <span>${element['text']}</span>
     </div>
     <div class="progressBar">
-        <span><svg width="128" height="8" viewBox="0 0 128 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="128" height="8" rx="4" fill="#F4F4F4"/>
-            <rect width="64" height="8" rx="4" fill="#4589FF"/>
-            </svg></span>
-        <span>${element['progressBar']}/2 Subtasks</span>
+        <div class="progress-container">
+        <div class="progress-bar" id="myProgressBar${element['id']}"></div>
+        </div>
+        <span>${element['progressBar']}/${element['subtasks']} Subtasks</span>
     </div>
     <div class="labelProfile">
         <div class="containerProfile">
@@ -254,6 +330,7 @@ function generateCardHTML(element) {
     </div>
     </div>
     `;
+    
 }
 
 

@@ -23,7 +23,6 @@ let profile ={
 ];
 save();
 load();
-i= 0;
 
 async function addNewContact() {
   document.getElementById("addnewcontact").classList.add("showOverlay-addNewContactPopUpContainer");
@@ -184,6 +183,8 @@ function renderContacts() {
 
 
 function renderContact(index) {
+   
+ 
   
   const selectedContact =  profile["contactDetails"][index];
 document.getElementById('contactContainer').classList.add('backgroundColorContact');

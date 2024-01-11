@@ -1,46 +1,533 @@
-.contentAddTask{
-    width: 100vh;
-    height: calc(100vh - 96px);
-    padding-left: 232px;
-    padding-top: 96px;
+.contentAddTask {
+  width: calc(100vw - 232px);
+  height: calc(100vh - 96px);
+  padding-left: 232px;
+  padding-top: 96px;
 }
 
-.contentLeft-Right{
+.contentLeft-Right {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 62px;
+  padding-left: 96px;
+  padding-right: 96px;
+  width: calc(100vw - 424px);
+}
+
+.addTaskHeadline {
+  padding-left: 96px;
+  padding-top: 110px;
+  font-family: "Inter";
+  font-size: 61px;
+  font-weight: 700;
+  line-height: 73px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-block: 0;
+  height: 73px;
+  width: 278px;
+}
+
+.contentLeft {
+  height: 376px;
+  width: 100%;
+  
+}
+
+.titleStar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 24px;
+  
+}
+
+.title {
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-block: 0;
+}
+
+.titleAssigned {
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  width: 112px;
+  height: 24px;
+  margin-block: 0;
+  width: 100%;
+}
+
+.star {
+  color: #ff8190;
+  margin-block: 0;
+}
+
+.requiredField {
+  width: 119px;
+  height: 12px;
+  margin-block: 0;
+  font-size: 12px;
+}
+
+.titleInputContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+  height: 96px;
+  width: 100%;
+  
+}
+
+.inputTitle {
+  width: 100%;
+  height: 24px;
+  border-radius: 10px;
+  border: 1px solid #d1d1d1;
+  padding-top: 12px;
+  padding-left: 12px;
+  padding-bottom: 12px;
+  color: #d1d1d1;
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.inputTitle:focus {
+  border: 1px solid #ff8190;
+}
+
+.textareaDescription {
+  
+  height: 168px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+  width: 100%;
+}
+
+textarea {
+  width: 100%;
+  height: 84px;
+  border: 1px solid #d1d1d1;
+  padding-top: 18px;
+  padding-left: 16px;
+  padding-bottom: 18px;
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+
+  text-align: left;
+  border-radius: 10px;
+}
+
+.assignedContainer {
+  height: 80px;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 16px;
+  width: 100%;
+}
+
+.inputDropDown {
+  height: 48px;
+  border-radius: 10px;
+  border: 1px solid #d1d1d1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.inputContactsSVG{
     display: flex;
-}
-
-.addTaskHeadline{
-    padding-left: 96px;
-    padding-top: 110px;
-    font-family: "Inter";
-    font-size: 61px;
-    font-weight: 700;
-    line-height: 73px;
-    letter-spacing: 0em;
-    text-align: left;
-    
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 
 }
 
-.contentLeft{
-    padding-left: 96px;
+.inputContacts {
+  border: none;
+  width: 239px;
+  height: 24px;
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  padding: 12px 16px 12px 16px;
+  color: #000000;
 }
 
-.titleStar{
+.inputContacts::placeholder {
+  color: #000000;
+}
+
+.inputDropDownContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.inputTitleRequiredContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: 64px;
+  gap: 4px;
+  width: 100%;
+}
+
+.textareaTitleRequiredContainer {
+  height: 132px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.svgArrow {
+  width: 24px;
+  height: 24px;
+  padding: 12px 16px 12px 16px;
+}
+
+.svgArrow:hover {
+  fill: #d9d9d9;
+  border-radius: 50%;
+}
+
+.partingLine {
+  padding-left: 48px;
+  padding-right: 48px;
+}
+
+.contentRight {
+  height: 416px;
+  width: 100%;
+}
+
+.titleDateContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+  height: 96px;
+  width: 100%;
+}
+
+.dateInputRequiredContainer {
+  height: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.dateInputImg {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  height: 48px;
+  width: 100%;
+}
+
+.inputMonth {
+  border: none;
+  width: 119px;
+  height: 24px;
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  padding: 12px 16px 12px 16px;
+  
+}
+
+.imgCalendar {
+  width: 24px;
+  height: 24px;
+  padding: 12px 16px 12px 16px;
+}
+
+.prioContainer {
+  height: 88px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 24px;
+  width: 100%;
+}
+
+.prioButtonContainer {
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.btnUrgent,
+.btnMedium,
+.btnLow {
+  width: 136px;
+  height: 56px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid #d1d1d1;
+}
+
+.urgentSVGText,
+.mediumSVGText,
+.lowSVGText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 10px 16px 10px;
+}
+
+.urgentText {
+  width: 65px;
+  height: 24px;
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #000000;
+  margin-block: 0;
+}
+
+.mediumText {
+  width: 84px;
+  height: 24px;
+  font-family: "Inter", sans-serif;
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 25.2px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #000000;
+  margin-block: 0;
+}
+
+.lowText {
+  width: 40px;
+  height: 24px;
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #000000;
+  margin-block: 0;
+}
+
+.categoryContainer {
+  height: 80px;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 24px;
+
+}
+
+.selectTaskCategorySVG {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 48px;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.selectTaskCategory {
+  padding: 12px 16px 12px 16px;
+  width: 195px;
+  height: 24px;
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #000000;
+  display: flex;
+}
+
+.selectTaskCategoryArrow{
     display: flex;
-}
-
-.inputTitle{
-    width: 440px;
+    justify-content: space-between;
     height: 48px;
     border-radius: 10px;
-    border: 1px solid  #D1D1D1;
-    
+    border: 1px solid #d1d1d1;
+    width: 100%;
 }
 
-textarea{
-    width: 440px;
-    height: 120px;
+.subtasksContainer{
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 24px;
+}
+
+.addNewSubtask{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 48px;
+    border-radius: 10px;
+    border: 1px solid #d1d1d1;
+    width: 100%;
+
+}
+
+.subtaskText{
+    margin-block: 0;
+    padding: 12px 16px 12px 16px;
+    color: #d1d1d1;
+}
+
+.subtaskSVG{
+    padding: 12px 16px 12px 16px;
+}
 
 
+
+
+.createCheck {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+  width: 100%;
+}
+
+.createText {
+  width: 154px;
+  height: 25px;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 25.2px;
+  font-family: "Inter", sans-serif;
+  color: white;
+}
+
+.createCheckBtn {
+  width: 214px;
+  height: 57px;
+  border-radius: 10px;
+  background-color: #2a3647;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  gap: 4px;
+  border: none;
+}
+
+.createCheckBtn:hover {
+  background-color: #29abe2;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+.cancelX {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+  width: 100%;
+}
+
+.cancelX:hover,
+.x:hover {
+  color: #29abe2;
+}
+
+.cancelBtn:hover {
+  border: 2px solid #29abe2;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+.cancelBtn {
+  width: 126px;
+  height: 56px;
+  border-radius: 10px;
+  border: 1px solid #2a3647;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.textButtonsContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  padding-left: 96px;
+  padding-right: 96px;
+  margin-top: 54px;
+}
+
+.cancelCreateContactButtons {
+  display: flex;
+  gap: 16px;
+}
+
+.textContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text {
+  margin-block: 0;
 }

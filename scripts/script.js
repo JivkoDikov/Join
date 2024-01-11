@@ -16,7 +16,12 @@ async function includeHTML() {
 async function render(){
 await includeHTML();
  restoreSelectedLink();
+<<<<<<< HEAD
  
+=======
+ updateHTML();
+
+>>>>>>> c7532308bb67e701c518f228ab3966872b1d962c
 }
   
 

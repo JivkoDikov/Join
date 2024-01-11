@@ -113,6 +113,8 @@ a:hover{
     background-color: #2A3647;
     color: white;
     border-radius: 8px;
+    font-family: 'Inter 700', sans-serif;
+    font-size: 16px;
 }
 .disappear {
     animation: fadeOut 1s ease-out 1s forwards;
@@ -166,7 +168,7 @@ a:hover{
     align-items: center;
     z-index: 999;
     opacity: 1;
-    animation: fadeOut 1.5s ease-in-out 1.5s forwards;
+    animation: fadeOut 2s ease-in-out 2s forwards;
 }
 
 /* Keyframe-Animationen */
@@ -220,6 +222,7 @@ a:hover{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-left: -40px;
 }
 
 .rememberme{
@@ -239,6 +242,7 @@ a:hover{
     border: 5px solid black;
     accent-color: white;
     mix-blend-mode: multiply;
+    
     
 }
 .footerLoginForm .rememberme input[type="checkbox"]:checked {
@@ -323,4 +327,23 @@ a:hover{
     font-size: 12px;
     margin-left: -32px;
     margin-top: -15px;
+}
+.signupFooter{
+    display: none;
+    gap: 35px;
+    margin-top: 35px;
+    margin-bottom: 45px;
+    
+    
+}
+.signupFooter button{
+    width: 91px;
+    height: 49px;
+    padding: 15px, 16px, 15px, 16px;
+    gap: 10px;
+    background-color: #2A3647;
+    color: white;
+    border-radius: 8px;
+    font-family: 'Inter 700', sans-serif;
+    font-size: 16px;
 }
