@@ -183,6 +183,8 @@ function renderContacts() {
 
 
 function renderContact(index) {
+   
+ 
   
   const selectedContact =  profile["contactDetails"][index];
 document.getElementById('contactContainer').classList.add('backgroundColorContact');
