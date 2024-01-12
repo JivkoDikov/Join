@@ -68,20 +68,6 @@ async function getItem(key, ) {
 }
 
 
-function test() {
-    setItem('board', {
-        "id" : 2,
-        "label" : "User Story",
-        "headline" : "Recipe Recommender",
-        "text": "Build start page with recipe recommendation...",
-        "progressBar" : 1,
-        "user": "",
-        "priority": 1,
-        "category": "todo",
-        "date": 1151
-    });
-}
-
 function updateHTML() {
     
     getItem('board', 10);
@@ -120,6 +106,7 @@ function updateHTML() {
     }
 
     emptyCategory();
+    
 }
 
 function startDragging(id) {
@@ -233,25 +220,40 @@ function closeOverview() {
     });
 }
 
-// function updateProgressBar(element) {
-//     for (let j = 0; j < cards.length; j++) {
-//         let infoArrayCard = cards[j]['progressBar'];
-//         let progressBarId = `myProgressBar${cards[j]['id']}`;
-//         let progressBar = document.getElementById(progressBarId);
 
-//         progressBar.style.width = infoArrayCard + '%';
-//         progressBar.innerHTML = infoArrayCard + '%';
 
-//         if (infoArrayCard < 100) {
-//             infoArrayCard += 10;
-//         }
-//     }
-// }
+function updateProgressBar() {
+    for (let j = 0; j < cards.length; j++) {
+        
+        let infoArrayCard = cards[j]['progressBar'];
+        let progressBarId = `myProgressBar${j['id']}`;
+
+       
+        let progressBar = document.getElementById(`progressBarId${j['id']}`);
+console.log(progressBar);
+        progressBar.innerHTML = '';
+        progressBar.innerHTML = `<div class="progress-bar" id="${progressBarId}"></div>`;
+
+        
+        if (progressBarId) {
+            
+            
+            progressBarId.style.width = infoArrayCard + '%';
+            progressBarId.innerHTML = infoArrayCard + '%';
+
+            if (infoArrayCard < 100) {
+                infoArrayCard += 10;
+            }
+        }
+    }
+}
+
+
 
 
 function priorityCheck(element) {
     const priority = element['priority'];
-
+    
     if (priority === 0) {
         return `<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_122331_4841)">
@@ -295,7 +297,6 @@ function priorityCheck(element) {
 
 function generateCardHTML(element) {
     let prioritySVG = priorityCheck(element);
-    
     return `
     <div class="cards" draggable="true" ondragstart="startDragging(${element['id']})" onclick="openOverview(${element['id']})">
     <h2 class="labelsBoardCard">${element['label']}</h2>
@@ -305,7 +306,9 @@ function generateCardHTML(element) {
     </div>
     <div class="progressBar">
         <div class="progress-container">
-        <div class="progress-bar" id="myProgressBar${element['id']}"></div>
+        <div class="progress-bar" id="progressBarId${element['id']}">
+        
+        </div>
         </div>
         <span>${element['progressBar']}/${element['subtasks']} Subtasks</span>
     </div>
@@ -331,11 +334,16 @@ function generateCardHTML(element) {
     </div>
     `;
     
+    
 }
+
+
+
 
 
 function generateOverviewHTML(element) {
     let prioritySVG = priorityCheck(element);
+    
     return `
     <div class="overview">
     <div class="overlayCard ">
