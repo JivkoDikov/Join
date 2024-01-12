@@ -14,6 +14,11 @@ let profile = {
   ],
 };
 
+let letters = {
+  firstletters: [],
+  lastletters: [],
+};
+
 save();
 load();
 
@@ -35,7 +40,7 @@ function closeAddNewContact() {
 
 function createContact() {
   document.getElementById("addnewcontact").classList.remove("showOverlay-addNewContactPopUpContainer");
-  document.getElementById("backGroundOpacityContainer").classList.add("d-none");
+  
   let name = document.getElementById("name");
   let email = document.getElementById("email");
   let tel = document.getElementById("tel");
@@ -44,38 +49,45 @@ function createContact() {
     email: email.value,
     tel: tel.value,
   };
+  document.getElementById("backGroundOpacityContainer").classList.add("d-none");
   profile["contactDetails"].push(contactDetail);
   name.value = "";
   email.value = "";
   tel.value = "";
 
   document.getElementById("renderContactContainer").innerHTML = "";
-  
 
   for (let i = 0; i < profile["contactDetails"].length; i++) {
     const detail = profile["contactDetails"][i];
+    
     const firstLetter = detail["name"][0].toUpperCase();
-     const lastLetter = detail["name"].split(" ")[1]?.[0]?.toUpperCase() || "";
+    const lastLetter = detail["name"].split(" ")[1]?.[0]?.toUpperCase() || "";
+
+    // Hier wird die Variable backgroundColor definiert
+    const backgroundColor = profile["backgroundColors"][i % profile["backgroundColors"].length];
+
     document.getElementById("renderContactContainer").innerHTML += /*html*/ `
-    <div id="firstLetterContainer" class="firstLetterContainer">${firstLetter}</div>
-    <div class="line"></div>
-  <div onclick="renderContact(${i})"id="iconNameEmailContainer"class="iconNameEmailContainer" >
-    <div class="iconNameEmail">
-    <div id="firstLastLetter"class="firstLastLetter" style="background-color: ${backgroundColor.color};">${firstLetter}${lastLetter}</div>
-    <div class="nameEmail">
-  <div class="name">${detail["name"]}</div>
-  <div class="email">${detail["email"]}</div>
-  </div>
-  </div>
-  </div>
-  `;
-  if(!profile["letters"]["firstletters"].includes(firstLetter)){
-    profile["letters"]["firstletters"].push(firstLetter);
+      <div id="firstLetterContainer" class="firstLetterContainer">${firstLetter}</div>
+      <div class="line"></div>
+      <div onclick="renderContact(${i})" id="iconNameEmailContainer" class="iconNameEmailContainer" >
+        <div class="iconNameEmail">
+          <div id="firstLastLetter" class="firstLastLetter" style="background-color: ${backgroundColor.color};">${firstLetter}${lastLetter}</div>
+          <div class="nameEmail">
+            <div class="name">${detail["name"]}</div>
+            <div class="email">${detail["email"]}</div>
+          </div>
+        </div>
+      </div>
+    `;
+    if (!profile["letters"]["firstletters"].includes(firstLetter)) {
+      profile["letters"]["firstletters"].push(firstLetter);
+    }
+    if (!profile["letters"]["lastletters"].includes(lastLetter)) {
+      profile["letters"]["lastletters"].push(lastLetter);
+    }
   }
-  if(! profile["letters"]["lastletters"].includess(lastLetter)){
-     profile["letters"]["lastletters"].push(lastLetter);
-  }
-  }
+}
+
  
 
   for (let i = 0; i < profile["contactDetails"].length; i++) {
@@ -142,7 +154,7 @@ function createContact() {
       "contactContainerContactIcon"
     ).style.backgroundColor = lastAddedBackgroundColor.color;
   }
-}
+
 
 function renderContacts() {
   document.getElementById("renderContactContainer").innerHTML = "";
