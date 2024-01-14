@@ -1,3 +1,5 @@
+let isClicked = false;
+
 async function includeHTML() {
   let includeElements = document.querySelectorAll("[w3-include-html]");
   for (let i = 0; i < includeElements.length; i++) {
@@ -87,5 +89,14 @@ function sidebarBGTerms(linkId) {
       addActiveStyle(linkId);
   }
 }
+function openOrCloseHeaderLinksPopUp(){
+  if(isClicked){
+   document.getElementById('headerLinkPopUp').classList.remove('d-none');
+   isClicked = false;
+  }else{
+   document.getElementById('headerLinkPopUp').classList.add('d-none');
+   isClicked = true;
+  }
+ }
 
 document.addEventListener('DOMContentLoaded', render);

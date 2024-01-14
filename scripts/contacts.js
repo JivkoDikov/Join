@@ -3,7 +3,8 @@ let profile = {
     firstletters: [],
     lastletters: [],
   },
-  contactDetails: [],
+  contactDetails: [
+  ],
   backgroundColors: [
     { color: "rgb(147, 39, 255)" },
     { color: "rgb(110, 82, 255)" },
@@ -211,16 +212,4 @@ function load() {
   }
 }
 
-/*function openOrCloseHeaderLinksPopUp(){
- let isClicked = true;
- if(isClicked){
-  document.getElementById('headerLinkPopUp').classList.remove('d-none');
-  isClicked = false;
- }else{
-  document.getElementById('headerLinkPopUp').classList.add('d-none');
-  isClicked = true;
 
-
- }
-
-}*/
