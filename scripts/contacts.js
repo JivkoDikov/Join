@@ -18,50 +18,57 @@ save();
 load();
 
 async function addNewContact() {
-  document
-    .getElementById("addnewcontact")
-    .classList.add("showOverlay-addNewContactPopUpContainer");
-  document
-    .getElementById("backGroundOpacityContainer")
-    .classList.remove("d-none");
+  document.getElementById("addnewcontact").classList.add("showOverlay-addNewContactPopUpContainer");
+  document.getElementById("backGroundOpacityContainer").classList.remove("d-none");
 }
 
 function closeAddNewContact() {
-  document
-    .getElementById("addnewcontact")
-    .classList.remove("showOverlay-addNewContactPopUpContainer");
+  document.getElementById("addnewcontact").classList.remove("showOverlay-addNewContactPopUpContainer");
   document.getElementById("backGroundOpacityContainer").classList.add("d-none");
 }
 
-function createContact() {
+function createContact(event) {
+  event.preventDefault();
   document.getElementById("addnewcontact").classList.remove("showOverlay-addNewContactPopUpContainer");
   document.getElementById("backGroundOpacityContainer").classList.add("d-none");
-  let name = document.getElementById("name");
-  let email = document.getElementById("email");
-  let tel = document.getElementById("tel");
-  let contactDetail = {
+  document.getElementById('popUpSuccesfullyCreated').classList.add('overlay-successfullyCreated', 'showoverlay-successfullyCreated');
+  setTimeout(() => {
+    document.getElementById('popUpSuccesfullyCreated').classList.remove('showoverlay-successfullyCreated');
+  }, 1000);
+
+  
+ 
+  
+
+    let name = document.getElementById("name");
+    let email = document.getElementById("email");
+    let tel = document.getElementById("tel");
+    let contactDetail = {
     name: name.value,
     email: email.value,
     tel: tel.value,
   };
-  profile["contactDetails"].push(contactDetail);
-  name.value = "";
-  email.value = "";
-  tel.value = "";
+    profile["contactDetails"].push(contactDetail);
+    name.value = "";
+    email.value = "";
+    tel.value = "";
 
-  document.getElementById("renderContactContainer").innerHTML = "";
+    document.getElementById("renderContact").innerHTML ='';
+    document.getElementById("letterBox").innerHTML ='';
   
-
   for (let i = 0; i < profile["contactDetails"].length; i++) {
     const detail = profile["contactDetails"][i];
     const firstLetter = detail["name"][0].toUpperCase();
      const lastLetter = detail["name"].split(" ")[1]?.[0]?.toUpperCase() || "";
-    document.getElementById("renderContactContainer").innerHTML += /*html*/ `
-    <div id="firstLetterContainer" class="firstLetterContainer">${firstLetter}</div>
-    <div class="line"></div>
+     let backgroundColor = profile.backgroundColors[i % profile.backgroundColors.length].color;
+     
+    document.getElementById("letterBox").innerHTML += /*html*/ `
+    <div id="firstLetterContainer" class="firstLetterContainer" >${firstLetter}</div>
+    <div class="line"></div>`;
+     document.getElementById("renderContact").innerHTML += /*html*/ `
   <div onclick="renderContact(${i})"id="iconNameEmailContainer"class="iconNameEmailContainer" >
     <div class="iconNameEmail">
-    <div id="firstLastLetter"class="firstLastLetter" style="background-color: ${backgroundColor.color};">${firstLetter}${lastLetter}</div>
+    <div id="firstLastLetter"class="firstLastLetter" style="background-color: ${backgroundColor}">${firstLetter}${lastLetter}</div>
     <div class="nameEmail">
   <div class="name">${detail["name"]}</div>
   <div class="email">${detail["email"]}</div>
@@ -72,22 +79,24 @@ function createContact() {
   if(!profile["letters"]["firstletters"].includes(firstLetter)){
     profile["letters"]["firstletters"].push(firstLetter);
   }
-  if(! profile["letters"]["lastletters"].includess(lastLetter)){
+  if(! profile["letters"]["lastletters"].includes(lastLetter)){
      profile["letters"]["lastletters"].push(lastLetter);
   }
   }
  
-
+ 
   for (let i = 0; i < profile["contactDetails"].length; i++) {
     const detail = profile["contactDetails"][i];
 
     const firstLetter = detail["name"][0].toUpperCase();
     const lastLetter = detail["name"].split(" ")[1]?.[0]?.toUpperCase() || "";
-
+    let backgroundColor = profile.backgroundColors[i % profile.backgroundColors.length].color;
+ 
+  
     document.getElementById("showContact").innerHTML = /*html*/ `
   <div id="contactContainerContact" class="contactContainerContact ">
     <div class="contactContainerContactIconName">
-      <div id="contactContainerContactIcon"class="contactContainerContactIcon">${firstLetter}${lastLetter}</div>
+      <div id="contactContainerContactIcon"class="contactContainerContactIcon" style="background-color: ${backgroundColor}" >${firstLetter}${lastLetter}</div>
       <div class="nameEditDelete">
         <div id="contactContainerContactName"class="contactContainerContactName">${detail["name"]}</div>
         <div class="editDeleteContainer">
@@ -134,95 +143,50 @@ function createContact() {
   </div>
   `;
 
-    const lastAddedBackgroundColor =
-      backgroundColors[
-        (profile["contactDetails"].length - 1) % backgroundColors.length
-      ];
-    document.getElementById(
-      "contactContainerContactIcon"
-    ).style.backgroundColor = lastAddedBackgroundColor.color;
-  }
+}
 }
 
-function renderContacts() {
-  document.getElementById("renderContactContainer").innerHTML = "";
 
-  for (let i = 0; i < profile["contactDetails"].length; i++) {
-    const detail = profile["contactDetails"][i];
 
-    const backgroundColor = backgroundColors[i % backgroundColors.length];
-
-    const firstLetter = detail["name"][0].toUpperCase();
-    const lastLetter = detail["name"].split(" ")[1]?.[0]?.toUpperCase() || "";
-
-    document.getElementById("renderContactContainer").innerHTML += /*html*/ `
-    <div id="firstLetterContainer" class="firstLetterContainer">${firstLetter}</div>
-    <div onclick="renderContact(${i})" id="iconNameEmailContainer" class="iconNameEmailContainer" >
-      <div class="iconNameEmail">
-      <div id="firstLastLetter" class="firstLastLetter" style="background-color: ${backgroundColor.color};">${firstLetter}${lastLetter}</div>
-      <div class="nameEmail">
-    <div class="name">${detail["name"]}</div>
-    <div class="email">${detail["email"]}</div>
-    </div>
-    </div>
-
-    </div>
-    `;
-  }
-}
 
 function renderContact(index) {
   const selectedContact = profile["contactDetails"][index];
-  document
-    .getElementById("contactContainer")
-    .classList.add("backgroundColorContact");
-  document
-    .getElementById("contactContainerContact")
-    .classList.add("showOverlay-contactContainerContact");
-  document
-    .getElementById("showContact")
-    .classList.remove("overlay-contactContainerContact");
-  document.getElementById("contactContainerContactName").innerHTML =
-    selectedContact.name;
+  const firstLetter = selectedContact["name"][0].toUpperCase();
+  const lastLetter = selectedContact["name"].split(" ")[1]?.[0]?.toUpperCase() || "";
+  const backgroundColor = profile.backgroundColors[index % profile.backgroundColors.length].color;
+  document.getElementById("contactContainer").classList.add("backgroundColorContact");
+  document.getElementById("contactContainerContact").classList.add("showOverlay-contactContainerContact");
+  document.getElementById("showContact").classList.remove("overlay-contactContainerContact");
+  document.getElementById("contactContainerContactName").innerHTML = selectedContact.name;
   document.getElementById("emailadress").innerHTML = selectedContact.email;
   document.getElementById("telnumber").innerHTML = selectedContact.tel;
-  document.getElementById("contactContainerContactIcon").innerHTML = `${
-    firstLetter + lastLetter
-  }`;
-  document.getElementById("contactContainerContactIcon").style.backgroundColor =
-    backgroundColor.color;
+  document.getElementById("contactContainerContactIcon").innerHTML = `${firstLetter + lastLetter}`;
+  document.getElementById("contactContainerContactIcon").style.backgroundColor = backgroundColor;
 }
+
+
+  
+
 
 function deleteContact(index) {
   profile["contactDetails"].splice(index, 1);
   save();
   load();
-  renderContacts();
-  document
-    .getElementById("showContact")
-    .classList.add("overlay-contactContainerContact");
-  document
-    .getElementById("showContact")
-    .classList.remove("showOverlay-contactContainerContact");
+  document.getElementById("showContact").classList.add("overlay-contactContainerContact");
+  document.getElementById("showContact").classList.remove("showOverlay-contactContainerContact");
   console.log(profile);
 }
 
 function editContact(index) {
   const selectedContact = profile["contactDetails"][index];
-  document
-    .getElementById("editcontact")
-    .classList.add("showOverlay-addNewContactPopUpContainer");
-  document
-    .getElementById("backGroundOpacityContainer")
-    .classList.remove("d-none");
+  document.getElementById("editcontact").classList.add("showOverlay-addNewContactPopUpContainer");
+  document.getElementById("backGroundOpacityContainer").classList.remove("d-none");
   document.getElementById("editname").value = selectedContact.name;
   document.getElementById("editemail").value = selectedContact.email;
   document.getElementById("edittel").value = selectedContact.tel;
 }
 function closeEditContact() {
-  document
-    .getElementById("editcontact")
-    .classList.remove("showOverlay-addNewContactPopUpContainer");
+  document.getElementById("editcontact").classList.remove("showOverlay-addNewContactPopUpContainer");
   document.getElementById("backGroundOpacityContainer").classList.add("d-none");
 }
 

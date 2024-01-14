@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/mediaquerys/joinsidebar.css" />
     <link rel="stylesheet" href="/mediaquerys/header.css" />
     <script defer src="/scripts/script.js"></script>
+    <script src="/scripts/addtask.js"></script>
     <title>Add Task</title>
   </head>
 
@@ -28,14 +29,14 @@
                 <p class="title">Title</p><p class="star">*</p>
                 </div>
                 <div class="inputTitleRequiredContainer">
-                <input class="inputTitle"type="text" required="true" placeholder="Enter a Title">
+                <input id="enterTitle"class="inputTitle"type="text" required="true" placeholder="Enter a Title">
                 <p class="requiredField">This fiels is required</p>
                 </div>
             </div>
             <div class="textareaDescription">
                 <p class="title">Description</p>
                 <div class="textareaTitleRequiredContainer">
-                <textarea name="" id="" cols="30" rows="10" placeholder="Enter a Description"></textarea>
+                <textarea id="enterDescription"name="" id="" cols="30" rows="10" required="true" placeholder="Enter a Description"></textarea>
                 <p class="requiredField">This fiels is required</p>
                 </div>
             </div>
@@ -75,8 +76,8 @@
                 </div>
                 <div class="dateInputRequiredContainer">
                     <div class="dateInputImg">
-                <input class="inputMonth"type="text" placeholder="dd/mm/yyyy">
-                <img class="imgCalendar"src="/assets/img/calendar.png" alt="">
+                <input id="enterDate" class="inputMonth"type="date" required="true" placeholder="dd/mm/yyyy">
+                
                     </div>
                     <p class="requiredField">This fiels is required</p>
                     </div>
@@ -192,14 +193,14 @@
         </div>
         
         <div class="cancelCreateContactButtons">
-            <button onclick="closeAddNewContact()"class="cancelBtn">
+            <button class="cancelBtn">
                 <span class="cancelX">
             <p class="cancelText">Clear</p>
             <p class="x">x</p>
               </span>
         
             </button>
-           <button class="createCheckBtn">
+           <button onclick="createTask()" class="createCheckBtn">
             <span class="createCheck">
             <p class="createText">Create Task</p>
             <img src="/assets/img/check.png" alt="">
