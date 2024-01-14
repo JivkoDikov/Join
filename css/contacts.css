@@ -683,24 +683,9 @@ input:focus {
   transition: all 225ms ease-in-out;
 }
 
-@keyframes slideOutRight{
-  from {
-    transform: translateX(1200px);
-  }
-   to{
-    transform: translateX(0px);
-   }
-   
 
-}
 
-.slideOutRight{
-  animation: slideOutRight 500ms alternate ease-in-out;
 
-  
-  
-  
-}
 
 .successfullyText {
   color: white;

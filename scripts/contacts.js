@@ -162,8 +162,10 @@ function renderContact(index) {
   const lastLetter = selectedContact["name"].split(" ")[1]?.[0]?.toUpperCase() || "";
   const backgroundColor = profile.backgroundColors[index % profile.backgroundColors.length].color;
   document.getElementById("contactContainer").classList.add("backgroundColorContact");
-  document.getElementById("contactContainerContact").classList.add("showOverlay-contactContainerContact");
-  document.getElementById("showContact").classList.remove("overlay-contactContainerContact");
+  document.getElementById('contactContainerContact').classList.add('overlay-contactContainerContact', 'showOverlay-contactContainerContact');
+  setTimeout(() => {
+    document.getElementById('contactContainerContact').classList.remove('overlay-contactContainerContact');
+  }, 1000);
   document.getElementById("contactContainerContactName").innerHTML = selectedContact.name;
   document.getElementById("emailadress").innerHTML = selectedContact.email;
   document.getElementById("telnumber").innerHTML = selectedContact.tel;
