@@ -17,12 +17,9 @@ async function includeHTML() {
 
 async function render(){
 await includeHTML();
- restoreSelectedLink();
- 
- 
- 
+restoreSelectedLink();
 }
-  
+
 
 function addActiveStyle(linkId) {
   sessionStorage.setItem('selectedMenu', linkId);
