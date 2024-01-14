@@ -14,6 +14,11 @@ let profile = {
   ],
 };
 
+let letters = {
+  firstletters: [],
+  lastletters: [],
+};
+
 save();
 load();
 
@@ -58,6 +63,7 @@ function createContact(event) {
   
   for (let i = 0; i < profile["contactDetails"].length; i++) {
     const detail = profile["contactDetails"][i];
+    
     const firstLetter = detail["name"][0].toUpperCase();
      const lastLetter = detail["name"].split(" ")[1]?.[0]?.toUpperCase() || "";
      let backgroundColor = profile.backgroundColors[i % profile.backgroundColors.length].color;
@@ -82,7 +88,8 @@ function createContact(event) {
   if(! profile["letters"]["lastletters"].includes(lastLetter)){
      profile["letters"]["lastletters"].push(lastLetter);
   }
-  }
+}
+
  
  
   for (let i = 0; i < profile["contactDetails"].length; i++) {

@@ -76,7 +76,7 @@ function updateHTML() {
     for (let i = 0; i < todo.length; i++) {
         const element = todo[i];   
         document.getElementById('todo').innerHTML += generateCardHTML(element);
-        
+        updateProgressBar(element);
     }
 
 
@@ -85,7 +85,7 @@ function updateHTML() {
     for (let j = 0; j < progress.length; j++) {
         const element = progress[j];
         document.getElementById('progress').innerHTML += generateCardHTML(element);
-        
+        updateProgressBar(element);
     }
 
 
@@ -94,7 +94,7 @@ function updateHTML() {
     for (let j = 0; j < feedback.length; j++) {
         const element = feedback[j];
         document.getElementById('feedback').innerHTML += generateCardHTML(element);
-        
+        updateProgressBar(element);
     }
     
     let done = cards.filter(t => t['category'] == 'done');
@@ -102,7 +102,7 @@ function updateHTML() {
     for (let j = 0; j < done.length; j++) {
         const element = done[j];
         document.getElementById('done').innerHTML += generateCardHTML(element);
-        
+        updateProgressBar(element);
     }
 
     emptyCategory();
@@ -148,7 +148,9 @@ function updateCategory(card, category, search) {
         
         if (element['category'] === category && (element['headline'].toLowerCase().includes(search) || search === '')) {
             card.innerHTML += generateCardHTML(element);
+            
         }
+        
     }
     emptyCategory();
 }
@@ -222,24 +224,24 @@ function closeOverview() {
 
 
 
-function updateProgressBar() {
+function updateProgressBar(element) {
     for (let j = 0; j < cards.length; j++) {
         
-        let infoArrayCard = cards[j]['progressBar'];
-        let progressBarId = `myProgressBar${j['id']}`;
+        let infoArrayCard = element['progressBar'];
+        let progressBarId = `myProgressBar${element['id']}`;
 
        
-        let progressBar = document.getElementById(`progressBarId${j['id']}`);
+        let progressBar = document.getElementById(`progressBarId${element['id']}`);
 console.log(progressBar);
         progressBar.innerHTML = '';
         progressBar.innerHTML = `<div class="progress-bar" id="${progressBarId}"></div>`;
 
         
-        if (progressBarId) {
+        if (progressBar) {
             
             
-            progressBarId.style.width = infoArrayCard + '%';
-            progressBarId.innerHTML = infoArrayCard + '%';
+            progressBar.style.width = infoArrayCard + '%';
+            progressBar.innerHTML = infoArrayCard + '%';
 
             if (infoArrayCard < 100) {
                 infoArrayCard += 10;
