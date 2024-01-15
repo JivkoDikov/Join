@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="/mediaquerys/joinsidebar.css">
     <link rel="stylesheet" href="/mediaquerys/header.css">
     <script defer src="/scripts/script.js"></script>
-    <script defer src="/scripts/contacts.js"></script>
+    <script defer src="/scripts/contacts_render.js"></script>
     <script src="/scripts/storage.js"></script>
     
     
 </head>
-<body id="body"onload="render()">
+<body id="body" onload="render(), renderContact()">
     <div w3-include-html= "/assets/templates/join_side_bar.html"></div>
     <div w3-include-html="/assets/templates/header.html"></div>
     <div class="contentContact">
