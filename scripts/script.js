@@ -17,8 +17,6 @@ async function render(){
 await includeHTML();
  restoreSelectedLink();
  termsStatus();
- 
- 
 }
   
 
