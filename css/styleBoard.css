@@ -501,6 +501,10 @@ input[type=checkbox]:before {
     transition: width 0.3s ease-in-out;
 }
 
+.overlayCardEditForm {
+    width: 85%;
+}
+
 @media (max-width:1350px) {
     .boardHeader {
         justify-content: flex-start;
