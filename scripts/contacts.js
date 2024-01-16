@@ -8,7 +8,7 @@ let backgroundColors = [
     { color: "rgb(255, 122, 0)" },
     { color: "rgb(31, 215, 193)" },
     { color: "rgb(70, 47, 138)" },
-  ]
+]
 
 save();
 load();
@@ -32,59 +32,87 @@ function createContact(event) {
     document.getElementById('popUpSuccesfullyCreated').classList.remove('showoverlay-successfullyCreated');
   }, 1000);
 
-    let name = document.getElementById("name");
-    let email = document.getElementById("email");
-    let tel = document.getElementById("tel");
-    let contactDetail = {
+  let name = document.getElementById("name");
+  let email = document.getElementById("email");
+  let tel = document.getElementById("tel");
+  let contactDetail = {
     name: name.value,
     email: email.value,
     tel: tel.value,
   };
-    contactDetails.push(contactDetail);
-    name.value = "";
-    email.value = "";
-    tel.value = "";
-
-    document.getElementById('letterBox').innerHTML ='';
-    document.getElementById("renderContact").innerHTML ='';
-  
-  for (let i = 0; i < contactDetails.length; i++) {
-    const detail = contactDetails[i];
-    
-    const firstLetter = detail["name"][0].toUpperCase();
-     const lastLetter = detail["name"].split(" ")[1]?.[0]?.toUpperCase() || "";
-     let backgroundColor = backgroundColors[i % backgroundColors.length].color;
-     
-     document.getElementById("renderContact").innerHTML += /*html*/ `
-    <div onclick="renderContact(${i})"id="iconNameEmailContainer"class="iconNameEmailContainer" >
-    <div class="iconNameEmail">
-    <div id="firstLastLetter"class="firstLastLetter" style="background-color: ${backgroundColor}">${firstLetter}${lastLetter}</div>
-    <div class="nameEmail">
-    <div class="name">${detail["name"]}</div>
-    <div class="email">${detail["email"]}</div>
-    </div>
-    </div>
-    </div>
-  `;
-     
-  if(!firstLetters.includes(firstLetter)){
+  contactDetails.push(contactDetail);
+  name.value = "";
+  email.value = "";
+  tel.value = "";
+  let detail = contactDetails[contactDetails.length - 1];
+  let firstLetter = detail["name"][0].toUpperCase();
+  let lastLetter = detail["name"].split(" ")[1]?.[0]?.toUpperCase() || "";
+  if (!firstLetters.includes(firstLetter)) {
     firstLetters.push(firstLetter);
   }
-  if(!lastLetters.includes(lastLetter)){
-     lastLetters.push(lastLetter);
+  if (!lastLetters.includes(lastLetter)) {
+    lastLetters.push(lastLetter);
   }
+document.getElementById("letterBox").innerHTML = '';
+
+
+
+
+  showContact();
 }
 
+function showContact() {
+  let groupedContacts = {};
+  for (let i = 0; i < contactDetails.length; i++) {
+      const detail = contactDetails[i];
+      const firstLetter = detail["name"][0].toUpperCase();
+      if (!groupedContacts[firstLetter]) {
+          groupedContacts[firstLetter] = [];
+      }
+      groupedContacts[firstLetter].push(detail);
+  }
+  for (let letter in groupedContacts) {
+      const contacts = groupedContacts[letter];
+      document.getElementById("letterBox").innerHTML += /*html*/ `
+          <div id="firstLetterContainer" class="firstLetterContainer" onclick="renderContact('${letter}')">${letter}</div>
+          <div class="line"></div>
+          <div id="renderContactDetails${letter}"></div>`;
+      for (let i = 0; i < contacts.length; i++) {
+          const detail = contacts[i];
+          let backgroundColor = backgroundColors[i % backgroundColors.length];
+
+          let lastLetter = detail["name"].split(" ")[1]?.[0]?.toUpperCase() || "";
+
+        document.getElementById(`renderContactDetails${letter}`).innerHTML += /*html*/ `
+            <div onclick="renderContact('${letter}')" id="iconNameEmailContainer" class="iconNameEmailContainer" >
+                <div class="iconNameEmail">
+                    <div id="firstLastLetter" class="firstLastLetter" style="background-color: ${backgroundColor.color}">
+                        ${letter}${lastLetter}
+                    </div>
+                    <div class="nameEmail">
+                        <div class="name">${detail["name"]}</div>
+                        <div class="email">${detail["email"]}</div>
+                    </div>
+                </div>
+            </div>`;
+    }
+ 
+}
+showContactDetails();
+}
+
+function showContactDetails(){
+  
   for (let i = 0; i < contactDetails.length; i++) {
     const detail = contactDetails[i];
     const firstLetter = detail["name"][0].toUpperCase();
     const lastLetter = detail["name"].split(" ")[1]?.[0]?.toUpperCase() || "";
-    let backgroundColor = backgroundColors[i % backgroundColors.length].color;
+    let backgroundColor = backgroundColors[i % backgroundColors.length];
  
     document.getElementById("showContact").innerHTML = /*html*/ `
   <div id="contactContainerContact" class="contactContainerContact">
     <div class="contactContainerContactIconName">
-      <div id="contactContainerContactIcon"class="contactContainerContactIcon" style="background-color: ${backgroundColor}" >${firstLetter}${lastLetter}</div>
+      <div id="contactContainerContactIcon"class="contactContainerContactIcon" style="background-color: ${backgroundColor.color}" >${firstLetter}${lastLetter}</div>
       <div class="nameEditDelete">
         <div id="contactContainerContactName"class="contactContainerContactName">${detail["name"]}</div>
         <div class="editDeleteContainer">
@@ -131,22 +159,9 @@ function createContact(event) {
   
 
 }
-renderLetters();
 save();
 load();
 }
-
-function renderLetters(){
-   for (let i = 0; i < firstLetters.length; i++) {
-    const firstLetter = firstLetters[i];
-    
-  document.getElementById("letterBox").innerHTML += /*html*/ `
-  <div id="firstLetterContainer" class="firstLetterContainer" >${firstLetter}</div>
-  <div class="line"></div>`;
-   }
-}
-
-
 
 function renderContact(index) {
   const selectedContact = contactDetails[index];
@@ -165,7 +180,6 @@ function renderContact(index) {
   document.getElementById("contactContainerContactIcon").style.backgroundColor = backgroundColor;
 }
 
-
 function deleteContact(index) {
   contactDetails.splice(index, 1);
   save();
@@ -182,16 +196,19 @@ function editContact(index) {
   document.getElementById("editemail").value = selectedContact.email;
   document.getElementById("edittel").value = selectedContact.tel;
 }
+
 function closeEditContact() {
   document.getElementById("editcontact").classList.remove("showOverlay-addNewContactPopUpContainer");
   document.getElementById("backGroundOpacityContainer").classList.add("d-none");
 }
 
+
+
 function save() {
   let firstLettersAsText = JSON.stringify(firstLetters);
-  localStorage.setItem("firstLetter", firstLettersAsText);
+  localStorage.setItem("firstLetters", firstLettersAsText);
   let lastLettersAsText = JSON.stringify(lastLetters);
-  localStorage.setItem("lastLetter", lastLettersAsText);
+  localStorage.setItem("lastLetters", lastLettersAsText);
   let contactDetailsAsText = JSON.stringify(contactDetails);
   localStorage.setItem("contactDetails", contactDetailsAsText);
   let backgroundColorsAsText = JSON.stringify(backgroundColors);
@@ -199,19 +216,15 @@ function save() {
 }
 
 function load() {
-  let lastLettersAsText = localStorage.getItem("lastLetters");
-  let firstLettersAsText = localStorage.getItem("firstLetters");
-  let contactDetailsAsText = localStorage.getItem("contactDetails");
-  let backgroundColorsAsText = localStorage.getItem("backgroundColors")
-  
-  
-  if (lastLettersAsText&firstLettersAsText&contactDetailsAsText&backgroundColorsAsText) {
+  let lastLettersAsText = localStorage.getItem('lastLetters');
+  let firstLettersAsText = localStorage.getItem('firstLetters');
+  let contactDetailsAsText = localStorage.getItem('contactDetails');
+  let backgroundColorsAsText = localStorage.getItem('backgroundColors')
+
+  if (lastLettersAsText && firstLettersAsText && contactDetailsAsText && backgroundColorsAsText) {
     contactDetails = JSON.parse(contactDetailsAsText);
     firstLetters = JSON.parse(firstLettersAsText);
     lastLetters = JSON.parse(lastLettersAsText);
     backgroundColors = JSON.parse(backgroundColorsAsText);
-
   }
 }
-
-
