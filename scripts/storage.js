@@ -12,4 +12,3 @@ async function getItem(profile) {
     const url = `${STORAGE_URL}?key=${profile}&token=${STORAGE_TOKEN}`;
     return fetch(url).then(res => res.json());
 }
-

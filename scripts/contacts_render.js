@@ -60,10 +60,20 @@ let profile = {
       let firstLetter = profile.contactDetails[i].firstLetter
       let renderContact = document.getElementById(firstLetter);
       let userName = profile.contactDetails[i].name
+      let email = profile.contactDetails[i].email
 
-      renderContact.innerHTML += /*html*/ `
-      <div class="firstLetterContainer">${userName}</div>
-      `;
+    
+    renderContact.innerHTML += /*html*/ `
+    <div onclick="renderContact(${i})"id="iconNameEmailContainer"class="iconNameEmailContainer" >
+    <div class="iconNameEmail">
+    <div id="firstLastLetter"class="firstLastLetter" style="background-color: ${backgroundColor}">${firstLetter}${lastLetter}</div>
+    <div class="nameEmail">
+    <div class="name">${userName}</div>
+    <div class="email">${email}</div>
+    </div>
+    </div>
+    </div>
+  `;
   }
     }
 

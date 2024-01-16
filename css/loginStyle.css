@@ -117,7 +117,7 @@ a:hover{
     font-size: 16px;
 }
 .disappear {
-    animation: fadeOut 1s ease-out 1s forwards;
+    animation: fadeOut 1.5s ease-out forwards;
 }
 .centeredImage {
     position: fixed;
