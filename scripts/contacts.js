@@ -163,11 +163,11 @@ save();
 load();
 }
 
-function renderContact(index) {
-  const selectedContact = contactDetails[index];
+function renderContact(i) {
+  const selectedContact = contactDetails[i];
   const firstLetter = selectedContact["name"][0].toUpperCase();
   const lastLetter = selectedContact["name"].split(" ")[1]?.[0]?.toUpperCase() || "";
-  const backgroundColor = backgroundColors[index % backgroundColors.length].color;
+  const backgroundColor = backgroundColors[i % backgroundColors.length];
   document.getElementById("contactContainer").classList.add("backgroundColorContact");
   document.getElementById('contactContainerContact').classList.add('overlay-contactContainerContact');
   setTimeout(() => {
@@ -177,7 +177,7 @@ function renderContact(index) {
   document.getElementById("emailadress").innerHTML = selectedContact.email;
   document.getElementById("telnumber").innerHTML = selectedContact.tel;
   document.getElementById("contactContainerContactIcon").innerHTML = `${firstLetter + lastLetter}`;
-  document.getElementById("contactContainerContactIcon").style.backgroundColor = backgroundColor;
+  document.getElementById("contactContainerContactIcon").style.backgroundColor = backgroundColor.color;
 }
 
 function deleteContact(index) {
