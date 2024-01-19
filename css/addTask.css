@@ -165,12 +165,12 @@ textarea {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    padding: 12px 16px;
 
 }
 
 .inputContacts {
   border: none;
-  width: 239px;
   height: 24px;
   font-family: "Inter", sans-serif;
   font-size: 20px;
@@ -178,7 +178,6 @@ textarea {
   line-height: 24px;
   letter-spacing: 0em;
   text-align: left;
-  padding: 12px 16px 12px 16px;
   color: #000000;
 }
 
@@ -216,11 +215,12 @@ textarea {
 .svgArrow {
   width: 24px;
   height: 24px;
-  padding: 12px 16px 12px 16px;
+  cursor: pointer;
+
 }
 
 .svgArrow:hover {
-  fill: #d9d9d9;
+  background-color: #d1d1d1;
   border-radius: 50%;
 }
 
@@ -313,7 +313,15 @@ textarea {
   align-items: center;
   background-color: #ffffff;
   border: 1px solid #d1d1d1;
+  cursor: pointer;
 }
+.btnUrgent:hover,
+.btnMedium:hover,
+.btnLow:hover{
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+
 
 .urgentSVGText,
 .mediumSVGText,
@@ -385,8 +393,7 @@ textarea {
 }
 
 .selectTaskCategory {
-  padding: 12px 16px 12px 16px;
-  width: 195px;
+  
   height: 24px;
   font-family: "Inter", sans-serif;
   font-size: 20px;
@@ -396,6 +403,14 @@ textarea {
   text-align: left;
   color: #000000;
   display: flex;
+}
+
+.selectTaskCategoryContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  width: 100%;
 }
 
 .selectTaskCategoryArrow{
