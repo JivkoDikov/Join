@@ -18,6 +18,7 @@ async function includeHTML() {
 async function render(){
 await includeHTML();
 restoreSelectedLink();
+
 }
 
 
