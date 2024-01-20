@@ -1,4 +1,4 @@
-const users = ['email_neizcon@gmail.com_pw_12345']
+
 
 function submitForm(event){
     event.preventDefault(); // Prevents the default form submission
@@ -22,10 +22,12 @@ function checkLogin(email, password) {
     }
 }
 
-function toggleCheckbox() {
-    var checkbox = document.getElementById('rememberCheckbox');
-    checkbox.checked = !checkbox.checked;
+async function loadUser(){
+    let users = await getItem('users');
+    console.log(JSON.parse(users.data.value))
 }
+
+
 
 function guestLogin(){
     alert('Welcom Guest')
