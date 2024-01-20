@@ -1,7 +1,7 @@
 
 
 function submitForm(event){
-    event.preventDefault(); // Prevents the default form submission
+    event.preventDefault(); 
 
     // Get values from the form
     var email = document.getElementById('emailInput').value;
@@ -12,7 +12,6 @@ function submitForm(event){
 }
 
 function checkLogin(email, password) {
-    // Replace this with your actual logic
     let loginString = 'email_'+email+'_pw_'+password
     
     for ( let i = 0; i < users.length; i++){
@@ -89,7 +88,7 @@ function checkEmail() {
     let emailError = document.getElementById('emailError');
     let emailInputFrame = document.getElementById('emailInputFrame');
   
-    // Regulärer Ausdruck für eine einfache Überprüfung der E-Mail-Adresse
+
     let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   
     if (emailRegex.test(emailInput.value)) {

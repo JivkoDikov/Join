@@ -551,14 +551,7 @@ textarea {
   cursor: pointer;
 }
 
-.textButtonsContainer {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  padding-left: 96px;
-  padding-right: 96px;
-  margin-top: 54px;
-}
+
 
 .cancelCreateContactButtons {
   display: flex;
@@ -573,4 +566,14 @@ textarea {
 
 .text {
   margin-block: 0;
+}
+
+
+.footerTask{
+  padding: 0px 96px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-top: 140px;
+  width: calc(100vw - 424px);
 }
