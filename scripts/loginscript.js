@@ -98,7 +98,7 @@ function checkEmail() {
       } else {
         emailError.classList.remove('d-none');
         emailError.classList.add('dontMatch')
-        emailInputFrame.style.border = '2px solid red'; // Optional: Rote Umrandung für ungültige E-Mail-Adressen
+        emailInputFrame.style.border = '2px solid red';
       }
 }
 

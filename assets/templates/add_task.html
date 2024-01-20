@@ -31,16 +31,16 @@
                 </div>
                 <div class="inputTitleRequiredContainer">
                     <div class="inputTitleContainer">
-                <input id="enterTitle"class="inputTitle"type="text" required="true" placeholder="Enter a Title">
+                <input oninput="inputFrame(id)" id="enterTitle"class="inputTitle"type="text" required="true" placeholder="Enter a Title">
                     </div>
-                <p class="requiredField">This fiels is required</p>
+                <p id="enterTitleClass" class="requiredField d-none">This fiels is required</p>
                 </div>
             </div>
             <div class="textareaDescription">
                 <p class="title">Description</p>
                 <div class="textareaTitleRequiredContainer">
-                <textarea id="enterDescription"name="" id="" cols="30" rows="10" required="true" placeholder="Enter a Description"></textarea>
-                <p class="requiredField">This fiels is required</p>
+                <textarea oninput="inputFrame(id)" id="enterDescription" cols="30" rows="10" required="true" placeholder="Enter a Description"></textarea>
+                <p id="enterDescriptionClass" class="requiredField d-none">This fiels is required</p>
                 </div>
             </div>
 
@@ -79,10 +79,10 @@
                 </div>
                 <div class="dateInputRequiredContainer">
                     <div class="dateInputImg">
-                <input id="enterDate" class="inputMonth"type="date" required="true" placeholder="dd/mm/yyyy">
+                <input oninput="inputFrame(id)" id="enterDate" class="inputMonth"type="date" required="true" placeholder="dd/mm/yyyy">
                 
                     </div>
-                    <p class="requiredField">This fiels is required</p>
+                    <p id="enterDateClass" class="requiredField d-none">This fiels is required</p>
                     </div>
             </div>
 

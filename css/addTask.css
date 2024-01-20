@@ -1,3 +1,8 @@
+form input:focus,
+form textarea:focus{
+  outline: none;
+}
+
 .contentAddTask {
   width: calc(100vw - 232px);
   height: calc(100vh - 96px);
@@ -73,6 +78,7 @@
   height: 12px;
   margin-block: 0;
   font-size: 12px;
+  color: red;
 }
 
 .titleInputContainer {
