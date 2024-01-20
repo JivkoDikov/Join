@@ -25,7 +25,7 @@ let contacts = [
     { email: "example20@example.com", name: "Rita", tel: "444444444", firstLetter: "R" },
   ]
 
-let backgroundColors = [
+const backgroundColors = [
     { color: "rgb(147, 39, 255)" },
     { color: "rgb(110, 82, 255)" },
     { color: "rgb(252, 113, 255)" },
@@ -79,10 +79,7 @@ function createContact(event) {
   
   
     showContacts();
-showContact();
-  
-
-  
+showContact();  
 }
 
 
@@ -92,6 +89,7 @@ function initContacts(){
 }
 
 function showContacts() {
+  
  
   let idName = null;
   let letterBox = document.getElementById("letterBox");
@@ -104,13 +102,14 @@ function showContacts() {
     let filteredContacts = contacts.filter((contact) => contact["name"].charAt(0) == letter);
     
     for (let j = 0; j < filteredContacts.length; j++) {
+      let color = backgroundcolor();
       const filteredContact = filteredContacts[j];
       idName = filteredContact.email + '-' + filteredContact.name;
 
       letterBox.innerHTML += /*html*/ `
         <div onclick="showContact('${idName}')" id="iconNameEmailContainer" class="iconNameEmailContainer">
           <div class="iconNameEmail">
-            <div id="firstLastLetter" class="firstLastLetter">${letter}</div>
+            <div id="firstLastLetter" class="firstLastLetter" style="background-color: ${color}">${letter} </div>
             <div class="nameEmail">
               <div class="name">${filteredContact["name"]}</div>
               <div class="email">${filteredContact["email"]}</div>
@@ -122,6 +121,7 @@ function showContacts() {
 }
 
 function showContact(idName){
+  
 
   for (let i = 0; i < contacts.length; i++) {
     let contact = contacts[i];
@@ -186,7 +186,11 @@ function showContact(idName){
   load();
   }
 
+function backgroundcolor(){
+  let randomColor = backgroundColors[Math.floor(Math.random() * backgroundColors.length)].color;
 
+  return randomColor;
+}
 
 
 
