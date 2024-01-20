@@ -1,39 +1,6 @@
 let letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-let contacts = [
-  {
-    id : 0,
-    name: "Franz Meier",
-    email: "franzmeier@hotmail.com",
-    tel: "5458938498",
-  },
-  {
-    id : 1,
-    name: "Sepp Schuster",
-    email: "seppschuster@hotmail.com",
-    tel: "5889523049",
-  },
-  {
-    id : 2,
-    name: "Max Mustermann",
-    email: "maxmustermann@hotmail.com",
-    tel: "9080983409",
-  },
-  {
-    id : 3,
-    name: "Anton Hermann",
-    email: "antonhermann@hotmail.com",
-    tel: "485039485"
-  }
+let contacts = [];
 
-];
-let backgroundColors = [
-    { color: "rgb(147, 39, 255)" },
-    { color: "rgb(110, 82, 255)" },
-    { color: "rgb(252, 113, 255)" },
-    { color: "rgb(255, 122, 0)" },
-    { color: "rgb(31, 215, 193)" },
-    { color: "rgb(70, 47, 138)" },
-]
 
 save();
 load();
@@ -65,21 +32,17 @@ function createContact(event) {
     name: name.value,
     email: email.value,
     tel: tel.value,
+    bgColor: generateRandomColor(),
   };
   contacts.push(contact);
   name.value = "";
   email.value = "";
   tel.value = "";
   
+  
 
-  let letter = contact["name"].charAt(0).toUpperCase();
-  if (letters.indexOf(letter) === -1) {
-    letters.push(letter);
-  }
-  
-  
     showContacts();
-showContact();
+showContact(contact.id);
   
 
   
@@ -89,7 +52,11 @@ showContact();
 function initContacts(){
   render();
   showContacts();
+  
 }
+
+
+
 
 function showContacts() {
  
@@ -97,43 +64,61 @@ function showContacts() {
   letterBox.innerHTML ='';
   for (let i = 0; i < letters.length; i++) {
     const letter = letters[i];
+    let filteredContacts = contacts.filter((contact) => contact["name"].charAt(0) == letter);
+
+    if(filteredContacts.length > 0){
     document.getElementById("letterBox").innerHTML += /*html*/ `
       <div id="firstLetterContainer" class="firstLetterContainer">${letter}</div>
       <div class="line"></div>`;
-    let filteredContacts = contacts.filter((contact) => contact["name"].charAt(0) == letter);
     
     for (let j = 0; j < filteredContacts.length; j++) {
       const filteredContact = filteredContacts[j];
-      
+      const lastNameLetter = filteredContact["name"].split(" ").pop().charAt(0).toUpperCase();
+      const bgColor = filteredContact.bgColor; 
       letterBox.innerHTML += /*html*/ `
-        <div onclick="showContact(${i})" id="iconNameEmailContainer" class="iconNameEmailContainer">
+        <div onclick="showContact(${filteredContact.id})" id="iconNameEmailContainer" class="iconNameEmailContainer">
           <div class="iconNameEmail">
-            <div id="firstLastLetter" class="firstLastLetter">${letter}</div>
+            <div id="firstLastLetter" class="firstLastLetter" style="background-color: ${bgColor}">${letter}${lastNameLetter}</div>
             <div class="nameEmail">
               <div class="name">${filteredContact["name"]}</div>
               <div class="email">${filteredContact["email"]}</div>
             </div>
           </div>
         </div>`;
+       
     }
   }
 }
+}
 
-function showContact(){
+function generateRandomColor() {
+  var x = Math.floor(Math.random() * 256);
+  var y = Math.floor(Math.random() * 256);
+  var z = Math.floor(Math.random() * 256);
+  return `rgb(${x},${y},${z})`;
+}
 
+
+function getLastLetter(name) {
+  return name.split(" ").pop().charAt(0).toUpperCase();
+}
+function showContact(id){
+const index = contacts.findIndex((contact) => contact.id === id);
   
-    for (let i = 0; i < contacts.length; i++) {
-      const contact = contacts[i];
+if (index !== -1) {
+      const contact = contacts[index];
       let letter = contact["name"].charAt(0).toUpperCase();
-  
+      let lastNameLetter = getLastLetter(contact["name"]);
+      
+      
       document.getElementById("showContact").innerHTML = /*html*/ `
     <div id="contactContainerContact" class="contactContainerContact">
       <div class="contactContainerContactIconName">
-        <div id="contactContainerContactIcon"class="contactContainerContactIcon" >${letter}</div>
+        <div id="contactContainerContactIcon"class="contactContainerContactIcon"style="background-color: ${contact.bgColor}">${letter}${lastNameLetter}</div>
         <div class="nameEditDelete">
           <div id="contactContainerContactName"class="contactContainerContactName">${contact["name"]}</div>
           <div class="editDeleteContainer">
-          <div onclick="editContact(${i})"class="iconEdit">
+          <div onclick="editContact(${id})"class="iconEdit">
           <svg class="svgIcons"width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <mask id="mask0_119188_2072" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
               <rect width="24" height="24" fill="#D9D9D9"/>
@@ -144,7 +129,7 @@ function showContact(){
             </svg>
             <p>Edit</p>
           </div>
-        <div onclick="deleteContact(${i})"class="iconDelete">
+        <div onclick="deleteContact(${id})"class="iconDelete">
         <svg class="svgIcons"width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
              <mask id="mask0_119188_3520" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
              <rect width="24" height="24" fill="#D9D9D9"/>
@@ -173,13 +158,13 @@ function showContact(){
       </div>
     </div>
     `;
-  }
+  
   save();
   load();
-  }
+  
+}
 
-
-
+}
 
 
 
@@ -187,6 +172,7 @@ function deleteContact(i) {
   contacts.splice(i, 1);
   save();
   load();
+  showContacts();
   document.getElementById("showContact").classList.add("overlay-contactContainerContact");
   document.getElementById("showContact").classList.remove("showOverlay-contactContainerContact");
 }
@@ -212,18 +198,16 @@ function save() {
   localStorage.setItem("letters", lettersAsText);
   let contactsAsText = JSON.stringify(contacts);
   localStorage.setItem("contacts", contactsAsText);
-  let backgroundColorsAsText = JSON.stringify(backgroundColors);
-  localStorage.setItem("backgroundColors", backgroundColorsAsText);
+  
 }
 
 function load() {
   let lettersAsText = localStorage.getItem('letters');
   let contactsAsText = localStorage.getItem('contacts');
-  let backgroundColorsAsText = localStorage.getItem('backgroundColors')
+ 
 
-  if (lettersAsText && contactsAsText && backgroundColorsAsText) {
+  if (lettersAsText && contactsAsText) {
     contacts = JSON.parse(contactsAsText);
     letters = JSON.parse(lettersAsText);
-    backgroundColors = JSON.parse(backgroundColorsAsText);
   }
 }
