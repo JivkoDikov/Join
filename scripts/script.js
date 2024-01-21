@@ -18,6 +18,7 @@ async function includeHTML() {
 async function render(){
 await includeHTML();
 restoreSelectedLink();
+
 }
 
 
@@ -38,12 +39,12 @@ function termsStatus() {
   }
 }
 
-function checkUser() {
+function checkUser(value) {
   let loginStatus = sessionStorage.getItem('user');
 
   if (loginStatus) {
     window.location.href = '/assets/templates/summary.html';
-  } else {
+  }  if (!value){
     window.location.href = '/assets/templates/login.html';
   }
 }

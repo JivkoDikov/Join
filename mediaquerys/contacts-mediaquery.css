@@ -183,15 +183,6 @@
     h3{
       font-size: 20px;
     }
-  
-    .addcontactContainer{
-      width: 380px;
-    }
-
-    .addContactButton{
-      width: 328px;
-    }
-  
     .contactContainer{
       width: calc(100vw - 610px);
       padding-left: 12px;

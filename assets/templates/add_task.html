@@ -21,6 +21,7 @@
     <div class="contentAddTask">
       <h1 class="addTaskHeadline">Add Task</h1>
 <form onsubmit="createTask();return false">
+    <div>
       <div class="contentLeft-Right">
 
         <div class="contentLeft">
@@ -29,15 +30,17 @@
                 <p class="title">Title</p><p class="star">*</p>
                 </div>
                 <div class="inputTitleRequiredContainer">
-                <input id="enterTitle"class="inputTitle"type="text" required="true" placeholder="Enter a Title">
-                <p class="requiredField">This fiels is required</p>
+                    <div class="inputTitleContainer">
+                <input oninput="inputFrame(id)" id="enterTitle"class="inputTitle"type="text" required="true" placeholder="Enter a Title">
+                    </div>
+                <p id="enterTitleClass" class="requiredField d-none">This fiels is required</p>
                 </div>
             </div>
             <div class="textareaDescription">
                 <p class="title">Description</p>
                 <div class="textareaTitleRequiredContainer">
-                <textarea id="enterDescription"name="" id="" cols="30" rows="10" required="true" placeholder="Enter a Description"></textarea>
-                <p class="requiredField">This fiels is required</p>
+                <textarea oninput="inputFrame(id)" id="enterDescription" cols="30" rows="10" required="true" placeholder="Enter a Description"></textarea>
+                <p id="enterDescriptionClass" class="requiredField d-none">This fiels is required</p>
                 </div>
             </div>
 
@@ -76,10 +79,10 @@
                 </div>
                 <div class="dateInputRequiredContainer">
                     <div class="dateInputImg">
-                <input id="enterDate" class="inputMonth"type="date" required="true" placeholder="dd/mm/yyyy">
+                <input oninput="inputFrame(id)" id="enterDate" class="inputMonth"type="date" required="true" placeholder="dd/mm/yyyy" value="">
                 
                     </div>
-                    <p class="requiredField">This fiels is required</p>
+                    <p id="enterDateClass" class="requiredField d-none">This fiels is required</p>
                     </div>
             </div>
 
@@ -145,6 +148,7 @@
                     <p class="star">*</p>
                     </div>
                     <div class="selectTaskCategoryArrow">
+                       <div class="selectTaskCategoryContainer">
                     <div class="selectTaskCategory">Select task category</div>
                     <svg class="svgArrow"width="24" height="24" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
                         <mask id="mask0_123060_2330" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
@@ -154,7 +158,8 @@
                         <path d="M11.3 14.3L8.69998 11.7C8.38331 11.3833 8.31248 11.0208 8.48748 10.6125C8.66248 10.2042 8.97498 10 9.42498 10H14.575C15.025 10 15.3375 10.2042 15.5125 10.6125C15.6875 11.0208 15.6166 11.3833 15.3 11.7L12.7 14.3C12.6 14.4 12.4916 14.475 12.375 14.525C12.2583 14.575 12.1333 14.6 12 14.6C11.8666 14.6 11.7416 14.575 11.625 14.525C11.5083 14.475 11.4 14.4 11.3 14.3Z" fill="#2A3647"/>
                         </g>
                         </svg>
-                        </div>
+                       </div>
+                    </div>
                 </div>
                 
 
@@ -164,7 +169,8 @@
                     <div class="subtasksContainer">
                         <p class="title">Subtasks</p>
                         <div class="addNewSubtask">
-                            <p class="subtaskText">Add new subtask</p>
+                            <div class="addNewSubtasksContainer">
+                            <input class="subtaskText" placeholder="Add new subtask">
                             <svg class="subtaskSVG"width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <mask id="mask0_123060_1727" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
                                 <rect x="0.248535" width="24" height="24" fill="#D9D9D9"/>
@@ -173,6 +179,7 @@
                                 <path d="M11.2485 13H6.24854C5.9652 13 5.7277 12.9042 5.53604 12.7125C5.34437 12.5208 5.24854 12.2833 5.24854 12C5.24854 11.7167 5.34437 11.4792 5.53604 11.2875C5.7277 11.0958 5.9652 11 6.24854 11H11.2485V6C11.2485 5.71667 11.3444 5.47917 11.536 5.2875C11.7277 5.09583 11.9652 5 12.2485 5C12.5319 5 12.7694 5.09583 12.961 5.2875C13.1527 5.47917 13.2485 5.71667 13.2485 6V11H18.2485C18.5319 11 18.7694 11.0958 18.961 11.2875C19.1527 11.4792 19.2485 11.7167 19.2485 12C19.2485 12.2833 19.1527 12.5208 18.961 12.7125C18.7694 12.9042 18.5319 13 18.2485 13H13.2485V18C13.2485 18.2833 13.1527 18.5208 12.961 18.7125C12.7694 18.9042 12.5319 19 12.2485 19C11.9652 19 11.7277 18.9042 11.536 18.7125C11.3444 18.5208 11.2485 18.2833 11.2485 18V13Z" fill="#2A3647"/>
                                 </g>
                                 </svg>
+                            </div>
                                 
                         </div>
 
@@ -181,32 +188,40 @@
                 </div>
                  
         
-              
+
+                    
+
+                    </div>
+    </div>
+    <div class="footerTask">
+            <div class="textButtonsContainer">
+                <div class="textContainer">
+                <p class="star">*</p>
+                <p class="text">This field id required</p>
+                </div>
+            </div>
+
+                    <div class="cancelCreateContactButtons">
+                        <button type="reset" class="cancelBtn">
+                            <span class="cancelX">
+                        <p class="cancelText">Clear</p>
+                        <p class="x">x</p>
+                          </span>
+                    
+                        </button>
+                       <button type="submit" class="createCheckBtn">
+                        <span class="createCheck">
+                        <p class="createText">Create Task</p>
+                        <img src="/assets/img/check.png" alt="">
+                         </span>
+                       </button>
+                        </div>
+                    </div>
             </form>
             
         </div>
         
-    <div class="textButtonsContainer">
-        <div class="textContainer">
-        <p class="star">*</p>
-        <p class="text">This field id required</p>
-        </div>
-        
-        <div class="cancelCreateContactButtons">
-            <button class="cancelBtn">
-                <span class="cancelX">
-            <p class="cancelText">Clear</p>
-            <p class="x">x</p>
-              </span>
-        
-            </button>
-           <button onclick="createTask()" class="createCheckBtn">
-            <span class="createCheck">
-            <p class="createText">Create Task</p>
-            <img src="/assets/img/check.png" alt="">
-             </span>
-           </button>
-            </div>
+
 
        
     </div>
