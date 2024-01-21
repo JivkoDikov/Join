@@ -53,7 +53,7 @@ async function setItem(key, value) {
 
 
 
-async function getItem(key, ) {
+async function getItem(key) {
     const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
 
     let fetchPromises = Array.from( (_, i) =>
@@ -65,37 +65,42 @@ async function getItem(key, ) {
 
 
 function updateHTML() { 
-    getItem('board', 10);
-    let todo = cards.filter(t => t["category"] == 'todo');
-    document.getElementById('todo').innerHTML = '';
-    for (let i = 0; i < todo.length; i++) {
-        const element = todo[i];   
-        document.getElementById('todo').innerHTML += generateCardHTML(element);
-        updateProgressBar(element); 
-    }
+    getItem('tasks');
 
-    let progress = cards.filter(t => t['category'] == 'progress');
-    document.getElementById('progress').innerHTML = '';
-    for (let j = 0; j < progress.length; j++) {
-        const element = progress[j];
-        document.getElementById('progress').innerHTML += generateCardHTML(element);
-        updateProgressBar(element);
-    }
+    for (let index = 0; index < cards.length; index++) {
+        const numberOfCard = cards[index];
+        
+        let todo = cards.filter(t => t["category"] == 'todo');
+        document.getElementById('todo').innerHTML = '';
+        for (let i = 0; i < todo.length; i++) {
+            const element = todo[i];   
+            document.getElementById('todo').innerHTML += generateCardHTML(element, numberOfCard);
+            updateProgressBar(element); 
+        }
 
-    let feedback = cards.filter(t => t['category'] == 'feedback');
-    document.getElementById('feedback').innerHTML = '';
-    for (let j = 0; j < feedback.length; j++) {
-        const element = feedback[j];
-        document.getElementById('feedback').innerHTML += generateCardHTML(element);
-        updateProgressBar(element);
-    }
-    
-    let done = cards.filter(t => t['category'] == 'done');
-    document.getElementById('done').innerHTML = '';
-    for (let j = 0; j < done.length; j++) {
-        const element = done[j];
-        document.getElementById('done').innerHTML += generateCardHTML(element);
-        updateProgressBar(element);
+        let progress = cards.filter(t => t['category'] == 'progress');
+        document.getElementById('progress').innerHTML = '';
+        for (let j = 0; j < progress.length; j++) {
+            const element = progress[j];
+            document.getElementById('progress').innerHTML += generateCardHTML(element, numberOfCard);
+            updateProgressBar(element);
+        }
+
+        let feedback = cards.filter(t => t['category'] == 'feedback');
+        document.getElementById('feedback').innerHTML = '';
+        for (let j = 0; j < feedback.length; j++) {
+            const element = feedback[j];
+            document.getElementById('feedback').innerHTML += generateCardHTML(element, numberOfCard);
+            updateProgressBar(element);
+        }
+        
+        let done = cards.filter(t => t['category'] == 'done');
+        document.getElementById('done').innerHTML = '';
+        for (let j = 0; j < done.length; j++) {
+            const element = done[j];
+            document.getElementById('done').innerHTML += generateCardHTML(element, numberOfCard);
+            updateProgressBar(element);
+        }
     }
     emptyCategory();
 }
@@ -201,10 +206,9 @@ function openOverview(i) {
 
 
 function closeOverview() {
-    document.getElementById('overlay').addEventListener('click', function(event) {
-            let overviewElement = document.getElementById('overlay');
-            overviewElement.classList.add('d-none');     
-    });
+    let overviewElement = document.getElementById('overlay');
+    overviewElement.classList.add('d-none');     
+    
 }
 
 
@@ -265,19 +269,26 @@ function CardEditForm(i) {
     let titleEdit = document.getElementById('editTitle').value;
     let textareaEdit = document.getElementById('editTextarea').value;
     let dateEdit = document.getElementById('editDate').value;
-console.log(titleEdit);
-console.log(cards);
-    infoArrayCard['headline'].push('');
-    infoArrayCard['headline'].push(titleEdit);
-    infoArrayCard['text'].push(textareaEdit);
-    infoArrayCard['date'].push(dateEdit);
+
+    infoArrayCard['headline'] = titleEdit;
+    infoArrayCard['text'] = textareaEdit;
+    infoArrayCard['date'] = dateEdit;
     closeOverview();
     updateHTML();
 }
 
 
+function deleteCard(i) {
+    let infoArrayCard = cards[i];
+    cards.splice(infoArrayCard, 1);
+    updateHTML();
+    closeOverview();
+    generateCardHTML();
+    
+}
 
-function priorityCheck(element) {
+
+function priorityCheck(element, numberOfCard) {
     const priority = element['priority'];
     
     if (priority === 0) {
@@ -321,8 +332,8 @@ function priorityCheck(element) {
 
 
 
-function generateCardHTML(element) {
-    let prioritySVG = priorityCheck(element);
+function generateCardHTML(element, numberOfCard) {
+    let prioritySVG = priorityCheck(element, numberOfCard);
     return `
     <div class="cards" draggable="true" ondragstart="startDragging(${element['id']})" onclick="openOverview(${element['id']})">
     <h2 class="labelsBoardCard">${element['label']}</h2>
@@ -336,7 +347,7 @@ function generateCardHTML(element) {
         
         </div>
         </div>
-        <span>${element['progressBar']}/${element['subtasks']} Subtasks</span>
+        <span>${element['progressBar']/10}/${element['subtasks']/10} Subtasks</span>
     </div>
     <div class="labelProfile">
         <div class="containerProfile">
@@ -367,7 +378,7 @@ function generateCardHTML(element) {
 
 
 
-function generateOverviewHTML(element) {
+function generateOverviewHTML(element, numberOfCard) {
     let prioritySVG = priorityCheck(element);
     
     return `
@@ -433,7 +444,7 @@ function generateOverviewHTML(element) {
                 </div>
             </div>
             <div class="deleteUedit">
-                    <div class="delete">
+                    <div class="delete" onclick="deleteCard(${element['id']})">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_119188_3520" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                             <rect width="24" height="24" fill="#D9D9D9"/>

@@ -6,9 +6,16 @@ function createTask(){
     let description = document.getElementById("enterDescription");
     let date = document.getElementById("enterDate");
     let task = {
-      title: title.value,
-      description: description.value,
-      date: date.value,
+      id : 2,
+      label : "User Story",
+      headline : title.value,
+      text: description.value,
+      progressBar : 11,
+      subtasks: 50,
+      user: "",
+      priority: 1,
+      category: "todo",
+      date: date
     };
 
     tasks.push(task);

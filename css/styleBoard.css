@@ -159,6 +159,7 @@ main {
 }
 
 .content > h3 {
+    height: auto; 
     font-size: 16px;
     font-weight: 700;
     color: #2A3647;
@@ -170,7 +171,12 @@ main {
     font-size: 16px;
     font-weight: 400;
     color: #A8A8A8;
+    overflow: auto;
+    display: block; 
+    max-height: 200px; 
+    white-space: pre-line;
 }
+
 
 .progressBar {
     margin-bottom: 20px;
@@ -504,6 +510,15 @@ input[type=checkbox]:before {
 .overlayCardEditForm {
     width: 85%;
 }
+
+.content span {
+    overflow: auto; /* oder overflow: scroll; */
+    display: block; /* Stellt sicher, dass der Text innerhalb des Containers bleibt */
+    max-height: 200px; /* Optional: Begrenzt die maximale Höhe, um ein unendliches Scrollen zu verhindern */
+    white-space: pre-line; /* Erlaubt Zeilenumbrüche */
+}
+
+
 
 @media (max-width:1350px) {
     .boardHeader {
