@@ -40,3 +40,53 @@ function getCurrentDate() {
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById("enterDate").value = getCurrentDate();
 });
+
+
+function assignedTo(){
+  let contactsBox = document.getElementById('contactsBox');
+  contactsBox.innerHTML ='';
+  contactsBox.innerHTML += /*html*/`
+   <div class="assignedContactsContainer">
+                        <div class="assignedContactSVG">
+                            <div class="letterContacts">
+                                <div class="assignedLetters">JD</div>
+                                <span>Jivko Dikov</span>
+                            </div>
+                                <input type="checkbox">
+                        </div>
+
+                    </div>`;
+
+}
+
+function addCategory(){
+  let categoryBox = document.getElementById('categoryBox');
+  categoryBox.innerHTML ='';
+  categoryBox.innerHTML += /*html*/`
+  <div class="categoryTaskContainer">
+                            <div class="selectCategoryContainer">
+                                <div class="selectCategory">
+                
+                                    <span>Technical Task</span>
+                                </div>
+                                    <input type="checkbox">
+                            </div>
+    
+                        </div>
+                        <div class="categoryTaskContainer">
+                            <div class="selectCategoryContainer">
+                                <div class="selectCategory">
+                
+                                    <span>User Story</span>
+                                </div>
+                                    <input type="checkbox">
+                            </div>
+    
+                        </div>
+  `;
+}
+
+function addSubtasks(){
+  let addSubTasks = document.getElementById('addSubTasks').value;
+
+}

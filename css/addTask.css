@@ -8,6 +8,7 @@ form textarea:focus{
   height: calc(100vh - 96px);
   padding-left: 232px;
   padding-top: 96px;
+  background-color: #F6F7F8;
 }
 
 .contentLeft-Right {
@@ -141,7 +142,6 @@ textarea {
 }
 
 .assignedContainer {
-  height: 80px;
   gap: 8px;
   display: flex;
   flex-direction: column;
@@ -159,6 +159,7 @@ textarea {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  background-color: white;
 }
 
 .inputContactsSVG {
@@ -180,6 +181,7 @@ textarea {
   color: #000000;
   outline: none;
   border: none;
+  width: 100%;
 }
 
 .inputContacts::placeholder {
@@ -227,6 +229,57 @@ textarea {
 .partingLine {
   padding-left: 48px;
   padding-right: 48px;
+}
+
+.contactsBox{
+  width: 100%;
+  margin-top: -8px;
+  background-color: white;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap:4px;
+}
+  
+
+
+.assignedContactsContainer{
+  width: 100%;
+}
+
+.assignedLetters{
+  border: 2px solid white;
+  background-color: blueviolet;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.assignedContactSVG{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px;
+  border-bottom: 1px solid #d1d1d1;
+  border-radius: 10px;
+}
+
+
+.assignedContactSVG:hover{
+background-color: #d1d1d1;
+}
+
+.letterContacts{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 24px;
 }
 
 .contentRight {
@@ -299,6 +352,7 @@ textarea {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  margin-top: 12px;
 }
 
 .btnUrgent,
@@ -370,7 +424,6 @@ textarea {
 }
 
 .categoryContainer {
-  height: 80px;
   gap: 8px;
   display: flex;
   flex-direction: column;
@@ -386,6 +439,7 @@ textarea {
   height: 48px;
   border: 1px solid #d1d1d1;
   border-radius: 10px;
+  margin-top: 12px;
 }
 
 .selectTaskCategory {
@@ -416,7 +470,39 @@ textarea {
   border-radius: 10px;
   border: 1px solid #d1d1d1;
   width: 100%;
+  margin-top: 12px;
+  background-color: white;
 }
+
+.categoryBox{
+  width: 100%;
+  margin-top: -8px;
+  background-color: white;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap:4px;
+}
+
+.categoryTaskContainer{
+  width: 100%;
+}
+
+
+.selectCategoryContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px;
+  border-bottom: 1px solid #d1d1d1;
+  border-radius: 10px;
+}
+
+.selectCategoryContainer:hover{
+  background-color: #d1d1d1;
+}
+
 
 .subtasksContainer {
   height: 80px;
@@ -436,6 +522,8 @@ textarea {
   border-radius: 10px;
   border: 1px solid #d1d1d1;
   width: 100%;
+  margin-top: 12px;
+  background-color: white;
 }
 
 .addNewSubtasksContainer{
