@@ -34,6 +34,16 @@
   padding-top: 110px;
 
  }
+ .contactContainerContactIcon{
+  height: 100px;
+  width: 100px;
+  font-size: 38px;
+
+ }
+
+ .contactContainerContactName{
+  font-size: 38px;
+ }
   
 }
 
@@ -194,6 +204,16 @@
       font-size: 42px;
 
     }
+
+    .addContactButton{
+      width: 328px;
+
+    }
+
+    #letterBox{
+      width: 328px;
+    }
+    
     
   }
 
@@ -242,6 +262,10 @@
 
     .personLogo{
       display: inline !important;
+    }
+
+    #letterBox{
+      width: unset;
     }
 
   }
@@ -356,6 +380,16 @@
   
     .xButtonResponsive:hover{
       transform: scale(1.2);
+    }
+  }
+
+  @media (max-width:400px){
+    .firstLetterContainer{
+      padding: 32px 32px;
+    }
+
+    .iconNameEmail{
+      padding: 15px;
     }
   }
 

@@ -1,9 +1,9 @@
 let letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 let contacts = [];
-
-
+let contactIdCounter = 0;
 save();
 load();
+
 
 async function addNewContact() {
   document.getElementById("addnewcontact").classList.add("showOverlay-addNewContactPopUpContainer");
@@ -28,7 +28,7 @@ function createContact(event) {
   let email = document.getElementById("email");
   let tel = document.getElementById("tel");
   let contact = {
-    id : contacts.length,
+    id : contactIdCounter++,
     name: name.value,
     email: email.value,
     tel: tel.value,
@@ -59,12 +59,12 @@ function initContacts(){
 
 
 function showContacts() {
- 
+  
   let letterBox = document.getElementById("letterBox");
   letterBox.innerHTML ='';
   for (let i = 0; i < letters.length; i++) {
     const letter = letters[i];
-    let filteredContacts = contacts.filter((contact) => contact["name"].charAt(0) == letter);
+    let filteredContacts = contacts.filter((contact) => contact["name"].charAt(0).toUpperCase() == letter);
 
     if(filteredContacts.length > 0){
     document.getElementById("letterBox").innerHTML += /*html*/ `
@@ -85,10 +85,14 @@ function showContacts() {
             </div>
           </div>
         </div>`;
-       
+      
     }
   }
 }
+
+
+save();
+load();
 }
 
 function generateRandomColor() {
@@ -102,7 +106,9 @@ function generateRandomColor() {
 function getLastLetter(name) {
   return name.split(" ").pop().charAt(0).toUpperCase();
 }
-function showContact(id){
+function showContact(id){ 
+  document.getElementById("contactContainer").classList.add("backgroundColorContact");
+ 
 const index = contacts.findIndex((contact) => contact.id === id);
   
 if (index !== -1) {
@@ -158,27 +164,31 @@ if (index !== -1) {
       </div>
     </div>
     `;
-  
-  save();
-  load();
-  
+   
+ 
 }
 
+save();
+load();
+}
+
+function deleteContact(id) {
+  let index = contacts.findIndex((contact) => contact.id === id);
+  if (index !== -1) {
+    contacts.splice(index, 1);
+    showContacts();
+    save();
+    load();
+    document.getElementById('contactContainerContact').innerHTML = '';
+  }
 }
 
 
 
-function deleteContact(i) {
-  contacts.splice(i, 1);
-  save();
-  load();
-  showContacts();
-  document.getElementById("showContact").classList.add("overlay-contactContainerContact");
-  document.getElementById("showContact").classList.remove("showOverlay-contactContainerContact");
-}
 
-function editContact(i) {
-  const selectedContact = contacts[i];
+
+function editContact(id) {
+  const selectedContact = contacts[id];
   document.getElementById("editcontact").classList.add("showOverlay-addNewContactPopUpContainer");
   document.getElementById("backGroundOpacityContainer").classList.remove("d-none");
   document.getElementById("editname").value = selectedContact.name;

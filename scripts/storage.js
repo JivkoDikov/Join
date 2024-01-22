@@ -1,22 +1,54 @@
 const STORAGE_TOKEN = 'Y2B64H33P1ZFHWE7S0HF0V8EC9OTCQZV1FG8B8B5';
 const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 
+let contactsLey ="contacts";
 
-
-
-let Contactskey = "contactDetails";
-
-
-
-
-async function setItem(key, value) {
-    const payload = { key, value, token: STORAGE_TOKEN };
-    return fetch(STORAGE_URL, { method: 'POST', body: JSON.stringify(payload)})
-    .then(res => res.json());
+async function setItem(contactsKey, contacts) {
+    const payload = { contactsKey, contacts, token: STORAGE_TOKEN };
+    return fetch(STORAGE_URL, { method: 'POST', body: JSON.stringify(payload) })
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(`HTTP error! Status: ${res.status}`);
+            }
+            return res.json();
+        });
 }
 
 async function getItem(key) {
     const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
-    return fetch(url).then(res => res.json());
+    return fetch(url).then(res => {
+        if (!res.ok) {
+            throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        return res.json();
+    });
 }
 
+function saveToRemoteStorage() {
+    setItem('letters', letters);
+    setItem('contacts', contacts);
+}
+
+async function loadFromRemoteStorage() {
+    try {
+        const loadedLetters = await getItem('letters');
+        const loadedContacts = await getItem('contacts');
+
+        if (loadedLetters && loadedContacts) {
+            letters = loadedLetters;
+            contacts = loadedContacts;
+            showContacts();
+        }
+    } catch (error) {
+        console.error('Error loading data from remote storage:', error);
+    }
+}
+
+
+function save() {
+    saveToRemoteStorage();
+}
+
+function load() {
+    loadFromRemoteStorage();
+}
