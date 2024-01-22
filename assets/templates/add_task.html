@@ -20,8 +20,7 @@
 
     <div class="contentAddTask">
       <h1 class="addTaskHeadline">Add Task</h1>
-<form onsubmit="createTask();return false">
-    <div>
+<form onsubmit="createTask(event)">
       <div class="contentLeft-Right">
 
         <div class="contentLeft">
@@ -176,8 +175,8 @@
                         <p class="title">Subtasks</p>
                         <div class="addNewSubtask">
                             <div class="addNewSubtasksContainer">
-                            <input id="addSubtasks" type="text" class="subtaskText" placeholder="Add new subtask">
-                            <svg class="subtaskSVG"width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <input id="addSubTasks" type="text" class="subtaskText" placeholder="Add new subtask">
+                            <svg onclick ="addSubtasks()"class="subtaskSVG"width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <mask id="mask0_123060_1727" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
                                 <rect x="0.248535" width="24" height="24" fill="#D9D9D9"/>
                                 </mask>
@@ -199,31 +198,32 @@
                     
 
                     </div>
-    </div>
-    <div class="footerTask">
-            <div class="textButtonsContainer">
-                <div class="textContainer">
-                <p class="star">*</p>
-                <p class="text">This field id required</p>
-                </div>
-            </div>
-
-                    <div class="cancelCreateContactButtons">
-                        <button type="reset" class="cancelBtn">
-                            <span class="cancelX">
-                        <p class="cancelText">Clear</p>
-                        <p class="x">x</p>
-                          </span>
-                    
-                        </button>
-                       <button type="submit" class="createCheckBtn">
-                        <span class="createCheck">
-                        <p class="createText">Create Task</p>
-                        <img src="/assets/img/check.png" alt="">
-                         </span>
-                       </button>
+                    <div class="footerTask">
+                        <div class="textButtonsContainer">
+                            <div class="textContainer">
+                            <p class="star">*</p>
+                            <p class="text">This field id required</p>
+                            </div>
                         </div>
-                    </div>
+            
+                                <div class="cancelCreateContactButtons">
+                                    <button type="reset" class="cancelBtn">
+                                        <span class="cancelX">
+                                    <p class="cancelText">Clear</p>
+                                    <p class="x">x</p>
+                                      </span>
+                                
+                                    </button>
+                                   <button type="submit" class="createCheckBtn">
+                                    <span class="createCheck">
+                                    <p class="createText">Create Task</p>
+                                    <img src="/assets/img/check.png" alt="">
+                                     </span>
+                                   </button>
+                                    </div>
+                                </div>
+    </div>
+    
             </form>
             
         </div>
@@ -231,7 +231,7 @@
 
 
        
-    </div>
+    
 </div>
        
    

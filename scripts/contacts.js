@@ -64,7 +64,7 @@ function showContacts() {
   letterBox.innerHTML ='';
   for (let i = 0; i < letters.length; i++) {
     const letter = letters[i];
-    let filteredContacts = contacts.filter((contact) => contact["name"].charAt(0) == letter);
+    let filteredContacts = contacts.filter((contact) => contact["name"].charAt(0).toUpperCase() == letter);
 
     if(filteredContacts.length > 0){
     document.getElementById("letterBox").innerHTML += /*html*/ `
