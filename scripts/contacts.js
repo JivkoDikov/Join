@@ -1,7 +1,7 @@
 let letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 let contacts = [];
-
-
+let contactIdCounter = 0;
+save();
 load();
 
 
@@ -28,7 +28,7 @@ function createContact(event) {
   let email = document.getElementById("email");
   let tel = document.getElementById("tel");
   let contact = {
-    id : contacts.length,
+    id : contactIdCounter++,
     name: name.value,
     email: email.value,
     tel: tel.value,
@@ -165,16 +165,22 @@ if (index !== -1) {
     </div>
     `;
    
+ 
 }
 
 save();
 load();
 }
+
 function deleteContact(id) {
-  contacts.splice(id,1);
-  showContacts(); 
-  load();
-  document.getElementById('contactContainerContact').innerHTML = '';
+  let index = contacts.findIndex((contact) => contact.id === id);
+  if (index !== -1) {
+    contacts.splice(index, 1);
+    showContacts();
+    save();
+    load();
+    document.getElementById('contactContainerContact').innerHTML = '';
+  }
 }
 
 
