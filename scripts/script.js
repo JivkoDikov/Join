@@ -39,12 +39,12 @@ function termsStatus() {
   }
 }
 
-function checkUser(value) {
-  let loginStatus = sessionStorage.getItem('user');
+function checkUser() {
+  let loginStatus = localStorage.getItem('user');
 
   if (loginStatus) {
     window.location.href = '/assets/templates/summary.html';
-  }  if (!value){
+  }  if (!loginStatus){
     window.location.href = '/assets/templates/login.html';
   }
 }

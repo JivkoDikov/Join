@@ -1,4 +1,4 @@
-
+let userLogin = []
 
 function submitForm(event){
     event.preventDefault(); 
@@ -12,18 +12,27 @@ function submitForm(event){
 }
 
 function checkLogin(email, password) {
-    let loginString = 'email_'+email+'_pw_'+password
-    
-    for ( let i = 0; i < users.length; i++){
-        if( loginString === users[i]){
-            alert("Login hat geklappt")
-        } else{ alert("Falsche Daten")}
+    let loginString = email + password;
+
+    let findUser = userLogin.user.find(function(user) {
+        let concat = user.email + user.password;
+        return loginString === concat;
+    });
+
+    if (findUser) {
+        localStorage.setItem('user', findUser.email);
+        window.location.href = '/assets/templates/summary.html';
+    } else {
+        alert("Falsche Daten");
     }
 }
 
 async function loadUser(){
     let users = await getItem('users');
-    console.log(JSON.parse(users.data.value))
+    userLogin = JSON.parse(users.data.value)
+    let user1 = userLogin.user[1].email
+    let pw = userLogin.user[1].password
+    console.log(user1 +" & "+ pw)
 }
 
 
@@ -47,13 +56,14 @@ function submitFormSignup(event){
         let passwordConfirm = document.getElementById('passwordInputConfirm').value;
     
         // using email and password values
-        checkSignup(password, passwordConfirm);
+        checkSignup(name, email, password, passwordConfirm);
 }
 
 
-function checkSignup(password, passwordConfirm) {
+function checkSignup(name, email, password, passwordConfirm) {
         if( password === passwordConfirm){
-            alert("Regestrierung hat geklappt")
+            alert("Regestrierung hat geklappt");
+
         } else{ 
             let passwordInputConfirmFrame = document.getElementById('passwordInputConfirmFrame');
             let pwdontmatch = document.getElementById('pwDontMatch')
@@ -86,7 +96,7 @@ function checkpw() {
 function checkEmail() {
     let emailInput = document.getElementById('emailInput');
     let emailError = document.getElementById('emailError');
-    let emailInputFrame = document.getElementById('emailInputFrame');
+    let emailInputFrame = document.getElementById('emailInput');
   
 
     let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
