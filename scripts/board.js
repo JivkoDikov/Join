@@ -64,50 +64,118 @@ async function getItem(key) {
 }
 
 
-function updateHTML() { 
-    getItem('tasks');
+// function updateHTML() { 
+//     getItem('tasks');
 
-    for (let index = 0; index < cards.length; index++) {
-        const numberOfCard = cards[index];
+//     for (let index = 0; index < cards.length; index++) {
+//         const numberOfCard = cards[index];
         
-        let todo = cards.filter(t => t["category"] == 'todo');
-        document.getElementById('todo').innerHTML = '';
-        for (let i = 0; i < todo.length; i++) {
-            const element = todo[i];   
-            document.getElementById('todo').innerHTML += generateCardHTML(element, numberOfCard);
-            updateProgressBar(element); 
-        }
+//         let todo = cards.filter(t => t["category"] == 'todo');
+//         document.getElementById('todo').innerHTML = '';
+//         for (let i = 0; i < todo.length; i++) {
+//             const element = todo[i];   
+//             document.getElementById('todo').innerHTML += generateCardHTML(element);
+//             updateProgressBar(element); 
+//         }
 
-        let progress = cards.filter(t => t['category'] == 'progress');
-        document.getElementById('progress').innerHTML = '';
-        for (let j = 0; j < progress.length; j++) {
-            const element = progress[j];
-            document.getElementById('progress').innerHTML += generateCardHTML(element, numberOfCard);
-            updateProgressBar(element);
-        }
+//         let progress = cards.filter(t => t['category'] == 'progress');
+//         document.getElementById('progress').innerHTML = '';
+//         for (let j = 0; j < progress.length; j++) {
+//             const element = progress[j];
+//             document.getElementById('progress').innerHTML += generateCardHTML(element);
+//             updateProgressBar(element);
+//         }
 
-        let feedback = cards.filter(t => t['category'] == 'feedback');
-        document.getElementById('feedback').innerHTML = '';
-        for (let j = 0; j < feedback.length; j++) {
-            const element = feedback[j];
-            document.getElementById('feedback').innerHTML += generateCardHTML(element, numberOfCard);
-            updateProgressBar(element);
-        }
+//         let feedback = cards.filter(t => t['category'] == 'feedback');
+//         document.getElementById('feedback').innerHTML = '';
+//         for (let j = 0; j < feedback.length; j++) {
+//             const element = feedback[j];
+//             document.getElementById('feedback').innerHTML += generateCardHTML(element);
+//             updateProgressBar(element);
+//         }
         
-        let done = cards.filter(t => t['category'] == 'done');
-        document.getElementById('done').innerHTML = '';
-        for (let j = 0; j < done.length; j++) {
-            const element = done[j];
-            document.getElementById('done').innerHTML += generateCardHTML(element, numberOfCard);
+//         let done = cards.filter(t => t['category'] == 'done');
+//         document.getElementById('done').innerHTML = '';
+//         for (let j = 0; j < done.length; j++) {
+//             const element = done[j];
+//             document.getElementById('done').innerHTML += generateCardHTML(element);
+//             updateProgressBar(element);
+//         }
+//     }
+//     emptyCategory();
+// }
+
+// function updateHTML() {
+    
+//     const allCategories = ['todo', 'progress', 'feedback', 'done'];
+
+//     allCategories.forEach(category => {
+//         const categoryTasks = cards.filter(cards => cards['category'] === category);
+//         document.getElementById(category).innerHTML = '';
+        
+//         categoryTasks.forEach((element, index) => {
+//             const uniqueId = `${category}-${index + 1}`;
+//             element['id'] = uniqueId;
+//             document.getElementById(category).innerHTML += generateCardHTML(element);
+//             updateProgressBar(element);
+//         });
+//     });
+
+//     emptyCategory();
+// }
+
+function updateHTML() {
+    
+    const allCategories = ['todo', 'progress', 'feedback', 'done'];
+
+    allCategories.forEach(category => {
+        const categoryTasks = cards.filter(cards => cards['category'] === category);
+        document.getElementById(category).innerHTML = '';
+
+        categoryTasks.forEach((element, index) => {
+            document.getElementById(category).innerHTML += generateCardHTML(element, index + 1);
             updateProgressBar(element);
-        }
-    }
+        });
+    });
+
     emptyCategory();
 }
+
+
+function generateCategoryHTML(category, tasks) {
+    let html = '';
+    tasks.forEach(task => {
+        html += generateCardHTML(task);
+        updateProgressBar(task);
+    });
+    return html;
+}
+
+
+// function updateHTML() {
+//     const cards = getItem('tasks');
+
+//     document.getElementById('todo').innerHTML = '';
+//     document.getElementById('progress').innerHTML = '';
+//     document.getElementById('feedback').innerHTML = '';
+//     document.getElementById('done').innerHTML = '';
+
+//     for (let index = 0; index < cards.length; index++) {
+//         const element = cards[index];
+
+//         document.getElementById(element['category']).innerHTML += generateCardHTML(element);
+//         updateProgressBar(element);
+//     }
+
+//     emptyCategory();
+// }
+
+
 
 function startDragging(id) {
     currentDraggedElement = id;
 }
+
 
 function allowDrop(ev) {
     ev.preventDefault();
@@ -133,6 +201,7 @@ function search() {
     updateCategory(cardFeedback, 'feedback', search);
     updateCategory(cardDone, 'done', search);
 }
+
 
 function updateCategory(card, category, search) {
     card.innerHTML = '';
@@ -197,10 +266,11 @@ function emptyCategory() {
 
 
 function openOverview(i) {
-    let infoArrayCard = cards[i] 
+    let infoArrayCard = cards[i];
+    let arrayCardsID = i;
     let removeClass = document.getElementById('overlay');
     removeClass.innerHTML = '';
-    removeClass.innerHTML = generateOverviewHTML(infoArrayCard);
+    removeClass.innerHTML = generateOverviewHTML(infoArrayCard, arrayCardsID);
     removeClass.classList.remove('d-none');   
 }
 
@@ -210,7 +280,6 @@ function closeOverview() {
     overviewElement.classList.add('d-none');     
     
 }
-
 
 
 function updateProgressBar(element) {
@@ -238,10 +307,10 @@ function updateProgressBar(element) {
     }
 }
 
+
 function editCard(i) {
 
     let infoArrayCard = cards[i];
-
 
 
     let overlay = document.getElementById('overlay');
@@ -262,7 +331,6 @@ function editCard(i) {
 }
 
 
-
 function CardEditForm(i) {
     let infoArrayCard = cards[i];
 
@@ -278,17 +346,18 @@ function CardEditForm(i) {
 }
 
 
-function deleteCard(i) {
-    let infoArrayCard = cards[i];
-    cards.splice(infoArrayCard, 1);
-    updateHTML();
-    closeOverview();
-    generateCardHTML();
-    
+function deleteCard(id) {
+    const indexToDelete = cards.findIndex(card => card.id === id);
+
+    if (indexToDelete !== -1) {
+        cards.splice(indexToDelete, 1);
+        updateHTML();
+        closeOverview();
+    }
 }
 
 
-function priorityCheck(element, numberOfCard) {
+function priorityCheck(element) {
     const priority = element['priority'];
     
     if (priority === 0) {
@@ -331,9 +400,8 @@ function priorityCheck(element, numberOfCard) {
 }
 
 
-
-function generateCardHTML(element, numberOfCard) {
-    let prioritySVG = priorityCheck(element, numberOfCard);
+function generateCardHTML(element) {
+    let prioritySVG = priorityCheck(element);
     return `
     <div class="cards" draggable="true" ondragstart="startDragging(${element['id']})" onclick="openOverview(${element['id']})">
     <h2 class="labelsBoardCard">${element['label']}</h2>
@@ -370,15 +438,10 @@ function generateCardHTML(element, numberOfCard) {
     </div>
     </div>
     `;
-    
-    
 }
 
 
-
-
-
-function generateOverviewHTML(element, numberOfCard) {
+function generateOverviewHTML(element, arrayCardsID) {
     let prioritySVG = priorityCheck(element);
     
     return `
@@ -601,6 +664,4 @@ function overviewEditHTML(i) {
     </div>
     </div>
     `;
-
-
 }
