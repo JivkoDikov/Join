@@ -30,9 +30,9 @@ function checkLogin(email, password) {
 async function loadUser(){
     let users = await getItem('users');
     userLogin = JSON.parse(users.data.value)
-    let user1 = userLogin.user[1].email
-    let pw = userLogin.user[1].password
-    console.log(user1 +" & "+ pw)
+    // let user1 = userLogin.user[1].email
+    // let pw = userLogin.user[1].password
+    // console.log(user1 +" & "+ pw)
 }
 
 
@@ -62,7 +62,10 @@ function submitFormSignup(event){
 
 function checkSignup(name, email, password, passwordConfirm) {
         if( password === passwordConfirm){
+            let newUser = { "name": name, "email": email, "password": password };
             alert("Regestrierung hat geklappt");
+            userLogin.user.push(newUser);
+            setItem("users", userLogin);
 
         } else{ 
             let passwordInputConfirmFrame = document.getElementById('passwordInputConfirmFrame');
@@ -123,29 +126,29 @@ function testData(){
 document.addEventListener('DOMContentLoaded', function() {
     let logoImage = document.querySelector('.centeredImage');
 
-    // Speichere die ursprüngliche Position
+    // save Position of Logo
     let originalPosition = {
         top: logoImage.offsetTop,
         left: logoImage.offsetLeft
     };
 
-    // Setze das Bild in die Mitte des Bildschirms
+    // move logo in to the middle
     logoImage.style.top = '50%';
     logoImage.style.left = '50%';
     logoImage.style.transform = 'translate(-50%, -50%)';
 
-    // Berechne die Verschiebung
+    // calculate difference of the position
     let verticalDifference = originalPosition.top - logoImage.offsetTop;
     let horizontalDifference = originalPosition.left - logoImage.offsetLeft;
 
-    // Starte die fadeOut-Animation nach 1 Sekunde
+    // start fadeOut-Animation after  1 Sec.
     setTimeout(function() {
-        logoImage.style.transition = 'transform 1s ease-out'; // Füge eine zusätzliche Transition für die Transform-Eigenschaft hinzu
+        logoImage.style.transition = 'transform 1s ease-out'; 
         logoImage.style.transform = `translate(${horizontalDifference}px, ${verticalDifference}px)`;
         logoImage.classList.add('disappear');
     }, 1000);
 
-    // Entferne alle Style-Elemente und Klassen nach 2 Sekunden
+    // remove all Style-Elemente and class after  2 Sec.
     setTimeout(function() {
         logoImage.removeAttribute('style');
         logoImage.classList.remove('disappear');
