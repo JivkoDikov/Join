@@ -21,6 +21,7 @@ function checkLogin(email, password) {
 
     if (findUser) {
         localStorage.setItem('user', findUser.email);
+        localStorage.setItem('name', findUser.name);
         window.location.href = '/assets/templates/summary.html';
     } else {
         alert("Falsche Daten");
