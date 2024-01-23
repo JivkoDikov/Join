@@ -330,3 +330,40 @@ span{
   .todo.tile.hoverCube:hover .svgImgHoverTodo {
     opacity: 1;
   }
+
+  .welcomeSummary {
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0;  
+    animation: fadeInOut 4s forwards;
+    z-index: 9999;
+  }
+  
+  .welcomeSummary p:first-child{
+    font-family: 'Inter 500',sans-serif;
+    font-size: 47px;
+    color: #2A3647;
+}
+.welcomeSummary p:nth-child(2){
+    font-family: 'Inter 700',sans-serif;
+    font-size: 64px;
+    color: rgba(41, 171, 226, 1);
+}
+.welcomeSummary p{
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+  @keyframes fadeInOut {
+    0% { opacity: 0; } /* Anfang: Opazität 0% */
+    25% { opacity: 1; } 
+    100% { opacity: 0; } 
+  }

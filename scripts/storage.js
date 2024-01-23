@@ -3,8 +3,8 @@ const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 
 let contactsLey ="contacts";
 
-async function setItem(contactsKey, contacts) {
-    const payload = { contactsKey, contacts, token: STORAGE_TOKEN };
+async function setItem(key, value) {
+    const payload = { key, value, token: STORAGE_TOKEN };
     return fetch(STORAGE_URL, { method: 'POST', body: JSON.stringify(payload) })
         .then(res => {
             if (!res.ok) {

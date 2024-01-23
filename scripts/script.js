@@ -18,6 +18,7 @@ async function includeHTML() {
 async function render(){
 await includeHTML();
 restoreSelectedLink();
+initials();
 
 }
 
@@ -39,12 +40,12 @@ function termsStatus() {
   }
 }
 
-function checkUser(value) {
-  let loginStatus = sessionStorage.getItem('user');
+function checkUser() {
+  let loginStatus = localStorage.getItem('user');
 
   if (loginStatus) {
     window.location.href = '/assets/templates/summary.html';
-  }  if (!value){
+  }  if (!loginStatus){
     window.location.href = '/assets/templates/login.html';
   }
 }
@@ -95,6 +96,25 @@ function openOrCloseHeaderLinksPopUp(){
    document.getElementById('headerLinkPopUp').classList.add('d-none');
    isClicked = true;
   }
+ }
+
+ function initials(){
+    let name = localStorage.getItem("name")
+    let letters = name.split(' ');
+
+    let initials = letters.map(function(letters) {
+      return letters.charAt(0).toUpperCase();
+  });
+
+  setInitials(initials);
+
+ }
+
+ function setInitials(initials){
+      initialsHeader = document.getElementById("headerInitial");
+      initials = initials.join('')
+      initials = initials.replace(/[^A-Za-z]/g, '');
+      initialsHeader.innerHTML = initials
  }
 
 document.addEventListener('DOMContentLoaded', render);

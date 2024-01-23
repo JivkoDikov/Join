@@ -1,4 +1,4 @@
-
+let userLogin = []
 
 function submitForm(event){
     event.preventDefault(); 
@@ -12,18 +12,28 @@ function submitForm(event){
 }
 
 function checkLogin(email, password) {
-    let loginString = 'email_'+email+'_pw_'+password
-    
-    for ( let i = 0; i < users.length; i++){
-        if( loginString === users[i]){
-            alert("Login hat geklappt")
-        } else{ alert("Falsche Daten")}
+    let loginString = email + password;
+
+    let findUser = userLogin.user.find(function(user) {
+        let concat = user.email + user.password;
+        return loginString === concat;
+    });
+
+    if (findUser) {
+        localStorage.setItem('user', findUser.email);
+        localStorage.setItem('name', findUser.name);
+        window.location.href = '/assets/templates/summary.html';
+    } else {
+        alert("Falsche Daten");
     }
 }
 
 async function loadUser(){
     let users = await getItem('users');
-    console.log(JSON.parse(users.data.value))
+    userLogin = JSON.parse(users.data.value)
+    // let user1 = userLogin.user[1].email
+    // let pw = userLogin.user[1].password
+    // console.log(user1 +" & "+ pw)
 }
 
 
@@ -47,13 +57,17 @@ function submitFormSignup(event){
         let passwordConfirm = document.getElementById('passwordInputConfirm').value;
     
         // using email and password values
-        checkSignup(password, passwordConfirm);
+        checkSignup(name, email, password, passwordConfirm);
 }
 
 
-function checkSignup(password, passwordConfirm) {
+function checkSignup(name, email, password, passwordConfirm) {
         if( password === passwordConfirm){
-            alert("Regestrierung hat geklappt")
+            let newUser = { "name": name, "email": email, "password": password };
+            alert("Regestrierung hat geklappt");
+            userLogin.user.push(newUser);
+            setItem("users", userLogin);
+
         } else{ 
             let passwordInputConfirmFrame = document.getElementById('passwordInputConfirmFrame');
             let pwdontmatch = document.getElementById('pwDontMatch')
@@ -86,7 +100,7 @@ function checkpw() {
 function checkEmail() {
     let emailInput = document.getElementById('emailInput');
     let emailError = document.getElementById('emailError');
-    let emailInputFrame = document.getElementById('emailInputFrame');
+    let emailInputFrame = document.getElementById('emailInput');
   
 
     let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -113,29 +127,29 @@ function testData(){
 document.addEventListener('DOMContentLoaded', function() {
     let logoImage = document.querySelector('.centeredImage');
 
-    // Speichere die ursprüngliche Position
+    // save Position of Logo
     let originalPosition = {
         top: logoImage.offsetTop,
         left: logoImage.offsetLeft
     };
 
-    // Setze das Bild in die Mitte des Bildschirms
+    // move logo in to the middle
     logoImage.style.top = '50%';
     logoImage.style.left = '50%';
     logoImage.style.transform = 'translate(-50%, -50%)';
 
-    // Berechne die Verschiebung
+    // calculate difference of the position
     let verticalDifference = originalPosition.top - logoImage.offsetTop;
     let horizontalDifference = originalPosition.left - logoImage.offsetLeft;
 
-    // Starte die fadeOut-Animation nach 1 Sekunde
+    // start fadeOut-Animation after  1 Sec.
     setTimeout(function() {
-        logoImage.style.transition = 'transform 1s ease-out'; // Füge eine zusätzliche Transition für die Transform-Eigenschaft hinzu
+        logoImage.style.transition = 'transform 1s ease-out'; 
         logoImage.style.transform = `translate(${horizontalDifference}px, ${verticalDifference}px)`;
         logoImage.classList.add('disappear');
     }, 1000);
 
-    // Entferne alle Style-Elemente und Klassen nach 2 Sekunden
+    // remove all Style-Elemente and class after  2 Sec.
     setTimeout(function() {
         logoImage.removeAttribute('style');
         logoImage.classList.remove('disappear');

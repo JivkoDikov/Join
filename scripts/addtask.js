@@ -1,21 +1,17 @@
 let tasks = [];
 
     
-function createTask(){
+function createTask(event){
+  event.preventDefault();
     let title = document.getElementById("enterTitle");
     let description = document.getElementById("enterDescription");
     let date = document.getElementById("enterDate");
+    let subtask = document.getElementById('addSubTasks');
     let task = {
-      id : 2,
-      label : "User Story",
-      headline : title.value,
-      text: description.value,
-      progressBar : 11,
-      subtasks: 50,
-      user: "",
-      priority: 1,
-      category: "todo",
-      date: date
+      title: title.value,
+      description: description.value,
+      date: date.value,
+      subtask:subtask.value,
     };
 
     tasks.push(task);
@@ -94,6 +90,21 @@ function addCategory(){
 }
 
 function addSubtasks(){
-  let addSubTasks = document.getElementById('addSubTasks').value;
+  let subtask = document.getElementById('addSubTasks').value;
+  let subTasksBox = document.getElementById('subTasksBox');
+  subTasksBox.innerHTML ='';
+  subTasksBox.innerHTML += /*html*/`
+  <div class="subTasksIconsContainer">
+    <div class="subTaskText">
+  <li>${subtask}</li>
+</div>
+  <div class="subTaskIconsBox">
+    <img class="subTaskIcon"src="/assets/img/pencel.jpg" alt="">
+    <img class="subTaskIcon"src="/assets/img/trash.jpg" alt="">
+  </div>
+</div>
+
+  `;
+  
 
 }
