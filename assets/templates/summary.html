@@ -16,10 +16,15 @@
     <link rel="icon" type="image/x-icon" href="/assets/img/join.png">
     <title>summary</title>
   </head>
-<body onload="render(), hourCheck()">
+<body onload="checkwelcome(), render(), hourCheck()">
 
   <div w3-include-html="/assets/templates/join_side_bar.html"></div>
   <div w3-include-html="/assets/templates/header.html"></div>
+
+  <div id="welcomeSummary" class="welcomeSummary d-none">
+    <p id="greeting"></p>
+    <p id="greetingName"></p>
+  </div>
 
     <div class="headline">
         <h2>Join 360</h2>

@@ -31,3 +31,15 @@ function setUserName(){
     let greetingName = document.getElementById("greetingName");
     greetingName.innerHTML = name
 }
+
+function checkwelcome(){
+    let stateWelcome = sessionStorage.getItem("welcome")
+
+    if (!stateWelcome){
+        welcomeSummary.classList.remove("d-none");
+        setTimeout(function() {
+            welcomeSummary.classList.add("d-none");
+            sessionStorage.setItem("welcome", 1)
+        }, 2800);
+    }
+}
