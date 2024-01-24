@@ -43,11 +43,7 @@ function guestLogin(){
     sessionStorage.setItem('user', 'guest');
 }
 
-function signup(){
-    alert('Register Form')
-}
-
-function submitFormSignup(event){
+async function signup(event){
     event.preventDefault(); // Prevents the default form submission
 
         // Get values from the form
@@ -56,47 +52,58 @@ function submitFormSignup(event){
         let password = document.getElementById('passwordInput').value;
         let passwordConfirm = document.getElementById('passwordInputConfirm').value;
     
-        // using email and password values
-        checkSignup(name, email, password, passwordConfirm);
+        // 
+         let passwordValid = await checkPasswordMatch(password, passwordConfirm);
+
+         if(passwordValid){emailExists = await checkUserDatabase(email)};
+         if (emailExists === -1) {
+                setUser(name, email, password);
+         } else {
+             alert("Email existiert bereits")
+         }
 }
 
+async function checkUserDatabase(emailValue){
+    let emailExists = userLogin.user.findIndex(user => user.email === emailValue);
+    return emailExists
+    //displayEmailAvailability(emailExists);
+  }
 
-function checkSignup(name, email, password, passwordConfirm) {
+function setUser(name, email, password){
+    let newUser = { "name": name, "email": email, "password": password };
+    userLogin.user.push(newUser);
+    setItem("users", userLogin);
+    localStorage.setItem("name", name)
+    localStorage.setItem("user", email)
+    setTimeout(function() {
+        window.location.href = '/assets/templates/summary.html';
+    }, 1000);
+    
+}
+
+async function checkPasswordMatch(password, passwordConfirm) {
         if( password === passwordConfirm){
-            let newUser = { "name": name, "email": email, "password": password };
-            alert("Regestrierung hat geklappt");
-            userLogin.user.push(newUser);
-            setItem("users", userLogin);
+            return true
+        }
+    }
 
+    function checkpw() {
+        let password = document.getElementById('passwordInput').value;
+        let passwordConfirm = document.getElementById('passwordInputConfirm').value;
+        let passwordInputConfirmFrame = document.getElementById('passwordInputConfirmFrame');
+        let pwdontmatch = document.getElementById('pwDontMatch');
+        if( password === passwordConfirm){
+            passwordInputConfirmFrame.style.border = '2px solid green';
+            pwdontmatch.classList.remove('dontMatch')
+            pwdontmatch.classList.add('d-none')
         } else{ 
-            let passwordInputConfirmFrame = document.getElementById('passwordInputConfirmFrame');
-            let pwdontmatch = document.getElementById('pwDontMatch')
             passwordInputConfirmFrame.style.border = '2px solid red';
-            passwordInputConfirmFrame.style.animation = 'shake 0.5s ease-in-out infinite';
             pwdontmatch.classList.remove('d-none')
             pwdontmatch.classList.add('dontMatch')
-            setTimeout(function () {
-                passwordInputConfirmFrame.style.animation = '';
-            }, 1800);
+    
         }
-}
-function checkpw() {
-    let password = document.getElementById('passwordInput').value;
-    let passwordConfirm = document.getElementById('passwordInputConfirm').value;
-    let passwordInputConfirmFrame = document.getElementById('passwordInputConfirmFrame');
-    let pwdontmatch = document.getElementById('pwDontMatch');
-    if( password === passwordConfirm){
-        passwordInputConfirmFrame.style.border = '2px solid green';
-        pwdontmatch.classList.remove('dontMatch')
-        pwdontmatch.classList.add('d-none')
-    } else{ 
-
-        passwordInputConfirmFrame.style.border = '2px solid red';
-        pwdontmatch.classList.remove('d-none')
-        pwdontmatch.classList.add('dontMatch')
-
     }
-}
+
 function checkEmail() {
     let emailInput = document.getElementById('emailInput');
     let emailError = document.getElementById('emailError');
@@ -117,10 +124,10 @@ function checkEmail() {
 }
 
 function testData(){
-    document.getElementById('nameInput').value = "Juri"
-    document.getElementById('emailInput').value = "neiz@neiz"
+    document.getElementById('nameInput').value = "Juri Neiz"
+    document.getElementById('emailInput').value = "neiz@neiz.de"
     document.getElementById('passwordInput').value = "12345"
-    document.getElementById('passwordInputConfirm').value = "1234"
+    document.getElementById('passwordInputConfirm').value = "12345"
 }
 
 
@@ -156,7 +163,3 @@ document.addEventListener('DOMContentLoaded', function() {
         logoImage.classList.remove('centeredImage');
     }, 2000);
 });
-
-function termsSite(){
-
-}

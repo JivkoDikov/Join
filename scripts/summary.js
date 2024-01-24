@@ -39,7 +39,7 @@ function checkwelcome(){
         welcomeSummary.classList.remove("d-none");
         setTimeout(function() {
             welcomeSummary.classList.add("d-none");
-            sessionStorage.setItem("welcome", 1)
+            //sessionStorage.setItem("welcome", 1)
         }, 2800);
     }
 }

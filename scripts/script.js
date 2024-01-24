@@ -117,4 +117,9 @@ function openOrCloseHeaderLinksPopUp(){
       initialsHeader.innerHTML = initials
  }
 
+ function logout(){
+    localStorage.removeItem("user");
+    localStorage.removeItem("name");
+ }
+
 document.addEventListener('DOMContentLoaded', render);
