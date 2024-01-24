@@ -134,7 +134,8 @@ function testData(){
 document.addEventListener('DOMContentLoaded', function() {
     let logoImage = document.querySelector('.centeredImage');
 
-    // save Position of Logo
+    if (logoImage) {
+            // save Position of Logo
     let originalPosition = {
         top: logoImage.offsetTop,
         left: logoImage.offsetLeft
@@ -162,4 +163,8 @@ document.addEventListener('DOMContentLoaded', function() {
         logoImage.classList.remove('disappear');
         logoImage.classList.remove('centeredImage');
     }, 2000);
-});
+}
+
+    }
+
+);
