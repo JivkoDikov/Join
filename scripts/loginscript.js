@@ -133,6 +133,9 @@ function testData(){
 
 document.addEventListener('DOMContentLoaded', function() {
     let logoImage = document.querySelector('.centeredImage');
+    let logo = document.getElementById('logo');
+
+    updateImageBasedOnResolution(logo);
 
     if (logoImage) {
             // save Position of Logo
@@ -162,9 +165,21 @@ document.addEventListener('DOMContentLoaded', function() {
         logoImage.removeAttribute('style');
         logoImage.classList.remove('disappear');
         logoImage.classList.remove('centeredImage');
+        logo.src = "/assets/img/Capa 2.png";
     }, 2000);
 }
 
     }
 
 );
+
+function updateImageBasedOnResolution(logo) {
+    let screenWidth = window.innerWidth;
+
+    if (screenWidth < 768) {
+        logo.src = "/assets/img/joinlogo.png";
+    } else {
+        logo.src = "/assets/img/Capa 2.png";
+    }
+
+}
