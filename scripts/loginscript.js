@@ -135,17 +135,35 @@ document.addEventListener('DOMContentLoaded', function() {
     let logoImage = document.querySelector('.centeredImage');
     let logo = document.getElementById('logo');
 
-    
-
-    if (logoImage) {
+    if (logoImage && logo) {
         updateImageBasedOnResolution(logo);
-            // save Position of Logo
+        animateLogo(logoImage, logo);
+    }
+});
+
+function updateImageBasedOnResolution(logo) {
+    let screenWidth = window.innerWidth;
+
+    if (screenWidth < 768) {
+        logo.src = "/assets/img/joinlogo.png";
+    } else {
+        logo.src = "/assets/img/Capa2.png"; // Anpassen, falls die Dateierweiterung anders ist
+    }
+}
+
+function animateLogo(logoImage, logo) {
+    moveToCenter(logoImage);
+    fadeOutAndReset(logoImage, logo);
+}
+
+function moveToCenter(logoImage) {
+    // save Position of Logo
     let originalPosition = {
         top: logoImage.offsetTop,
         left: logoImage.offsetLeft
     };
 
-    // move logo in to the middle
+    // move logo in the middle
     logoImage.style.top = '50%';
     logoImage.style.left = '50%';
     logoImage.style.transform = 'translate(-50%, -50%)';
@@ -154,14 +172,16 @@ document.addEventListener('DOMContentLoaded', function() {
     let verticalDifference = originalPosition.top - logoImage.offsetTop;
     let horizontalDifference = originalPosition.left - logoImage.offsetLeft;
 
-    // start fadeOut-Animation after  1 Sec.
+    // start fadeOut-Animation after 1 Sec.
     setTimeout(function() {
-        logoImage.style.transition = 'transform 1s ease-out'; 
+        logoImage.style.transition = 'transform 1s ease-out';
         logoImage.style.transform = `translate(${horizontalDifference}px, ${verticalDifference}px)`;
         logoImage.classList.add('disappear');
     }, 1000);
+}
 
-    // remove all Style-Elemente and class after  2 Sec.
+function fadeOutAndReset(logoImage, logo) {
+    // remove all Style-Elemente and class after 2 Sec.
     setTimeout(function() {
         logoImage.removeAttribute('style');
         logoImage.classList.remove('disappear');
@@ -170,9 +190,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 2000);
 }
 
-    }
-
-);
 
 function updateImageBasedOnResolution(logo) {
     let screenWidth = window.innerWidth;
