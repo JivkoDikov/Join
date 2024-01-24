@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="/scripts/loginscript.js"></script>
     <script src="/scripts/storage.js"></script>
+    <script src="/scripts/script.js"></script>
     <link rel="stylesheet" href="/css/loginStyle.css" />
     <link rel="stylesheet" href="/mediaquerys/login.css" />
     <title>Sign up</title>
@@ -12,10 +13,10 @@
   <body onload="loadUser()">
     <div class="headerLogin">
       <img src="/assets/img/Capa 2.png" alt="" />
-      <div class="signupHeader">
+      <!-- <div class="signupHeader">
         <p>Not a Join user?</p>
         <button onclick="testData()" class="hoverDarkBtn">Sign up</button>
-      </div>
+      </div> -->
     </div>
     <div class="login">
       <div class="arrowLeft"><a href="/assets/templates/login.html"><img src="/assets/img/arrow-left-line.png" alt=""></a></div>
@@ -24,12 +25,12 @@
         <div class="underline"></div>
       </div>
       <div class="form-container">
-        <form id="loginForm" onsubmit="submitFormSignup(event)">
+        <form id="loginForm" onsubmit="signup(event)">
           <div class="input-container">
             <input id="nameInput" required type="text" placeholder="Name" />
             <img src="/assets/img/person.png" alt="picture of name" />
           </div>
-          <div id="emailInputFrame" class="input-container">
+          <div id="emailInput" class="input-container">
             <input oninput="checkEmail()" id="emailInput" required type="email" placeholder="Email" />
             <img src="/assets/img/mail.png" alt="picture of mail" />
           </div>

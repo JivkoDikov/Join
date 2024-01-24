@@ -18,6 +18,7 @@ async function includeHTML() {
 async function render(){
 await includeHTML();
 restoreSelectedLink();
+initials();
 
 }
 
@@ -95,6 +96,31 @@ function openOrCloseHeaderLinksPopUp(){
    document.getElementById('headerLinkPopUp').classList.add('d-none');
    isClicked = true;
   }
+ }
+
+ function initials(){
+    let name = localStorage.getItem("name")
+
+    if(name){
+      let letters = name.split(' ');
+
+      let initials = letters.map(function(letters) {
+        return letters.charAt(0).toUpperCase();
+      });
+    setInitials(initials);
+    }
+ }
+
+ function setInitials(initials){
+      initialsHeader = document.getElementById("headerInitial");
+      initials = initials.join('')
+      initials = initials.replace(/[^A-Za-z]/g, '');
+      initialsHeader.innerHTML = initials
+ }
+
+ function logout(){
+    localStorage.removeItem("user");
+    localStorage.removeItem("name");
  }
 
 document.addEventListener('DOMContentLoaded', render);

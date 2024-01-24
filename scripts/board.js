@@ -53,7 +53,7 @@ async function setItem(key, value) {
 
 
 
-async function getItem(key, ) {
+async function getItem(key) {
     const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
 
     let fetchPromises = Array.from( (_, i) =>
@@ -64,45 +64,118 @@ async function getItem(key, ) {
 }
 
 
-function updateHTML() { 
-    getItem('board', 10);
-    let todo = cards.filter(t => t["category"] == 'todo');
-    document.getElementById('todo').innerHTML = '';
-    for (let i = 0; i < todo.length; i++) {
-        const element = todo[i];   
-        document.getElementById('todo').innerHTML += generateCardHTML(element);
-        updateProgressBar(element); 
-    }
+// function updateHTML() { 
+//     getItem('tasks');
 
-    let progress = cards.filter(t => t['category'] == 'progress');
-    document.getElementById('progress').innerHTML = '';
-    for (let j = 0; j < progress.length; j++) {
-        const element = progress[j];
-        document.getElementById('progress').innerHTML += generateCardHTML(element);
-        updateProgressBar(element);
-    }
+//     for (let index = 0; index < cards.length; index++) {
+//         const numberOfCard = cards[index];
+        
+//         let todo = cards.filter(t => t["category"] == 'todo');
+//         document.getElementById('todo').innerHTML = '';
+//         for (let i = 0; i < todo.length; i++) {
+//             const element = todo[i];   
+//             document.getElementById('todo').innerHTML += generateCardHTML(element);
+//             updateProgressBar(element); 
+//         }
 
-    let feedback = cards.filter(t => t['category'] == 'feedback');
-    document.getElementById('feedback').innerHTML = '';
-    for (let j = 0; j < feedback.length; j++) {
-        const element = feedback[j];
-        document.getElementById('feedback').innerHTML += generateCardHTML(element);
-        updateProgressBar(element);
-    }
+//         let progress = cards.filter(t => t['category'] == 'progress');
+//         document.getElementById('progress').innerHTML = '';
+//         for (let j = 0; j < progress.length; j++) {
+//             const element = progress[j];
+//             document.getElementById('progress').innerHTML += generateCardHTML(element);
+//             updateProgressBar(element);
+//         }
+
+//         let feedback = cards.filter(t => t['category'] == 'feedback');
+//         document.getElementById('feedback').innerHTML = '';
+//         for (let j = 0; j < feedback.length; j++) {
+//             const element = feedback[j];
+//             document.getElementById('feedback').innerHTML += generateCardHTML(element);
+//             updateProgressBar(element);
+//         }
+        
+//         let done = cards.filter(t => t['category'] == 'done');
+//         document.getElementById('done').innerHTML = '';
+//         for (let j = 0; j < done.length; j++) {
+//             const element = done[j];
+//             document.getElementById('done').innerHTML += generateCardHTML(element);
+//             updateProgressBar(element);
+//         }
+//     }
+//     emptyCategory();
+// }
+
+// function updateHTML() {
     
-    let done = cards.filter(t => t['category'] == 'done');
-    document.getElementById('done').innerHTML = '';
-    for (let j = 0; j < done.length; j++) {
-        const element = done[j];
-        document.getElementById('done').innerHTML += generateCardHTML(element);
-        updateProgressBar(element);
-    }
+//     const allCategories = ['todo', 'progress', 'feedback', 'done'];
+
+//     allCategories.forEach(category => {
+//         const categoryTasks = cards.filter(cards => cards['category'] === category);
+//         document.getElementById(category).innerHTML = '';
+        
+//         categoryTasks.forEach((element, index) => {
+//             const uniqueId = `${category}-${index + 1}`;
+//             element['id'] = uniqueId;
+//             document.getElementById(category).innerHTML += generateCardHTML(element);
+//             updateProgressBar(element);
+//         });
+//     });
+
+//     emptyCategory();
+// }
+
+function updateHTML() {
+    
+    const allCategories = ['todo', 'progress', 'feedback', 'done'];
+
+    allCategories.forEach(category => {
+        const categoryTasks = cards.filter(cards => cards['category'] === category);
+        document.getElementById(category).innerHTML = '';
+
+        categoryTasks.forEach((element, index) => {
+            document.getElementById(category).innerHTML += generateCardHTML(element, index + 1);
+            updateProgressBar(element);
+        });
+    });
+
     emptyCategory();
 }
+
+
+function generateCategoryHTML(category, tasks) {
+    let html = '';
+    tasks.forEach(task => {
+        html += generateCardHTML(task);
+        updateProgressBar(task);
+    });
+    return html;
+}
+
+
+// function updateHTML() {
+//     const cards = getItem('tasks');
+
+//     document.getElementById('todo').innerHTML = '';
+//     document.getElementById('progress').innerHTML = '';
+//     document.getElementById('feedback').innerHTML = '';
+//     document.getElementById('done').innerHTML = '';
+
+//     for (let index = 0; index < cards.length; index++) {
+//         const element = cards[index];
+
+//         document.getElementById(element['category']).innerHTML += generateCardHTML(element);
+//         updateProgressBar(element);
+//     }
+
+//     emptyCategory();
+// }
+
+
 
 function startDragging(id) {
     currentDraggedElement = id;
 }
+
 
 function allowDrop(ev) {
     ev.preventDefault();
@@ -128,6 +201,7 @@ function search() {
     updateCategory(cardFeedback, 'feedback', search);
     updateCategory(cardDone, 'done', search);
 }
+
 
 function updateCategory(card, category, search) {
     card.innerHTML = '';
@@ -192,21 +266,20 @@ function emptyCategory() {
 
 
 function openOverview(i) {
-    let infoArrayCard = cards[i] 
+    let infoArrayCard = cards[i];
+    let arrayCardsID = i;
     let removeClass = document.getElementById('overlay');
     removeClass.innerHTML = '';
-    removeClass.innerHTML = generateOverviewHTML(infoArrayCard);
+    removeClass.innerHTML = generateOverviewHTML(infoArrayCard, arrayCardsID);
     removeClass.classList.remove('d-none');   
 }
 
 
 function closeOverview() {
-    document.getElementById('overlay').addEventListener('click', function(event) {
-            let overviewElement = document.getElementById('overlay');
-            overviewElement.classList.add('d-none');     
-    });
+    let overviewElement = document.getElementById('overlay');
+    overviewElement.classList.add('d-none');     
+    
 }
-
 
 
 function updateProgressBar(element) {
@@ -234,10 +307,10 @@ function updateProgressBar(element) {
     }
 }
 
+
 function editCard(i) {
 
     let infoArrayCard = cards[i];
-
 
 
     let overlay = document.getElementById('overlay');
@@ -258,23 +331,30 @@ function editCard(i) {
 }
 
 
-
 function CardEditForm(i) {
     let infoArrayCard = cards[i];
 
     let titleEdit = document.getElementById('editTitle').value;
     let textareaEdit = document.getElementById('editTextarea').value;
     let dateEdit = document.getElementById('editDate').value;
-console.log(titleEdit);
-console.log(cards);
-    infoArrayCard['headline'].push('');
-    infoArrayCard['headline'].push(titleEdit);
-    infoArrayCard['text'].push(textareaEdit);
-    infoArrayCard['date'].push(dateEdit);
+
+    infoArrayCard['headline'] = titleEdit;
+    infoArrayCard['text'] = textareaEdit;
+    infoArrayCard['date'] = dateEdit;
     closeOverview();
     updateHTML();
 }
 
+
+function deleteCard(id) {
+    const indexToDelete = cards.findIndex(card => card.id === id);
+
+    if (indexToDelete !== -1) {
+        cards.splice(indexToDelete, 1);
+        updateHTML();
+        closeOverview();
+    }
+}
 
 
 function priorityCheck(element) {
@@ -320,7 +400,6 @@ function priorityCheck(element) {
 }
 
 
-
 function generateCardHTML(element) {
     let prioritySVG = priorityCheck(element);
     return `
@@ -336,7 +415,7 @@ function generateCardHTML(element) {
         
         </div>
         </div>
-        <span>${element['progressBar']}/${element['subtasks']} Subtasks</span>
+        <span>${element['progressBar']/10}/${element['subtasks']/10} Subtasks</span>
     </div>
     <div class="labelProfile">
         <div class="containerProfile">
@@ -359,15 +438,10 @@ function generateCardHTML(element) {
     </div>
     </div>
     `;
-    
-    
 }
 
 
-
-
-
-function generateOverviewHTML(element) {
+function generateOverviewHTML(element, arrayCardsID) {
     let prioritySVG = priorityCheck(element);
     
     return `
@@ -433,7 +507,7 @@ function generateOverviewHTML(element) {
                 </div>
             </div>
             <div class="deleteUedit">
-                    <div class="delete">
+                    <div class="delete" onclick="deleteCard(${element['id']})">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_119188_3520" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                             <rect width="24" height="24" fill="#D9D9D9"/>
@@ -590,6 +664,4 @@ function overviewEditHTML(i) {
     </div>
     </div>
     `;
-
-
 }
