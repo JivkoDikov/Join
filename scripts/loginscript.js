@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
         logoImage.removeAttribute('style');
         logoImage.classList.remove('disappear');
         logoImage.classList.remove('centeredImage');
-        logo.src = "/assets/img/Capa 2.png";
+        logo.src = "/assets/img/join.png";
     }, 2000);
 }
 
@@ -180,7 +180,7 @@ function updateImageBasedOnResolution(logo) {
     if (screenWidth < 768) {
         logo.src = "/assets/img/joinlogo.png";
     } else {
-        logo.src = "/assets/img/Capa 2.png";
+        logo.src = "/assets/img/join.png";
     }
 
 }
