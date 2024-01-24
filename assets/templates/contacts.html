@@ -60,7 +60,12 @@
     </div>
     <div id="contactContainer"class="contactContainer">
         <div class="contactHeadline">
+          <div class="headlineArrow">
             <h2>Contacts</h2>
+            <img id="imgArrow" class="imgArrow d-none"src="/assets/img/arrow-left-line.png" alt="">
+
+
+            </div>
             <div class="vectorPerpendicularContainerh3">
             <div class="vectorPerpendicularContainer">
             </div>
@@ -172,7 +177,7 @@
               <p onclick="closeEditContact()"class="closeAddContact">x</p>
             </div>
             <div class="inputButtonsContainer">
-            <form onsubmit="createContact();return false">
+            <form onsubmit="createContact(event)">
             <div class="contactInput">
             
             <div class="inputIconsContainer">

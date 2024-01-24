@@ -1,7 +1,7 @@
 let letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 let contacts = [];
 let contactIdCounter = 0;
-save();
+
 load();
 
 
@@ -22,7 +22,7 @@ function createContact(event) {
   document.getElementById('popUpSuccesfullyCreated').classList.add('overlay-successfullyCreated', 'showoverlay-successfullyCreated');
   setTimeout(() => {
     document.getElementById('popUpSuccesfullyCreated').classList.remove('showoverlay-successfullyCreated');
-  }, 1000);
+  }, 500);
 
   let name = document.getElementById("name");
   let email = document.getElementById("email");
@@ -92,7 +92,7 @@ function showContacts() {
 
 
 save();
-load();
+
 }
 
 function generateRandomColor() {
@@ -118,7 +118,7 @@ if (index !== -1) {
       
       
       document.getElementById("showContact").innerHTML = /*html*/ `
-    <div id="contactContainerContact" class="contactContainerContact">
+    <div id="contactContainerContact" class="contactContainerContact overlay-contactContainerContact">
       <div class="contactContainerContactIconName">
         <div id="contactContainerContactIcon"class="contactContainerContactIcon"style="background-color: ${contact.bgColor}">${letter}${lastNameLetter}</div>
         <div class="nameEditDelete">
@@ -163,10 +163,12 @@ if (index !== -1) {
         </div>
       </div>
     </div>
-    `;
+    `; 
    
- 
 }
+setTimeout(() => {
+  document.getElementById('contactContainerContact').classList.add('showOverlay-contactContainerContact');
+}, 225);
 
 save();
 load();

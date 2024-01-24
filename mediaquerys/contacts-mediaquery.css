@@ -216,7 +216,9 @@
     
     
   }
-
+  
+ 
+  
   @media (max-width:800px){
     .contentContact{
       padding-left: 0;
@@ -234,6 +236,8 @@
       padding-right: 14px;
       padding-top: 24px;
     }
+
+    
 
     
 

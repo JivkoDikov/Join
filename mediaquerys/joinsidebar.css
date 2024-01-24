@@ -6,7 +6,7 @@
     bottom: 0;
     top: unset;
     height: 80px;
-    width: 100vw;
+    width: 100%;
   }
 
   .joinlogo,
@@ -62,5 +62,16 @@
   .img-sideBar {
     width: 24px;
     height: 24px;
+  }
+}
+
+@media (max-width:400px){
+  .links{
+    width: 58px;
+  
+  }
+
+  .links:hover{
+    border-radius: 10px;
   }
 }

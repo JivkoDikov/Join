@@ -82,6 +82,12 @@
   gap: 30px;
 }
 
+.headlineArrow{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 h2 {
   width: 274px;
   height: 73px;
@@ -682,12 +688,12 @@ input:focus {
 
 .overlay-successfullyCreated{
   transform: translateX(1200px);
-  transition: all 225ms ease-in-out;
+  transition: all 500ms ease-in-out;
 }
 
 .showoverlay-successfullyCreated{
   transform: translateX(0px);
-  transition: all 225ms ease-in-out;
+  transition: all 500ms ease-in-out;
 }
 
 
@@ -709,7 +715,7 @@ input:focus {
 }
 
 .showOverlay-contactContainerContact {
-  transform: translateX(0px);
+  transform: translateX(0px) ;
   transition: all 225ms ease-in-out;
 }
 
