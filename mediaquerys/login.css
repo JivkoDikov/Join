@@ -73,4 +73,8 @@
     .footerLoginForm{
         margin-left: 0px;
     }
+    .loginBtn a{
+        width: 177px;
+        height: 60px;
+    }
 }
