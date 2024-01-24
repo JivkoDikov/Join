@@ -92,24 +92,16 @@ function addCategory(){
 function addSubtasks() {
   let subtaskInput = document.getElementById('addSubTasks');
   let subtaskValue = subtaskInput.value.trim();
-
-  // Überprüfen, ob das Eingabefeld nicht leer ist
   if (subtaskValue !== '') {
-    // Füge die Subtask zum tasks-Array hinzu
     let subtask = {
       title: subtaskValue,
-      completed: false, // You can add additional properties if needed
+      completed: false, 
     };
 
     tasks.push(subtask);
-
-    // Rufe die Funktion auf, um die Subtasks anzuzeigen
     displaySubtasks();
-    
-    // Leere das Eingabefeld für die nächste Eingabe
     document.getElementById('addSubTasks').value = '';
   } else {
-    // Zeige eine Fehlermeldung oder handle den leeren Zustand des Eingabefelds
     console.log('Subtask field is empty');
   }
 }
@@ -117,8 +109,6 @@ function addSubtasks() {
 function displaySubtasks() {
   let subTasksBox = document.getElementById('subTasksBox');
   subTasksBox.innerHTML = '';
-
-  // Iteriere durch alle Subtasks im tasks-Array und zeige sie an
   for (let i = 0; i < tasks.length; i++) {
     const subtask = tasks[i];
     subTasksBox.innerHTML += /*html*/`
@@ -136,6 +126,6 @@ function displaySubtasks() {
 }
 
 
-function editSubTasks(){
+function editSubTasks(){ 
   
 }
