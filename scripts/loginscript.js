@@ -135,9 +135,10 @@ document.addEventListener('DOMContentLoaded', function() {
     let logoImage = document.querySelector('.centeredImage');
     let logo = document.getElementById('logo');
 
-    updateImageBasedOnResolution(logo);
+    
 
     if (logoImage) {
+        updateImageBasedOnResolution(logo);
             // save Position of Logo
     let originalPosition = {
         top: logoImage.offsetTop,
