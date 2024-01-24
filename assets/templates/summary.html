@@ -21,7 +21,7 @@
   <div w3-include-html="/assets/templates/join_side_bar.html"></div>
   <div w3-include-html="/assets/templates/header.html"></div>
 
-  <div id="welcomePopup" class="welcomePopupCSS">
+  <div id="welcomePopup" class="welcomePopupCSS d-none">
     <p id="greetingPopup"></p>
     <p id="greetingNamePopup"></p>
   </div>
@@ -41,7 +41,7 @@
             <img src="/assets/img/todo_invert.svg" alt="" class="svgImgHoverTodo">
           </div>
           <div class="doneCount hoverCube">
-            <p>1<span>To-do</span></p>
+            <p id="todoSummary">1<span>To-do</span></p>
           </div>
         </a>
         <a href="/assets/templates/board.html" class="done tile hoverCube" onclick="addActiveStyle(3)">
@@ -50,7 +50,7 @@
             <img src="/assets/img/done_invert.svg" alt="" class="svgImgHoverDone">
           </div>
           <div class="doneCount">
-            <p>1<span>Done</span></p>
+            <p id="doneSummary">1<span>Done</span></p>
           </div>
         </a>
       </div>
@@ -61,12 +61,12 @@
               <img src="/assets/img/Prio alta.svg" alt="">
             </div>
             <div class="doneCount">
-              <p>1<span>Urgent</span></p>
+              <p id="urgentSummary">1<span>Urgent</span></p>
             </div>
           </div>
             <div ><img src="/assets/img/vector.svg" alt=""></div>
             <div class="frame68">
-              <span>October 16, 2022</span>
+              <span id="deadlineSummary">October 16, 2022</span>
               <span>Upcoming Deadline</span>
             </div>
           </div>
@@ -74,19 +74,19 @@
       <div class="summarySelektor3" onclick="addActiveStyle(3)">
         <a href="/assets/templates/board.html" class="square-button tile hoverCube">
           <div class="frame">
-            <div ><span class="element">5</span></div>
+            <div ><span id="tasksSummary" class="element">5</span></div>
             <div class="tasks-on-board"><span>Task in<br />Board</span></div>
           </div>
       </a>
         <a href="/assets/templates/board.html" class="square-button tile hoverCube" onclick="addActiveStyle(3)">
           <div class="frame">
-            <div ><span class="element">2</span></div>
+            <div ><span id="tasksInProgressSummary" class="element">2</span></div>
             <div class="tasks-on-board"><span>Task in<br />Progress</span></div>
           </div>
       </a>
         <a href="/assets/templates/board.html" class="square-button tile hoverCube" onclick="addActiveStyle(3)">
           <div class="frame">
-            <div ><span class="element">2</span></div>
+            <div ><span id="taskAwaitingSummary" class="element">2</span></div>
             <div class="tasks-on-board"><span>Awaiting<br />Feedback</span></div>
           </div>
         </a>

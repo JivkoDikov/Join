@@ -52,8 +52,9 @@ function checkWelcomePopup(){
 
 function welcomeAnimation(welcomePopup){
     welcomePopup.classList.add("d-none");
-    //sessionStorage.setItem("welcome", 1);
+    sessionStorage.setItem("welcome", true);
 }
+
 function welcomeSummary(){
     let greetingSummary = document.getElementById("greeting");
     greetingSummary.innerHTML = greeting;
