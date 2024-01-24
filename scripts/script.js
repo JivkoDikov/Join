@@ -100,14 +100,15 @@ function openOrCloseHeaderLinksPopUp(){
 
  function initials(){
     let name = localStorage.getItem("name")
-    let letters = name.split(' ');
 
-    let initials = letters.map(function(letters) {
-      return letters.charAt(0).toUpperCase();
-  });
+    if(name){
+      let letters = name.split(' ');
 
-  setInitials(initials);
-
+      let initials = letters.map(function(letters) {
+        return letters.charAt(0).toUpperCase();
+      });
+    setInitials(initials);
+    }
  }
 
  function setInitials(initials){

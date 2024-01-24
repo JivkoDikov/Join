@@ -39,8 +39,8 @@ async function loadUser(){
 
 
 function guestLogin(){
-    alert('Welcom Guest')
-    sessionStorage.setItem('user', 'guest');
+    localStorage.setItem('user', 'guest');
+    localStorage.setItem('name', 'Guest');
 }
 
 async function signup(event){
