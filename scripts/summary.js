@@ -1,5 +1,6 @@
 let timeOfDay = ["Good Morning,", "Good Afternoon,", "Good Evening,"]
 let greeting = ""
+let nameUser = localStorage.getItem("name")
 
 // Function to generate the greeting based on the current time
 function hourCheck() {
@@ -18,28 +19,44 @@ function hourCheck() {
     }
     setGreeting(greeting);
     setUserName();
+    welcomeSummary();
 
 }
 
 function setGreeting(greeting){
-    let greetingHeader = document.getElementById("greeting");
-    greetingHeader.innerHTML = greeting
+    let greetingPopup = document.getElementById("greetingPopup");
+    greetingPopup.innerHTML = greeting
+
+
 }
 
 function setUserName(){
-    let name = localStorage.getItem("name")
-    let greetingName = document.getElementById("greetingName");
-    greetingName.innerHTML = name
+    let greetingNamePopup = document.getElementById("greetingNamePopup");
+    greetingNamePopup.innerHTML = nameUser
+
+
 }
 
-function checkwelcome(){
+function checkWelcomePopup(){
     let stateWelcome = sessionStorage.getItem("welcome")
+    let welcomePopup = document.getElementById("welcomePopup")
 
     if (!stateWelcome){
-        welcomeSummary.classList.remove("d-none");
+        welcomePopup.classList.remove("d-none");
         setTimeout(function() {
-            welcomeSummary.classList.add("d-none");
-            //sessionStorage.setItem("welcome", 1)
+            welcomeAnimation(welcomePopup);
         }, 2800);
     }
+    
+}
+
+function welcomeAnimation(welcomePopup){
+    welcomePopup.classList.add("d-none");
+    //sessionStorage.setItem("welcome", 1);
+}
+function welcomeSummary(){
+    let greetingSummary = document.getElementById("greeting");
+    greetingSummary.innerHTML = greeting;
+    let greetingNameSummary = document.getElementById("greetingName");
+    greetingNameSummary.innerHTML = nameUser;
 }

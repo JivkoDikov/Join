@@ -331,7 +331,7 @@ span{
     opacity: 1;
   }
 
-  .welcomeSummary {
+  .welcomePopupCSS {
     display: flex;
     position: fixed;
     flex-direction: column;
@@ -348,17 +348,17 @@ span{
     z-index: 9999;
   }
   
-  .welcomeSummary p:first-child{
+  .welcomePopupCSS p:first-child{
     font-family: 'Inter 500',sans-serif;
     font-size: 47px;
     color: #2A3647;
 }
-.welcomeSummary p:nth-child(2){
+.welcomePopupCSS p:nth-child(2){
     font-family: 'Inter 700',sans-serif;
     font-size: 64px;
     color: rgba(41, 171, 226, 1);
 }
-.welcomeSummary p{
+.welcomePopupCSS p{
     margin-block-start: 0;
     margin-block-end: 0;
 }
