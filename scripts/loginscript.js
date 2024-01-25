@@ -126,7 +126,7 @@ function checkPasswordConfirm() {
     if(inputFieldPassword.value.length < 5){ 
         passwordError.classList.add("dontMatch");
         passwordError.classList.remove("d-none");
-        updateSignupLogic("passwordCounter", fasle)}
+        updateSignupLogic("passwordCounter", false)}
     else{
         passwordError.classList.add("d-none");
         passwordError.classList.remove("dontMatch")

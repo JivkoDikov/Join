@@ -131,12 +131,13 @@ function openOrCloseHeaderLinksPopUp(){
   let user = localStorage.getItem("user")
   let path = "/assets/templates/"
   let backArrow = document.getElementById("backArrow")
-
+  
+  if(window.location.pathname.includes('terms')){
   if(!user){
     backArrow.href = path+"login.html"
   } else{ backArrow.href = path+"summary.html"}
 }
-
+ }
 
 
 document.addEventListener('DOMContentLoaded', render);
