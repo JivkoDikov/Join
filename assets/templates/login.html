@@ -12,7 +12,7 @@
     <link rel="icon" type="image/x-icon" href="/assets/img/join.png">
     <title>Login</title>
 </head>
-<body onload="loadUser(), currentPath()">
+<body onload="loadUser()">
     <div class="background-container"></div>
     <div class="headerLogin">
         <img id="logo" class="centeredImage" src="/assets/img/join.png" alt="">
@@ -33,7 +33,7 @@
                 </div>
                 <div id="emailError" class="d-none">Invalid email address</div>
                 <div class="input-container">
-                    <input id="passwordInput" required type="password" placeholder="Password">
+                    <input oninput="checkPasswordInput()" id="passwordInput" required type="password" placeholder="Password">
                     <img src="/assets/img/lock.png" alt="picture of Lock">
                 </div>
                 <div class="footerLoginForm">

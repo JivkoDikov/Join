@@ -120,12 +120,35 @@ function checkEmail() {
         emailError.classList.remove('dontMatch')
         emailInputFrame.style.border = '2px solid green';
         sessionStorage.setItem("checkEmailValue", true);
+        enableLoginButton();
       } else {
         emailError.classList.remove('d-none');
         emailError.classList.add('dontMatch')
         emailInputFrame.style.border = '2px solid red';
         sessionStorage.setItem("checkEmailValue", false);
+        sessionStorage.removeItem("checkEmailValue");
       }
+}
+
+function checkPasswordInput(){
+    let password = document.getElementById('passwordInput').value;
+
+    if(password.length >= 5){ 
+        sessionStorage.setItem("checkPasswordValue", true);
+        } else{
+            sessionStorage.removeItem("checkPasswordValue");
+        };
+        enableLoginButton();
+    }
+
+function enableLoginButton(){
+    let submitButton = document.getElementById("submitButton");
+    let passwordInput = sessionStorage.getItem("checkPasswordValue");
+    let emailInput = sessionStorage.getItem("checkEmailValue");
+    
+    if (passwordInput === "true" && emailInput === "true") {
+        submitButton.classList.remove("disableButton");
+    } else{submitButton.classList.add("disableButton")}
 }
 
 function activateButton(){
