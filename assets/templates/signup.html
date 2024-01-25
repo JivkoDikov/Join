@@ -27,35 +27,38 @@
       <div class="form-container">
         <form id="loginForm" onsubmit="signup(event)">
           <div class="input-container">
-            <input id="nameInput" required type="text" placeholder="Name" />
+            <input oninput="checkName()" id="nameInput" required type="text" placeholder="Name" />
             <img src="/assets/img/person.png" alt="picture of name" />
           </div>
-          <div id="emailInput" class="input-container">
+          <div id="nameError" class="d-none">Please type your first- and last name<br> 
+            Example: Jon Doe, not Jon-Justin Doe or Jon Doe-Jackson</div>
+          <div id="emailInputFrame" class="input-container">
             <input oninput="checkEmail()" id="emailInput" required type="email" placeholder="Email" />
             <img src="/assets/img/mail.png" alt="picture of mail" />
           </div>
           <div id="emailError" class="d-none">Invalid email address</div>
           <div class="input-container">
-            <input
+            <input oninput="passwordLength()"
               id="passwordInput" required type="password" placeholder="Password"
             />
             <img src="/assets/img/lock.png" alt="picture of Lock" />
           </div>
+          <div id="passwordLengthError" class="d-none">Your Password is too short, you need a password with at least 5 characters</div>
           <div id="passwordInputConfirmFrame" class="input-container">
             <input
-              oninput="checkpw()" id="passwordInputConfirm" required type="password" placeholder="Confirm Password"
+              oninput="checkPasswordConfirm()" id="passwordInputConfirm" required type="password" placeholder="Confirm Password"
             />
             <img src="/assets/img/lock.png" alt="picture of Lock" />
           </div>
           <div id="pwDontMatch" class="d-none">Ups! your password don´t match</div>
           <div class="footerLoginForm">
             <div class="rememberme privacyTerm">
-              <input id="rememberCheckbox" required type="checkbox" />
-              <p onclick="toggleCheckbox()">I accept the </p><a href="#" style="color: #29ABE2;">Privacy policy</a>
+              <input onclick="updateSignupLogic('checkboxCounter',this.checked)" id="rememberCheckbox" required type="checkbox" />
+              <p >I accept the </p><a href="#" style="color: #29ABE2;">Privacy policy</a>
             </div>
           </div>
           <div class="loginBtn mobilesignupBtn">
-            <input class="hoverDarkBtn" type="submit" value="Sign up" />
+            <input id="submitButton" class="hoverDarkBtn disableButton" type="submit" value="Sign up" />
           </div>
         </form>
       </div>

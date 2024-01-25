@@ -1,21 +1,23 @@
-let userLogin = []
+let userLogin = [];
+let signupCounter = {
+    nameCounter: 0,
+    emailCounter: 0,
+    passwordCounter: 0,
+    confirmPasswordCounter: 0,
+    checkboxCounter: 0
+  };
+let inputFieldName;
+let inputFieldEmail;
+let inputFieldPassword;
+let inputFieldPasswordConfirm;
 
 sessionStorage.removeItem("checkEmailValue");
 sessionStorage.removeItem("checkPasswordValue");
 
-function submitForm(event){
-    event.preventDefault(); 
 
-    // Get values from the form
-    var email = document.getElementById('emailInput').value;
-    var password = document.getElementById('passwordInput').value;
-
-    // using email and password values
-    checkLogin(email, password);
-}
-
-function checkLogin(email, password) {
-    let loginString = email + password;
+function checkLogin(event) {
+    event.preventDefault();
+    let loginString = inputFieldEmail.value+inputFieldPassword.value;
 
     let findUser = userLogin.user.find(function(user) {
         let concat = user.email + user.password;
@@ -49,18 +51,13 @@ function guestLogin(){
 async function signup(event){
     event.preventDefault(); // Prevents the default form submission
 
-        // Get values from the form
-        let name = document.getElementById('nameInput').value;
-        let email = document.getElementById('emailInput').value;
-        let password = document.getElementById('passwordInput').value;
-        let passwordConfirm = document.getElementById('passwordInputConfirm').value;
-    
-        // 
-         let passwordValid = await checkPasswordMatch(password, passwordConfirm);
+          //let passwordValid = await checkPasswordMatch(inputFieldPassword.value, inputFieldPasswordConfirm.value);
 
-         if(passwordValid){emailExists = await checkUserDatabase(email)};
+         if(passwordValid){emailExists = await checkUserDatabase(inputFieldEmail.value)};
          if (emailExists === -1) {
-                setUser(name, email, password);
+                setUser(inputFieldName.value, 
+                        inputFieldEmail.value, 
+                        inputFieldPassword.value);
          } else {
              alert("Email existiert bereits")
          }
@@ -69,7 +66,6 @@ async function signup(event){
 async function checkUserDatabase(emailValue){
     let emailExists = userLogin.user.findIndex(user => user.email === emailValue);
     return emailExists
-    //displayEmailAvailability(emailExists);
   }
 
 function setUser(name, email, password){
@@ -90,50 +86,79 @@ async function checkPasswordMatch(password, passwordConfirm) {
         }
     }
 
-function checkpw() {
-        let password = document.getElementById('passwordInput').value;
-        let passwordConfirm = document.getElementById('passwordInputConfirm').value;
+function checkName(){
+    let nameError = document.getElementById("nameError")
+    let nameRegEx = /^[a-zA-Z]{2,}\s[a-zA-Z]{2,}$/;
+
+    if(nameRegEx.test(inputFieldName.value)){ 
+        nameError.classList.remove("dontMatch");
+        nameError.classList.add("d-none");
+        updateSignupLogic("nameCounter", true);
+    } else{
+        nameError.classList.add("dontMatch");
+        nameError.classList.remove("d-none");
+        updateSignupLogic("nameCounter", false);
+    }
+}
+
+function checkPasswordConfirm() {
         let passwordInputConfirmFrame = document.getElementById('passwordInputConfirmFrame');
         let pwdontmatch = document.getElementById('pwDontMatch');
-        if( password === passwordConfirm){
+        if( inputFieldPassword.value === inputFieldPasswordConfirm.value){
             passwordInputConfirmFrame.style.border = '2px solid green';
             pwdontmatch.classList.remove('dontMatch')
             pwdontmatch.classList.add('d-none')
             sessionStorage.setItem("checkPasswordValue", true);
+            updateSignupLogic("confirmPasswordCounter", true)
         } else{ 
             passwordInputConfirmFrame.style.border = '2px solid red';
             pwdontmatch.classList.remove('d-none')
             pwdontmatch.classList.add('dontMatch')
-            sessionStorage.setItem("checkPasswordValue", false);    
+            sessionStorage.setItem("checkPasswordValue", false);  
+            updateSignupLogic("confirmPasswordCounter", false)  
         }
     }
 
+//check password length in signup page
+ function passwordLength(){
+    let passwordError = document.getElementById("passwordLengthError");
+
+    if(inputFieldPassword.value.length < 5){ 
+        passwordError.classList.add("dontMatch");
+        passwordError.classList.remove("d-none");
+        updateSignupLogic("passwordCounter", fasle)}
+    else{
+        passwordError.classList.add("d-none");
+        passwordError.classList.remove("dontMatch")
+        updateSignupLogic("passwordCounter", true)}
+ }
+
 function checkEmail() {
-    let emailInput = document.getElementById('emailInput');
     let emailError = document.getElementById('emailError');
     let emailInputFrame = document.getElementById('emailInputFrame');
 
     let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   
-    if (emailRegex.test(emailInput.value)) {
+    if (emailRegex.test(inputFieldEmail.value)) {
         emailError.classList.add('d-none');
         emailError.classList.remove('dontMatch')
         emailInputFrame.style.border = '2px solid green';
         sessionStorage.setItem("checkEmailValue", true);
         enableLoginButton();
+        updateSignupLogic("emailCounter", true);
       } else {
         emailError.classList.remove('d-none');
         emailError.classList.add('dontMatch')
         emailInputFrame.style.border = '2px solid red';
         sessionStorage.setItem("checkEmailValue", false);
         sessionStorage.removeItem("checkEmailValue");
+        updateSignupLogic("emailCounter", false);
       }
 }
 
+//check Password Length in Login Page
 function checkPasswordInput(){
-    let password = document.getElementById('passwordInput').value;
-
-    if(password.length >= 5){ 
+     if(inputFieldPassword.value.length >= 5){ 
         sessionStorage.setItem("checkPasswordValue", true);
         } else{
             sessionStorage.removeItem("checkPasswordValue");
@@ -142,17 +167,35 @@ function checkPasswordInput(){
     }
 
 function enableLoginButton(){
-    let submitButton = document.getElementById("submitButton");
     let passwordInput = sessionStorage.getItem("checkPasswordValue");
     let emailInput = sessionStorage.getItem("checkEmailValue");
     
-    if (passwordInput === "true" && emailInput === "true") {
-        submitButton.classList.remove("disableButton");
-    } else{submitButton.classList.add("disableButton")}
+    if (passwordInput === "true" && emailInput === "true") {activateButton();} else{deactivateButton()}
+}
+
+function enableSignupButton(){
+    let disbaleButton = document.getElementById("submitButton").classList
+    let count = Object.values(signupCounter).reduce((sum, value) => sum + value, 0);
+    if(count === 5){ disbaleButton.remove("disableButton")}
+        else{disbaleButton.add("disableButton");}
+}
+
+function checkboxTerms(){
+
 }
 
 function activateButton(){
     document.getElementById('submitButton').classList.remove('disableButton');
+}
+
+function deactivateButton(){
+    document.getElementById('submitButton').classList.add('disableButton');
+}
+
+function updateSignupLogic(key, boolean) {
+    if (boolean) {signupCounter[key] = 1;} 
+    else{signupCounter[key] = 0;};
+    enableSignupButton();
 }
 
 function testData(){
@@ -162,16 +205,6 @@ function testData(){
     document.getElementById('passwordInputConfirm').value = "12345"
 }
 
-
-document.addEventListener('DOMContentLoaded', function() {
-    let logoImage = document.querySelector('.centeredImage');
-    let logo = document.getElementById('logo');
-
-    if (logoImage && logo) {
-        updateImageBasedOnResolution(logo);
-        animateLogo(logoImage, logo);
-    }
-});
 
 function updateImageBasedOnResolution(logo) {
     let screenWidth = window.innerWidth;
@@ -233,3 +266,20 @@ function updateImageBasedOnResolution(logo) {
     }
 
 }
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Elemente nach dem vollständigen Laden des DOM abrufen
+    inputFieldName = document.getElementById('nameInput');
+    inputFieldEmail = document.getElementById('emailInput');
+    inputFieldPassword = document.getElementById('passwordInput');
+    inputFieldPasswordConfirm = document.getElementById('passwordInputConfirm');
+
+    let logoImage = document.querySelector('.centeredImage');
+    let logo = document.getElementById('logo');
+
+    if (logoImage && logo) {
+        updateImageBasedOnResolution(logo);
+        animateLogo(logoImage, logo);
+    }
+});
