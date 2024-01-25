@@ -8,7 +8,7 @@ let tasks = [];
 function renderSummary(){
     checkWelcomePopup(); 
     hourCheck();
-    loadTasks();
+    //loadTasks();
 }
 
 // Function to generate the greeting based on the current time

@@ -1,5 +1,8 @@
 let userLogin = []
 
+sessionStorage.removeItem("checkEmailValue");
+sessionStorage.removeItem("checkPasswordValue");
+
 function submitForm(event){
     event.preventDefault(); 
 
@@ -87,7 +90,7 @@ async function checkPasswordMatch(password, passwordConfirm) {
         }
     }
 
-    function checkpw() {
+function checkpw() {
         let password = document.getElementById('passwordInput').value;
         let passwordConfirm = document.getElementById('passwordInputConfirm').value;
         let passwordInputConfirmFrame = document.getElementById('passwordInputConfirmFrame');
@@ -96,19 +99,19 @@ async function checkPasswordMatch(password, passwordConfirm) {
             passwordInputConfirmFrame.style.border = '2px solid green';
             pwdontmatch.classList.remove('dontMatch')
             pwdontmatch.classList.add('d-none')
+            sessionStorage.setItem("checkPasswordValue", true);
         } else{ 
             passwordInputConfirmFrame.style.border = '2px solid red';
             pwdontmatch.classList.remove('d-none')
             pwdontmatch.classList.add('dontMatch')
-    
+            sessionStorage.setItem("checkPasswordValue", false);    
         }
     }
 
 function checkEmail() {
     let emailInput = document.getElementById('emailInput');
     let emailError = document.getElementById('emailError');
-    let emailInputFrame = document.getElementById('emailInput');
-  
+    let emailInputFrame = document.getElementById('emailInputFrame');
 
     let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   
@@ -116,11 +119,17 @@ function checkEmail() {
         emailError.classList.add('d-none');
         emailError.classList.remove('dontMatch')
         emailInputFrame.style.border = '2px solid green';
+        sessionStorage.setItem("checkEmailValue", true);
       } else {
         emailError.classList.remove('d-none');
         emailError.classList.add('dontMatch')
         emailInputFrame.style.border = '2px solid red';
+        sessionStorage.setItem("checkEmailValue", false);
       }
+}
+
+function activateButton(){
+    document.getElementById('submitButton').classList.remove('disableButton');
 }
 
 function testData(){

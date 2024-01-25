@@ -19,6 +19,8 @@ async function render(){
 await includeHTML();
 restoreSelectedLink();
 initials();
+termsBackButton();
+
 
 }
 
@@ -28,7 +30,7 @@ function addActiveStyle(linkId) {
 }
 
 function termsStatus() {
-  let loginStatus = sessionStorage.getItem('user');
+  let loginStatus = localStorage.getItem("user")
 
   if (!loginStatus) {
     for (let i = 1; i <= 4; i++) {
@@ -121,6 +123,20 @@ function openOrCloseHeaderLinksPopUp(){
  function logout(){
     localStorage.removeItem("user");
     localStorage.removeItem("name");
+    sessionStorage.removeItem("welcome")
+
  }
+
+ function termsBackButton(){
+  let user = localStorage.getItem("user")
+  let path = "/assets/templates/"
+  let backArrow = document.getElementById("backArrow")
+
+  if(!user){
+    backArrow.href = path+"login.html"
+  } else{ backArrow.href = path+"summary.html"}
+}
+
+
 
 document.addEventListener('DOMContentLoaded', render);

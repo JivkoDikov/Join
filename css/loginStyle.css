@@ -46,6 +46,10 @@ a:hover{
     cursor: pointer;
     border: none;
 }
+.disableButton{
+        pointer-events: none;
+        background-color: #A8A8A8 !important;
+}
 
 .login {
     position: relative;

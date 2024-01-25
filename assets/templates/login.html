@@ -12,7 +12,7 @@
     <link rel="icon" type="image/x-icon" href="/assets/img/join.png">
     <title>Login</title>
 </head>
-<body onload="loadUser()">
+<body onload="loadUser(), currentPath()">
     <div class="background-container"></div>
     <div class="headerLogin">
         <img id="logo" class="centeredImage" src="/assets/img/join.png" alt="">
@@ -27,7 +27,7 @@
         </div>
         <div class="form-container">
             <form id="loginForm" onsubmit="submitForm(event)">
-                <div id="emailInput" class="input-container">
+                <div id="emailInputFrame" class="input-container">
                     <input oninput="checkEmail()" id="emailInput" required type="email" placeholder="Email">
                     <img src="/assets/img/mail.png" alt="picture of mail">
                 </div>
@@ -44,7 +44,7 @@
                     <a class="d-none"> Forgot my password</a>
                 </div>
                 <div class="loginBtn">
-                    <input class="hoverDarkBtn" type="submit" value="Log in">
+                    <input id="submitButton" class="hoverDarkBtn disableButton" type="submit" value="Log in">
                     <a href="/assets/templates/summary.html" onclick="guestLogin()">Guest Log in</a>
                 </div>
             </form>
