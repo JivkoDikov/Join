@@ -1,7 +1,7 @@
 let letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 let contacts = [];
 let contactIdCounter = 0;
-
+let isMobile = window.innerWidth < 800 ;
 load();
 
 
@@ -89,8 +89,6 @@ function showContacts() {
     }
   }
 }
-
-
 save();
 
 }
@@ -170,9 +168,12 @@ setTimeout(() => {
   document.getElementById('contactContainerContact').classList.add('showOverlay-contactContainerContact');
 }, 225);
 
+
+
 save();
 load();
 }
+
 
 function deleteContact(id) {
   let index = contacts.findIndex((contact) => contact.id === id);
@@ -182,6 +183,7 @@ function deleteContact(id) {
     save();
     load();
     document.getElementById('contactContainerContact').innerHTML = '';
+    closeEditContact();
   }
 }
 
@@ -190,18 +192,38 @@ function deleteContact(id) {
 
 
 function editContact(id) {
-  const selectedContact = contacts[id];
+  
+
+  const selectedContact = contacts.find(contact => contact.id === id);
   document.getElementById("editcontact").classList.add("showOverlay-addNewContactPopUpContainer");
   document.getElementById("backGroundOpacityContainer").classList.remove("d-none");
   document.getElementById("editname").value = selectedContact.name;
   document.getElementById("editemail").value = selectedContact.email;
   document.getElementById("edittel").value = selectedContact.tel;
+  
 }
+
 
 function closeEditContact() {
   document.getElementById("editcontact").classList.remove("showOverlay-addNewContactPopUpContainer");
   document.getElementById("backGroundOpacityContainer").classList.add("d-none");
+  document.getElementById("editname").value = "";
+  document.getElementById("editemail").value = "";
+  document.getElementById("edittel").value = "";
+
 }
+
+
+function deleteEditContact(id){
+ 
+  deleteContact(id);
+  closeEditContact();
+  showContacts();
+
+}
+
+
+
 
 
 

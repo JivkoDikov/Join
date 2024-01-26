@@ -21,7 +21,7 @@
   margin-top: 100px;
 }
 
-#letterBox{
+#letterBox {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -82,7 +82,7 @@
   gap: 30px;
 }
 
-.headlineArrow{
+.headlineArrow {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -127,7 +127,7 @@ h3 {
 }
 
 .overlay-addNewContactPopUpContainer {
-  transform: translateX(1951px);
+  transform: translateX(3851px);
   transition: all 225ms ease-in-out;
 }
 
@@ -686,19 +686,15 @@ input:focus {
   margin-left: 55px;
 }
 
-.overlay-successfullyCreated{
+.overlay-successfullyCreated {
   transform: translateX(1200px);
   transition: all 500ms ease-in-out;
 }
 
-.showoverlay-successfullyCreated{
+.showoverlay-successfullyCreated {
   transform: translateX(0px);
   transition: all 500ms ease-in-out;
 }
-
-
-
-
 
 .successfullyText {
   color: white;
@@ -715,36 +711,22 @@ input:focus {
 }
 
 .showOverlay-contactContainerContact {
-  transform: translateX(0px) ;
+  transform: translateX(0px);
   transition: all 225ms ease-in-out;
 }
 
-.personLogo{
+.personLogo {
   position: absolute;
   top: 758px;
   right: 16px;
   width: 56px;
   height: 56px;
   border-radius: 46px;
-  
-  
-  
- 
 }
 
-.personLogo:hover path{
+.personLogo:hover path {
   fill: #29abe2;
-  
-
-  
-  
-  
-  
-
 }
-
-
-
 
 .d-inline {
   display: inline !important;

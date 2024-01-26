@@ -177,7 +177,7 @@
               <p onclick="closeEditContact()"class="closeAddContact">x</p>
             </div>
             <div class="inputButtonsContainer">
-            <form onsubmit="createContact(event)">
+            <form onsubmit="editContact(`${contact.id}`)">
             <div class="contactInput">
             
             <div class="inputIconsContainer">
@@ -206,14 +206,14 @@
             
 
             <div class="cancelCreateContactButtons">
-                <button class="cancelBtn d-inline">
+                <button type="submit" onclick="deleteEditContact(id)"class="cancelBtn d-inline">
                     <span class="cancelX">
                 <p class="cancelText">Delete</p>
                 <p class="x">x</p>
                   </span>
             
                 </button>
-               <button onclick="deleteContact()"  class="createCheckBtn">
+               <button type="submit" onclick="saveEditContact()"class="createCheckBtn">
                 <span class="createCheck">
                 <p class="createText">Save</p>
                 <img src="/assets/img/check.png" alt="">
