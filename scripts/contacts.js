@@ -22,7 +22,7 @@ function createContact(event) {
   document.getElementById('popUpSuccesfullyCreated').classList.add('overlay-successfullyCreated', 'showoverlay-successfullyCreated');
   setTimeout(() => {
     document.getElementById('popUpSuccesfullyCreated').classList.remove('showoverlay-successfullyCreated');
-  }, 500);
+  }, 1000);
 
   let name = document.getElementById("name");
   let email = document.getElementById("email");
@@ -188,19 +188,18 @@ function deleteContact(id) {
 }
 
 
-
-
-
 function editContact(id) {
   
-
   const selectedContact = contacts.find(contact => contact.id === id);
   document.getElementById("editcontact").classList.add("showOverlay-addNewContactPopUpContainer");
   document.getElementById("backGroundOpacityContainer").classList.remove("d-none");
   document.getElementById("editname").value = selectedContact.name;
   document.getElementById("editemail").value = selectedContact.email;
   document.getElementById("edittel").value = selectedContact.tel;
-  
+  document.getElementById("editname").dataset.contactId = id;
+  document.getElementById("deleteContactButton").addEventListener("click", function() {
+    deleteContact(id);
+});
 }
 
 
@@ -213,18 +212,22 @@ function closeEditContact() {
 
 }
 
+function saveEditContact() {
+  const id = document.getElementById("editname").dataset.contactId;
+  const editedContact = contacts.find((contact) => contact.id === parseInt(id));
 
-function deleteEditContact(id){
- 
-  deleteContact(id);
-  closeEditContact();
-  showContacts();
+  if (editedContact) {
+    editedContact.name = document.getElementById("editname").value;
+    editedContact.email = document.getElementById("editemail").value;
+    editedContact.tel = document.getElementById("edittel").value;
 
+    showContacts();
+    showContact(editedContact.id);
+    save();
+    load();
+    closeEditContact();
+  }
 }
-
-
-
-
 
 
 function save() {

@@ -182,7 +182,7 @@
             
             <div class="inputIconsContainer">
             <div class="contactDetails">
-            <input required minlength="3" id="editname"class="input"  type="text" placeholder="Name" autocomplete="name">
+            <input required minlength="3" id="editname"class="input"  type="text" placeholder="Name" autocomplete="name"  data-contact-id="${id}">
             <img class="inputIcons"src="/assets/img/person.png" alt="">
             </div>
             </div>
@@ -206,7 +206,7 @@
             
 
             <div class="cancelCreateContactButtons">
-                <button type="submit" onclick="deleteEditContact(id)"class="cancelBtn d-inline">
+                <button id="deleteContactButton" onclick="deleteEditContact(`${id}`)"class="cancelBtn d-inline">
                     <span class="cancelX">
                 <p class="cancelText">Delete</p>
                 <p class="x">x</p>
