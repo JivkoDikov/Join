@@ -266,7 +266,8 @@ function emptyCategory() {
 
 
 function openOverview(i) {
-    let infoArrayCard = cards[i];
+    let cardPosition = index = cards.findIndex(card => card.id === i);
+    let infoArrayCard = cards[cardPosition];
     let arrayCardsID = i;
     let removeClass = document.getElementById('overlay');
     removeClass.innerHTML = '';
@@ -351,8 +352,9 @@ function deleteCard(id) {
 
     if (indexToDelete !== -1) {
         cards.splice(indexToDelete, 1);
-        updateHTML();
         closeOverview();
+        updateHTML();
+        
     }
 }
 
