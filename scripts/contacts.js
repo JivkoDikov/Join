@@ -1,7 +1,8 @@
 let letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 let contacts = [];
 let contactIdCounter = 0;
-let isMobile = window.innerWidth < 800 ;
+//let isMobile = window.innerWidth < 800 ;
+let screenSize = []
 load();
 
 
@@ -52,7 +53,7 @@ showContact(contact.id);
 function initContacts(){
   render();
   showContacts();
-  
+  screenSizeUser();
 }
 
 
@@ -105,6 +106,13 @@ function getLastLetter(name) {
   return name.split(" ").pop().charAt(0).toUpperCase();
 }
 function showContact(id){ 
+
+  let mobile = isMobile();
+  if(mobile){ changeContactView()}
+
+  let contactDetails = document.getElementById("contactContainer")
+  contactDetails.classList.remove("d-none")
+
   document.getElementById("contactContainer").classList.add("backgroundColorContact");
  
 const index = contacts.findIndex((contact) => contact.id === id);
@@ -244,4 +252,30 @@ function load() {
     contacts = JSON.parse(contactsAsText);
     letters = JSON.parse(lettersAsText);
   }
+}
+
+function isMobile(){
+  if(screenSize[0] <= 800){return true}
+}
+
+function disableContactContainer(){
+  let contactDetails = document.getElementById("addcontactContainer");
+  let contactContainerView = document.getElementById("contactContainer")
+  contactDetails.classList.add("d-none");
+  contactDetails.classList.remove("d-none");
+  contactContainerView.style.removeProperty("display");
+  contactContainerView.style.removeProperty("width");
+}
+
+function screenSizeUser(){
+  screenSize.push(window.screen.width);
+  screenSize.push(window.screen.height);
+}
+
+function changeContactView(){
+  let contactContainerList = document.getElementById("addcontactContainer");
+  let contactContainerView = document.getElementById("contactContainer")
+  contactContainerList.classList.add("d-none")
+  contactContainerView.style.display = "block";
+  contactContainerView.style.width = "100vw";
 }

@@ -735,3 +735,7 @@ input:focus {
 .d-none {
   display: none;
 }
+
+.imgArrow{
+  display: none;
+}
