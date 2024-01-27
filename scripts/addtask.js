@@ -129,3 +129,9 @@ function displaySubtasks() {
 function editSubTasks(){ 
   
 }
+
+function saveContactsInArray(){
+  let jsonString = localStorage.getItem("contacts")
+  let contacts = JSON.parse(jsonString)
+  console.log(contacts[0].name)
+}
