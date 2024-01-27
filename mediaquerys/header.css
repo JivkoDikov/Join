@@ -1,11 +1,11 @@
 @media (max-width:810px){
-    h1{
+    .headlineHeader{
         text-align: center;
     }
 }
 
 @media (max-width:800px){
-    h1,.helpIcon{
+    .headlineHeader,.helpIcon{
         display: none;
     }
 

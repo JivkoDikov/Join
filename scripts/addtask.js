@@ -89,22 +89,49 @@ function addCategory(){
   `;
 }
 
-function addSubtasks(){
-  let subtask = document.getElementById('addSubTasks').value;
+function addSubtasks() {
+  let subtaskInput = document.getElementById('addSubTasks');
+  let subtaskValue = subtaskInput.value.trim();
+  if (subtaskValue !== '') {
+    let subtask = {
+      title: subtaskValue,
+      completed: false, 
+    };
+
+    tasks.push(subtask);
+    displaySubtasks();
+    document.getElementById('addSubTasks').value = '';
+  } else {
+    console.log('Subtask field is empty');
+  }
+}
+
+function displaySubtasks() {
   let subTasksBox = document.getElementById('subTasksBox');
-  subTasksBox.innerHTML ='';
-  subTasksBox.innerHTML += /*html*/`
-  <div class="subTasksIconsContainer">
-    <div class="subTaskText">
-  <li>${subtask}</li>
-</div>
-  <div class="subTaskIconsBox">
-    <img class="subTaskIcon"src="/assets/img/pencel.jpg" alt="">
-    <img class="subTaskIcon"src="/assets/img/trash.jpg" alt="">
-  </div>
-</div>
+  subTasksBox.innerHTML = '';
+  for (let i = 0; i < tasks.length; i++) {
+    const subtask = tasks[i];
+    subTasksBox.innerHTML += /*html*/`
+      <div class="subTasksIconsContainer">
+        <div class="subTaskText">
+          <li>${subtask.title}</li>
+        </div>
+        <div class="subTaskIconsBox">
+          <img class="subTaskIcon" src="/assets/img/pencel.jpg" alt="">
+          <img class="subTaskIcon" src="/assets/img/trash.jpg" alt="">
+        </div>
+      </div>
+    `;
+  }
+}
 
-  `;
+
+function editSubTasks(){ 
   
+}
 
+function saveContactsInArray(){
+  let jsonString = localStorage.getItem("contacts")
+  let contacts = JSON.parse(jsonString)
+  console.log(contacts[0].name)
 }

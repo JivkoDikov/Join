@@ -1,0 +1,51 @@
+@media (max-width:1200px){
+    .contentLeft-Right{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contentAddTask{
+        height: calc(100vh - -223px);
+    }
+
+    .partingLine{
+        display: none;
+    }
+
+    .contentRight{
+        margin-top: 16px;
+    }
+
+    .footerTask{
+        margin-top: 16px;
+    }
+}
+
+@media (max-width:800px){
+    .contentAddTask{
+        padding-left: 0;
+        width: 100vw;
+        padding-top: 80px;
+    }
+
+    .addTaskHeadline{
+        padding-top: 24px;
+        padding-left: 24px;
+        font-size: 46px;
+
+    }
+
+    .contentLeft-Right{
+        padding-left: 24px;
+        margin-top: 24px;
+        padding-right: 0;
+        width: calc(100vw - 60px);
+
+    }
+
+    .footerTask{
+        padding-left: 24px;
+        width: calc(100vw - 60px);
+
+    }
+}

@@ -19,6 +19,8 @@ async function render(){
 await includeHTML();
 restoreSelectedLink();
 initials();
+termsBackButton();
+
 
 }
 
@@ -28,7 +30,7 @@ function addActiveStyle(linkId) {
 }
 
 function termsStatus() {
-  let loginStatus = sessionStorage.getItem('user');
+  let loginStatus = localStorage.getItem("user")
 
   if (!loginStatus) {
     for (let i = 1; i <= 4; i++) {
@@ -100,14 +102,15 @@ function openOrCloseHeaderLinksPopUp(){
 
  function initials(){
     let name = localStorage.getItem("name")
-    let letters = name.split(' ');
 
-    let initials = letters.map(function(letters) {
-      return letters.charAt(0).toUpperCase();
-  });
+    if(name){
+      let letters = name.split(' ');
 
-  setInitials(initials);
-
+      let initials = letters.map(function(letters) {
+        return letters.charAt(0).toUpperCase();
+      });
+    setInitials(initials);
+    }
  }
 
  function setInitials(initials){
@@ -116,5 +119,25 @@ function openOrCloseHeaderLinksPopUp(){
       initials = initials.replace(/[^A-Za-z]/g, '');
       initialsHeader.innerHTML = initials
  }
+
+ function logout(){
+    localStorage.removeItem("user");
+    localStorage.removeItem("name");
+    sessionStorage.removeItem("welcome")
+
+ }
+
+ function termsBackButton(){
+  let user = localStorage.getItem("user")
+  let path = "/assets/templates/"
+  let backArrow = document.getElementById("backArrow")
+  
+  if(window.location.pathname.includes('terms')){
+  if(!user){
+    backArrow.href = path+"login.html"
+  } else{ backArrow.href = path+"summary.html"}
+}
+ }
+
 
 document.addEventListener('DOMContentLoaded', render);

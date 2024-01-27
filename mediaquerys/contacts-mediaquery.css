@@ -216,7 +216,9 @@
     
     
   }
-
+  
+ 
+  
   @media (max-width:800px){
     .contentContact{
       padding-left: 0;
@@ -233,9 +235,10 @@
       padding-left: 14px;
       padding-right: 14px;
       padding-top: 24px;
+    }   
+    .imgArrow{
+      display: flex;
     }
-
-    
 
     .firstLetterContainer{
       padding: 32px 60px;
@@ -252,6 +255,7 @@
     .renderContactContainer{
       width: 100%;
       margin-top: 0px;
+    
       
 
     }

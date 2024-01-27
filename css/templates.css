@@ -77,7 +77,7 @@ header{
 }
 
 
-h1{
+.headlineHeader{
     width: 319px;
     height: 24px;
     font-size: 20px;
@@ -169,7 +169,7 @@ color: #29ABE2;
 
 
 .link-text{
-font-family: "Inter",sans-serif;
+font-family: "Inter Regular",sans-serif;
 font-size: 16px;
 font-weight: 400;
 line-height: 19px;

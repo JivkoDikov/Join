@@ -1,7 +1,8 @@
 let letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 let contacts = [];
 let contactIdCounter = 0;
-save();
+//let isMobile = window.innerWidth < 800 ;
+let screenSize = []
 load();
 
 
@@ -52,7 +53,7 @@ showContact(contact.id);
 function initContacts(){
   render();
   showContacts();
-  
+  screenSizeUser();
 }
 
 
@@ -89,10 +90,8 @@ function showContacts() {
     }
   }
 }
-
-
 save();
-load();
+
 }
 
 function generateRandomColor() {
@@ -107,6 +106,13 @@ function getLastLetter(name) {
   return name.split(" ").pop().charAt(0).toUpperCase();
 }
 function showContact(id){ 
+
+  let mobile = isMobile();
+  if(mobile){ changeContactView()}
+
+  let contactDetails = document.getElementById("contactContainer")
+  contactDetails.classList.remove("d-none")
+
   document.getElementById("contactContainer").classList.add("backgroundColorContact");
  
 const index = contacts.findIndex((contact) => contact.id === id);
@@ -118,7 +124,7 @@ if (index !== -1) {
       
       
       document.getElementById("showContact").innerHTML = /*html*/ `
-    <div id="contactContainerContact" class="contactContainerContact">
+    <div id="contactContainerContact" class="contactContainerContact overlay-contactContainerContact">
       <div class="contactContainerContactIconName">
         <div id="contactContainerContactIcon"class="contactContainerContactIcon"style="background-color: ${contact.bgColor}">${letter}${lastNameLetter}</div>
         <div class="nameEditDelete">
@@ -163,14 +169,19 @@ if (index !== -1) {
         </div>
       </div>
     </div>
-    `;
+    `; 
    
- 
 }
+setTimeout(() => {
+  document.getElementById('contactContainerContact').classList.add('showOverlay-contactContainerContact');
+}, 225);
+
+
 
 save();
 load();
 }
+
 
 function deleteContact(id) {
   let index = contacts.findIndex((contact) => contact.id === id);
@@ -180,27 +191,51 @@ function deleteContact(id) {
     save();
     load();
     document.getElementById('contactContainerContact').innerHTML = '';
+    closeEditContact();
   }
 }
 
 
-
-
-
 function editContact(id) {
-  const selectedContact = contacts[id];
+  
+  const selectedContact = contacts.find(contact => contact.id === id);
   document.getElementById("editcontact").classList.add("showOverlay-addNewContactPopUpContainer");
   document.getElementById("backGroundOpacityContainer").classList.remove("d-none");
   document.getElementById("editname").value = selectedContact.name;
   document.getElementById("editemail").value = selectedContact.email;
   document.getElementById("edittel").value = selectedContact.tel;
+  document.getElementById("editname").dataset.contactId = id;
+  document.getElementById("deleteContactButton").addEventListener("click", function() {
+    deleteContact(id);
+});
 }
+
 
 function closeEditContact() {
   document.getElementById("editcontact").classList.remove("showOverlay-addNewContactPopUpContainer");
   document.getElementById("backGroundOpacityContainer").classList.add("d-none");
+  document.getElementById("editname").value = "";
+  document.getElementById("editemail").value = "";
+  document.getElementById("edittel").value = "";
+
 }
 
+function saveEditContact() {
+  const id = document.getElementById("editname").dataset.contactId;
+  const editedContact = contacts.find((contact) => contact.id === parseInt(id));
+
+  if (editedContact) {
+    editedContact.name = document.getElementById("editname").value;
+    editedContact.email = document.getElementById("editemail").value;
+    editedContact.tel = document.getElementById("edittel").value;
+
+    showContacts();
+    showContact(editedContact.id);
+    save();
+    load();
+    closeEditContact();
+  }
+}
 
 
 function save() {
@@ -220,4 +255,30 @@ function load() {
     contacts = JSON.parse(contactsAsText);
     letters = JSON.parse(lettersAsText);
   }
+}
+
+function isMobile(){
+  if(screenSize[0] <= 800){return true}
+}
+
+function disableContactContainer(){
+  let contactDetails = document.getElementById("addcontactContainer");
+  let contactContainerView = document.getElementById("contactContainer")
+  contactDetails.classList.add("d-none");
+  contactDetails.classList.remove("d-none");
+  contactContainerView.style.removeProperty("display");
+  contactContainerView.style.removeProperty("width");
+}
+
+function screenSizeUser(){
+  screenSize.push(window.screen.width);
+  screenSize.push(window.screen.height);
+}
+
+function changeContactView(){
+  let contactContainerList = document.getElementById("addcontactContainer");
+  let contactContainerView = document.getElementById("contactContainer")
+  contactContainerList.classList.add("d-none")
+  contactContainerView.style.display = "block";
+  contactContainerView.style.width = "100vw";
 }

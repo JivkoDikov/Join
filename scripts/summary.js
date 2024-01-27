@@ -1,5 +1,15 @@
-let timeOfDay = ["Good Morning,", "Good Afternoon,", "Good Evening,"]
-let greeting = ""
+let timeOfDay = ["Good Morning,", "Good Afternoon,", "Good Evening,"];
+let greeting = "";
+let nameUser = localStorage.getItem("name");
+let tasks = [];
+
+
+
+function renderSummary(){
+    checkWelcomePopup(); 
+    hourCheck();
+    //loadTasks();
+}
 
 // Function to generate the greeting based on the current time
 function hourCheck() {
@@ -18,28 +28,49 @@ function hourCheck() {
     }
     setGreeting(greeting);
     setUserName();
-
+    welcomeSummary();
 }
 
 function setGreeting(greeting){
-    let greetingHeader = document.getElementById("greeting");
-    greetingHeader.innerHTML = greeting
+    let greetingPopup = document.getElementById("greetingPopup");
+    greetingPopup.innerHTML = greeting
 }
 
 function setUserName(){
-    let name = localStorage.getItem("name")
-    let greetingName = document.getElementById("greetingName");
-    greetingName.innerHTML = name
+    let greetingNamePopup = document.getElementById("greetingNamePopup");
+    greetingNamePopup.innerHTML = nameUser
 }
 
-function checkwelcome(){
+async function loadTasks(){
+    //lädt den aktuellen user aus dem Local Storage und speichert ihn in user ab
+    let user = localStorage.getItem("user")
+    //übergibt den aktuellen user an getitem
+    let userTask = await getItem(user);
+    //holt sich alle task für ein user
+    tasks = JSON.parse(userTask.data.value)
+}
+
+function checkWelcomePopup(){
     let stateWelcome = sessionStorage.getItem("welcome")
+    let welcomePopup = document.getElementById("welcomePopup")
 
     if (!stateWelcome){
-        welcomeSummary.classList.remove("d-none");
+        welcomePopup.classList.remove("d-none");
         setTimeout(function() {
-            welcomeSummary.classList.add("d-none");
-            sessionStorage.setItem("welcome", 1)
+            welcomeAnimation(welcomePopup);
         }, 2800);
     }
+    
+}
+
+function welcomeAnimation(welcomePopup){
+    welcomePopup.classList.add("d-none");
+    sessionStorage.setItem("welcome", true);
+}
+
+function welcomeSummary(){
+    let greetingSummary = document.getElementById("greeting");
+    greetingSummary.innerHTML = greeting;
+    let greetingNameSummary = document.getElementById("greetingName");
+    greetingNameSummary.innerHTML = nameUser;
 }

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="/scripts/loginscript.js"></script>
     <script src="/scripts/storage.js"></script>
+    <script src="/scripts/script.js"></script>
     <link rel="stylesheet" href="/css/loginStyle.css" />
     <link rel="stylesheet" href="/mediaquerys/login.css" />
     <title>Sign up</title>
@@ -12,10 +13,10 @@
   <body onload="loadUser()">
     <div class="headerLogin">
       <img src="/assets/img/Capa 2.png" alt="" />
-      <div class="signupHeader">
+      <!-- <div class="signupHeader">
         <p>Not a Join user?</p>
         <button onclick="testData()" class="hoverDarkBtn">Sign up</button>
-      </div>
+      </div> -->
     </div>
     <div class="login">
       <div class="arrowLeft"><a href="/assets/templates/login.html"><img src="/assets/img/arrow-left-line.png" alt=""></a></div>
@@ -24,45 +25,48 @@
         <div class="underline"></div>
       </div>
       <div class="form-container">
-        <form id="loginForm" onsubmit="submitFormSignup(event)">
+        <form id="loginForm" onsubmit="signup(event)">
           <div class="input-container">
-            <input id="nameInput" required type="text" placeholder="Name" />
+            <input oninput="checkName()" id="nameInput" required type="text" placeholder="Name" />
             <img src="/assets/img/person.png" alt="picture of name" />
           </div>
+          <div id="nameError" class="d-none">Please type your first- and last name<br> 
+            Example: Jon Doe, not Jon-Justin Doe or Jon Doe-Jackson</div>
           <div id="emailInputFrame" class="input-container">
             <input oninput="checkEmail()" id="emailInput" required type="email" placeholder="Email" />
             <img src="/assets/img/mail.png" alt="picture of mail" />
           </div>
           <div id="emailError" class="d-none">Invalid email address</div>
           <div class="input-container">
-            <input
+            <input oninput="passwordLength()"
               id="passwordInput" required type="password" placeholder="Password"
             />
             <img src="/assets/img/lock.png" alt="picture of Lock" />
           </div>
+          <div id="passwordLengthError" class="d-none">Your Password is too short, you need a password with at least 5 characters</div>
           <div id="passwordInputConfirmFrame" class="input-container">
             <input
-              oninput="checkpw()" id="passwordInputConfirm" required type="password" placeholder="Confirm Password"
+              oninput="checkPasswordConfirm()" id="passwordInputConfirm" required type="password" placeholder="Confirm Password"
             />
             <img src="/assets/img/lock.png" alt="picture of Lock" />
           </div>
           <div id="pwDontMatch" class="d-none">Ups! your password don´t match</div>
           <div class="footerLoginForm">
             <div class="rememberme privacyTerm">
-              <input id="rememberCheckbox" required type="checkbox" />
-              <p onclick="toggleCheckbox()">I accept the </p><a href="#" style="color: #29ABE2;">Privacy policy</a>
+              <input onclick="updateSignupLogic('checkboxCounter',this.checked)" id="rememberCheckbox" required type="checkbox" />
+              <p >I accept the </p><a href="#" style="color: #29ABE2;">Privacy policy</a>
             </div>
           </div>
           <div class="loginBtn mobilesignupBtn">
-            <input class="hoverDarkBtn" type="submit" value="Sign up" />
+            <input id="submitButton" class="hoverDarkBtn disableButton" type="submit" value="Sign up" />
           </div>
         </form>
       </div>
     </div>
     <div class="loginFooter signupfooter">
       <div class="legalNotice">
-        <a>Privacy Policy</a>
-        <a>Legal notice</a>
+        <a href="/assets/templates/terms/privacy_policy.html" >Privacy Policy</a>
+        <a href="/assets/templates/terms/legal_notice.html">Legal notice</a>
       </div>
     </div>
   </body>

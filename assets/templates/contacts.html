@@ -60,7 +60,10 @@
     </div>
     <div id="contactContainer"class="contactContainer">
         <div class="contactHeadline">
+          <div class="headlineArrow">
+            <img onclick="disableContactContainer()" id="imgArrow" class="imgArrow"src="/assets/img/arrow-left-line.png" alt="">
             <h2>Contacts</h2>
+            </div>
             <div class="vectorPerpendicularContainerh3">
             <div class="vectorPerpendicularContainer">
             </div>
@@ -172,12 +175,12 @@
               <p onclick="closeEditContact()"class="closeAddContact">x</p>
             </div>
             <div class="inputButtonsContainer">
-            <form onsubmit="createContact();return false">
+            <form onsubmit="editContact(`${contact.id}`)">
             <div class="contactInput">
             
             <div class="inputIconsContainer">
             <div class="contactDetails">
-            <input required minlength="3" id="editname"class="input"  type="text" placeholder="Name" autocomplete="name">
+            <input required minlength="3" id="editname"class="input"  type="text" placeholder="Name" autocomplete="name"  data-contact-id="${id}">
             <img class="inputIcons"src="/assets/img/person.png" alt="">
             </div>
             </div>
@@ -201,14 +204,14 @@
             
 
             <div class="cancelCreateContactButtons">
-                <button class="cancelBtn d-inline">
+                <button id="deleteContactButton" onclick="deleteEditContact(`${id}`)"class="cancelBtn d-inline">
                     <span class="cancelX">
                 <p class="cancelText">Delete</p>
                 <p class="x">x</p>
                   </span>
             
                 </button>
-               <button onclick="deleteContact()"  class="createCheckBtn">
+               <button type="submit" onclick="saveEditContact()"class="createCheckBtn">
                 <span class="createCheck">
                 <p class="createText">Save</p>
                 <img src="/assets/img/check.png" alt="">

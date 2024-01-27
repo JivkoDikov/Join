@@ -15,7 +15,7 @@
 <body onload="loadUser()">
     <div class="background-container"></div>
     <div class="headerLogin">
-        <img class="centeredImage" src="/assets/img/Capa 2.png" alt="">
+        <img id="logo" class="centeredImage" src="/assets/img/join.png" alt="">
         <div class="signupHeader">
             <p>Not a Join user?</p>
             <a href="/assets/templates/signup.html"><button class="hoverDarkBtn">Sign up</button></a>
@@ -26,14 +26,14 @@
             <div class="underline"></div>
         </div>
         <div class="form-container">
-            <form id="loginForm" onsubmit="submitForm(event)">
-                <div class="input-container">
+            <form id="loginForm" onsubmit="checkLogin(event)">
+                <div id="emailInputFrame" class="input-container">
                     <input oninput="checkEmail()" id="emailInput" required type="email" placeholder="Email">
                     <img src="/assets/img/mail.png" alt="picture of mail">
                 </div>
                 <div id="emailError" class="d-none">Invalid email address</div>
                 <div class="input-container">
-                    <input id="passwordInput" required type="password" placeholder="Password">
+                    <input oninput="checkPasswordInput()" id="passwordInput" required type="password" placeholder="Password">
                     <img src="/assets/img/lock.png" alt="picture of Lock">
                 </div>
                 <div class="footerLoginForm">
@@ -44,7 +44,7 @@
                     <a class="d-none"> Forgot my password</a>
                 </div>
                 <div class="loginBtn">
-                    <input class="hoverDarkBtn" type="submit" value="Log in">
+                    <input id="submitButton" class="hoverDarkBtn disableButton" type="submit" value="Log in">
                     <a href="/assets/templates/summary.html" onclick="guestLogin()">Guest Log in</a>
                 </div>
             </form>
@@ -58,8 +58,8 @@
     </div>
     <div class="loginFooter">
         <div class="legalNotice">
-            <a href="/assets/templates/privacy_policy.html" >Privacy Policy</a>
-            <a href="/assets/templates/legal_notice.html">Legal notice</a>
+            <a href="/assets/templates/terms/privacy_policy.html" >Privacy Policy</a>
+            <a href="/assets/templates/terms/legal_notice.html">Legal notice</a>
         </div>
     </div>
     
