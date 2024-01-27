@@ -1,42 +1,46 @@
+let IdCounter = 0;
 let cards = [
     {
         "id" : 0,
         "label" : "User Story",
         "headline" : "Recommender",
         "text": "Build start page with recipe recommendation...",
-        "progressBar" : 50,
+        "progressBar" : 100,
         "subtasks": 50,
         "user": "",
         "priority": 1,
         "category": "progress",
         "date": 1151,
+        "subtask1": "AddTask"
     },
     {
         "id" : 1,
         "label" : "User Story",
         "headline" : "Page",
         "text": "Build start page with recipe recommendation...",
-        "progressBar" : 30,
+        "progressBar" : 0,
         "subtasks": 50,
         "user": "",
         "priority": 1,
         "category": "todo",
         "date": 1151,
+        "subtask1": "AddTask"
     },
     {
         "id" : 2,
         "label" : "User Story",
         "headline" : "Recipe Recommender",
         "text": "Build start page with recipe recommendation...",
-        "progressBar" : 11,
+        "progressBar" : 10,
         "subtasks": 50,
         "user": "",
         "priority": 1,
         "category": "todo",
-        "date": 1151
+        "date": 1151,
+        "subtask1": "AddTask"
     },
-
 ]
+
 
 
 let currentDraggedElement;
@@ -64,118 +68,27 @@ async function getItem(key) {
 }
 
 
-// function updateHTML() { 
-//     getItem('tasks');
-
-//     for (let index = 0; index < cards.length; index++) {
-//         const numberOfCard = cards[index];
-        
-//         let todo = cards.filter(t => t["category"] == 'todo');
-//         document.getElementById('todo').innerHTML = '';
-//         for (let i = 0; i < todo.length; i++) {
-//             const element = todo[i];   
-//             document.getElementById('todo').innerHTML += generateCardHTML(element);
-//             updateProgressBar(element); 
-//         }
-
-//         let progress = cards.filter(t => t['category'] == 'progress');
-//         document.getElementById('progress').innerHTML = '';
-//         for (let j = 0; j < progress.length; j++) {
-//             const element = progress[j];
-//             document.getElementById('progress').innerHTML += generateCardHTML(element);
-//             updateProgressBar(element);
-//         }
-
-//         let feedback = cards.filter(t => t['category'] == 'feedback');
-//         document.getElementById('feedback').innerHTML = '';
-//         for (let j = 0; j < feedback.length; j++) {
-//             const element = feedback[j];
-//             document.getElementById('feedback').innerHTML += generateCardHTML(element);
-//             updateProgressBar(element);
-//         }
-        
-//         let done = cards.filter(t => t['category'] == 'done');
-//         document.getElementById('done').innerHTML = '';
-//         for (let j = 0; j < done.length; j++) {
-//             const element = done[j];
-//             document.getElementById('done').innerHTML += generateCardHTML(element);
-//             updateProgressBar(element);
-//         }
-//     }
-//     emptyCategory();
-// }
-
-// function updateHTML() {
-    
-//     const allCategories = ['todo', 'progress', 'feedback', 'done'];
-
-//     allCategories.forEach(category => {
-//         const categoryTasks = cards.filter(cards => cards['category'] === category);
-//         document.getElementById(category).innerHTML = '';
-        
-//         categoryTasks.forEach((element, index) => {
-//             const uniqueId = `${category}-${index + 1}`;
-//             element['id'] = uniqueId;
-//             document.getElementById(category).innerHTML += generateCardHTML(element);
-//             updateProgressBar(element);
-//         });
-//     });
-
-//     emptyCategory();
-// }
-
 function updateHTML() {
-    
-    const allCategories = ['todo', 'progress', 'feedback', 'done'];
-
-    allCategories.forEach(category => {
-        const categoryTasks = cards.filter(cards => cards['category'] === category);
+    const categories = ['todo', 'progress', 'feedback', 'done'];
+    for (const category of categories) {
+        let categoryElements = cards.filter(t => t['category'] === category);
         document.getElementById(category).innerHTML = '';
-
-        categoryTasks.forEach((element, index) => {
-            document.getElementById(category).innerHTML += generateCardHTML(element, index + 1);
+        for (let i = 0; i < categoryElements.length; i++) {
+            let element = categoryElements[i];
+            document.getElementById(category).innerHTML += generateCardHTML(element);
             updateProgressBar(element);
-        });
-    });
-
+            console.log(element);
+        }
+    }
     emptyCategory();
 }
 
-
-function generateCategoryHTML(category, tasks) {
-    let html = '';
-    tasks.forEach(task => {
-        html += generateCardHTML(task);
-        updateProgressBar(task);
-    });
-    return html;
-}
-
-
-// function updateHTML() {
-//     const cards = getItem('tasks');
-
-//     document.getElementById('todo').innerHTML = '';
-//     document.getElementById('progress').innerHTML = '';
-//     document.getElementById('feedback').innerHTML = '';
-//     document.getElementById('done').innerHTML = '';
-
-//     for (let index = 0; index < cards.length; index++) {
-//         const element = cards[index];
-
-//         document.getElementById(element['category']).innerHTML += generateCardHTML(element);
-//         updateProgressBar(element);
-//     }
-
-//     emptyCategory();
-// }
-
+    
 
 
 function startDragging(id) {
     currentDraggedElement = id;
 }
-
 
 function allowDrop(ev) {
     ev.preventDefault();
@@ -201,7 +114,6 @@ function search() {
     updateCategory(cardFeedback, 'feedback', search);
     updateCategory(cardDone, 'done', search);
 }
-
 
 function updateCategory(card, category, search) {
     card.innerHTML = '';
@@ -266,12 +178,14 @@ function emptyCategory() {
 
 
 function openOverview(i) {
-    let infoArrayCard = cards[i];
-    let arrayCardsID = i;
+    let infoArrayCard = cards.find(task => {
+        return task.id == i;
+    });
+    console.log(infoArrayCard);
     let removeClass = document.getElementById('overlay');
     removeClass.innerHTML = '';
-    removeClass.innerHTML = generateOverviewHTML(infoArrayCard, arrayCardsID);
-    removeClass.classList.remove('d-none');   
+    removeClass.innerHTML = generateOverviewHTML(infoArrayCard);
+    removeClass.classList.remove('d-none');
 }
 
 
@@ -282,6 +196,36 @@ function closeOverview() {
 }
 
 
+function subtasksCheck(id) {
+    let index = cards.findIndex((card) => {
+        return card.id === id
+    });
+
+    let check = document.getElementById('subtasks1').checked;
+    console.log(check);
+    let progress = cards[index]['progressBar'];
+    let numberOfTask = cards[index]['subtasks'];
+    let calculatedTask = numberOfTask / 10;
+    let calculatedProgress = progress / calculatedTask;
+    
+
+    if(check === true){
+       
+       console.log(progress);
+       let addProgress = progress + calculatedProgress;
+       cards[index]['progressBar'] = addProgress;
+    }else if(check === false) {
+        let addProgress = progress - calculatedProgress;
+       cards[index]['progressBar'] = addProgress;
+    }
+    updateHTML();
+}
+
+
+
+
+
+
 function updateProgressBar(element) {
     for (let j = 0; j < cards.length; j++) {
         
@@ -290,15 +234,15 @@ function updateProgressBar(element) {
 
        
         let progressBar = document.getElementById(`progressBarId${element['id']}`);
-        progressBar.innerHTML = '';
+        
         progressBar.innerHTML = `<div class="progress-bar" id="${progressBarId}"></div>`;
-        progressBarId.innerHTML = '';
+        
         
         if (progressBar) {
             
-            
             progressBar.style.width = infoArrayCard + '%';
             progressBar.innerHTML = infoArrayCard + '%';
+            progressBar.innerText = ''; 
 
             if (infoArrayCard < 100) {
                 infoArrayCard += 10;
@@ -307,10 +251,10 @@ function updateProgressBar(element) {
     }
 }
 
-
 function editCard(i) {
 
     let infoArrayCard = cards[i];
+
 
 
     let overlay = document.getElementById('overlay');
@@ -331,6 +275,7 @@ function editCard(i) {
 }
 
 
+
 function CardEditForm(i) {
     let infoArrayCard = cards[i];
 
@@ -347,18 +292,20 @@ function CardEditForm(i) {
 
 
 function deleteCard(id) {
-    const indexToDelete = cards.findIndex(card => card.id === id);
-
-    if (indexToDelete !== -1) {
-        cards.splice(indexToDelete, 1);
-        updateHTML();
-        closeOverview();
+    let index = cards.findIndex((card) => {
+        return card.id === id
+    });
+    console.log(index);
+    cards.splice(index, 1);
+    updateHTML();
+    closeOverview();
     }
-}
+
 
 
 function priorityCheck(element) {
-    const priority = element['priority'];
+    if (element && element['priority'] !== undefined) {
+        const priority = element['priority'];
     
     if (priority === 0) {
         return `<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -398,6 +345,8 @@ function priorityCheck(element) {
         </svg>`;
     }
 }
+}
+
 
 
 function generateCardHTML(element) {
@@ -438,12 +387,17 @@ function generateCardHTML(element) {
     </div>
     </div>
     `;
+    
+    
 }
 
 
-function generateOverviewHTML(element, arrayCardsID) {
+
+
+
+function generateOverviewHTML(element) {
     let prioritySVG = priorityCheck(element);
-    
+    let id = element['id'];
     return `
     
     <div class="overview">
@@ -501,13 +455,13 @@ function generateOverviewHTML(element, arrayCardsID) {
                 <span>Subtasks</span>
                 <div>
                     <ul>
-                        <li><input type="checkbox">Implement Recipe Recommendation</li>
-                        <li><input type="checkbox">Start Page Layout</li>
+                        <li><input type="checkbox" id="subtasks1" onclick="subtasksCheck(${id})">${element['subtask1']}</li>
+                        <li><input type="checkbox" id="subtasks2" onclick="subtasksCheck(${id})">${element['subtask2']}</li>
                     </ul>
                 </div>
             </div>
             <div class="deleteUedit">
-                    <div class="delete" onclick="deleteCard(${element['id']})">
+                    <div class="delete" onclick="deleteCard(${id})">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_119188_3520" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                             <rect width="24" height="24" fill="#D9D9D9"/>
@@ -664,4 +618,6 @@ function overviewEditHTML(i) {
     </div>
     </div>
     `;
+
+
 }
