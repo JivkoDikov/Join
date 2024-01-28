@@ -1,21 +1,49 @@
-let tasks = [];
-
+let tasks = [
+  {
+  "id" : "",
+  "label" : ["User Story","Technical Task"],
+  "headline" : "Recommender",
+  "text": "Build start page with recipe recommendation...",
+  "progressBar" : 100,
+  "subtasks": "",
+  "user": "",
+  "priority": 1,
+  "category": "progress",
+  "date": 1151,
+  "subtask1": "AddTask"
+  }
+];
+let IdCounter = 0;
     
 function createTask(event){
   event.preventDefault();
-    let title = document.getElementById("enterTitle");
-    let description = document.getElementById("enterDescription");
-    let date = document.getElementById("enterDate");
-    let subtask = document.getElementById('addSubTasks');
-    let task = {
-      title: title.value,
-      description: description.value,
-      date: date.value,
-      subtask:subtask.value,
-    };
+    let headline = document.getElementById("enterTitle").value;
+    let text = document.getElementById("enterDescription").value;
+    let date = document.getElementById("enterDate").value;
+    let subtask = document.getElementById('addSubTasks').value;
 
-    tasks.push(task);
-    console.log(tasks);
+    
+  let newTask = {
+    id: IdCounter++,
+    label: ["User Story", "Technical Task"],
+    headline: headline,
+    text: text,
+    progressBar:"",
+    subtasks: [subtask],
+    user: "",
+    priority: 1,
+    category: "progress",
+    date: date
+  };
+
+  tasks.push(newTask);
+
+  document.getElementById("enterTitle").value = "";
+  document.getElementById("enterDescription").value = "";
+  document.getElementById("enterDate").value = "";
+  document.getElementById("addSubTasks").value = "";
+
+   
 }
 
 function inputFrame(id){
@@ -89,7 +117,7 @@ function addCategory(){
   `;
 }
 
-function addSubtasks() {
+function addSubtask() {
   let subtaskInput = document.getElementById('addSubTasks');
   let subtaskValue = subtaskInput.value.trim();
   if (subtaskValue !== '') {
