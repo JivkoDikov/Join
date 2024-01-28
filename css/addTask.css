@@ -3,6 +3,17 @@ form textarea:focus {
   outline: none;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 .contentAddTask {
   width: calc(100vw - 232px);
   height: calc(100vh - 96px);
