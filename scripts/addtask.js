@@ -1,48 +1,37 @@
-let tasks = [
-  {
-  "id" : "",
-  "label" : ["User Story","Technical Task"],
-  "headline" : "Recommender",
-  "text": "Build start page with recipe recommendation...",
-  "progressBar" : 100,
-  "subtasks": "",
-  "user": "",
-  "priority": 1,
-  "category": "progress",
-  "date": 1151,
-  "subtask1": "AddTask"
-  }
-];
+let tasks = [];
 let IdCounter = 0;
-    
+let subtasksArray =[];
+
+
 function createTask(event){
   event.preventDefault();
     let headline = document.getElementById("enterTitle").value;
     let text = document.getElementById("enterDescription").value;
     let date = document.getElementById("enterDate").value;
-    let subtask = document.getElementById('addSubTasks').value;
+    
 
     
   let newTask = {
     id: IdCounter++,
-    label: ["User Story", "Technical Task"],
+    label: [],
     headline: headline,
     text: text,
     progressBar:"",
-    subtasks: [subtask],
+    subtasks: [subtasksArray],
     user: "",
     priority: 1,
-    category: "progress",
+    category: "",
     date: date
   };
 
-  tasks.push(newTask);
+ 
 
+  tasks.push(newTask);
   document.getElementById("enterTitle").value = "";
   document.getElementById("enterDescription").value = "";
   document.getElementById("enterDate").value = "";
   document.getElementById("addSubTasks").value = "";
-
+  subtasksArray = [];
    
 }
 
@@ -90,6 +79,8 @@ function assignedTo(){
 
 }
 
+
+
 function addCategory(){
   let categoryBox = document.getElementById('categoryBox');
   categoryBox.innerHTML ='';
@@ -98,9 +89,9 @@ function addCategory(){
                             <div class="selectCategoryContainer">
                                 <div class="selectCategory">
                 
-                                    <span>Technical Task</span>
+                                    <span id="technicalTask">Technical Task</span>
                                 </div>
-                                    <input type="checkbox">
+                                    <input id="technicalTaskCheckbox" type="checkbox" onchange="updateLabels('Technical Task')">
                             </div>
     
                         </div>
@@ -108,41 +99,53 @@ function addCategory(){
                             <div class="selectCategoryContainer">
                                 <div class="selectCategory">
                 
-                                    <span>User Story</span>
+                                    <span id="userStory">User Story</span>
                                 </div>
-                                    <input type="checkbox">
+                                    <input id="userStoryCheckbox" type="checkbox" onchange="updateLabels('User Story')">
                             </div>
     
                         </div>
   `;
+  
+}
+function updateLabels(category) {
+  const newTask = tasks[tasks.length - 1]; 
+  const labelIndex = newTask["label"].indexOf(category);
+
+  if (labelIndex === -1) {
+    newTask.label.push(category);
+  } else {
+    newTask.label.splice(labelIndex, 1);
+  }
+
+  console.log(newTask.label);
 }
 
-function addSubtask() {
-  let subtaskInput = document.getElementById('addSubTasks');
-  let subtaskValue = subtaskInput.value.trim();
-  if (subtaskValue !== '') {
-    let subtask = {
-      title: subtaskValue,
-      completed: false, 
-    };
 
-    tasks.push(subtask);
+
+function addSubTask() {
+  let subTaskInput = document.getElementById('addSubTasks');
+  if (subTaskInput.value.trim() !== '') {
+    subtasksArray.push({
+      name:subTaskInput.value.trim(),
+      done:false
+    })
+    subTaskInput.value = '';
     displaySubtasks();
-    document.getElementById('addSubTasks').value = '';
-  } else {
-    console.log('Subtask field is empty');
   }
 }
+
+
 
 function displaySubtasks() {
   let subTasksBox = document.getElementById('subTasksBox');
   subTasksBox.innerHTML = '';
-  for (let i = 0; i < tasks.length; i++) {
-    const subtask = tasks[i];
+  for (let i = 0; i < subtasksArray.length; i++) {
+    const subtask = subtasksArray[i];
     subTasksBox.innerHTML += /*html*/`
       <div class="subTasksIconsContainer">
         <div class="subTaskText">
-          <li>${subtask.title}</li>
+          <li>${subtask.name}</li>
         </div>
         <div class="subTaskIconsBox">
           <img class="subTaskIcon" src="/assets/img/pencel.jpg" alt="">
@@ -156,6 +159,10 @@ function displaySubtasks() {
 
 function editSubTasks(){ 
   
+}
+
+function deleteSubTask(){
+
 }
 
 function saveContactsInArray(){
