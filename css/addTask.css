@@ -694,5 +694,44 @@ textarea {
   align-items: center;
   gap: 8px;
   margin-top: 12px;
+  background-color: white;
+}
+
+.editSubTaskContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.editSubTasksIcons{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editsubTasksSVG path{
+  fill: #000000;
+  
+}
+
+.editSubTasksClose{
+  font-size: 24px;
+  font-weight: 400;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.editSubTasksInput{
+  border: none;
+}
+
+.editSubTasksClose:hover,.editsubTasksSVG:hover{
+  background-color: #d1d1d1;
+  border-radius: 50%;
 }
 
