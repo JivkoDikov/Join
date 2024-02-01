@@ -3,8 +3,9 @@ let IdCounter = 0;
 let subtasksArray =[];
 let categoryArray =[];
 let prioArray = [];
-
-
+let editingSubtaskIndex = -1;
+let selectedCategoryId = null;
+let selectedContactsInitials = [];
 
 function createTask(event){
   event.preventDefault();
@@ -21,11 +22,12 @@ function createTask(event){
     text: text,
     progressBar:"",
     subtasks: subtasksArray,
-    user: "",
+    user: selectedContactsInitials,
     priority: prioArray,
-    category: "",
+    category: "todo",
     date: date
   };
+  console.log(newTask);
 
   tasks.push(newTask);
   document.getElementById("enterTitle").value = "";
@@ -63,36 +65,74 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById("enterDate").value = getCurrentDate();
 });
 
-
-function assignedTo(){
+function assignedTo() {
   let contactsBox = document.getElementById('contactsBox');
-  contactsBox.innerHTML ='';
+  contactsBox.innerHTML = '';
+
   let jsonString = localStorage.getItem('contacts');
   let contacts = JSON.parse(jsonString);
-  if(contacts && contacts.length > 0){
-    contacts.forEach(contact =>{
+
+  if (contacts && contacts.length > 0) {
+    contacts.forEach(contact => {
       let initials = getInitials(contact.name);
 
-  contactsBox.innerHTML += /*html*/`
-   <div class="assignedContactsContainer">
-                        <div class="assignedContactSVG">
-                            <div class="letterContacts">
-                                <div class="assignedLetters" style="background-color: ${contact.bgColor}">${initials}</div>
-                                <span>${contact.name}</span>
-                            </div>
-                                <input type="checkbox">
-                        </div>
+      contactsBox.innerHTML += /*html*/`
+        <div class="assignedContactsContainer">
+          <div class="assignedContactSVG">
+            <div class="letterContacts">
+              <div class="assignedLetters" style="background-color: ${contact.bgColor}">${initials}</div>
+              <span>${contact.name}</span>
+            </div>
+            <input id="assignedToContact_${contact.name}" type="checkbox" onchange="updateSelectedContacts('${initials}', this)">
+          </div>
+        </div>`;
+    });
+  }
+}
 
-                    </div>`;
 
-});
+function updateSelectedContacts(initials, checkbox) {
+  if (checkbox.checked) {
+    selectedContactsInitials.push(initials);
+  } else {
+    let index = selectedContactsInitials.indexOf(initials);
+    if (index !== -1) {
+      selectedContactsInitials.splice(index, 1);
+    }
+  }
+  console.log('Selected Contacts Initials:', selectedContactsInitials);
 
 }
-}
+
 function getInitials(name) {
   let names = name.split(' ');
   let initials = names.map(name => name[0].toUpperCase());
   return initials.join('');
+}
+
+function updatePrio(buttonId, event) {
+  event.preventDefault();
+
+  let button = document.getElementById(buttonId);
+
+  if (button) {
+    let svgElement = document.getElementById(buttonId.replace('btn', 'svg'));
+
+    if (button.classList.contains('active')) {
+      button.classList.remove('active');
+      prioArray = prioArray.filter(item => item !== svgElement.outerHTML);
+    } else {
+      document.querySelectorAll('.prioButtonContainer button').forEach(otherButton => {
+        if (otherButton.id !== buttonId) {
+          otherButton.classList.remove('active');
+        }
+      });
+
+      button.classList.add('active');
+      prioArray = [svgElement.outerHTML];
+    }
+  }
+  console.log('Ausgewählte Prioritäten:', prioArray);
 }
 
 function addCategory(){
@@ -123,30 +163,6 @@ function addCategory(){
   
 }
 
-function updatePrio(buttonId, event) {
-  event.preventDefault();
-
-  let button = document.getElementById(buttonId);
-
-  if (button) {
-    let svgElement = document.getElementById(buttonId.replace('btn', 'svg'));
-
-    if (button.classList.contains('active')) {
-      button.classList.remove('active');
-      prioArray = prioArray.filter(item => item !== svgElement.outerHTML);
-    } else {
-      document.querySelectorAll('.prioButtonContainer button').forEach(otherButton => {
-        if (otherButton.id !== buttonId) {
-          otherButton.classList.remove('active');
-        }
-      });
-
-      button.classList.add('active');
-      prioArray = [svgElement.outerHTML];
-    }
-  }
-  console.log('Ausgewählte Prioritäten:', prioArray);
-}
 
 
 
@@ -193,8 +209,8 @@ function displaySubtasks() {
           <li>${subtask.name}</li>
         </div>
         <div class="subTaskIconsBox">
-          <img onclick="editSubTasks()"class="subTaskIcon" src="/assets/img/pencel.jpg" alt="">
-          <img onclick="deleteSubTasks()"class="subTaskIcon" src="/assets/img/trash.jpg" alt="">
+          <img onclick="editSubTask(${i})"class="subTaskIcon" src="/assets/img/pencel.jpg" alt="">
+          <img onclick="deleteSubTask(${i})"class="subTaskIcon" src="/assets/img/trash.jpg" alt="">
         </div>
       </div>
     `;
@@ -202,12 +218,16 @@ function displaySubtasks() {
 }
 
 
-function editSubTasks(){ 
+function editSubTask(index){
   let editSubTasks = document.getElementById('editSubTasksBox');
   editSubTasks.innerHTML = '';
+
+  if (index >= 0 && index < subtasksArray.length) {
+    let subTaskName = subtasksArray[index].name;
+
   editSubTasks.innerHTML += /*html*/`
-  <div class="editSubTaskContainer">
-  <input class="editSubTasksInput" type="text">
+  <div id="editSubTaskContainer"class="editSubTaskContainer">
+  <input id="editSubTaskInput" class="editSubTasksInput" type="text" value="${subTaskName}">
   <div class="editSubTasksIcons">
   <svg class="editSubTasksClose"width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 <mask id="mask0_117793_4210" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="4" width="24" height="24">
@@ -229,12 +249,19 @@ function editSubTasks(){
    </div>
   
   `;
-  
+    let editSubTaskInput = document.getElementById('editSubTaskInput');
+    editSubTaskInput.addEventListener('input', function () {
+      subtasksArray[index].name = editSubTaskInput.value;
+    });
   
 }
+}
 
-function deleteSubTask(){
 
+function deleteSubTask(index){
+  subtasksArray.splice(index, 1);
+  document.getElementById('editSubTaskContainer').innerHTML ='';
+  displaySubtasks();
 }
 
 function saveContactsInArray(){
