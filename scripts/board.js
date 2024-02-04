@@ -1,47 +1,65 @@
-let IdCounter = 0;
 let cards = [
     {
         "id" : 0,
         "label" : "User Story",
         "headline" : "Recommender",
         "text": "Build start page with recipe recommendation...",
-        "progressBar" : 100,
-        "subtasks": 50,
         "user": "",
         "priority": 1,
         "category": "progress",
-        "date": 1151,
-        "subtask1": "AddTask"
+        "date": "2024-02-01",
+        "subtask": [
+            {
+                "name":"H",
+                "done": true
+            },
+        ],
+        "checkForTrue": 5,
     },
     {
         "id" : 1,
         "label" : "User Story",
         "headline" : "Page",
         "text": "Build start page with recipe recommendation...",
-        "progressBar" : 0,
-        "subtasks": 50,
         "user": "",
         "priority": 1,
         "category": "todo",
-        "date": 1151,
-        "subtask1": "AddTask"
+        "date": "01-01-2014",
+        "subtask": [
+            {
+                "name":"Hallo",
+                "done": false,
+                
+            },
+            {
+                "name":"Halloaaaa",
+                "done": false
+            },
+        ],
+        "checkForTrue": 0,
     },
     {
         "id" : 2,
         "label" : "User Story",
         "headline" : "Recipe Recommender",
         "text": "Build start page with recipe recommendation...",
-        "progressBar" : 10,
-        "subtasks": 50,
         "user": "",
         "priority": 1,
         "category": "todo",
-        "date": 1151,
-        "subtask1": "AddTask"
+        "date": "01-01-2014",
+        "subtask": [
+            {
+                "name":"BBBBBB",
+                "done": false
+            },
+            {
+                "name":"CCCCC",
+                "done": false
+            },
+        ],
+        "checkForTrue": 0,
     },
 ]
-
-
 
 let currentDraggedElement;
 
@@ -77,18 +95,17 @@ function updateHTML() {
             let element = categoryElements[i];
             document.getElementById(category).innerHTML += generateCardHTML(element);
             updateProgressBar(element);
-            console.log(element);
+            subtasksCheck(element);
         }
     }
     emptyCategory();
 }
 
-    
-
 
 function startDragging(id) {
     currentDraggedElement = id;
 }
+
 
 function allowDrop(ev) {
     ev.preventDefault();
@@ -114,6 +131,7 @@ function search() {
     updateCategory(cardFeedback, 'feedback', search);
     updateCategory(cardDone, 'done', search);
 }
+
 
 function updateCategory(card, category, search) {
     card.innerHTML = '';
@@ -181,11 +199,11 @@ function openOverview(i) {
     let infoArrayCard = cards.find(task => {
         return task.id == i;
     });
-    console.log(infoArrayCard);
     let removeClass = document.getElementById('overlay');
     removeClass.innerHTML = '';
     removeClass.innerHTML = generateOverviewHTML(infoArrayCard);
     removeClass.classList.remove('d-none');
+    subtaskLoad(i);
 }
 
 
@@ -196,72 +214,85 @@ function closeOverview() {
 }
 
 
-function subtasksCheck(id) {
-    let index = cards.findIndex((card) => {
-        return card.id === id
-    });
-
-    let check = document.getElementById('subtasks1').checked;
-    console.log(check);
-    let progress = cards[index]['progressBar'];
-    let numberOfTask = cards[index]['subtasks'];
-    let calculatedTask = numberOfTask / 10;
-    let calculatedProgress = progress / calculatedTask;
-    
-
-    if(check === true){
-       
-       console.log(progress);
-       let addProgress = progress + calculatedProgress;
-       cards[index]['progressBar'] = addProgress;
-    }else if(check === false) {
-        let addProgress = progress - calculatedProgress;
-       cards[index]['progressBar'] = addProgress;
-    }
-    updateHTML();
+function subtasksCheck(idOfCard) {
+    let id = idOfCard['id'];
+    let subtasks = idOfCard['subtask'].length;
+    let trueCount = 0;
+    for (let i = 0; i < cards[id]['subtask'].length; i++) {
+        let check = cards[id]['subtask'][i]['done'];
+        if(check === true){
+            trueCount++;
+            console.log(trueCount);
+        }
+    } 
+    let subtaskHTMLCount = document.getElementById(`subtaskBar${idOfCard['id']}`);
+        subtaskHTMLCount.innerHTML = '';
+        subtaskHTMLCount.innerHTML =  `<span>${trueCount}/${subtasks} Subtasks</span>`;
 }
 
 
+function subtaskLoad(id) {
+    for (let i = 0; i < cards[id]['subtask'].length; i++) {
+        const specificSubtask = cards[id]['subtask'][i]['name'];
+        const isDone = cards[id]['subtask'][i]['done'];
+
+        let subtaskHTML = document.getElementById('unorderedListOfSubtask');
+            subtaskHTML.innerHTML += `<li><input type="checkbox" id="check${i}" ${isDone ? 'checked' : ''} onclick="subtasksCheckForTrue(${id}, ${i})">${specificSubtask}</li>`;
+    }
+}
 
 
+function subtasksCheckForTrue(id, subtaskId) {
+    const checkbox = document.getElementById(`check${subtaskId}`);
+        cards[id]['subtask'][subtaskId]['done'] = checkbox.checked;
+}
+
+
+function subtasksCheckForTrue(id) {
+    let checkForTrue = 0;
+    let element = cards[id];
+    for (let i = 0; i < cards[id]['subtask'].length; i++) {
+        let checkboxClick = document.getElementById(`check${i}`).checked
+        if(checkboxClick === true) {
+            cards[id]['subtask'][i]['done'] = true;
+            checkForTrue++;
+            cards[id]['checkForTrue'] = checkForTrue;
+        }else if(checkboxClick === false) {
+            cards[id]['subtask'][i]['done'] = false;}
+        if(checkboxClick && cards[id]['subtask'][i]['done'] === false) {
+            checkForTrue--; }
+    }
+    cards[id]['checkForTrue'] = checkForTrue;
+    subtasksCheck(element);
+    updateProgressBar(element);
+}
 
 
 function updateProgressBar(element) {
-    for (let j = 0; j < cards.length; j++) {
+    
+    
+        let currentProgress = element['checkForTrue'];
+        let percent = currentProgress / element['subtask'].length ;
+            percent = Math.round(percent * 100);
+   
+         let progressBarId = `myProgressBar${element['id']}`;
+         let progressBar = document.getElementById(`progressBarId${element['id']}`);
+         progressBar.innerHTML = `<div class="progress-bar" id="${progressBarId}"></div>`;
         
-        let infoArrayCard = element['progressBar'];
-        let progressBarId = `myProgressBar${element['id']}`;
-
-       
-        let progressBar = document.getElementById(`progressBarId${element['id']}`);
-        
-        progressBar.innerHTML = `<div class="progress-bar" id="${progressBarId}"></div>`;
-        
-        
-        if (progressBar) {
-            
-            progressBar.style.width = infoArrayCard + '%';
-            progressBar.innerHTML = infoArrayCard + '%';
-            progressBar.innerText = ''; 
-
-            if (infoArrayCard < 100) {
-                infoArrayCard += 10;
-            }
-        }
-    }
+        progressBar.style = `width: ${percent}%`;
+        progressBar.innerText = ''; 
+       console.log(percent); 
 }
+
 
 function editCard(i) {
 
     let infoArrayCard = cards[i];
 
-
-
     let overlay = document.getElementById('overlay');
     overlay.innerHTML = '';
     overlay.innerHTML = overviewEditHTML(i);
     overlay.classList.remove('d-none');
-
 
     let title = document.getElementById('editTitle');
     let textarea = document.getElementById('editTextarea');
@@ -270,8 +301,6 @@ function editCard(i) {
     title.value = infoArrayCard['headline'];  
     textarea.value = infoArrayCard['text']; 
     data.value = infoArrayCard['date']; 
-
-    
 }
 
 
@@ -295,11 +324,18 @@ function deleteCard(id) {
     let index = cards.findIndex((card) => {
         return card.id === id
     });
-    console.log(index);
+    
     cards.splice(index, 1);
     updateHTML();
     closeOverview();
     }
+
+
+function prioEdit(prio, i) {
+    let infoArrayCard = cards[i];
+    infoArrayCard['priority'] = prio;
+    
+}
 
 
 
@@ -344,13 +380,12 @@ function priorityCheck(element) {
         </defs>
         </svg>`;
     }
-}
-}
-
+}}
 
 
 function generateCardHTML(element) {
     let prioritySVG = priorityCheck(element);
+    
     return `
     <div class="cards" draggable="true" ondragstart="startDragging(${element['id']})" onclick="openOverview(${element['id']})">
     <h2 class="labelsBoardCard">${element['label']}</h2>
@@ -364,7 +399,9 @@ function generateCardHTML(element) {
         
         </div>
         </div>
-        <span>${element['progressBar']/10}/${element['subtasks']/10} Subtasks</span>
+        <div id="subtaskBar${element['id']}">
+        
+        </div>
     </div>
     <div class="labelProfile">
         <div class="containerProfile">
@@ -386,13 +423,8 @@ function generateCardHTML(element) {
         </div>
     </div>
     </div>
-    `;
-    
-    
+    `; 
 }
-
-
-
 
 
 function generateOverviewHTML(element) {
@@ -422,7 +454,7 @@ function generateOverviewHTML(element) {
             </div>
             <div class="overlayDate">
                 <span>Due date:</span>
-                <span>10/05/2023</span>
+                <span>${element['date']}</span>
             </div>
             <div class="overlayPriority">
                 <span>Priority:</span>
@@ -454,9 +486,8 @@ function generateOverviewHTML(element) {
             <div class="subtasks">
                 <span>Subtasks</span>
                 <div>
-                    <ul>
-                        <li><input type="checkbox" id="subtasks1" onclick="subtasksCheck(${id})">${element['subtask1']}</li>
-                        <li><input type="checkbox" id="subtasks2" onclick="subtasksCheck(${id})">${element['subtask2']}</li>
+                    <ul id="unorderedListOfSubtask">
+                        
                     </ul>
                 </div>
             </div>
@@ -487,6 +518,7 @@ function generateOverviewHTML(element) {
     </div>`;
 }
 
+
 function overviewEditHTML(i) {
     
     return `
@@ -494,7 +526,7 @@ function overviewEditHTML(i) {
     <div class="overlayCard" id="overlayEdit">
     <div class="overlayCardEdit">
     <div class="deleteEdit">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg onclick="deleteCard(${i})" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <mask id="mask0_119188_3520" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
             <rect width="24" height="24" fill="#D9D9D9"/>
             </mask>
@@ -527,7 +559,7 @@ function overviewEditHTML(i) {
             </div>
             <div class="dateInputRequiredContainer">
                 <div class="dateInputImg">
-            <input class="inputMonth"type="date" id="editDate" placeholder="dd/mm/yyyy">
+            <input class="inputMonth "type="date" id="editDate" placeholder="${i['date']}">
             <img class="imgCalendar"src="/assets/img/calendar.png" alt="">
                 </div>
                 <p class="requiredField">This fiels is required</p>
@@ -537,7 +569,7 @@ function overviewEditHTML(i) {
         <div class="prioContainer">
             <p class="title">Prio</p>
             <div class="prioButtonContainer">
-                <button class="btnUrgent">
+                <button class="btnUrgent" onclick="prioEdit(2, ${i})">
                     <div class="urgentSVGText">
                     <p class="urgentText">Urgent</p>
                     <svg class="svgUrgent"width="20" height="20" viewBox="0 0 32 32" fill="" xmlns="http://www.w3.org/2000/svg">
@@ -554,7 +586,7 @@ function overviewEditHTML(i) {
                         </div>
                         
                 </button>
-                <button class="btnMedium">
+                <button class="btnMedium" onclick="prioEdit(1, ${i})">
                     <div class="mediumSVGText">
                     <p class="mediumText">Medium</p>
                     <svg  class="svgMedium"width="20" height="20" viewBox="0 0 32 32" fill="" xmlns="http://www.w3.org/2000/svg">
@@ -571,7 +603,7 @@ function overviewEditHTML(i) {
                     </div>
                         
                 </button>
-                <button class="btnLow">
+                <button class="btnLow" onclick="prioEdit(0, ${i})">
                     <div class="lowSVGText">
                     <p class="lowText">Low</p>
                     <svg  class="svgLow"width="20" height="20" viewBox="0 0 32 32" fill="" xmlns="http://www.w3.org/2000/svg">
@@ -618,6 +650,4 @@ function overviewEditHTML(i) {
     </div>
     </div>
     `;
-
-
 }
