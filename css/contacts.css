@@ -446,8 +446,7 @@ input:focus {
 
 .iconNameEmailContainer {
   display: flex;
-  width: 352px;
-
+  width: 100%;
   align-items: center;
   justify-content: flex-start;
   cursor: pointer;

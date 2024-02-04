@@ -33,6 +33,8 @@ function createContact(event) {
     name: name.value,
     email: email.value,
     tel: tel.value,
+    letter: name.value.charAt(0).toUpperCase(),
+    lastNameLetter: getLastLetter(name.value),
     bgColor: generateRandomColor(),
   };
   contacts.push(contact);
@@ -258,7 +260,7 @@ function load() {
 }
 
 function isMobile(){
-  if(screenSize[0] <= 800){return true}
+  return window.innerWidth <= 800;
 }
 
 function disableContactContainer(){
