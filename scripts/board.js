@@ -77,16 +77,23 @@ async function setItem(key, value) {
 
 async function getItem(key) {
     const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
-
-    let fetchPromises = Array.from( (_, i) =>
-        fetch(url).then(res => res.json()).then(res => res.data.value)
-    );
-    let results = await Promise.all(fetchPromises);
-    cards.push(results);
+    let resp = await fetch(url);
+    return cards.push(resp.json());
+    
 }
 
 
+function save() {
+    let key = "board";
+    let value = cards;
+
+    setItem(key, value);
+}
+
+
+
 function updateHTML() {
+    getItem('board');
     const categories = ['todo', 'progress', 'feedback', 'done'];
     for (const category of categories) {
         let categoryElements = cards.filter(t => t['category'] === category);

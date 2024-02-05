@@ -112,27 +112,7 @@ function getInitials(name) {
 
 function updatePrio(buttonId, event) {
   event.preventDefault();
-
-  let button = document.getElementById(buttonId);
-
-  if (button) {
-    let svgElement = document.getElementById(buttonId.replace('btn', 'svg'));
-
-    if (button.classList.contains('active')) {
-      button.classList.remove('active');
-      prioArray = prioArray.filter(item => item !== svgElement.outerHTML);
-    } else {
-      document.querySelectorAll('.prioButtonContainer button').forEach(otherButton => {
-        if (otherButton.id !== buttonId) {
-          otherButton.classList.remove('active');
-        }
-      });
-
-      button.classList.add('active');
-      prioArray = [svgElement.outerHTML];
-    }
-  }
-  console.log('Ausgewählte Prioritäten:', prioArray);
+    prioArray = buttonId;
 }
 
 function addCategory(){
