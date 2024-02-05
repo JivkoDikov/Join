@@ -23,7 +23,7 @@ function createContact(event) {
   document.getElementById('popUpSuccesfullyCreated').classList.add('overlay-successfullyCreated', 'showoverlay-successfullyCreated');
   setTimeout(() => {
     document.getElementById('popUpSuccesfullyCreated').classList.remove('showoverlay-successfullyCreated');
-  }, 1000);
+  }, 2000);
 
   let name = document.getElementById("name");
   let email = document.getElementById("email");
@@ -270,6 +270,7 @@ function disableContactContainer(){
   contactDetails.classList.remove("d-none");
   contactContainerView.style.removeProperty("display");
   contactContainerView.style.removeProperty("width");
+  document.getElementById('editContactMobile').classList.add('d-none');
 }
 
 function screenSizeUser(){
@@ -283,4 +284,12 @@ function changeContactView(){
   contactContainerList.classList.add("d-none")
   contactContainerView.style.display = "block";
   contactContainerView.style.width = "100vw";
+  document.getElementById('editContactMobile').classList.remove('d-none');
+  
+}
+
+function showEditContactMobile(){
+  document.getElementById('editDeleteContainerMobile').classList.add('showOverlay-editDeleteContainerMobile');
+  document.getElementById('editDeleteContainerMobile').classList.remove('overlay-editDeleteContainerMobile');
+
 }

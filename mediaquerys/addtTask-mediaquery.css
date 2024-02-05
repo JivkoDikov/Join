@@ -17,7 +17,24 @@
     }
 
     .footerTask{
-        margin-top: 16px;
+        margin-top: unset;
+    }
+
+    
+}
+
+@media (max-width:950px){
+    .textButtonsContainer{
+        text-align: center;
+    }
+
+    .cancelBtn,.createCheckBtn{
+        width: unset;
+    }
+
+    .createText{
+        width: unset;
+        height: unset;
     }
 }
 
@@ -48,5 +65,16 @@
         padding-left: 24px;
         width: calc(100vw - 60px);
 
+    }
+
+    .cancelBtn{
+        display: none;
+    }
+}
+
+@media(max-width:400px){
+    .prioButtonContainer{
+        display: flex;
+        flex-direction: column;
     }
 }

@@ -2,6 +2,7 @@
   padding-left: 232px;
   display: flex;
   padding-top: 96px;
+  height: calc(100vh - 96px);
 }
 
 .addcontactContainer {
@@ -28,7 +29,7 @@
 }
 
 .addContactButton {
-  width: 352px;
+  width: 340px;
   height: 56px;
   display: flex;
   justify-content: center;
@@ -80,6 +81,7 @@
   align-items: center;
   height: 73px;
   gap: 30px;
+  height: 180px;
 }
 
 .headlineArrow {
@@ -96,6 +98,7 @@ h2 {
   line-height: 73.2px;
   font-family: "Inter", sans-serif;
   color: #000000;
+  margin-block: 0;
 }
 
 .vectorPerpendicularContainer {
@@ -462,7 +465,7 @@ input:focus {
   justify-content: center;
   align-items: center;
   gap: 35px;
-  padding: 15px 24px;
+  padding: 15px 18px;
 }
 
 .firstLastLetter {
@@ -504,7 +507,6 @@ input:focus {
 
 .contactContainerAllInfo {
   padding-left: 55px;
-  padding-top: 55px;
 }
 
 .contactContainerContact {
@@ -721,11 +723,89 @@ input:focus {
   width: 56px;
   height: 56px;
   border-radius: 46px;
+  cursor: pointer;
 }
 
 .personLogo:hover path {
   fill: #29abe2;
 }
+
+.editContactMobile{
+  position: absolute;
+  top: 758px;
+  right: 16px;
+  width: 56px;
+  height: 56px;
+  border-radius: 46px;
+  cursor: pointer;
+}
+
+.editDeleteContainerMobile{
+  position: absolute;
+  top: 732px;
+  right: 16px;
+  height: 56px;
+  width: 116px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px 20px 0px 20px;
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+}
+
+.editContactMobile:hover path{
+  fill: #29abe2;
+}
+
+.iconEditMobile,.iconDeleteMobile{
+  display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 90px;
+    height: 40px;
+    gap: 8px;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.iconDeleteMobile:hover, .iconEditMobile:hover{
+  color: #29abe2;
+  font-weight: bold;
+}
+
+.iconDeleteMobile:hover path , .iconEditMobile:hover path{
+  fill: #29abe2;
+  
+}
+
+.editMobile,.deleteMobile{
+  margin-block: 0;
+font-family: "Inter", sans-serif;
+font-size: 16px;
+font-weight: 400;
+line-height: 19px;
+letter-spacing: 0em;
+text-align: left;
+
+}
+
+.overlay-editDeleteContainerMobile{
+  transform: translateX(3800px);
+  transition: all 225ms ease-in-out;
+
+}
+
+.showOverlay-editDeleteContainerMobile{
+  transform: translateX(0px);
+  transition: all 225ms ease-in-out;
+
+}
+
 
 .d-inline {
   display: inline !important;
