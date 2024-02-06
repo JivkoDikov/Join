@@ -1,7 +1,6 @@
 let letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 let contacts = [];
 let contactIdCounter = 0;
-//let isMobile = window.innerWidth < 800 ;
 let screenSize = []
 load();
 
@@ -200,17 +199,19 @@ function deleteContact(id) {
 
 function editContact(id) {
   const selectedContact = contacts.find(contact => contact.id === id);
-  document.getElementById("editcontact").classList.add("showOverlay-addNewContactPopUpContainer");
-  document.getElementById("backGroundOpacityContainer").classList.remove("d-none");
-  document.getElementById("editname").value = selectedContact.name;
-  document.getElementById("editemail").value = selectedContact.email;
-  document.getElementById("edittel").value = selectedContact.tel;
-  document.getElementById("editname").dataset.contactId = id;
-  document.getElementById("deleteContactButton").addEventListener("click", function() {
-    deleteContact(id);
-});
-
+  if (selectedContact) {
+    document.getElementById("editcontact").classList.add("showOverlay-addNewContactPopUpContainer");
+    document.getElementById("backGroundOpacityContainer").classList.remove("d-none");
+    document.getElementById("editname").value = selectedContact.name;
+    document.getElementById("editemail").value = selectedContact.email;
+    document.getElementById("edittel").value = selectedContact.tel;
+    document.getElementById("editname").dataset.contactId = id;
+    document.getElementById("deleteContactButton").addEventListener("click", function() {
+      deleteContact(id);
+    });
+  }
 }
+
 
 
 function closeEditContact() {
@@ -271,6 +272,7 @@ function disableContactContainer(){
   contactContainerView.style.removeProperty("display");
   contactContainerView.style.removeProperty("width");
   document.getElementById('editContactMobile').classList.add('d-none');
+  hideEditContactMobile();
 }
 
 function screenSizeUser(){
@@ -294,6 +296,25 @@ function showEditContactMobile(){
 
 }
 
+function hideEditContactMobile(){
+  document.getElementById('editDeleteContainerMobile').classList.remove('showOverlay-editDeleteContainerMobile');
+  document.getElementById('editDeleteContainerMobile').classList.add('overlay-editDeleteContainerMobile');
+}
 
 
+
+function editContactMobile(id) {
+  if (isMobile()) {
+      editContact(id);
+  } else {
+      // Falls die Funktion nicht aufgerufen wird, prüfen Sie die `id`
+      console.log("ID des Kontakts:", id);
+  }
+}
+
+function deleteContactMobile(id){
+  if (isMobile()) {
+    deleteContact(id);
+  }
+}
 
