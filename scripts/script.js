@@ -17,11 +17,11 @@ async function includeHTML() {
 
 async function render(){
 await includeHTML();
+// save();
+// updateHTML();
 restoreSelectedLink();
 initials();
 termsBackButton();
-
-
 }
 
 

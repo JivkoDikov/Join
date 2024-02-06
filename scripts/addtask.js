@@ -112,7 +112,23 @@ function getInitials(name) {
 
 function updatePrio(buttonId, event) {
   event.preventDefault();
+  let selectedPrio0 = document.getElementById('btnUrgent');
+  let selectedPrio1 = document.getElementById('btnMedium');
+  let selectedPrio2 = document.getElementById('btnLow');
     prioArray = buttonId;
+  if(buttonId === 0){
+    selectedPrio0.classList.add('activePrio0');
+    selectedPrio1.classList.remove('activePrio1');
+    selectedPrio2.classList.remove('activePrio2');
+  }else if (buttonId === 1) {
+    selectedPrio0.classList.remove('activePrio0');
+    selectedPrio1.classList.add('activePrio1');
+    selectedPrio2.classList.remove('activePrio2');
+  } else if (buttonId === 2) {
+    selectedPrio0.classList.remove('activePrio0');
+    selectedPrio1.classList.remove('activePrio1');
+    selectedPrio2.classList.add('activePrio2');
+  } 
 }
 
 function addCategory(){
