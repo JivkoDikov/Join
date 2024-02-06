@@ -306,12 +306,8 @@ function hideEditContactMobile(){
 function editContactMobile(id) {
   if (isMobile()) {
       editContact(id);
-  } else {
-      // Falls die Funktion nicht aufgerufen wird, prüfen Sie die `id`
-      console.log("ID des Kontakts:", id);
   }
 }
-
 function deleteContactMobile(id){
   if (isMobile()) {
     deleteContact(id);
