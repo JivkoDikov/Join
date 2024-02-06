@@ -310,7 +310,7 @@ function editCard(i) {
 
 
 
-function CardEditForm(i, event) {
+function CardEditForm(event,i) {
     event.preventDefault();
     let infoArrayCard = cards[i];
 
@@ -342,8 +342,8 @@ function prioEdit(prio, i, event) {
     event.preventDefault();
     let infoArrayCard = cards[i];
     infoArrayCard['priority'] = prio;
-    
 }
+
 
 
 
@@ -543,21 +543,21 @@ function overviewEditHTML(i) {
             </g>
         </svg>
     </div>
-    <form class="overlayCardEditForm" onsubmit="CardEditForm(${i,event})">
+    <form class="overlayCardEditForm" onsubmit="CardEditForm(event, ${i})">
         <div class="titleInputContainer">
             <div class="titleStar">
             <p class="title">Title</p><p class="star">*</p>
             </div>
             <div class="inputTitleRequiredContainer">
             <input class="inputTitle"type="text" required="true" id="editTitle" placeholder="Enter a Title">
-            <p class="requiredField">This fiels is required</p>
+            <p class="requiredField"></p>
             </div>
         </div>
         <div class="textareaDescription">
             <p class="title">Description</p>
             <div class="textareaTitleRequiredContainer">
             <textarea name="" id="editTextarea" cols="30" rows="10" placeholder="Enter a Description"></textarea>
-            <p class="requiredField">This fiels is required</p>
+            <p class="requiredField"></p>
             </div>
         </div>
         <div class="titleDateContainer">
@@ -568,16 +568,16 @@ function overviewEditHTML(i) {
             <div class="dateInputRequiredContainer">
                 <div class="dateInputImg">
             <input class="inputMonth "type="date" id="editDate" placeholder="${i['date']}">
-            <img class="imgCalendar"src="/assets/img/calendar.png" alt="">
+            
                 </div>
-                <p class="requiredField">This fiels is required</p>
+                <p class="requiredField"></p>
                 </div>
         </div>
     
         <div class="prioContainer">
             <p class="title">Prio</p>
             <div class="prioButtonContainer">
-                <button class="btnUrgent" onclick="prioEdit(2, ${i},${event})">
+                <button class="btnUrgent" onclick="prioEdit(2, ${i},event)">
                     <div class="urgentSVGText">
                     <p class="urgentText">Urgent</p>
                     <svg class="svgUrgent"width="20" height="20" viewBox="0 0 32 32" fill="" xmlns="http://www.w3.org/2000/svg">
@@ -594,7 +594,7 @@ function overviewEditHTML(i) {
                         </div>
                         
                 </button>
-                <button class="btnMedium" onclick="prioEdit(1, ${i},${event})">
+                <button class="btnMedium" onclick="prioEdit(1, ${i},event)">
                     <div class="mediumSVGText">
                     <p class="mediumText">Medium</p>
                     <svg  class="svgMedium"width="20" height="20" viewBox="0 0 32 32" fill="" xmlns="http://www.w3.org/2000/svg">
@@ -611,7 +611,7 @@ function overviewEditHTML(i) {
                     </div>
                         
                 </button>
-                <button class="btnLow" onclick="prioEdit(0, ${i},${event})">
+                <button class="btnLow" onclick="prioEdit(0, ${i},event)">
                     <div class="lowSVGText">
                     <p class="lowText">Low</p>
                     <svg  class="svgLow"width="20" height="20" viewBox="0 0 32 32" fill="" xmlns="http://www.w3.org/2000/svg">
