@@ -739,3 +739,39 @@ textarea {
   border-radius: 50%;
 }
 
+.activePrio2{
+  background-color: #1fb827;
+}
+
+.activePrio1{
+  background-color: #FFA800;
+}
+
+.activePrio0{
+  background-color: #ff2600;
+}
+
+
+.activePrio2 #svgLow path{
+  fill: #FFF !important;
+}
+
+.activePrio1 #svgMedium path{
+  fill: #FFF !important;
+}
+
+.activePrio0 #svgUrgent path{
+  fill: #FFF !important;
+}
+
+.activePrio2 p{
+  color: #FFF;
+}
+
+.activePrio1 p{
+  color: #FFF;
+}
+
+.activePrio0 p{
+  color: #FFF;
+}

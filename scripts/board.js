@@ -63,37 +63,36 @@ let cards = [
 
 let currentDraggedElement;
 
+
+
 const STORAGE_TOKEN = 'Y2B64H33P1ZFHWE7S0HF0V8EC9OTCQZV1FG8B8B5';
 const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 
 
-async function setItem(key, value) {
-    const payload = { key, value, token: STORAGE_TOKEN };
-    return fetch(STORAGE_URL, { method: 'POST', body: JSON.stringify(payload)})
-    .then(res => res.json());
-}
+// async function setItem(key, value) {
+//     const payload = { key, value, token: STORAGE_TOKEN };
+//     return fetch(STORAGE_URL, { method: 'POST', body: JSON.stringify(payload)})
+//     .then(res => res.json());
+// }
 
 
 
-async function getItem(key) {
-    const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
-    let resp = await fetch(url);
-    return cards.push(resp.json());
+// async function getItem(key) {
+//     const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
+//     let resp = await fetch(url);
+//     return cards.push(resp.json());
     
-}
+// }
 
 
-function save() {
-    let key = "board";
-    let value = cards;
-
-    setItem(key, value);
-}
-
-
+// function save() {
+//     let key = "board";
+//     let value = cards;
+//     setItem(key, value);
+// }
 
 function updateHTML() {
-    getItem('board');
+    // getItem('board');
     const categories = ['todo', 'progress', 'feedback', 'done'];
     for (const category of categories) {
         let categoryElements = cards.filter(t => t['category'] === category);
@@ -223,18 +222,17 @@ function closeOverview() {
 
 function subtasksCheck(idOfCard) {
     let id = idOfCard['id'];
-    let subtasks = idOfCard['subtask'].length;
+    let subtasks = idOfCard['subtask'] ? idOfCard['subtask'].length : 0;       // überprüft ob subtask definiert ist
     let trueCount = 0;
-    for (let i = 0; i < cards[id]['subtask'].length; i++) {
-        let check = cards[id]['subtask'][i]['done'];
+    for (let i = 0; i < subtasks; i++) {            // Iteration bis zur Länge des subtask-Arrays oder 0, wenn es nicht definiert ist
+        let check = idOfCard['subtask'][i]['done'];
         if(check === true){
             trueCount++;
             console.log(trueCount);
         }
     } 
-    let subtaskHTMLCount = document.getElementById(`subtaskBar${idOfCard['id']}`);
-        subtaskHTMLCount.innerHTML = '';
-        subtaskHTMLCount.innerHTML =  `<span>${trueCount}/${subtasks} Subtasks</span>`;
+    let subtaskHTMLCount = document.getElementById(`subtaskBar${id}`);
+    subtaskHTMLCount.innerHTML = `<span>${trueCount}/${subtasks} Subtasks</span>`;
 }
 
 
@@ -312,7 +310,8 @@ function editCard(i) {
 
 
 
-function CardEditForm(i) {
+function CardEditForm(event,i) {
+    event.preventDefault();
     let infoArrayCard = cards[i];
 
     let titleEdit = document.getElementById('editTitle').value;
@@ -328,21 +327,23 @@ function CardEditForm(i) {
 
 
 function deleteCard(id) {
-    let index = cards.findIndex((card) => {
-        return card.id === id
-    });
-    
-    cards.splice(index, 1);
-    updateHTML();
-    closeOverview();
+    let index = cards.findIndex((card) => card.id === id);
+    if (index !== -1) {
+        cards.splice(index, 1);
+        updateHTML();
+        closeOverview();
+    } else {
+        console.error("Card not found");
     }
+}
 
 
-function prioEdit(prio, i) {
+function prioEdit(prio, i, event) {
+    event.preventDefault();
     let infoArrayCard = cards[i];
     infoArrayCard['priority'] = prio;
-    
 }
+
 
 
 
@@ -542,21 +543,21 @@ function overviewEditHTML(i) {
             </g>
         </svg>
     </div>
-    <form class="overlayCardEditForm" onsubmit="CardEditForm(${i});return false">
+    <form class="overlayCardEditForm" onsubmit="CardEditForm(event, ${i})">
         <div class="titleInputContainer">
             <div class="titleStar">
             <p class="title">Title</p><p class="star">*</p>
             </div>
             <div class="inputTitleRequiredContainer">
             <input class="inputTitle"type="text" required="true" id="editTitle" placeholder="Enter a Title">
-            <p class="requiredField">This fiels is required</p>
+            <p class="requiredField"></p>
             </div>
         </div>
         <div class="textareaDescription">
             <p class="title">Description</p>
             <div class="textareaTitleRequiredContainer">
             <textarea name="" id="editTextarea" cols="30" rows="10" placeholder="Enter a Description"></textarea>
-            <p class="requiredField">This fiels is required</p>
+            <p class="requiredField"></p>
             </div>
         </div>
         <div class="titleDateContainer">
@@ -567,16 +568,16 @@ function overviewEditHTML(i) {
             <div class="dateInputRequiredContainer">
                 <div class="dateInputImg">
             <input class="inputMonth "type="date" id="editDate" placeholder="${i['date']}">
-            <img class="imgCalendar"src="/assets/img/calendar.png" alt="">
+            
                 </div>
-                <p class="requiredField">This fiels is required</p>
+                <p class="requiredField"></p>
                 </div>
         </div>
     
         <div class="prioContainer">
             <p class="title">Prio</p>
             <div class="prioButtonContainer">
-                <button class="btnUrgent" onclick="prioEdit(2, ${i})">
+                <button class="btnUrgent" onclick="prioEdit(2, ${i},event)">
                     <div class="urgentSVGText">
                     <p class="urgentText">Urgent</p>
                     <svg class="svgUrgent"width="20" height="20" viewBox="0 0 32 32" fill="" xmlns="http://www.w3.org/2000/svg">
@@ -593,7 +594,7 @@ function overviewEditHTML(i) {
                         </div>
                         
                 </button>
-                <button class="btnMedium" onclick="prioEdit(1, ${i})">
+                <button class="btnMedium" onclick="prioEdit(1, ${i},event)">
                     <div class="mediumSVGText">
                     <p class="mediumText">Medium</p>
                     <svg  class="svgMedium"width="20" height="20" viewBox="0 0 32 32" fill="" xmlns="http://www.w3.org/2000/svg">
@@ -610,7 +611,7 @@ function overviewEditHTML(i) {
                     </div>
                         
                 </button>
-                <button class="btnLow" onclick="prioEdit(0, ${i})">
+                <button class="btnLow" onclick="prioEdit(0, ${i},event)">
                     <div class="lowSVGText">
                     <p class="lowText">Low</p>
                     <svg  class="svgLow"width="20" height="20" viewBox="0 0 32 32" fill="" xmlns="http://www.w3.org/2000/svg">
@@ -658,3 +659,4 @@ function overviewEditHTML(i) {
     </div>
     `;
 }
+
