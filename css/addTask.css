@@ -151,7 +151,7 @@ textarea {
 }
 
 .assignedContainer {
-  gap: 8px;
+  gap: 16px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -242,7 +242,7 @@ textarea {
 
 .contactsBox {
   width: 100%;
-  margin-top: -8px;
+  margin-top: -16px;
   background-color: white;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
@@ -659,7 +659,7 @@ textarea {
   display: flex;
   justify-content: space-between;
   align-items: end;
-  margin-top: 46px;
+  margin-top: 32px;
   width: calc(100vw - 424px);
 }
 
@@ -702,6 +702,8 @@ textarea {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  padding: 12px;
+  background-color: #f6f7f8;
 }
 
 .editSubTasksIcons{
@@ -728,6 +730,8 @@ textarea {
 
 .editSubTasksInput{
   border: none;
+  font-size: 16px;
+  width: 100%;
 }
 
 .editSubTasksClose:hover,.editsubTasksSVG:hover{
