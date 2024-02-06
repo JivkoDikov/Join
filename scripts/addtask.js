@@ -5,7 +5,7 @@ let categoryArray =[];
 let prioArray = [];
 let editingSubtaskIndex = -1;
 let selectedCategoryId = null;
-let selectedContactsInitials = [];
+let selectedContactDetails = [];
 
 function createTask(event){
   event.preventDefault();
@@ -22,7 +22,7 @@ function createTask(event){
     text: text,
     progressBar:"",
     subtasks: subtasksArray,
-    user: selectedContactsInitials,
+    user: selectedContactDetails,
     priority: prioArray,
     category: "todo",
     date: date
@@ -83,7 +83,7 @@ function assignedTo() {
               <div class="assignedLetters" style="background-color: ${contact.bgColor}">${initials}</div>
               <span>${contact.name}</span>
             </div>
-            <input id="assignedToContact_${contact.name}" type="checkbox" onchange="updateSelectedContacts('${initials}', this)">
+            <input id="assignedToContact_${contact.name}" type="checkbox" onchange="updateSelectedContacts('${initials}','${contact.bgColor}','${contact.name}', this)">
           </div>
         </div>`;
     });
@@ -91,16 +91,20 @@ function assignedTo() {
 }
 
 
-function updateSelectedContacts(initials, checkbox) {
+function updateSelectedContacts(initials, bgColor, name, checkbox) {
   if (checkbox.checked) {
-    selectedContactsInitials.push(initials);
+    selectedContactDetails.push({
+      name: name,
+      bgColor: bgColor,
+      initials: initials
+    });
   } else {
-    let index = selectedContactsInitials.indexOf(initials);
+    let index = selectedContactDetails.indexOf(initials, bgColor, name);
     if (index !== -1) {
-      selectedContactsInitials.splice(index, 1);
+      selectedContactDetails.splice(index, 1);
     }
   }
-  console.log('Selected Contacts Initials:', selectedContactsInitials);
+  console.log('Selected Contacts Initials:', selectedContactDetails);
 
 }
 

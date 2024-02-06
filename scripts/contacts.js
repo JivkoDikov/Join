@@ -199,7 +199,6 @@ function deleteContact(id) {
 
 
 function editContact(id) {
-  
   const selectedContact = contacts.find(contact => contact.id === id);
   document.getElementById("editcontact").classList.add("showOverlay-addNewContactPopUpContainer");
   document.getElementById("backGroundOpacityContainer").classList.remove("d-none");
@@ -210,6 +209,7 @@ function editContact(id) {
   document.getElementById("deleteContactButton").addEventListener("click", function() {
     deleteContact(id);
 });
+
 }
 
 
@@ -293,3 +293,7 @@ function showEditContactMobile(){
   document.getElementById('editDeleteContainerMobile').classList.remove('overlay-editDeleteContainerMobile');
 
 }
+
+
+
+
