@@ -65,6 +65,16 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById("enterDate").value = getCurrentDate();
 });
 
+function toggleContacts() {
+  let contactsBox = document.getElementById('contactsBox');
+  if (contactsBox.style.display === 'none' || contactsBox.innerHTML.trim() === '') {
+    assignedTo(); 
+    contactsBox.style.display = 'block';
+  } else {
+    contactsBox.style.display = 'none';
+  }
+}
+
 function assignedTo() {
   let contactsBox = document.getElementById('contactsBox');
   contactsBox.innerHTML = '';
@@ -83,7 +93,7 @@ function assignedTo() {
               <div class="assignedLetters" style="background-color: ${contact.bgColor}">${initials}</div>
               <span>${contact.name}</span>
             </div>
-            <input id="assignedToContact_${contact.name}" type="checkbox" onchange="updateSelectedContacts('${initials}','${contact.bgColor}','${contact.name}', this)">
+            <input id="assignedToContact_${contact.name}" type="checkbox" onchange="toggleContactSelection('${initials}','${contact.bgColor}','${contact.name}', this)">
           </div>
         </div>`;
     });
