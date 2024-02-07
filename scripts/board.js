@@ -4,7 +4,23 @@ let cards = [
         "label" : "User Story",
         "headline" : "Recommender",
         "text": "Build start page with recipe recommendation...",
-        "user": "",
+        "user": [
+            {
+                "name": "Anton BAAA",
+                "bgColor": "rgb(255,200,50)",
+                "initials": "AB"
+            },
+            {
+                "name": "Anton BAAA",
+                "bgColor": "rgb(255,50,50)",
+                "initials": "AB"
+            },
+            {
+                "name": "Anton BAAA",
+                "bgColor": "rgb(205,100,50)",
+                "initials": "AB"
+            }
+        ],
         "priority": 1,
         "category": "progress",
         "date": "2024-02-01",
@@ -21,7 +37,13 @@ let cards = [
         "label" : "User Story",
         "headline" : "Page",
         "text": "Build start page with recipe recommendation...",
-        "user": "",
+        "user": [
+            {
+                "name": "Anton BAAA",
+                "bgColor": "rgb(255,200,50)",
+                "initials": "AB"
+            }
+        ],
         "priority": 1,
         "category": "todo",
         "date": "01-01-2014",
@@ -43,7 +65,13 @@ let cards = [
         "label" : "User Story",
         "headline" : "Recipe Recommender",
         "text": "Build start page with recipe recommendation...",
-        "user": "",
+        "user": [
+            {
+                "name": "Anton BAAA",
+                "bgColor": "rgb(255,200,50)",
+                "initials": "AB"
+            }
+        ],
         "priority": 1,
         "category": "todo",
         "date": "01-01-2014",
@@ -102,6 +130,7 @@ function updateHTML() {
             document.getElementById(category).innerHTML += generateCardHTML(element);
             updateProgressBar(element);
             subtasksCheck(element);
+            assignIcon(element);
         }
     }
     emptyCategory();
@@ -210,6 +239,7 @@ function openOverview(i) {
     removeClass.innerHTML = generateOverviewHTML(infoArrayCard);
     removeClass.classList.remove('d-none');
     subtaskLoad(i);
+    assignedToEdit(infoArrayCard, i);
 }
 
 
@@ -345,6 +375,32 @@ function prioEdit(prio, i, event) {
 }
 
 
+function assignedToEdit(element, b) {
+    let assignProfil = document.getElementById(`assignedProfileName${b}`);
+        assignProfil.innerHTML = '';
+
+    for (let i = 0; i < element['user'].length; i++) {
+        let userInitials = element['user'][i];
+        assignProfil.innerHTML +=`
+        <div class="profileName">
+            <div class="assignedLetters" style="background-color: ${userInitials['bgColor']}">${userInitials['initials']}</div>
+            <span>${userInitials['name']}</span>
+        </div>`;
+    }
+}
+
+function assignIcon(element) {
+    let assignIcon = document.getElementById(`iconProfile${element['id']}`);
+    
+
+    for (let i = 0; i < element['user'].length; i++) {
+        let icon = element['user'][i];
+        assignIcon.innerHTML +=`
+        <div class="imgProfile">
+            <div class="assignedLetters" style="background-color: ${icon['bgColor']}">${icon['initials']}</div>
+        </div>`;
+    }
+}
 
 
 function priorityCheck(element) {
@@ -412,18 +468,8 @@ function generateCardHTML(element) {
         </div>
     </div>
     <div class="labelProfile">
-        <div class="containerProfile">
-            <svg class="imgProfile" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="32" height="32" rx="16" fill="white"/>
-                <circle cx="16" cy="16" r="15.5" fill="#FF7A00" stroke="white"/>
-                <path d="M8.02224 20.1904H6.91428L10.1188 11.4632H11.2097L14.4143 20.1904H13.3063L10.6984 12.8438H10.6302L8.02224 20.1904ZM8.43133 16.7813H12.8972V17.7188H8.43133V16.7813ZM15.7737 11.4632H17.035L20.0009 18.7075H20.1032L23.0691 11.4632H24.3305V20.1904H23.3418V13.5597H23.2566L20.5293 20.1904H19.5748L16.8475 13.5597H16.7623V20.1904H15.7737V11.4632Z" fill="white"/>
-            </svg>
-
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="32" height="32" rx="16" fill="white"/>
-                <circle cx="16" cy="16" r="15.5" fill="#FF7A00" stroke="white"/>
-                <path d="M8.02224 20.1904H6.91428L10.1188 11.4632H11.2097L14.4143 20.1904H13.3063L10.6984 12.8438H10.6302L8.02224 20.1904ZM8.43133 16.7813H12.8972V17.7188H8.43133V16.7813ZM15.7737 11.4632H17.035L20.0009 18.7075H20.1032L23.0691 11.4632H24.3305V20.1904H23.3418V13.5597H23.2566L20.5293 20.1904H19.5748L16.8475 13.5597H16.7623V20.1904H15.7737V11.4632Z" fill="white"/>
-            </svg> 
+        <div class="containerProfile" id="iconProfile${element['id']}">
+             
         </div>
 
         <div id="priority">
@@ -435,9 +481,11 @@ function generateCardHTML(element) {
 }
 
 
-function generateOverviewHTML(element) {
-    let prioritySVG = priorityCheck(element);
+function generateOverviewHTML(element, b) {
     let id = element['id'];
+    
+    let prioritySVG = priorityCheck(element);
+    
     return `
     
     <div class="overview">
@@ -472,23 +520,11 @@ function generateOverviewHTML(element) {
             </div>
             <div class="containerProfileName">
                 <span>Assigned To:</span>
-                <div class="profileName">
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="32" height="32" rx="16" fill="white"/>
-                        <circle cx="16" cy="16" r="15.5" fill="#FF7A00" stroke="white"/>
-                        <path d="M8.02224 20.1904H6.91428L10.1188 11.4632H11.2097L14.4143 20.1904H13.3063L10.6984 12.8438H10.6302L8.02224 20.1904ZM8.43133 16.7813H12.8972V17.7188H8.43133V16.7813ZM15.7737 11.4632H17.035L20.0009 18.7075H20.1032L23.0691 11.4632H24.3305V20.1904H23.3418V13.5597H23.2566L20.5293 20.1904H19.5748L16.8475 13.5597H16.7623V20.1904H15.7737V11.4632Z" fill="white"/>
-                    </svg>
-                    <span>Anton Mayer</span>
+                <div id="assignedProfileName${id}" >
+                
                 </div>
 
-                <div class="profileName">
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="32" height="32" rx="16" fill="white"/>
-                        <circle cx="16" cy="16" r="15.5" fill="#FF7A00" stroke="white"/>
-                        <path d="M8.02224 20.1904H6.91428L10.1188 11.4632H11.2097L14.4143 20.1904H13.3063L10.6984 12.8438H10.6302L8.02224 20.1904ZM8.43133 16.7813H12.8972V17.7188H8.43133V16.7813ZM15.7737 11.4632H17.035L20.0009 18.7075H20.1032L23.0691 11.4632H24.3305V20.1904H23.3418V13.5597H23.2566L20.5293 20.1904H19.5748L16.8475 13.5597H16.7623V20.1904H15.7737V11.4632Z" fill="white"/>
-                    </svg>
-                    <span>Anton Mayer</span>
-                </div>
+                
             </div>
 
             <div class="subtasks">
@@ -577,7 +613,7 @@ function overviewEditHTML(i) {
         <div class="prioContainer">
             <p class="title">Prio</p>
             <div class="prioButtonContainer">
-                <button class="btnUrgent" onclick="prioEdit(2, ${i},event)">
+                <button class="btnUrgent" id="btnUrgent" onclick="prioEdit(2, ${i},event),updatePrio(0, event)">
                     <div class="urgentSVGText">
                     <p class="urgentText">Urgent</p>
                     <svg class="svgUrgent"width="20" height="20" viewBox="0 0 32 32" fill="" xmlns="http://www.w3.org/2000/svg">
@@ -594,7 +630,7 @@ function overviewEditHTML(i) {
                         </div>
                         
                 </button>
-                <button class="btnMedium" onclick="prioEdit(1, ${i},event)">
+                <button class="btnMedium" id="btnMedium" onclick="prioEdit(1, ${i},event),updatePrio(1, event)">
                     <div class="mediumSVGText">
                     <p class="mediumText">Medium</p>
                     <svg  class="svgMedium"width="20" height="20" viewBox="0 0 32 32" fill="" xmlns="http://www.w3.org/2000/svg">
@@ -611,7 +647,7 @@ function overviewEditHTML(i) {
                     </div>
                         
                 </button>
-                <button class="btnLow" onclick="prioEdit(0, ${i},event)">
+                <button class="btnLow" id="btnLow" onclick="prioEdit(0, ${i},event), updatePrio(2, event)">
                     <div class="lowSVGText">
                     <p class="lowText">Low</p>
                     <svg  class="svgLow"width="20" height="20" viewBox="0 0 32 32" fill="" xmlns="http://www.w3.org/2000/svg">
@@ -631,24 +667,27 @@ function overviewEditHTML(i) {
         </div>
     </div>
     <div class="assignedContainer">
-        <p class="titleAssigned">Assigned to</p>
-        <div class="inputDropDown">
-            <div class="inputDropDownContainer">
-                <div class="inputContactsSVG">
-        <input class="inputContacts" type="text" placeholder="Select contacts to assign">
-        <svg class="svgArrow"width="24" height="24" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
-            <mask id="mask0_123060_2330" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
-            <rect width="24" height="24" fill="#D9D9D9"/>
-            </mask>
-            <g mask="url(#mask0_123060_2330)">
-            <path d="M11.3 14.3L8.69998 11.7C8.38331 11.3833 8.31248 11.0208 8.48748 10.6125C8.66248 10.2042 8.97498 10 9.42498 10H14.575C15.025 10 15.3375 10.2042 15.5125 10.6125C15.6875 11.0208 15.6166 11.3833 15.3 11.7L12.7 14.3C12.6 14.4 12.4916 14.475 12.375 14.525C12.2583 14.575 12.1333 14.6 12 14.6C11.8666 14.6 11.7416 14.575 11.625 14.525C11.5083 14.475 11.4 14.4 11.3 14.3Z" fill="#2A3647"/>
-            </g>
-            </svg>
-                </div>
+    <p class="titleAssigned">Assigned to</p>
+    <div class="inputDropDown">
+        <div class="inputDropDownContainer">
+            <div onclick="assignedTo()" class="inputContactsSVG">
+    <input class="inputContacts" type="text" placeholder="Select contacts to assign">
+    <svg class="svgArrow"width="24" height="24" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
+        <mask id="mask0_123060_2330" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+        <rect width="24" height="24" fill="#D9D9D9"/>
+        </mask>
+        <g mask="url(#mask0_123060_2330)">
+        <path d="M11.3 14.3L8.69998 11.7C8.38331 11.3833 8.31248 11.0208 8.48748 10.6125C8.66248 10.2042 8.97498 10 9.42498 10H14.575C15.025 10 15.3375 10.2042 15.5125 10.6125C15.6875 11.0208 15.6166 11.3833 15.3 11.7L12.7 14.3C12.6 14.4 12.4916 14.475 12.375 14.525C12.2583 14.575 12.1333 14.6 12 14.6C11.8666 14.6 11.7416 14.575 11.625 14.525C11.5083 14.475 11.4 14.4 11.3 14.3Z" fill="#2A3647"/>
+        </g>
+        </svg>
             </div>
-        </div>  
-
+        </div>
+        
+    </div>  
+    <div id="contactsBox" class="contactsBox">
+       
     </div>
+</div>
     <div class="submitEdit">
             <button class="onsubmitEdit">Ok</button>
         </div>

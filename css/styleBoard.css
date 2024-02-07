@@ -191,12 +191,12 @@ main {
 }
 
 .containerProfile {
-    position: relative;
+    display: flex;
+    flex-direction: row;
 }
 
 .imgProfile {
-    position: absolute;
-    left: 20px;
+    margin-right: -10px;
 }
 
 
@@ -204,7 +204,6 @@ main {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
     width: 220px;
 }
 
