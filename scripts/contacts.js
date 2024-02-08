@@ -208,6 +208,7 @@ function editContact(id) {
     document.getElementById("editname").dataset.contactId = id;
     document.getElementById("deleteContactButton").addEventListener("click", function() {
       deleteContact(id);
+      editContactMobile(id);
     });
   }
 }
