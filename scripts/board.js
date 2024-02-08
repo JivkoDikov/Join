@@ -113,14 +113,14 @@ const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 // }
 
 
-// function save() {
-//     let key = "board";
-//     let value = cards;
-//     setItem(key, value);
-// }
+function save() {
+    let key = "board";
+    let value = cards;
+    setItem(key, value);
+}
 
 function updateHTML() {
-    // getItem('board');
+    getItem('board');
     const categories = ['todo', 'progress', 'feedback', 'done'];
     for (const category of categories) {
         let categoryElements = cards.filter(t => t['category'] === category);
