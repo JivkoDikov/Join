@@ -1,0 +1,116 @@
+@media (max-width:1060px){
+    .boardHeader > h1{
+        font-size: 41px;
+        
+    }
+
+   
+
+    .searchBar{
+        width: unset;
+    }
+
+
+    .searchBar > input{
+        width: unset;
+    }
+}
+
+@media (max-width:980px){
+     h1{
+        font-size: 38px;
+        margin-left: 16px;
+    }
+
+    .boardHeader{
+        margin-top: 32px;
+    }
+
+    .boardDistribution{
+        margin-left: 0px;
+    }
+
+    .findTask{
+        gap: 8px;
+        margin-right: 24px;
+    }
+}
+
+
+@media (max-width: 800px) {
+    main {
+        top: 80px;
+        left: unset;
+        height: calc(100vh - 160px);
+        width: 100vw;
+    }
+
+    .boardHeader > h1{
+        font-size: 47px;
+        margin-left: 16px;
+
+    }
+
+    .boardDistribution{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .column{
+        width:100% ;
+        margin-left: 16px;
+    }
+
+    .addKanban{
+        width: calc(100vw - 16px);
+    }
+
+    .addKanban > svg{
+        margin-right: 24px;
+    }
+
+}
+
+
+@media (max-width:600px){
+    .btn-AddTask{
+        display: none;
+    }
+
+    .boardHeader{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .findTask{
+        width: 100%;
+    }
+
+    .searchBar{
+        width: 100%;
+        margin-left: 16px;
+        margin-right: 24px;
+    }
+
+    .plusAddTaskMobile{
+        display: inline !important;
+    }
+
+    .headlineAddTaskMobile{
+        width: 100%;
+    }
+
+    .plusAddTaskMobile {
+        margin-right: 24px;
+        cursor: pointer;
+    }
+
+    .plusAddTaskMobile:hover rect{
+        fill: #29ABE2;
+        
+    }
+
+}
