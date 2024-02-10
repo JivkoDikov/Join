@@ -93,7 +93,7 @@ function assignedTo() {
               <div class="assignedLetters" style="background-color: ${contact.bgColor}">${initials}</div>
               <span>${contact.name}</span>
             </div>
-            <input id="assignedToContact_${contact.name}" type="checkbox" onchange="toggleContactSelection('${initials}','${contact.bgColor}','${contact.name}', this)">
+            <input id="assignedToContact_${contact.name}" type="checkbox" onchange="updateSelectedContacts('${initials}','${contact.bgColor}','${contact.name}', this)">
           </div>
         </div>`;
     });
@@ -145,33 +145,41 @@ function updatePrio(buttonId, event) {
   } 
 }
 
-function addCategory(){
+function toggleCategories() {
   let categoryBox = document.getElementById('categoryBox');
-  categoryBox.innerHTML ='';
-  categoryBox.innerHTML += /*html*/`
-  <div class="categoryTaskContainer">
-                            <div class="selectCategoryContainer">
-                                <div class="selectCategory">
-                
-                                    <span id="technicalTask">Technical Task</span>
-                                </div>
-                                    <input id="technicalTaskCheckbox" type="checkbox" onchange="updateLabels('technicalTaskCheckbox')">
-                            </div>
-    
-                        </div>
-                        <div class="categoryTaskContainer">
-                            <div class="selectCategoryContainer">
-                                <div class="selectCategory">
-                
-                                    <span id="userStory">User Story</span>
-                                </div>
-                                    <input id="userStoryCheckbox" type="checkbox" onchange="updateLabels('userStoryCheckbox')">
-                            </div>
-    
-                        </div>
-  `;
-  
+  if (categoryBox.style.display === 'none' || categoryBox.innerHTML.trim() === '') {
+    addCategory();
+    categoryBox.style.display = 'block';
+  } else {
+    categoryBox.style.display = 'none'; 
+  }
 }
+
+function addCategory() {
+  let categoryBox = document.getElementById('categoryBox');
+  categoryBox.innerHTML = '';
+
+  categoryBox.innerHTML += /*html*/`
+    <div class="categoryTaskContainer">
+      <div class="selectCategoryContainer">
+        <div class="selectCategory">
+          <span id="technicalTask">Technical Task</span>
+        </div>
+        <input id="technicalTaskCheckbox" type="checkbox" onchange="updateLabels('technicalTaskCheckbox')">
+      </div>
+    </div>
+    <div class="categoryTaskContainer">
+      <div class="selectCategoryContainer">
+        <div class="selectCategory">
+          <span id="userStory">User Story</span>
+        </div>
+        <input id="userStoryCheckbox" type="checkbox" onchange="updateLabels('userStoryCheckbox')">
+      </div>
+    </div>
+  `;
+}
+
+
 
 
 
@@ -321,4 +329,26 @@ function saveContactsInArray(){
   let jsonString = localStorage.getItem("contacts")
   let contacts = JSON.parse(jsonString)
   console.log(contacts[0].name)
+}
+
+
+
+function searchContact() {
+  let search = document.getElementById('searchContacts').value.toLowerCase();
+  
+  
+  updateCategory(contacts, search);
+}
+
+
+function updateCategory(card, search) {
+  card.innerHTML = '';
+
+  for (let i = 0; i < cards.length; i++) {
+      const element = cards[i];
+      if (element['category'] === category && (element['headline'].toLowerCase().includes(search) || search === '')) {
+          card.innerHTML += generateCardHTML(element);           
+      }       
+  }
+  emptyCategory();
 }

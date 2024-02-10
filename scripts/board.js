@@ -90,37 +90,23 @@ let cards = [
 ]
 
 let currentDraggedElement;
+let currentChecktContact = [];
 
 
-
-const STORAGE_TOKEN = 'Y2B64H33P1ZFHWE7S0HF0V8EC9OTCQZV1FG8B8B5';
-const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
-
-
-// async function setItem(key, value) {
-//     const payload = { key, value, token: STORAGE_TOKEN };
-//     return fetch(STORAGE_URL, { method: 'POST', body: JSON.stringify(payload)})
-//     .then(res => res.json());
-// }
-
-
-
-// async function getItem(key) {
-//     const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
-//     let resp = await fetch(url);
-//     return cards.push(resp.json());
-    
-// }
-
-
-function save() {
+function saveBoard() {
     let key = "board";
     let value = cards;
     setItem(key, value);
 }
 
+function loadBoard() {
+    let key = "board";
+    let toPush = 'cards';
+     getItem(key, toPush);
+}
+
 function updateHTML() {
-    getItem('board');
+    // loadBord();
     const categories = ['todo', 'progress', 'feedback', 'done'];
     for (const category of categories) {
         let categoryElements = cards.filter(t => t['category'] === category);
@@ -173,7 +159,6 @@ function updateCategory(card, category, search) {
 
     for (let i = 0; i < cards.length; i++) {
         const element = cards[i];
-        
         if (element['category'] === category && (element['headline'].toLowerCase().includes(search) || search === '')) {
             card.innerHTML += generateCardHTML(element);           
         }       
@@ -245,8 +230,7 @@ function openOverview(i) {
 
 function closeOverview() {
     let overviewElement = document.getElementById('overlay');
-    overviewElement.classList.add('d-none');     
-    
+    overviewElement.classList.add('d-none');
 }
 
 
@@ -353,6 +337,7 @@ function CardEditForm(event,i) {
     infoArrayCard['date'] = dateEdit;
     closeOverview();
     updateHTML();
+    
 }
 
 
@@ -401,6 +386,87 @@ function assignIcon(element) {
         </div>`;
     }
 }
+
+
+function toggleAssignedToBoard(i) {
+    let contactsBox = document.getElementById('contactsBox');
+    if (contactsBox.style.display === 'none' || contactsBox.innerHTML.trim() === '') {
+      assignedToBoard(i);
+      contactsBox.style.display = 'block';
+    } else {
+      contactsBox.style.display = 'none'; 
+    }
+  }
+  
+  function assignedToBoard(b) {
+    let contactsBox = document.getElementById('contactsBox');
+    contactsBox.innerHTML = '';
+
+    let uniqueUsers = {};
+    currentChecktContact = [];
+    for (let i = 0; i < cards.length; i++) {
+        let users = cards[i]['user'];
+
+        for (let j = 0; j < users.length; j++) {
+            let user = users[j];
+            let key = user['name'] + user['bgColor'] + user['initials'];
+
+            // Überprüfen, ob der Benutzer bereits in der Liste ist
+            if (!uniqueUsers[key]) {
+                uniqueUsers[key] = true;
+                let isChecked = checkIfUserIsAssigned(user['bgColor'], b, user['initials'], user['bgColor'], user['name']);
+
+                contactsBox.innerHTML += /*html*/`
+                    <div class="assignedContactsContainer">
+                        <div class="assignedContactSVG">
+                            <div class="letterContacts">
+                                <div class="assignedLetters" style="background-color: ${user['bgColor']}">${user['initials']}</div>
+                                <span>${user['name']}</span>
+                            </div>
+                            <input id="assignedToContact_${user['name']}" type="checkbox" onchange="checkIfUserIsAssigned('${user['bgColor']}', '${b}','${user['initials']}','${user['bgColor']}','${user['name']}')" ${isChecked ? 'checked' : ''}>
+                        </div>
+                    </div>`;
+            }
+        }
+    }
+}
+
+function checkIfUserIsAssigned(userName, i,initials,bgColor,name) {
+    let users = cards[i]['user'];
+    
+    if (users) {
+        for (let j = 0; j < users.length; j++) {
+            if (users[j]['bgColor'] === userName) {
+                
+                currentChecktContact.push({
+                    name: name,
+                    bgColor: bgColor,
+                    initials: initials
+                  });
+                console.log(currentChecktContact);
+                pushNewContact(i);
+                return true;
+                
+            }
+        }
+    }
+    pushNewContact(i);
+    return false;
+}
+
+function pushNewContact(i) {
+    let newUsers = cards[i]['user'];
+    newUsers = [];
+    newUsers.push(currentChecktContact);
+}
+
+
+
+  
+  
+
+
+
 
 
 function priorityCheck(element) {
@@ -670,7 +736,7 @@ function overviewEditHTML(i) {
     <p class="titleAssigned">Assigned to</p>
     <div class="inputDropDown">
         <div class="inputDropDownContainer">
-            <div onclick="assignedTo()" class="inputContactsSVG">
+            <div onclick="toggleAssignedToBoard(${i})" class="inputContactsSVG">
     <input class="inputContacts" type="text" placeholder="Select contacts to assign">
     <svg class="svgArrow"width="24" height="24" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
         <mask id="mask0_123060_2330" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
