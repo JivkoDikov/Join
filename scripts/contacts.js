@@ -194,6 +194,10 @@ function deleteContact(id) {
     document.getElementById('contactContainerContact').innerHTML = '';
     closeEditContact();
   }
+  document.getElementById('popUpSuccesfullyDeleted').classList.add('overlay-successfullyDeleted', 'showoverlay-successfullyDeleted');
+  setTimeout(() => {
+    document.getElementById('popUpSuccesfullyDeleted').classList.remove('showoverlay-successfullyDeleted');
+  }, 2000);
 }
 
 
@@ -288,7 +292,6 @@ function changeContactView(){
   contactContainerView.style.display = "block";
   contactContainerView.style.width = "100vw";
   document.getElementById('editContactMobile').classList.remove('d-none');
-  
 }
 
 function showEditContactMobile(){
@@ -306,9 +309,11 @@ function hideEditContactMobile(){
 
 function editContactMobile(id) {
   if (isMobile()) {
-      editContact(id);
+    const contactId = parseInt(id); 
+    editContact(contactId); 
   }
 }
+
 function deleteContactMobile(id){
   if (isMobile()) {
     deleteContact(id);
