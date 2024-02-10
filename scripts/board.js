@@ -90,7 +90,7 @@ let cards = [
 ]
 
 let currentDraggedElement;
-
+let currentChecktContact = [];
 
 
 function saveBoard() {
@@ -337,6 +337,7 @@ function CardEditForm(event,i) {
     infoArrayCard['date'] = dateEdit;
     closeOverview();
     updateHTML();
+    
 }
 
 
@@ -397,57 +398,74 @@ function toggleAssignedToBoard(i) {
     }
   }
   
-function assignedToBoard(b) {
+  function assignedToBoard(b) {
     let contactsBox = document.getElementById('contactsBox');
     contactsBox.innerHTML = '';
-  
-    let uniqueUsersMap = new Map();
-  
-    for (let card of cards) {
-      for (let user of card['user']) {
-        if (!uniqueUsersMap.has(user['bgColor'])) {
-          uniqueUsersMap.set(user['bgColor'], user);
+
+    let uniqueUsers = {};
+    currentChecktContact = [];
+    for (let i = 0; i < cards.length; i++) {
+        let users = cards[i]['user'];
+
+        for (let j = 0; j < users.length; j++) {
+            let user = users[j];
+            let key = user['name'] + user['bgColor'] + user['initials'];
+
+            // Überprüfen, ob der Benutzer bereits in der Liste ist
+            if (!uniqueUsers[key]) {
+                uniqueUsers[key] = true;
+                let isChecked = checkIfUserIsAssigned(user['bgColor'], b, user['initials'], user['bgColor'], user['name']);
+
+                contactsBox.innerHTML += /*html*/`
+                    <div class="assignedContactsContainer">
+                        <div class="assignedContactSVG">
+                            <div class="letterContacts">
+                                <div class="assignedLetters" style="background-color: ${user['bgColor']}">${user['initials']}</div>
+                                <span>${user['name']}</span>
+                            </div>
+                            <input id="assignedToContact_${user['name']}" type="checkbox" onchange="checkIfUserIsAssigned('${user['bgColor']}', '${b}','${user['initials']}','${user['bgColor']}','${user['name']}')" ${isChecked ? 'checked' : ''}>
+                        </div>
+                    </div>`;
+            }
         }
-      }
     }
-  
-    let uniqueUsers = Array.from(uniqueUsersMap.values());
-  
-    for (let user of uniqueUsers) {
-    for (let i = 0; i < cards[i]['user'].length; i++) {
-        let element = cards[i]['user'];
-        
+}
+
+function checkIfUserIsAssigned(userName, i,initials,bgColor,name) {
+    let users = cards[i]['user'];
     
-      contactsBox.innerHTML += /*html*/`
-        <div class="assignedContactsContainer">
-          <div class="assignedContactSVG">
-            <div class="letterContacts">
-              <div class="assignedLetters" style="background-color: ${user['bgColor']}">${user['initials']}</div>
-              <span>${user['name']}</span>
-            </div>
-            <input id="assignedToContact_${user['name']}" type="checkbox" onchange="toggleSelection('${user['initials']}','${user['bgColor']}','${user['name']}', ${b})">
-          </div>
-        </div>`;
-    }}
-  }
+    if (users) {
+        for (let j = 0; j < users.length; j++) {
+            if (users[j]['bgColor'] === userName) {
+                
+                currentChecktContact.push({
+                    name: name,
+                    bgColor: bgColor,
+                    initials: initials
+                  });
+                console.log(currentChecktContact);
+                pushNewContact(i);
+                return true;
+                
+            }
+        }
+    }
+    pushNewContact(i);
+    return false;
+}
+
+function pushNewContact(i) {
+    let newUsers = cards[i]['user'];
+    newUsers = [];
+    newUsers.push(currentChecktContact);
+}
+
+
+
+  
   
 
-function toggleSelection(initials, bgColor, name, checkbox) {
-    if (checkbox.checked) {
-      selectedContactDetails.push({
-        name: name,
-        bgColor: bgColor,
-        initials: initials
-      });
-    } else {
-      let index = selectedContactDetails.indexOf(initials, bgColor, name);
-      if (index !== -1) {
-        selectedContactDetails.splice(index, 1);
-      }
-    }
-    console.log('Selected Contacts Initials:', selectedContactDetails);
-  
-  }
+
 
 
 
