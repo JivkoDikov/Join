@@ -93,34 +93,20 @@ let currentDraggedElement;
 
 
 
-const STORAGE_TOKEN = 'Y2B64H33P1ZFHWE7S0HF0V8EC9OTCQZV1FG8B8B5';
-const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
-
-
-// async function setItem(key, value) {
-//     const payload = { key, value, token: STORAGE_TOKEN };
-//     return fetch(STORAGE_URL, { method: 'POST', body: JSON.stringify(payload)})
-//     .then(res => res.json());
-// }
-
-
-
-// async function getItem(key) {
-//     const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
-//     let resp = await fetch(url);
-//     return cards.push(resp.json());
-    
-// }
-
-
-function save() {
+function saveBoard() {
     let key = "board";
     let value = cards;
     setItem(key, value);
 }
 
+function loadBoard() {
+    let key = "board";
+    let toPush = 'cards';
+     getItem(key, toPush);
+}
+
 function updateHTML() {
-    getItem('board');
+    // loadBord();
     const categories = ['todo', 'progress', 'feedback', 'done'];
     for (const category of categories) {
         let categoryElements = cards.filter(t => t['category'] === category);
@@ -173,7 +159,6 @@ function updateCategory(card, category, search) {
 
     for (let i = 0; i < cards.length; i++) {
         const element = cards[i];
-        
         if (element['category'] === category && (element['headline'].toLowerCase().includes(search) || search === '')) {
             card.innerHTML += generateCardHTML(element);           
         }       
@@ -245,8 +230,7 @@ function openOverview(i) {
 
 function closeOverview() {
     let overviewElement = document.getElementById('overlay');
-    overviewElement.classList.add('d-none');     
-    
+    overviewElement.classList.add('d-none');
 }
 
 
@@ -401,6 +385,70 @@ function assignIcon(element) {
         </div>`;
     }
 }
+
+
+function toggleAssignedToBoard(i) {
+    let contactsBox = document.getElementById('contactsBox');
+    if (contactsBox.style.display === 'none' || contactsBox.innerHTML.trim() === '') {
+      assignedToBoard(i);
+      contactsBox.style.display = 'block';
+    } else {
+      contactsBox.style.display = 'none'; 
+    }
+  }
+  
+function assignedToBoard(b) {
+    let contactsBox = document.getElementById('contactsBox');
+    contactsBox.innerHTML = '';
+  
+    let uniqueUsersMap = new Map();
+  
+    for (let card of cards) {
+      for (let user of card['user']) {
+        if (!uniqueUsersMap.has(user['bgColor'])) {
+          uniqueUsersMap.set(user['bgColor'], user);
+        }
+      }
+    }
+  
+    let uniqueUsers = Array.from(uniqueUsersMap.values());
+  
+    for (let user of uniqueUsers) {
+    for (let i = 0; i < cards[i]['user'].length; i++) {
+        let element = cards[i]['user'];
+        
+    
+      contactsBox.innerHTML += /*html*/`
+        <div class="assignedContactsContainer">
+          <div class="assignedContactSVG">
+            <div class="letterContacts">
+              <div class="assignedLetters" style="background-color: ${user['bgColor']}">${user['initials']}</div>
+              <span>${user['name']}</span>
+            </div>
+            <input id="assignedToContact_${user['name']}" type="checkbox" onchange="toggleSelection('${user['initials']}','${user['bgColor']}','${user['name']}', ${b})">
+          </div>
+        </div>`;
+    }}
+  }
+  
+
+function toggleSelection(initials, bgColor, name, checkbox) {
+    if (checkbox.checked) {
+      selectedContactDetails.push({
+        name: name,
+        bgColor: bgColor,
+        initials: initials
+      });
+    } else {
+      let index = selectedContactDetails.indexOf(initials, bgColor, name);
+      if (index !== -1) {
+        selectedContactDetails.splice(index, 1);
+      }
+    }
+    console.log('Selected Contacts Initials:', selectedContactDetails);
+  
+  }
+
 
 
 function priorityCheck(element) {
@@ -670,7 +718,7 @@ function overviewEditHTML(i) {
     <p class="titleAssigned">Assigned to</p>
     <div class="inputDropDown">
         <div class="inputDropDownContainer">
-            <div onclick="assignedTo()" class="inputContactsSVG">
+            <div onclick="toggleAssignedToBoard(${i})" class="inputContactsSVG">
     <input class="inputContacts" type="text" placeholder="Select contacts to assign">
     <svg class="svgArrow"width="24" height="24" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
         <mask id="mask0_123060_2330" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
