@@ -398,7 +398,7 @@ function toggleAssignedToBoard(i) {
     }
   }
   
-  function assignedToBoard(b) {
+  function assignedToBoard() {
     let contactsBox = document.getElementById('contactsBox');
     contactsBox.innerHTML = '';
 
@@ -414,8 +414,6 @@ function toggleAssignedToBoard(i) {
             // Überprüfen, ob der Benutzer bereits in der Liste ist
             if (!uniqueUsers[key]) {
                 uniqueUsers[key] = true;
-                let isChecked = checkIfUserIsAssigned(user['bgColor'], b, user['initials'], user['bgColor'], user['name']);
-
                 contactsBox.innerHTML += /*html*/`
                     <div class="assignedContactsContainer">
                         <div class="assignedContactSVG">
@@ -423,7 +421,7 @@ function toggleAssignedToBoard(i) {
                                 <div class="assignedLetters" style="background-color: ${user['bgColor']}">${user['initials']}</div>
                                 <span>${user['name']}</span>
                             </div>
-                            <input id="assignedToContact_${user['name']}" type="checkbox" onchange="checkIfUserIsAssigned('${user['bgColor']}', '${b}','${user['initials']}','${user['bgColor']}','${user['name']}')" ${isChecked ? 'checked' : ''}>
+                            <input id="assignedToContact_${user['name']}" type="checkbox" onchange="checkIfUserIsAssigned('${user['initials']}', '${user['bgColor']}', '${user['name']}', this)">
                         </div>
                     </div>`;
             }
@@ -431,42 +429,23 @@ function toggleAssignedToBoard(i) {
     }
 }
 
-function checkIfUserIsAssigned(userName, i,initials,bgColor,name) {
-    let users = cards[i]['user'];
-    
-    if (users) {
-        for (let j = 0; j < users.length; j++) {
-            if (users[j]['bgColor'] === userName) {
-                
-                currentChecktContact.push({
-                    name: name,
-                    bgColor: bgColor,
-                    initials: initials
-                  });
-                console.log(currentChecktContact);
-                pushNewContact(i);
-                return true;
-                
+function checkIfUserIsAssigned(initials, bgColor, name, checkbox) {
+    if (checkbox.checked) {
+        currentChecktContact.push({
+            name: name,
+            bgColor: bgColor,
+            initials: initials
+        });
+    } else {
+        for (let k = 0; k < currentChecktContact.length; k++) {
+            if (currentChecktContact[k].name === name) {
+                currentChecktContact.splice(k, 1);
+                break;
             }
         }
     }
-    pushNewContact(i);
-    return false;
+  console.log(currentChecktContact);
 }
-
-function pushNewContact(i) {
-    let newUsers = cards[i]['user'];
-    newUsers = [];
-    newUsers.push(currentChecktContact);
-}
-
-
-
-  
-  
-
-
-
 
 
 function priorityCheck(element) {

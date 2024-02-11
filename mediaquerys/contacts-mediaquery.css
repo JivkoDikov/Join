@@ -97,7 +97,12 @@
   
     .contactInput {
       gap: 15px;
+      width: calc(100% - 48px);
       
+    }
+
+    .contactDetails{
+      width: 100%;
     }
   
     .addContactPopUpLeft {
@@ -390,11 +395,6 @@
       padding-top: 0;
     }
   
-  
-    .contactInput {
-      gap: 15px;
-      width: 330px;
-    }
   
     .addContactPopUpLeft {
       padding-top: 24px;
