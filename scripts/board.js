@@ -431,7 +431,7 @@ function toggleAssignedToBoard(i) {
     }
 }
 
-function checkIfUserIsAssigned(userName, i,initials,bgColor,name) {
+function checkIfUserIsAssigned(userName, i,initials,bgColor,name,) {
     let users = cards[i]['user'];
     
     if (users) {

@@ -5,17 +5,17 @@ let screenSize = []
 
 
 
-function saveContacts() {
-  let key = "contact";
-  let value = contacts;
-  setItem(key, value);
-}
+// function saveContacts() {
+//   let key = "contact";
+//   let value = contacts;
+//   setItem(key, value);
+// }
 
-function loadContacts() {
-  let key = "contact";
-  let toPush = contacts;
-   getItem(key, toPush);
-}
+// function loadContacts() {
+//   let key = "contact";
+//   let toPush = contacts;
+//    getItem(key, toPush);
+// }
 
 async function addNewContact() {
   document.getElementById("addnewcontact").classList.add("showOverlay-addNewContactPopUpContainer");
@@ -64,8 +64,8 @@ showContact(contact.id);
 
 
 function initContacts(){
-  saveContacts();
-  loadContacts();
+  // saveContacts();
+  // loadContacts();
   render();
   showContacts();
   screenSizeUser();
@@ -222,7 +222,7 @@ function editContact(id) {
     document.getElementById("editname").dataset.contactId = id;
     document.getElementById("deleteContactButton").addEventListener("click", function() {
       deleteContact(id);
-      editContactMobile(id);
+      
     });
   }
 }
@@ -319,9 +319,11 @@ function hideEditContactMobile(){
 
 
 function editContactMobile(id) {
+  
   if (isMobile()) {
       editContact(id);
   }
+  editContact();
 }
 function deleteContactMobile(id){
   if (isMobile()) {
