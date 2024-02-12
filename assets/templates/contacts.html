@@ -71,14 +71,14 @@
             <h3>Better with a team</h3>
             </div>
         </div>
-        <div id="showContact" class="contactContainerAllInfo"></div>
+        <div id="showContact" class="contactContainerAllInfo"> </div>
         <div id="popUpSuccesfullyCreated"class="successfullyCreated overlay-successfullyCreated">
           <p class="successfullyText">Contact succesfully created</p>
         </div>
         <div id="popUpSuccesfullyDeleted"class="successfullyDeleted overlay-successfullyDeleted">
           <p class="successfullyText">Contact succesfully deleted</p>
         </div>
-        
+       
         <svg onclick="showEditContactMobile()" id="editContactMobile" class="editContactMobile d-none" width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g filter="url(#filter0_d_71395_18084)">
           <rect x="4" width="56" height="56" rx="28" fill="#2A3647" shape-rendering="crispEdges"/>
@@ -187,75 +187,8 @@
 </div>
 <div id="editbackGroundOpacityContainer"class="backGroundOpacityContainer d-none"></div>
 <div id="editcontact" class="addNewContactBackPopUpContainer overlay-addNewContactPopUpContainer"> 
-<div class="addNewContactPopUpContainer ">
-    <div class="addContactPopUpLeftContainer">
-        <div class="xButtonResponsiveContainer">
-            <p class="xButtonResponsive d-none" onclick="closeEditContact()">x</p>
-          </div>
-        <div class="addContactPopUpLeft">
-        <img class="addContactJoinLogo"src="/assets/img/joinlogo.png" alt="">
-       
-        <p class="addContactHeadline">Edit contact</p>
-        <p class="addContactParagraph">Tasks are better with a team!</p>
-        <img class="vectorContactPopUp" src="/assets/img/vector.png" alt=""> 
-        </div>
-    </div>
-    <div class="addContactPopUpRightContainer">
-        <div class="profileContactContainer">
-        <img class="profileContact"src="/assets/img/profilecontact.png" alt="">
-        </div>
-          <div class="closeInputButtonsContainer">
-            <div class="xContactButton">
-              <p onclick="closeEditContact()"class="closeAddContact">x</p>
-            </div>
-            <div class="inputButtonsContainer">
-            <form onsubmit="editContact(`${contact.id}`)">
-            <div class="contactInput">
-            
-            <div class="inputIconsContainer">
-            <div class="contactDetails">
-            <input required minlength="3" id="editname"class="input"  type="text" placeholder="Name" autocomplete="name"  data-contact-id="${id}">
-            <img class="inputIcons"src="/assets/img/person.png" alt="">
-            </div>
-            </div>
-
-            <div class="inputIconsContainer">
-            <div class="contactDetails">
-            <input required id="editemail"class="input"   type="email" placeholder="Email" autocomplete="email">
-            <img class="inputIcons"src="/assets/img/mail.png" alt="">
-            </div>
-            </div>
-
-            <div class="inputIconsContainer">
-            <div class="contactDetails">
-            <input required id="edittel"class="input"  type="tel" placeholder="Phone" autocomplete="tel">
-            <img class="inputIcons"src="/assets/img/call.png" alt="">
-            </div>
-            
-            </div>
-            
-            </div>
-            
-
-            <div class="cancelCreateContactButtons">
-                <button id="deleteContactButton" onclick="deleteEditContact(`${id}`)"class="cancelBtn d-inline">
-                    <span class="cancelX">
-                <p class="cancelText">Delete</p>
-                <p class="x">x</p>
-                  </span>
-            
-                </button>
-               <button type="submit" onclick="saveEditContact()"class="createCheckBtn">
-                <span class="createCheck">
-                <p class="createText">Save</p>
-                <img src="/assets/img/check.png" alt="">
-                 </span>
-               </button>
-                </div>
-                </form>
-             </div>
-          </div>
-    </div>
+<div id="addNewContactPopUp" class="addNewContactPopUpContainer ">
+    
 </div>
 </div>
 </body>

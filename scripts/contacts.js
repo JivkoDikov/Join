@@ -15,6 +15,9 @@ async function addNewContact() {
 function closeAddNewContact() {
   document.getElementById("addnewcontact").classList.remove("showOverlay-addNewContactPopUpContainer");
   document.getElementById("backGroundOpacityContainer").classList.add("d-none");
+  document.getElementById('name').value = '';
+  document.getElementById('email').value = '';
+  document.getElementById('tel').value = '';
 }
 
 function createContact(event) {
@@ -190,7 +193,7 @@ if (index !== -1) {
   </svg>
   <p class="editMobile">Edit</p>
 </div>
-<div id="deleteContactMobile" class="iconDeleteMobile">
+<div class="iconDeleteMobile" onclick="deleteContact(${id})">
 <svg class="svgIcons"width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
    <mask id="mask0_119188_3520" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
    <rect width="24" height="24" fill="#D9D9D9"/>
@@ -222,17 +225,88 @@ function deleteContact(id) {
     save();
     load();
     document.getElementById('contactContainerContact').innerHTML = '';
-    closeEditContact();
     hideEditContactMobile();
   }
+  disableContactContainer();
   document.getElementById('popUpSuccesfullyDeleted').classList.add('overlay-successfullyDeleted', 'showoverlay-successfullyDeleted');
   setTimeout(() => {
     document.getElementById('popUpSuccesfullyDeleted').classList.remove('showoverlay-successfullyDeleted');
   }, 2000);
+  
 }
 
 
 function editContact(id) {
+  let addNewContactPopUp = document.getElementById('addNewContactPopUp');
+  addNewContactPopUp.innerHTML = /*html*/`
+  <div class="addContactPopUpLeftContainer">
+        <div class="xButtonResponsiveContainer">
+            <p class="xButtonResponsive d-none" onclick="closeEditContact()">x</p>
+          </div>
+        <div class="addContactPopUpLeft">
+        <img class="addContactJoinLogo"src="/assets/img/joinlogo.png" alt="">
+       
+        <p class="addContactHeadline">Edit contact</p>
+        <p class="addContactParagraph">Tasks are better with a team!</p>
+        <img class="vectorContactPopUp" src="/assets/img/vector.png" alt=""> 
+        </div>
+    </div>
+    <div class="addContactPopUpRightContainer">
+        <div class="profileContactContainer">
+        <img class="profileContact"src="/assets/img/profilecontact.png" alt="">
+        </div>
+          <div class="closeInputButtonsContainer">
+            <div class="xContactButton">
+              <p onclick="closeEditContact()"class="closeAddContact">x</p>
+            </div>
+            <div class="inputButtonsContainer">
+            <form onsubmit="editContact(${id})">
+            <div class="contactInput">
+            
+            <div class="inputIconsContainer">
+            <div class="contactDetails">
+            <input required minlength="3" id="editname"class="input"  type="text" placeholder="Name" autocomplete="name"  data-contact-id="${id}">
+            <img class="inputIcons"src="/assets/img/person.png" alt="">
+            </div>
+            </div>
+
+            <div class="inputIconsContainer">
+            <div class="contactDetails">
+            <input required id="editemail"class="input"   type="email" placeholder="Email" autocomplete="email">
+            <img class="inputIcons"src="/assets/img/mail.png" alt="">
+            </div>
+            </div>
+
+            <div class="inputIconsContainer">
+            <div class="contactDetails">
+            <input required id="edittel"class="input"  type="tel" placeholder="Phone" autocomplete="tel">
+            <img class="inputIcons"src="/assets/img/call.png" alt="">
+            </div>
+            
+            </div>
+            
+            </div>
+            
+
+            <div class="cancelCreateContactButtons">
+                <button id="deleteContactButton" onclick="deleteEditContact(${id})"class="cancelBtn d-inline">
+                    <span class="cancelX">
+                <p class="cancelText">Delete</p>
+                <p class="x">x</p>
+                  </span>
+            
+                </button>
+               <button type="submit" onclick="saveEditContact(${id})"class="createCheckBtn">
+                <span class="createCheck">
+                <p class="createText">Save</p>
+                <img src="/assets/img/check.png" alt="">
+                 </span>
+               </button>
+                </div>
+                </form>
+             </div>
+          </div>
+    </div>`;
   const selectedContact = contacts.find(contact => contact.id === id);
   if (selectedContact) {
     document.getElementById("editcontact").classList.add("showOverlay-addNewContactPopUpContainer");
@@ -248,6 +322,14 @@ function editContact(id) {
   }
 }
 
+  function deleteEditContact(id) {
+    document.getElementById("editname").value = "";
+    document.getElementById("editemail").value = "";
+    document.getElementById("edittel").value = "";
+    closeEditContact();
+    deleteContact(id);
+  }
+  
 
 
 function closeEditContact() {
@@ -259,10 +341,8 @@ function closeEditContact() {
   hideEditContactMobile();
 }
 
-function saveEditContact() {
-  const id = document.getElementById("editname").dataset.contactId;
+function saveEditContact(id) {
   const editedContact = contacts.find((contact) => contact.id === parseInt(id));
-
   if (editedContact) {
     editedContact.name = document.getElementById("editname").value;
     editedContact.email = document.getElementById("editemail").value;
