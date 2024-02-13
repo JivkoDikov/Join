@@ -35,8 +35,8 @@ function checkLogin(event) {
 
 async function loadUser(){
     let users = await getItem('users');
-    //userLogin = JSON.parse(users.data.value)
-    userLogin = users.data.value
+    userLogin = JSON.parse(users.data.value)
+    //userLogin = users.data.value
     // let user1 = userLogin.user[1].email
     // let pw = userLogin.user[1].password
     // console.log(user1 +" & "+ pw)
@@ -52,7 +52,7 @@ function guestLogin(){
 async function signup(event){
     event.preventDefault(); // Prevents the default form submission
 
-          //let passwordValid = await checkPasswordMatch(inputFieldPassword.value, inputFieldPasswordConfirm.value);
+          let passwordValid = await checkPasswordMatch(inputFieldPassword.value, inputFieldPasswordConfirm.value);
 
          if(passwordValid){emailExists = await checkUserDatabase(inputFieldEmail.value)};
          if (emailExists === -1) {
