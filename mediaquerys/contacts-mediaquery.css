@@ -352,14 +352,6 @@
       font-size: 22px;
     }
 
-    
-      .showOverlay-contactContainerContact {
-        transform: translateX(0px);
-        transition: all 555ms ease-in-out;
-      }
-      
-    
-  
   
     .editDeleteContainer{
       display: none;

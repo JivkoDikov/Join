@@ -719,7 +719,7 @@ input:focus {
 }
 
 .overlay-successfullyCreated,.overlay-successfullyDeleted {
-  transform: translateX(1200px);
+  transform: translateX(3851px);
   transition: all 500ms ease-in-out;
 }
 
@@ -738,7 +738,7 @@ input:focus {
 }
 
 .overlay-contactContainerContact {
-  transform: translateX(1200px);
+  transform: translateX(3851px);
   transition: all 225ms ease-in-out;
 }
 
@@ -749,7 +749,7 @@ input:focus {
 
 .personLogo {
   position: absolute;
-  top: 758px;
+  bottom: 96px;
   right: 16px;
   width: 56px;
   height: 56px;
@@ -763,7 +763,7 @@ input:focus {
 
 .editContactMobile{
   position: absolute;
-  top: 758px;
+  bottom: 96px;
   right: 16px;
   width: 56px;
   height: 56px;
@@ -773,7 +773,7 @@ input:focus {
 
 .editDeleteContainerMobile{
   position: absolute;
-  top: 732px;
+  bottom: 96px;
   right: 16px;
   height: 56px;
   width: 116px;
@@ -826,7 +826,7 @@ text-align: left;
 }
 
 .overlay-editDeleteContainerMobile{
-  transform: translateX(3800px);
+  transform: translateX(3851px);
   transition: all 225ms ease-in-out;
 
 }
