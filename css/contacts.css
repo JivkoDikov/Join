@@ -75,7 +75,7 @@
 }
 
 .contactHeadline {
-  padding-top: 110px;
+  padding-top: 55px;
   padding-left: 55px;
   display: flex;
   justify-content: flex-start;
@@ -617,11 +617,28 @@ input:focus {
   line-height: 24px;
   letter-spacing: 0em;
   text-align: left;
+  margin-block: 0;
+}
+
+.emailContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  width: 124px;
+  height: 53px;
+  margin-block: 0;
 }
 
 .emailPhone {
-  width: 140px;
+  width: 146px;
   gap: 22px;
+  height: 128px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
 }
 
 .emailtext {
@@ -633,6 +650,7 @@ input:focus {
   text-align: left;
   width: 43px;
   height: 19px;
+  margin-block: 0;
 }
 
 .emailadress {
@@ -645,10 +663,20 @@ input:focus {
   text-align: left;
   color: #29abe2;
   cursor: pointer;
+  margin-block: 0;
 }
 
 .emailadress:hover {
   color: #007cee;
+}
+
+.phoneContainer{
+  width: 146px;
+  height: 53px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
 }
 
 .phone {
@@ -660,6 +688,7 @@ input:focus {
   text-align: left;
   width: 50px;
   height: 19px;
+  margin-block: 0;
 }
 
 .tel {
@@ -670,13 +699,14 @@ input:focus {
   letter-spacing: 0em;
   text-align: left;
   height: 19px;
+  margin-block: 0;
 }
 
 .backgroundColorContact {
   background-color: #f1f2f3;
 }
 
-.successfullyCreated {
+.successfullyCreated,.successfullyDeleted {
   width: 326px;
   height: 74px;
   background-color: #2a3647;
@@ -684,16 +714,16 @@ input:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 55px;
   margin-left: 55px;
+  margin-top: 10px;
 }
 
-.overlay-successfullyCreated {
+.overlay-successfullyCreated,.overlay-successfullyDeleted {
   transform: translateX(1200px);
   transition: all 500ms ease-in-out;
 }
 
-.showoverlay-successfullyCreated {
+.showoverlay-successfullyCreated,.showoverlay-successfullyDeleted {
   transform: translateX(0px);
   transition: all 500ms ease-in-out;
 }

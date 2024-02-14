@@ -2,20 +2,10 @@ let letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','
 let contacts = [];
 let contactIdCounter = 0;
 let screenSize = []
+load();
 
 
 
-// function saveContacts() {
-//   let key = "contact";
-//   let value = contacts;
-//   setItem(key, value);
-// }
-
-// function loadContacts() {
-//   let key = "contact";
-//   let toPush = contacts;
-//    getItem(key, toPush);
-// }
 
 async function addNewContact() {
   document.getElementById("addnewcontact").classList.add("showOverlay-addNewContactPopUpContainer");

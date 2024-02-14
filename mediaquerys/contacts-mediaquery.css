@@ -3,7 +3,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding-top: 52px;
+    padding-top: 45px;
+    gap:16px
   }
 
   h2,h3{
@@ -96,7 +97,12 @@
   
     .contactInput {
       gap: 15px;
+      width: calc(100% - 48px);
       
+    }
+
+    .contactDetails{
+      width: 100%;
     }
   
     .addContactPopUpLeft {
@@ -178,6 +184,12 @@
     }
   }
 
+  @media (max-width:1100px){
+    .successfullyCreated, .successfullyDeleted{
+      width: 270px;
+    }
+  }
+
   @media (max-width:1030px){
     .contactHeadline,.contactContainerAllInfo{
       padding-left: 0;
@@ -218,6 +230,10 @@
     .renderContactContainer{
       width: 328px;
     }
+
+    .successfullyCreated, .successfullyDeleted{
+      margin-left: 0px;
+    }
     
     
   }
@@ -227,6 +243,19 @@
       font-size: 22px;
     }
   }
+
+  @media (max-width:950px){
+    .successfullyCreated, .successfullyDeleted{
+      width: 170px;
+    }
+
+    .successfullyText{
+      margin-block: 0;
+      font-size: 16px;
+      text-align: center;
+    }
+  }
+
   
  
   
@@ -281,7 +310,7 @@
     }
 
     .firstLetterContainer{
-      padding: 32px 60px;
+      padding: 17px 36px;
     }
 
     .iconNameEmailContainer{
@@ -289,7 +318,7 @@
     }
 
     .iconNameEmail{
-      padding: 15px 48px;
+      padding: 15px 24px;
     }
 
     .renderContactContainer{
@@ -314,6 +343,24 @@
       width: unset;
     }
 
+   .successfullyCreated, .successfullyDeleted{
+      width: 326px;
+    }
+
+    .successfullyText{
+      margin-block: 0;
+      font-size: 22px;
+    }
+
+    
+      .showOverlay-contactContainerContact {
+        transform: translateX(0px);
+        transition: all 555ms ease-in-out;
+      }
+      
+    
+  
+  
     .editDeleteContainer{
       display: none;
     }
@@ -348,11 +395,6 @@
       padding-top: 0;
     }
   
-  
-    .contactInput {
-      gap: 15px;
-      width: 330px;
-    }
   
     .addContactPopUpLeft {
       padding-top: 24px;
@@ -440,15 +482,14 @@
   }
 
   @media (max-width:400px){
-    .firstLetterContainer{
-      padding: 32px 32px;
-    }
 
     .iconNameEmail{
-      padding: 15px;
+      gap: 15px;
     }
   }
 
   .d-none{
     display: none;
   }
+
+  
