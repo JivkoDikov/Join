@@ -1,10 +1,8 @@
 let letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-let contacts = [];
+let contacts = {};
 let contactIdCounter = 0;
 let screenSize = []
-load();
-
-
+let userID = localStorage.getItem('user');
 
 
 async function addNewContact() {
@@ -41,39 +39,42 @@ function createContact(event) {
     lastNameLetter: getLastLetter(name.value),
     bgColor: generateRandomColor(),
   };
-  contacts.push(contact);
+
+  if (!contacts[userID]) {
+    contacts[userID] = []; // Initialisiert ein neues Kontaktarray, falls der Benutzer noch nicht existiert
+  }
+
+  contacts[userID].push(contact);
   name.value = "";
   email.value = "";
   tel.value = "";
   
-  
-
+  setItem('contacts', contacts)
     showContacts();
 showContact(contact.id);
-  
-
-  
 }
 
 
-function initContacts(){
-  //saveContacts();
-  //loadContacts();
+async function initContacts(){
   render();
+  await load_contacts_from_webstorage();
   showContacts();
   screenSizeUser();
 }
 
 
-
-
 function showContacts() {
-  
   let letterBox = document.getElementById("letterBox");
   letterBox.innerHTML ='';
+
+  if (!contacts[userID] || !Array.isArray(contacts[userID])) {
+    console.log(`Keine Kontakte gefunden für Benutzer: ${userID}`);
+    return; 
+  }
+
   for (let i = 0; i < letters.length; i++) {
     const letter = letters[i];
-    let filteredContacts = contacts.filter((contact) => contact["name"].charAt(0).toUpperCase() == letter);
+    let filteredContacts = contacts[userID].filter((contact) => contact["name"].charAt(0).toUpperCase() == letter);
 
     if(filteredContacts.length > 0){
     document.getElementById("letterBox").innerHTML += /*html*/ `
@@ -85,7 +86,7 @@ function showContacts() {
       const lastNameLetter = filteredContact["name"].split(" ").pop().charAt(0).toUpperCase();
       const bgColor = filteredContact.bgColor; 
       letterBox.innerHTML += /*html*/ `
-        <div onclick="showContact(${filteredContact.id})" id="iconNameEmailContainer" class="iconNameEmailContainer">
+        <div onclick="showContact(${filteredContact.id})" id="iconNameEmailContainer_${filteredContact.id}" class="iconNameEmailContainer">
           <div class="iconNameEmail">
             <div id="firstLastLetter" class="firstLastLetter" style="background-color: ${bgColor}">${letter}${lastNameLetter}</div>
             <div class="nameEmail">
@@ -98,7 +99,6 @@ function showContacts() {
     }
   }
 }
-save();
 
 }
 
@@ -115,6 +115,17 @@ function getLastLetter(name) {
 }
 function showContact(id){ 
 
+  let allContainers = document.querySelectorAll('.iconNameEmailContainer');
+  allContainers.forEach(container => {
+    container.classList.remove('selected');
+    
+  });
+
+  let clickedContainer = document.getElementById('iconNameEmailContainer_' + id);
+  clickedContainer.classList.add('selected');
+
+  
+
   let mobile = isMobile();
   if(mobile){ changeContactView()}
 
@@ -123,13 +134,12 @@ function showContact(id){
 
   document.getElementById("contactContainer").classList.add("backgroundColorContact");
  
-const index = contacts.findIndex((contact) => contact.id === id);
+const index = contacts[userID].findIndex((contact) => contact.id === id);
   
 if (index !== -1) {
-      const contact = contacts[index];
+      const contact = contacts[userID][index];
       let letter = contact["name"].charAt(0).toUpperCase();
       let lastNameLetter = getLastLetter(contact["name"]);
-      
       
       document.getElementById("showContact").innerHTML = /*html*/ `
     <div id="contactContainerContact" class="contactContainerContact overlay-contactContainerContact">
@@ -209,21 +219,15 @@ if (index !== -1) {
 setTimeout(() => {
   document.getElementById('contactContainerContact').classList.add('showOverlay-contactContainerContact');
 }, 225);
-
-
-
-save();
-load();
 }
 
 
-function deleteContact(id) {
-  let index = contacts.findIndex((contact) => contact.id === id);
+async function deleteContact(id) {
+  let index = contacts[userID].findIndex((contact) => contact.id === id);
   if (index !== -1) {
-    contacts.splice(index, 1);
+    contacts[userID].splice(index, 1);
+    await setItem('contacts', contacts);
     showContacts();
-    save();
-    load();
     document.getElementById('contactContainerContact').innerHTML = '';
     hideEditContactMobile();
   }
@@ -307,7 +311,7 @@ function editContact(id) {
              </div>
           </div>
     </div>`;
-  const selectedContact = contacts.find(contact => contact.id === id);
+  const selectedContact = contacts[userID].find(contact => contact.id === id);
   if (selectedContact) {
     document.getElementById("editcontact").classList.add("showOverlay-addNewContactPopUpContainer");
     document.getElementById("backGroundOpacityContainer").classList.remove("d-none");
@@ -342,7 +346,7 @@ function closeEditContact() {
 }
 
 function saveEditContact(id) {
-  const editedContact = contacts.find((contact) => contact.id === parseInt(id));
+  const editedContact = contacts[userID].find((contact) => contact.id === parseInt(id));
   if (editedContact) {
     editedContact.name = document.getElementById("editname").value;
     editedContact.email = document.getElementById("editemail").value;
@@ -350,32 +354,12 @@ function saveEditContact(id) {
 
     showContacts();
     showContact(editedContact.id);
-    save();
-    load();
+    
     closeEditContact();
     hideEditContactMobile();
   }
 }
 
-
-function save() {
-  let lettersAsText = JSON.stringify(letters);
-  localStorage.setItem("letters", lettersAsText);
-  let contactsAsText = JSON.stringify(contacts);
-  localStorage.setItem("contacts", contactsAsText);
-  
-}
-
-function load() {
-  let lettersAsText = localStorage.getItem('letters');
-  let contactsAsText = localStorage.getItem('contacts');
- 
-
-  if (lettersAsText && contactsAsText) {
-    contacts = JSON.parse(contactsAsText);
-    letters = JSON.parse(lettersAsText);
-  }
-}
 
 function isMobile(){
   return window.innerWidth <= 800;
@@ -418,7 +402,10 @@ function hideEditContactMobile(){
 }
 
 
-
+async function load_contacts_from_webstorage(){
+  let contactsValue = await getItem('contacts');
+  contacts = JSON.parse(contactsValue.data.value)
+}
 
 
 

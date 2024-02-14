@@ -10,38 +10,11 @@ async function setItem(key, value) {
 
 
 
-async function getItem(key,toPush) {
+async function getItem(key) {
     const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
     let resp = await fetch(url);
-    return toPush.push(resp.json());
-    
+    let data = await resp.json(); 
+    return data;
 }
+    
 
-// function saveToRemoteStorage() {
-//     setItem('letters', letters);
-//     setItem('contacts', contacts);
-// }
-
-// async function loadFromRemoteStorage() {
-//     try {
-//         const loadedLetters = await getItem('letters');
-//         const loadedContacts = await getItem('contacts');
-
-//         if (loadedLetters && loadedContacts) {
-//             letters = loadedLetters;
-//             contacts = loadedContacts;
-//             showContacts();
-//         }
-//     } catch (error) {
-//         console.error('Error loading data from remote storage:', error);
-//     }
-// }
-
-
-// function save() {
-//     saveToRemoteStorage();
-// }
-
-// function load() {
-//     loadFromRemoteStorage();
-// }

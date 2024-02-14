@@ -11,6 +11,7 @@
     margin-block: 0px;
   }
 
+
   .vectorPerpendicularContainerh3{
     display: flex;
     flex-direction: column-reverse;
@@ -39,9 +40,9 @@
 
  }
 
- .contactContainerContactName{
+ /*.contactContainerContactName{
   font-size: 32px;
- }
+ }*/
   
 
 

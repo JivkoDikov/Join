@@ -75,14 +75,12 @@
 }
 
 .contactHeadline {
-  padding-top: 55px;
-  padding-left: 55px;
+  padding:55px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  height: 73px;
   gap: 30px;
-  height: 180px;
+  
 }
 
 .headlineArrow {
@@ -459,6 +457,29 @@ input:focus {
 
 .iconNameEmailContainer:hover {
   background-color: #f2f2f2;
+  
+}
+
+.iconNameEmailContainer.selected .name{
+  color: white;
+}
+
+.iconNameEmailContainer.selected:hover .name {
+  color: black;
+
+}
+
+.selected .name{
+  color: white;
+}
+
+.selected:hover .name{
+  color: #000000;
+}
+
+.selected {
+  background-color: #2a3647;
+  
 }
 
 .iconNameEmail {
@@ -477,6 +498,7 @@ input:focus {
   justify-content: center;
   align-items: center;
   color: #eeeeee;
+  border: 1px solid #ffffff;
 }
 
 .nameEmail {
@@ -602,9 +624,7 @@ input:focus {
 }
 
 .contactInfoContainer {
-  height: 74px;
   width: 207px;
-  gap: 59px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
