@@ -321,7 +321,7 @@ function editContact(id) {
     document.getElementById("editname").dataset.contactId = id;
     document.getElementById("deleteContactButton").addEventListener("click", function() {
       deleteContact(id);
-    
+      
     });
   }
 }
@@ -342,7 +342,7 @@ function closeEditContact() {
   document.getElementById("editname").value = "";
   document.getElementById("editemail").value = "";
   document.getElementById("edittel").value = "";
-  hideEditContactMobile();
+
 }
 
 function saveEditContact(id) {
@@ -356,7 +356,6 @@ function saveEditContact(id) {
     showContact(editedContact.id);
     
     closeEditContact();
-    hideEditContactMobile();
   }
 }
 
@@ -388,6 +387,7 @@ function changeContactView(){
   contactContainerView.style.display = "block";
   contactContainerView.style.width = "100vw";
   document.getElementById('editContactMobile').classList.remove('d-none');
+  
 }
 
 function showEditContactMobile(){

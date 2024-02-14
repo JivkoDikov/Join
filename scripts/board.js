@@ -1,112 +1,112 @@
 let cards = [
-    {
-        "id" : 0,
-        "label" : "User Story",
-        "headline" : "Recommender",
-        "text": "Build start page with recipe recommendation...",
-        "user": [
-            {
-                "name": "Anton BAAA",
-                "bgColor": "rgb(255,200,50)",
-                "initials": "AB"
-            },
-            {
-                "name": "Anton BAAA",
-                "bgColor": "rgb(255,50,50)",
-                "initials": "AB"
-            },
-            {
-                "name": "Anton BAAA",
-                "bgColor": "rgb(205,100,50)",
-                "initials": "AB"
-            }
-        ],
-        "priority": 1,
-        "category": "progress",
-        "date": "2024-02-01",
-        "subtask": [
-            {
-                "name":"H",
-                "done": true
-            },
-        ],
-        "checkForTrue": 5,
-    },
-    {
-        "id" : 1,
-        "label" : "User Story",
-        "headline" : "Page",
-        "text": "Build start page with recipe recommendation...",
-        "user": [
-            {
-                "name": "Anton BAAA",
-                "bgColor": "rgb(255,200,50)",
-                "initials": "AB"
-            }
-        ],
-        "priority": 1,
-        "category": "todo",
-        "date": "01-01-2014",
-        "subtask": [
-            {
-                "name":"Hallo",
-                "done": false,
+    // {
+    //     "id" : 0,
+    //     "label" : "User Story",
+    //     "headline" : "Recommender",
+    //     "text": "Build start page with recipe recommendation...",
+    //     "user": [
+    //         {
+    //             "name": "Anton BAAA",
+    //             "bgColor": "rgb(255,200,50)",
+    //             "initials": "AB"
+    //         },
+    //         {
+    //             "name": "Anton BAAA",
+    //             "bgColor": "rgb(255,50,50)",
+    //             "initials": "AB"
+    //         },
+    //         {
+    //             "name": "Anton BAAA",
+    //             "bgColor": "rgb(205,100,50)",
+    //             "initials": "AB"
+    //         }
+    //     ],
+    //     "priority": 1,
+    //     "category": "progress",
+    //     "date": "2024-02-01",
+    //     "subtask": [
+    //         {
+    //             "name":"H",
+    //             "done": true
+    //         },
+    //     ],
+    //     "checkForTrue": 5,
+    // },
+    // {
+    //     "id" : 1,
+    //     "label" : "User Story",
+    //     "headline" : "Page",
+    //     "text": "Build start page with recipe recommendation...",
+    //     "user": [
+    //         {
+    //             "name": "Anton BAAA",
+    //             "bgColor": "rgb(255,200,50)",
+    //             "initials": "AB"
+    //         }
+    //     ],
+    //     "priority": 1,
+    //     "category": "todo",
+    //     "date": "01-01-2014",
+    //     "subtask": [
+    //         {
+    //             "name":"Hallo",
+    //             "done": false,
                 
-            },
-            {
-                "name":"Halloaaaa",
-                "done": false
-            },
-        ],
-        "checkForTrue": 0,
-    },
-    {
-        "id" : 2,
-        "label" : "User Story",
-        "headline" : "Recipe Recommender",
-        "text": "Build start page with recipe recommendation...",
-        "user": [
-            {
-                "name": "Anton BAAA",
-                "bgColor": "rgb(255,200,50)",
-                "initials": "AB"
-            }
-        ],
-        "priority": 1,
-        "category": "todo",
-        "date": "01-01-2014",
-        "subtask": [
-            {
-                "name":"BBBBBB",
-                "done": false
-            },
-            {
-                "name":"CCCCC",
-                "done": false
-            },
-        ],
-        "checkForTrue": 0,
-    },
+    //         },
+    //         {
+    //             "name":"Halloaaaa",
+    //             "done": false
+    //         },
+    //     ],
+    //     "checkForTrue": 0,
+    // },
+    // {
+    //     "id" : 2,
+    //     "label" : "User Story",
+    //     "headline" : "Recipe Recommender",
+    //     "text": "Build start page with recipe recommendation...",
+    //     "user": [
+    //         {
+    //             "name": "Anton BAAA",
+    //             "bgColor": "rgb(255,200,50)",
+    //             "initials": "AB"
+    //         }
+    //     ],
+    //     "priority": 1,
+    //     "category": "todo",
+    //     "date": "01-01-2014",
+    //     "subtask": [
+    //         {
+    //             "name":"BBBBBB",
+    //             "done": false
+    //         },
+    //         {
+    //             "name":"CCCCC",
+    //             "done": false
+    //         },
+    //     ],
+    //     "checkForTrue": 0,
+    // },
 ]
 
 let currentDraggedElement;
 let currentChecktContact = [];
 
 
-function saveBoard() {
-    let key = "board";
-    let value = cards;
-    setItem(key, value);
-}
+// function saveBoard() {
+//     let key = "board";
+//     let value = cards;
+//     setItem(key, value);
+// }
 
-function loadBoard() {
-    let key = "board";
-    let toPush = 'cards';
-     getItem(key, toPush);
-}
+// function loadBoard() {
+//     let key = "board";
+//     let toPush = cards;
+//      getItem(key, toPush);
+// }
 
 function updateHTML() {
-    // loadBord();
+    loadTask();
     const categories = ['todo', 'progress', 'feedback', 'done'];
     for (const category of categories) {
         let categoryElements = cards.filter(t => t['category'] === category);
@@ -411,7 +411,6 @@ function toggleAssignedToBoard(i) {
             let user = users[j];
             let key = user['name'] + user['bgColor'] + user['initials'];
 
-            // Überprüfen, ob der Benutzer bereits in der Liste ist
             if (!uniqueUsers[key]) {
                 uniqueUsers[key] = true;
                 contactsBox.innerHTML += /*html*/`
@@ -421,7 +420,7 @@ function toggleAssignedToBoard(i) {
                                 <div class="assignedLetters" style="background-color: ${user['bgColor']}">${user['initials']}</div>
                                 <span>${user['name']}</span>
                             </div>
-                            <input id="assignedToContact_${user['name']}" type="checkbox" onchange="checkIfUserIsAssigned('${user['initials']}', '${user['bgColor']}', '${user['name']}', this)">
+                            <input id="assignedToContact_${user['name']}" type="checkbox" onchange="updateSelectedContacts('${user['initials']}', '${user['bgColor']}', '${user['name']}', this)">
                         </div>
                     </div>`;
             }

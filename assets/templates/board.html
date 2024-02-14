@@ -11,16 +11,18 @@
     <link rel="stylesheet" href="/mediaquerys/joinsidebar.css">
     <link rel="stylesheet" href="/mediaquerys/header.css">
     <link rel="stylesheet" href="/mediaquerys/board-mediaquery.css">
-    <!-- <script src="/scripts/addtask.js"></script> -->
+    
     <script src="/scripts/storage.js"></script>
-    <script src="/scripts/script.js"></script>
+    <script src="/scripts/addtask.js"></script>
     <script src="/scripts/board.js"></script>
+    <script src="/scripts/script.js"></script>
+    
     
     
 
     <title>Board</title>
 </head>
-<body id="body" onload="render(),updateHTML()">
+<body id="body" onload="render(),saveTask(),updateHTML()">
     <div w3-include-html="/assets/templates/join_side_bar.html"></div>
     <div w3-include-html="/assets/templates/header.html"></div>
     

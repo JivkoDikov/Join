@@ -15,6 +15,35 @@ async function getItem(key) {
     let resp = await fetch(url);
     let data = await resp.json(); 
     return data;
-}
-    
 
+    
+}
+
+// function saveToRemoteStorage() {
+//     setItem('letters', letters);
+//     setItem('contacts', contacts);
+// }
+
+// async function loadFromRemoteStorage() {
+//     try {
+//         const loadedLetters = await getItem('letters');
+//         const loadedContacts = await getItem('contacts');
+
+//         if (loadedLetters && loadedContacts) {
+//             letters = loadedLetters;
+//             contacts = loadedContacts;
+//             showContacts();
+//         }
+//     } catch (error) {
+//         console.error('Error loading data from remote storage:', error);
+//     }
+// }
+
+
+// function save() {
+//     saveToRemoteStorage();
+// }
+
+// function load() {
+//     loadFromRemoteStorage();
+// }

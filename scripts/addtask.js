@@ -1,4 +1,32 @@
-let tasks = [];
+let tasks = [
+  {
+        "id" : 2,
+        "label" : "User Story",
+        "headline" : "Recipe Recommender",
+        "text": "Build start page with recipe recommendation...",
+        "user": [
+            {
+                "name": "Anton BAAA",
+                "bgColor": "rgb(255,200,50)",
+                "initials": "AB"
+            }
+        ],
+        "priority": 1,
+        "category": "todo",
+        "date": "01-01-2014",
+        "subtask": [
+            {
+                "name":"BBBBBB",
+                "done": false
+            },
+            {
+                "name":"CCCCC",
+                "done": false
+            },
+        ],
+        "checkForTrue": 0,
+  }
+];
 let IdCounter = 0;
 let subtasksArray =[];
 let categoryArray =[];
@@ -6,6 +34,22 @@ let prioArray = [];
 let editingSubtaskIndex = -1;
 let selectedCategoryId = null;
 let selectedContactDetails = [];
+
+
+
+function saveTask() {
+  let key = "addTask";
+  let value = tasks;
+  setItem(key, value);
+}
+
+function loadTask() {
+  let key = "addTask";
+  let toPush = cards;
+   getItem(key, cards);
+}
+
+
 
 function createTask(event){
   event.preventDefault();
