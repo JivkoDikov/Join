@@ -17,7 +17,6 @@ async function includeHTML() {
 
 async function render(){
 await includeHTML();
-saveTask();
 // saveBoard();
 // updateHTML();
 restoreSelectedLink();

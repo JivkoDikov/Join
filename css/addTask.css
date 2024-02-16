@@ -257,13 +257,14 @@ textarea {
 
 .assignedLetters {
   border: 2px solid white;
-  background-color: blueviolet;
+  color: #ffffff;
   border-radius: 50%;
   width: 30px;
   height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 14px;
 }
 
 .assignedContactSVG {
