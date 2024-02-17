@@ -37,17 +37,17 @@ let selectedContactDetails = [];
 
 
 
-function saveTask() {
-  let key = "addTask";
-  let value = tasks;
-  setItem(key, value);
-}
+// function saveTask() {
+//   let key = "addTask";
+//   let value = tasks;
+//   setItem(key, value);
+// }
 
-function loadTask() {
-  let key = "addTask";
-  let toPush = cards;
-   getItem(key, cards);
-}
+// function loadTask() {
+//   let key = "addTask";
+//   let toPush = cards;
+//    getItem(key, cards);
+// }
 
 
 

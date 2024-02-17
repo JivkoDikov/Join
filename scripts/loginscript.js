@@ -35,7 +35,7 @@ function checkLogin(event) {
 
 async function loadUser(){
     let users = await getItem('users');
-    userLogin = JSON.parse(users.data.value)
+    userLogin = JSON.parse(users.data.value);
     //userLogin = users.data.value
     // let user1 = userLogin.user[1].email
     // let pw = userLogin.user[1].password
