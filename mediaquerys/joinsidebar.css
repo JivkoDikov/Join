@@ -1,13 +1,24 @@
 @media (max-width: 800px) {
-  .sidebar-container {
+  .sideBarBox {
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
     top: unset;
     height: 80px;
-    width: 100%;
+    width: 100vw;
   }
+
+.sidebar-container{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+}
+
 
   .joinlogo,
   .linksBottom {

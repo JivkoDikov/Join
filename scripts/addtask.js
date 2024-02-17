@@ -36,22 +36,7 @@ let selectedCategoryId = null;
 let selectedContactDetails = [];
 
 
-
-// function saveTask() {
-//   let key = "addTask";
-//   let value = tasks;
-//   setItem(key, value);
-// }
-
-// function loadTask() {
-//   let key = "addTask";
-//   let toPush = cards;
-//    getItem(key, cards);
-// }
-
-
-
-function createTask(event){
+async function createTask(event){
   event.preventDefault();
     let headline = document.getElementById("enterTitle").value;
     let text = document.getElementById("enterDescription").value;
@@ -74,6 +59,7 @@ function createTask(event){
   console.log(newTask);
 
   tasks.push(newTask);
+  await setItem('tasks', tasks)
   document.getElementById("enterTitle").value = "";
   document.getElementById("enterDescription").value = "";
   document.getElementById("enterDate").value = "";
@@ -109,7 +95,8 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById("enterDate").value = getCurrentDate();
 });
 
-function toggleContacts() {
+ function toggleContacts() {
+  
   let contactsBox = document.getElementById('contactsBox');
   if (contactsBox.style.display === 'none' || contactsBox.innerHTML.trim() === '') {
     assignedTo(); 
@@ -119,30 +106,29 @@ function toggleContacts() {
   }
 }
 
-function assignedTo() {
+async function assignedTo() {
+  await load_contacts_from_webstorage();
+
   let contactsBox = document.getElementById('contactsBox');
   contactsBox.innerHTML = '';
 
-  let jsonString = localStorage.getItem('contacts');
-  let contacts = JSON.parse(jsonString);
+  for (let i = 0; i < contacts.guest.length; i++) {
+    const contact = contacts.guest[i];
+    let initials = getInitials(contact.name);
 
-  if (contacts && contacts.length > 0) {
-    contacts.forEach(contact => {
-      let initials = getInitials(contact.name);
-
-      contactsBox.innerHTML += /*html*/`
-        <div class="assignedContactsContainer">
-          <div class="assignedContactSVG">
-            <div class="letterContacts">
-              <div class="assignedLetters" style="background-color: ${contact.bgColor}">${initials}</div>
-              <span>${contact.name}</span>
-            </div>
-            <input id="assignedToContact_${contact.name}" type="checkbox" onchange="updateSelectedContacts('${initials}','${contact.bgColor}','${contact.name}', this)">
+    contactsBox.innerHTML += /*html*/`
+      <div class="assignedContactsContainer">
+        <div class="assignedContactSVG">
+          <div class="letterContacts">
+            <div class="assignedLetters" style="background-color: ${contact.bgColor}">${initials}</div>
+            <span>${contact.name}</span>
           </div>
-        </div>`;
-    });
+          <input id="assignedToContact_${contact.name}" type="checkbox" onchange="updateSelectedContacts('${initials}','${contact.bgColor}','${contact.name}', this)">
+        </div>
+      </div>`;
   }
 }
+
 
 
 function updateSelectedContacts(initials, bgColor, name, checkbox) {
@@ -369,11 +355,7 @@ function deleteSubTask(index){
   displaySubtasks();
 }
 
-function saveContactsInArray(){
-  let jsonString = localStorage.getItem("contacts")
-  let contacts = JSON.parse(jsonString)
-  console.log(contacts[0].name)
-}
+
 
 
 
@@ -395,4 +377,10 @@ function updateCategory(card, search) {
       }       
   }
   emptyCategory();
+}
+
+
+async function load_contacts_from_webstorage(){
+  let contactsValue = await getItem('contacts');
+  contacts = JSON.parse(contactsValue.data.value)
 }

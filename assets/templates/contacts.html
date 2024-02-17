@@ -18,10 +18,11 @@
     
 </head>
 <body id="body"onload="initContacts()">
-    <div w3-include-html= "/assets/templates/join_side_bar.html"></div>
-    <div w3-include-html="/assets/templates/header.html"></div>
+    <div class="sideBarBox" w3-include-html= "/assets/templates/join_side_bar.html"></div>
+    <div class="headerBox"w3-include-html="/assets/templates/header.html"></div>
     <div class="contentContact">
     <div id="addcontactContainer" class="addcontactContainer">
+      <div class=" addContactButtonContacts">
       <div class="addButtonContainer">
     <button onclick="addNewContact()"class="addContactButton">
         <div class="addContactButtonContainer">
@@ -59,6 +60,7 @@
     <div id="renderContactContainer" class="renderContactContainer">
       <div id="letterBox"></div>
     </div>
+      </div>
     </div>
     <div id="contactContainer"class="contactContainer">
         <div class="contactHeadline">
