@@ -94,9 +94,23 @@ let currentChecktContact = [];
 let user = [];
 
 
+// function saveBoard() {
+//     let key = "board";
+//     let value = cards;
+//     setItem(key, value);
+// }
 
-function updateHTML() {
-    getitem('tasks');
+// function loadBoard() {
+//     let key = "board";
+//     let toPush = cards;
+//      getItem(key, toPush);
+function initBoard(){
+    render();
+    updateHTML();
+}
+
+async function updateHTML() {
+    cards = await getItem('tasks');
     const categories = ['todo', 'progress', 'feedback', 'done'];
     for (const category of categories) {
         let categoryElements = cards.filter(t => t['category'] === category);
