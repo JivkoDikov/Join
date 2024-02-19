@@ -1,4 +1,4 @@
-let cards = {};
+let cards = [];
 
 let currentDraggedElement;
 let currentChecktContact = [];
@@ -16,8 +16,17 @@ async function load_tasks_from_webstorage(){
     cards = JSON.parse(cardsValue.data.value);
   }
 
+
+  async function load_contacts_from_webstorage(){
+    let contactsValue = await getItem('contacts');
+    contacts = JSON.parse(contactsValue.data.value)
+  }
+
+  
+
 async function updateHTML() {
-   await load_tasks_from_webstorage();
+    await load_tasks_from_webstorage();
+    
     const categories = ['todo', 'progress', 'feedback', 'done'];
     for (const category of categories) {
         let categoryElements = cards.filter(t => t['category'] === category);
@@ -26,7 +35,7 @@ async function updateHTML() {
             let element = categoryElements[i];
             document.getElementById(category).innerHTML += generateCardHTML(element);
             updateProgressBar(element);
-            subtasksCheck(element);
+            
             assignIcon(element);
         }
     }
@@ -164,14 +173,17 @@ function subtasksCheck(idOfCard) {
 
 
 function subtaskLoad(id) {
-    for (let i = 0; i < cards[id]['subtask'].length; i++) {
-        const specificSubtask = cards[id]['subtask'][i]['name'];
-        const isDone = cards[id]['subtask'][i]['done'];
+    if (cards[id] && cards[id]['subtask']) {
+        for (let i = 0; i < cards[id]['subtask'].length; i++) {
+            const specificSubtask = cards[id]['subtask'][i]['name'];
+            const isDone = cards[id]['subtask'][i]['done'];
 
-        let subtaskHTML = document.getElementById('unorderedListOfSubtask');
+            let subtaskHTML = document.getElementById('unorderedListOfSubtask');
             subtaskHTML.innerHTML += `<li><input type="checkbox" id="check${i}" ${isDone ? 'checked' : ''} onclick="subtasksCheckForTrue(${id}, ${i})">${specificSubtask}</li>`;
+        }
     }
 }
+
 
 
 function subtasksCheckForTrue(id, subtaskId) {
@@ -201,20 +213,20 @@ function subtasksCheckForTrue(id) {
 
 
 function updateProgressBar(element) {
-    
-    
-        let currentProgress = element['checkForTrue'];
-        let percent = currentProgress / element['subtask'].length ;
-            percent = Math.round(percent * 100);
-   
-         let progressBarId = `myProgressBar${element['id']}`;
-         let progressBar = document.getElementById(`progressBarId${element['id']}`);
-         progressBar.innerHTML = `<div class="progress-bar" id="${progressBarId}"></div>`;
-        
-        progressBar.style = `width: ${percent}%`;
-        progressBar.innerText = ''; 
-       console.log(percent); 
+    // Überprüft, ob element und element['subtask'] existieren
+    if (element && element['subtask']) {
+        let currentProgress = element['checkForTrue'] || 0; // Default-Wert hinzugefügt, falls checkForTrue nicht definiert ist
+        let totalSubtasks = element['subtask'].length;
+        let percent = totalSubtasks > 0 ? Math.round((currentProgress / totalSubtasks) * 100) : 0; // Verhindert Division durch Null
+
+        let progressBarId = `myProgressBar${element['id']}`;
+        let progressBar = document.getElementById(`progressBarId${element['id']}`);
+        if (progressBar) { // Überprüft, ob das progressBar-Element existiert
+            progressBar.innerHTML = `<div class="progress-bar" id="${progressBarId}" style="width: ${percent}%;">${percent}%</div>`;
+        }
+    }
 }
+
 
 
 function editCard(i) {
@@ -267,11 +279,33 @@ async function deleteCard(id) {
 }
 
 
-function prioEdit(prio, i, event) {
+async function prioEdit(prio, i, event) {
     event.preventDefault();
     let infoArrayCard = cards[i];
     infoArrayCard['priority'] = prio;
+    await setItem('tasks', cards);
 }
+
+function updatePrio(buttonId, event) {
+    event.preventDefault();
+    let selectedPrio0 = document.getElementById('btnUrgent');
+    let selectedPrio1 = document.getElementById('btnMedium');
+    let selectedPrio2 = document.getElementById('btnLow');
+      prioArray = buttonId;
+    if(buttonId === 0){
+      selectedPrio0.classList.add('activePrio0');
+      selectedPrio1.classList.remove('activePrio1');
+      selectedPrio2.classList.remove('activePrio2');
+    }else if (buttonId === 1) {
+      selectedPrio0.classList.remove('activePrio0');
+      selectedPrio1.classList.add('activePrio1');
+      selectedPrio2.classList.remove('activePrio2');
+    } else if (buttonId === 2) {
+      selectedPrio0.classList.remove('activePrio0');
+      selectedPrio1.classList.remove('activePrio1');
+      selectedPrio2.classList.add('activePrio2');
+    } 
+  }
 
 
 function assignedToEdit(element, b) {
@@ -288,6 +322,8 @@ function assignedToEdit(element, b) {
     }
     assignIcon(element);
 }
+
+
 
 function assignIcon(element) {
     let assignIcon = document.getElementById(`iconProfile${element['id']}`);

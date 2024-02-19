@@ -6,7 +6,7 @@ let prioArray = [];
 let editingSubtaskIndex = -1;
 let selectedCategoryId = null;
 let selectedContactDetails = [];
-let userID = localStorage.getItem('user');
+
 
 
 async function createTask(event){
@@ -27,12 +27,13 @@ async function createTask(event){
     user: selectedContactDetails,
     priority: prioArray,
     category: "todo",
-    date: date
+    date: date,
+    checkForTrue: 0,
   };
-  
+  console.log(newTask);
   
   tasks.push(newTask);
-  await setItem('tasks', tasks);
+  await setItem('tasks', tasks)
   document.getElementById("enterTitle").value = "";
   document.getElementById("enterDescription").value = "";
   document.getElementById("enterDate").value = "";
