@@ -1,111 +1,13 @@
-let cards = [
-    // {
-    //     "id" : 0,
-    //     "label" : "User Story",
-    //     "headline" : "Recommender",
-    //     "text": "Build start page with recipe recommendation...",
-    //     "user": [
-    //         {
-    //             "name": "Anton BAAA",
-    //             "bgColor": "rgb(255,200,50)",
-    //             "initials": "AB"
-    //         },
-    //         {
-    //             "name": "Anton BAAA",
-    //             "bgColor": "rgb(255,50,50)",
-    //             "initials": "AB"
-    //         },
-    //         {
-    //             "name": "Anton BAAA",
-    //             "bgColor": "rgb(205,100,50)",
-    //             "initials": "AB"
-    //         }
-    //     ],
-    //     "priority": 1,
-    //     "category": "progress",
-    //     "date": "2024-02-01",
-    //     "subtask": [
-    //         {
-    //             "name":"H",
-    //             "done": true
-    //         },
-    //     ],
-    //     "checkForTrue": 5,
-    // },
-    // {
-    //     "id" : 1,
-    //     "label" : "User Story",
-    //     "headline" : "Page",
-    //     "text": "Build start page with recipe recommendation...",
-    //     "user": [
-    //         {
-    //             "name": "Anton BAAA",
-    //             "bgColor": "rgb(255,200,50)",
-    //             "initials": "AB"
-    //         }
-    //     ],
-    //     "priority": 1,
-    //     "category": "todo",
-    //     "date": "01-01-2014",
-    //     "subtask": [
-    //         {
-    //             "name":"Hallo",
-    //             "done": false,
-                
-    //         },
-    //         {
-    //             "name":"Halloaaaa",
-    //             "done": false
-    //         },
-    //     ],
-    //     "checkForTrue": 0,
-    // },
-    // {
-    //     "id" : 2,
-    //     "label" : "User Story",
-    //     "headline" : "Recipe Recommender",
-    //     "text": "Build start page with recipe recommendation...",
-    //     "user": [
-    //         {
-    //             "name": "Anton BAAA",
-    //             "bgColor": "rgb(255,200,50)",
-    //             "initials": "AB"
-    //         }
-    //     ],
-    //     "priority": 1,
-    //     "category": "todo",
-    //     "date": "01-01-2014",
-    //     "subtask": [
-    //         {
-    //             "name":"BBBBBB",
-    //             "done": false
-    //         },
-    //         {
-    //             "name":"CCCCC",
-    //             "done": false
-    //         },
-    //     ],
-    //     "checkForTrue": 0,
-    // },
-]
+let cards = {};
 
 let currentDraggedElement;
 let currentChecktContact = [];
 let user = [];
-let userID = localStorage.getItem('user');
 
-// function saveBoard() {
-//     let key = "board";
-//     let value = cards;
-//     setItem(key, value);
-// }
 
-// function loadBoard() {
-//     let key = "board";
-//     let toPush = cards;
-//      getItem(key, toPush);
 function initBoard(){
     render();
+    
     updateHTML();
 }
 
@@ -115,7 +17,7 @@ async function load_tasks_from_webstorage(){
   }
 
 async function updateHTML() {
-    let cards = await getItem('tasks');
+   await load_tasks_from_webstorage();
     const categories = ['todo', 'progress', 'feedback', 'done'];
     for (const category of categories) {
         let categoryElements = cards.filter(t => t['category'] === category);
@@ -127,10 +29,12 @@ async function updateHTML() {
             subtasksCheck(element);
             assignIcon(element);
         }
-    }}
+    }
     emptyCategory();
-}
+  await setItem('board', cards);
+    
 
+}
 
 function startDragging(id) {
     currentDraggedElement = id;
@@ -350,10 +254,11 @@ function CardEditForm(event,i) {
 }
 
 
-function deleteCard(id) {
+async function deleteCard(id) {
     let index = cards.findIndex((card) => card.id === id);
     if (index !== -1) {
         cards.splice(index, 1);
+        await setItem('tasks', cards);
         updateHTML();
         closeOverview();
     } else {
@@ -381,6 +286,7 @@ function assignedToEdit(element, b) {
             <span>${userInitials['name']}</span>
         </div>`;
     }
+    assignIcon(element);
 }
 
 function assignIcon(element) {

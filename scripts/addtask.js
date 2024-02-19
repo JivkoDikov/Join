@@ -1,32 +1,4 @@
-let tasks = [
-  {
-        "id" : 2,
-        "label" : "User Story",
-        "headline" : "Recipe Recommender",
-        "text": "Build start page with recipe recommendation...",
-        "user": [
-            {
-                "name": "Anton BAAA",
-                "bgColor": "rgb(255,200,50)",
-                "initials": "AB"
-            }
-        ],
-        "priority": 1,
-        "category": "todo",
-        "date": "01-01-2014",
-        "subtask": [
-            {
-                "name":"BBBBBB",
-                "done": false
-            },
-            {
-                "name":"CCCCC",
-                "done": false
-            },
-        ],
-        "checkForTrue": 0,
-  }
-];
+let tasks = [];
 let IdCounter = 0;
 let subtasksArray =[];
 let categoryArray =[];
@@ -57,12 +29,10 @@ async function createTask(event){
     category: "todo",
     date: date
   };
-  console.log(newTask);
-  if (!tasks[userID]) {
-    tasks[userID] = []; 
-  }
-  tasks[userID].push(newTask);
-  await setItem('tasks', tasks)
+  
+  
+  tasks.push(newTask);
+  await setItem('tasks', tasks);
   document.getElementById("enterTitle").value = "";
   document.getElementById("enterDescription").value = "";
   document.getElementById("enterDate").value = "";
