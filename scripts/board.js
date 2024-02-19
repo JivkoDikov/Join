@@ -6,8 +6,9 @@ let user = [];
 let userID = localStorage.getItem('user');
 
 
-function initBoard(){
+async function initBoard(){  
     render();
+    await load_tasks_from_webstorage();
     updateHTML();
 }
 
@@ -25,8 +26,6 @@ async function load_tasks_from_webstorage(){
   
 
 async function updateHTML() {
-    await load_tasks_from_webstorage();
-    
     const categories = ['todo', 'progress', 'feedback', 'done'];
     for (const category of categories) {
         let categoryElements = cards.filter(t => t['category'] === category);
@@ -34,9 +33,9 @@ async function updateHTML() {
         for (let i = 0; i < categoryElements.length; i++) {
             let element = categoryElements[i];
             document.getElementById(category).innerHTML += generateCardHTML(element);
-            updateProgressBar(element);
-            
+            updateProgressBar(element);        
             assignIcon(element);
+            await setItem('tasks', cards);
         }
     }
     emptyCategory();
@@ -105,7 +104,7 @@ function emptyCategory() {
 
     if(emptyprogress.innerHTML === "") {
         emptyprogress.innerHTML += `
-                <div class="dropWindow" id="todo" ondrop="moveTo('todo')" ondragover="allowDrop(event)">
+                <div class="dropWindow" id="progress" ondrop="moveTo('progress')" ondragover="allowDrop(event)">
                     <div class="empty">
                         <span>No task Progress</span>
                     </div>
@@ -115,7 +114,7 @@ function emptyCategory() {
 
     if(emptyfeedback.innerHTML === "") {
         emptyfeedback.innerHTML += `
-                <div class="dropWindow" id="todo" ondrop="moveTo('todo')" ondragover="allowDrop(event)">
+                <div class="dropWindow" id="feedback" ondrop="moveTo('feedback')" ondragover="allowDrop(event)">
                     <div class="empty">
                         <span>No task Feedback</span>
                     </div>
@@ -125,7 +124,7 @@ function emptyCategory() {
 
     if(emptydone.innerHTML === "") {
         emptydone.innerHTML += `
-                <div class="dropWindow" id="todo" ondrop="moveTo('todo')" ondragover="allowDrop(event)">
+                <div class="dropWindow" id="done" ondrop="moveTo('done')" ondragover="allowDrop(event)">
                     <div class="empty">
                         <span>No task Done</span>
                     </div>
@@ -171,6 +170,7 @@ function subtasksCheck(idOfCard) {
 
 
 function subtaskLoad(id) {
+    console.log(cards[id]['subtask']);
     if (cards[id] && cards[id]['subtask']) {
         for (let i = 0; i < cards[id]['subtask'].length; i++) {
             const specificSubtask = cards[id]['subtask'][i]['name'];
@@ -211,18 +211,19 @@ function subtasksCheckForTrue(id) {
 
 
 function updateProgressBar(element) {
-    // Überprüft, ob element und element['subtask'] existieren
-    if (element && element['subtask']) {
-        let currentProgress = element['checkForTrue'] || 0; // Default-Wert hinzugefügt, falls checkForTrue nicht definiert ist
-        let totalSubtasks = element['subtask'].length;
-        let percent = totalSubtasks > 0 ? Math.round((currentProgress / totalSubtasks) * 100) : 0; // Verhindert Division durch Null
+    
+    
+    let currentProgress = element['checkForTrue'];
+    let percent = currentProgress / element['subtask'].length ;
+        percent = Math.round(percent * 100);
 
-        let progressBarId = `myProgressBar${element['id']}`;
-        let progressBar = document.getElementById(`progressBarId${element['id']}`);
-        if (progressBar) { // Überprüft, ob das progressBar-Element existiert
-            progressBar.innerHTML = `<div class="progress-bar" id="${progressBarId}" style="width: ${percent}%;">${percent}%</div>`;
-        }
-    }
+     let progressBarId = `myProgressBar${element['id']}`;
+     let progressBar = document.getElementById(`progressBarId${element['id']}`);
+     progressBar.innerHTML = `<div class="progress-bar" id="${progressBarId}"></div>`;
+    
+    progressBar.style = `width: ${percent}%`;
+    progressBar.innerText = ''; 
+   console.log(percent); 
 }
 
 
@@ -247,7 +248,7 @@ function editCard(i) {
 
 
 
-function CardEditForm(event,i) {
+async function CardEditForm(event,i) {
     event.preventDefault();
     let infoArrayCard = cards[i];
 
@@ -346,15 +347,16 @@ function toggleAssignedToBoard(i) {
     }
   }
   
-  function assignedToBoard() {
+  async function assignedToBoard() {
+    await load_contacts_from_webstorage();
     let contactsBox = document.getElementById('contactsBox');
     contactsBox.innerHTML = '';
-
+    console.log(contacts);
+    console.log(contacts[userID]);
     let uniqueUsers = {};
     currentChecktContact = [];
-    for (let i = 0; i < cards.length; i++) {
-        let users = cards[i]['user'];
-
+    for (let i = 0; i < contacts[userID].length; i++) {
+        let users = contacts[userID];
         for (let j = 0; j < users.length; j++) {
             let user = users[j];
             let key = user['name'] + user['bgColor'] + user['initials'];
@@ -365,16 +367,20 @@ function toggleAssignedToBoard(i) {
                     <div class="assignedContactsContainer">
                         <div class="assignedContactSVG">
                             <div class="letterContacts">
-                                <div class="assignedLetters" style="background-color: ${user['bgColor']}">${user['initials']}</div>
+                                <div class="assignedLetters" style="background-color: ${user['bgColor']}">${user['letter']}${user['lastNameLetter']}</div>
                                 <span>${user['name']}</span>
                             </div>
-                            <input id="assignedToContact_${user['name']}" type="checkbox" onchange="updateSelectedContacts('${user['initials']}', '${user['bgColor']}', '${user['name']}', this)">
+                            <input id="assignedToContact_${user['name']}" type="checkbox" onchange="updateSelectedContacts('${user['lastNameLetter']}', '${user['bgColor']}', '${user['name']}', this)">
                         </div>
                     </div>`;
             }
         }
     }
 }
+
+
+
+
 
 function updateSelectedContacts(initials, bgColor, name, checkbox) {
     if (checkbox.checked) {

@@ -23,7 +23,7 @@ async function createTask(event){
     headline: headline,
     text: text,
     progressBar:"",
-    subtasks: subtasksArray,
+    subtask: subtasksArray,
     user: selectedContactDetails,
     priority: prioArray,
     category: "todo",
@@ -114,9 +114,7 @@ function updateSelectedContacts(initials, bgColor, name, checkbox) {
     });
   } else {
     let index = selectedContactDetails.indexOf(initials, bgColor, name);
-    if (index !== -1) {
       selectedContactDetails.splice(index, 1);
-    }
   }
   console.log('Selected Contacts Initials:', selectedContactDetails);
 
