@@ -58,8 +58,10 @@ async function createTask(event){
     date: date
   };
   console.log(newTask);
-
-  tasks.push(newTask);
+  if (!tasks[userID]) {
+    tasks[userID] = [];
+  }
+  tasks[userID].push(newTask);
   await setItem('tasks', tasks)
   document.getElementById("enterTitle").value = "";
   document.getElementById("enterDescription").value = "";
