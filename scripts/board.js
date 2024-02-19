@@ -65,7 +65,13 @@ let cards = [
         "label" : "User Story",
         "headline" : "Recipe Recommender",
         "text": "Build start page with recipe recommendation...",
-        "user": currentChecktContact,
+        "user": [
+            {
+                "name": "Anton BAAA",
+                "bgColor": "rgb(255,200,50)",
+                "initials": "AB"
+            }
+        ],
         "priority": 1,
         "category": "todo",
         "date": "01-01-2014",
@@ -87,19 +93,10 @@ let currentDraggedElement;
 let currentChecktContact = [];
 let user = [];
 
-// function saveBoard() {
-//     let key = "board";
-//     let value = cards;
-//     setItem(key, value);
-// }
 
-// function loadBoard() {
-//     let key = "board";
-//     let toPush = cards;
-//      getItem(key, toPush);
-// }
 
 function updateHTML() {
+    getitem('tasks');
     const categories = ['todo', 'progress', 'feedback', 'done'];
     for (const category of categories) {
         let categoryElements = cards.filter(t => t['category'] === category);
@@ -421,7 +418,7 @@ function toggleAssignedToBoard(i) {
     }
 }
 
-function checkIfUserIsAssigned(initials, bgColor, name, checkbox) {
+function updateSelectedContacts(initials, bgColor, name, checkbox) {
     if (checkbox.checked) {
         currentChecktContact.push({
             name: name,
