@@ -103,10 +103,13 @@ let currentChecktContact = [];
 //     let key = "board";
 //     let toPush = cards;
 //      getItem(key, toPush);
-// }
+function initBoard(){
+    render();
+    updateHTML();
+}
 
-function updateHTML() {
-    loadTask();
+async function updateHTML() {
+    let cards = await getItem('tasks');
     const categories = ['todo', 'progress', 'feedback', 'done'];
     for (const category of categories) {
         let categoryElements = cards.filter(t => t['category'] === category);

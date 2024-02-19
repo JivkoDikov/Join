@@ -34,6 +34,7 @@ let prioArray = [];
 let editingSubtaskIndex = -1;
 let selectedCategoryId = null;
 let selectedContactDetails = [];
+let userID = localStorage.getItem('user');
 
 
 async function createTask(event){
@@ -112,8 +113,8 @@ async function assignedTo() {
   let contactsBox = document.getElementById('contactsBox');
   contactsBox.innerHTML = '';
 
-  for (let i = 0; i < contacts.guest.length; i++) {
-    const contact = contacts.guest[i];
+  for (let i = 0; i < contacts[userID].length; i++) {
+    const contact = contacts[userID][i];
     let initials = getInitials(contact.name);
 
     contactsBox.innerHTML += /*html*/`
