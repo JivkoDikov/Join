@@ -1,32 +1,4 @@
-let tasks = [
-  {
-        "id" : 2,
-        "label" : "User Story",
-        "headline" : "Recipe Recommender",
-        "text": "Build start page with recipe recommendation...",
-        "user": [
-            {
-                "name": "Anton BAAA",
-                "bgColor": "rgb(255,200,50)",
-                "initials": "AB"
-            }
-        ],
-        "priority": 1,
-        "category": "todo",
-        "date": "01-01-2014",
-        "subtask": [
-            {
-                "name":"BBBBBB",
-                "done": false
-            },
-            {
-                "name":"CCCCC",
-                "done": false
-            },
-        ],
-        "checkForTrue": 0,
-  }
-];
+let tasks = [];
 let IdCounter = 0;
 let subtasksArray =[];
 let categoryArray =[];
@@ -34,7 +6,7 @@ let prioArray = [];
 let editingSubtaskIndex = -1;
 let selectedCategoryId = null;
 let selectedContactDetails = [];
-let userID = localStorage.getItem('user');
+
 
 
 async function createTask(event){
@@ -55,13 +27,12 @@ async function createTask(event){
     user: selectedContactDetails,
     priority: prioArray,
     category: "todo",
-    date: date
+    date: date,
+    checkForTrue: 0,
   };
   console.log(newTask);
-  if (!tasks[userID]) {
-    tasks[userID] = [];
-  }
-  tasks[userID].push(newTask);
+  
+  tasks.push(newTask);
   await setItem('tasks', tasks)
   document.getElementById("enterTitle").value = "";
   document.getElementById("enterDescription").value = "";
