@@ -59,7 +59,7 @@ async function createTask(event){
   };
   console.log(newTask);
   if (!tasks[userID]) {
-    tasks[userID] = []; // Initialisiert ein neues Kontaktarray, falls der Benutzer noch nicht existiert
+    tasks[userID] = []; 
   }
   tasks[userID].push(newTask);
   await setItem('tasks', tasks)
