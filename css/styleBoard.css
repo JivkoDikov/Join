@@ -544,4 +544,13 @@ input[type=checkbox]:before {
     white-space: pre-line; /* Erlaubt Zeilenumbrüche */
 }
 
-
+.overlayAddTask {
+    width: unset!important;
+    padding: 0!important;
+    background-color: unset!important;
+    overflow-y: unset!important; 
+}
+.overlayAddTaskBorder {
+    width: unset!important;
+    padding: 18px!important;
+}

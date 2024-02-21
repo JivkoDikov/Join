@@ -11,12 +11,13 @@
     <link rel="stylesheet" href="/mediaquerys/joinsidebar.css">
     <link rel="stylesheet" href="/mediaquerys/header.css">
     <link rel="stylesheet" href="/mediaquerys/board-mediaquery.css">
+    <link rel="stylesheet" href="/mediaquerys/addtTask-mediaquery.css">
     
     <script src="/scripts/storage.js"></script>
-    <!-- <script src="/scripts/addtask.js"></script> -->
+    
     <script src="/scripts/board.js"></script>
     <script src="/scripts/script.js"></script>
-    
+    <script src="/scripts/addtask.js"></script>
     
     
 
@@ -41,7 +42,7 @@
             <div class="findTask">
                 <div class="searchBar">
                     <input id="search" type="text" placeholder="Find Task" onkeydown="search()">
-                    <button class="btn-search"><svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <button  class="btn-search"><svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <mask id="mask0_117793_5742" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
                         <rect width="32" height="32" fill="#fff"/>
                         </mask>
@@ -50,7 +51,7 @@
                         </g>
                         </svg></button>
                 </div>
-                <button class="btn-AddTask">Add task<svg width="25px" height="25px" viewBox="0 0 11 11" fill="FFF" xmlns="http://www.w3.org/2000/svg">
+                <button onclick="addTaskHTMLOpen('todo')" class="btn-AddTask">Add task<svg width="25px" height="25px" viewBox="0 0 11 11" fill="FFF" xmlns="http://www.w3.org/2000/svg">
                     <path d="M5.33325 1.5V9.5" stroke="white" stroke-width="1.3" stroke-linecap="round"/>
                     <path d="M9.33325 5.57544L1.33325 5.57544" stroke="white" stroke-width="1.3" stroke-linecap="round"/>
                     </svg>
@@ -65,7 +66,7 @@
             <div class="column">
                 <div class="addKanban">
                     <span>Todo</span>
-                    <svg class="addKanbanSVG" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg onclick="addTaskHTMLOpen('todo')" class="addKanbanSVG" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.33325 1.5V9.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                         <path d="M9.33325 5.57544L1.33325 5.57544" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                         </svg>
@@ -81,7 +82,7 @@
             <div class="column">
                 <div class="addKanban">
                     <span>In progress</span>
-                    <svg class="addKanbanSVG" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg onclick="addTaskHTMLOpen('progress')" class="addKanbanSVG" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.33325 1.5V9.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                         <path d="M9.33325 5.57544L1.33325 5.57544" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                         </svg>
@@ -95,7 +96,7 @@
             <div class="column">
                 <div class="addKanban">
                     <span>Await feedback</span>
-                    <svg class="addKanbanSVG" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg onclick="addTaskHTMLOpen('feedback')" class="addKanbanSVG" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.33325 1.5V9.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                         <path d="M9.33325 5.57544L1.33325 5.57544" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                     </svg>
@@ -108,7 +109,7 @@
             <div class="column">
                 <div class="addKanban">
                     <span>Done</span>
-                        <svg class="addKanbanSVG" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg onclick="addTaskHTMLOpen('done')"  class="addKanbanSVG" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5.33325 1.5V9.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                             <path d="M9.33325 5.57544L1.33325 5.57544" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                         </svg>

@@ -26,7 +26,7 @@ async function createTask(event){
     subtask: subtasksArray,
     user: selectedContactDetails,
     priority: prioArray,
-    category: "todo",
+    category: categorys,
     date: date,
     checkForTrue: 0,
   };
@@ -40,6 +40,7 @@ async function createTask(event){
   document.getElementById("addSubTasks").value = "";
   subtasksArray = [];
   categoryArray = [];
+  categorys = [];
   
 }
 
