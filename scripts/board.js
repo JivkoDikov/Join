@@ -3,8 +3,6 @@ let cards = [];
 let currentDraggedElement;
 let currentChecktContact = [];
 let user = [];
-let userID = localStorage.getItem('user');
-let categorys = [];
 
 async function initBoard(){  
     render();
@@ -39,8 +37,10 @@ async function updateHTML() {
         }
     }
     emptyCategory();
-}
+  await setItem('board', cards);
+    
 
+}
 
 function startDragging(id) {
     currentDraggedElement = id;
@@ -319,6 +319,7 @@ function assignedToEdit(element, b) {
             <span>${userInitials['name']}</span>
         </div>`;
     }
+    assignIcon(element);
 }
 
 
