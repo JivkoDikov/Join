@@ -557,3 +557,7 @@ input[type=checkbox]:before {
     width: unset!important;
     padding: 18px!important;
 }
+
+.closeTask{
+    cursor: pointer;
+  }

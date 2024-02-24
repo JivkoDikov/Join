@@ -6,10 +6,13 @@ let editingSubtaskIndex = -1;
 let selectedCategoryId = null;
 let selectedContactDetails = [];
 let tasks = {};
-
+let newcategoryTask = [];
 
 async function createTask(event){
   event.preventDefault();
+  newcategoryTask = await createTaskCategory();
+  console.log(newcategoryTask);
+  let newcategory = newcategoryTask[0];
     let headline = document.getElementById("enterTitle").value;
     let text = document.getElementById("enterDescription").value;
     let date = document.getElementById("enterDate").value;
@@ -27,7 +30,7 @@ async function createTask(event){
     subtasks: subtasksArray,
     user: selectedContactDetails,
     priority: prioArray,
-    category: "todo",
+    category: newcategory,
     date: date
   };
   console.log(newTask);
@@ -43,7 +46,9 @@ async function createTask(event){
   document.getElementById("addSubTasks").value = "";
   subtasksArray = [];
   categoryArray = [];
-  updateHTML();
+  initBoard();
+  // let todocategory = ['todo'];
+  // await setItem('newcategory', todocategory);
 }
 
 function inputFrame(id){

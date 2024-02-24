@@ -14,6 +14,7 @@ async function initBoard(){
 
 async function updateHTML() {
     cards = await loadTasks(userID);
+    console.log(cards);
     const categories = ['todo', 'progress', 'feedback', 'done'];
     for (const category of categories) {
         let categoryElements = cards.filter(t => t['category'] === category);
@@ -23,7 +24,6 @@ async function updateHTML() {
             document.getElementById(category).innerHTML += generateCardHTML(element);
             updateProgressBar(element);        
             assignIcon(element);
-            
         }
     }
     emptyCategory();
@@ -142,22 +142,6 @@ function closeOverview() {
 }
 
 
-// function subtasksCheck(idOfCard) {
-//     let id = idOfCard['id'];
-//     let subtasks = idOfCard['subtask'] ? idOfCard['subtask'].length : 0;       // überprüft ob subtask definiert ist
-//     let trueCount = 0;
-//     for (let i = 0; i < subtasks; i++) {            // Iteration bis zur Länge des subtask-Arrays oder 0, wenn es nicht definiert ist
-//         let check = idOfCard['subtask'][i]['done'];
-//         if(check === true){
-//             trueCount++;
-//             console.log(trueCount);
-//         }
-//     } 
-//     let subtaskHTMLCount = document.getElementById(`subtaskBar${id}`);
-//     subtaskHTMLCount.innerHTML = `<span>${trueCount}/${subtasks} Subtasks</span>`;
-// }
-
-
 function subtasksCheck(element) {
     let id = element.id;
     let subtasks = element.subtasks ? element.subtasks.length : 0;
@@ -165,7 +149,7 @@ function subtasksCheck(element) {
     for (let i = 0; i < subtasks; i++) {           
         if(element.subtasks[i].done === true){
             trueCount++;
-            console.log(trueCount);
+            
         }
     } 
     let subtaskHTMLCount = document.getElementById(`subtaskBar${id}`);
@@ -369,10 +353,8 @@ function toggleAssignedToBoard(i) {
     let contactsBox = document.getElementById('contactsBox');
     contactsBox.innerHTML = '';
     let uniqueUsers = {};
-     // Diese Zeile könnte entfernt werden, wenn Sie die ausgewählten Kontakte beibehalten möchten.
     let users = contacts[userID];
     
-    // Bereits zugewiesene Kontakte für diese Karte
     let assignedContacts = cards[i]['user'] || [];
   
     for (let j = 0; j < users.length; j++) {
@@ -386,7 +368,6 @@ function toggleAssignedToBoard(i) {
                 initials: user['lastNameLetter']
             };
   
-            // Überprüfen, ob der Kontakt bereits zugewiesen wurde
             let isChecked = assignedContacts.some(assignedUser => assignedUser.name === contactUser.name && assignedUser.bgColor === contactUser.bgColor) ? 'checked' : '';
   
             contactsBox.innerHTML += /*html*/`
@@ -411,13 +392,12 @@ function toggleAssignedToBoard(i) {
 
 
   function updateSelectedContactsBoard(initials, bgColor, name, id, checkbox) {
-    let key = name + bgColor; // Schlüssel zur Identifizierung des Kontakts
+    let key = name + bgColor; 
 
     if (checkbox.checked) {
-        // Prüfen, ob der Kontakt bereits im Array ist
+       
         let isContactAlreadyAdded = currentChecktContact.some(contact => contact.name + contact.bgColor === key);
 
-        // Nur hinzufügen, wenn der Kontakt noch nicht vorhanden ist
         if (!isContactAlreadyAdded) {
             currentChecktContact.push({
                 name: name,
@@ -426,12 +406,10 @@ function toggleAssignedToBoard(i) {
             });
         }
     } else {
-        // Kontakt aus dem Array entfernen, wenn das Kontrollkästchen nicht markiert ist
-        // Anstatt das gesamte Array zurückzusetzen, entferne nur den spezifischen Kontakt
+        
         currentChecktContact = currentChecktContact.filter(contact => !(contact.name === name && contact.bgColor === bgColor));
     }
 
-    // Aktualisieren des cards-Arrays und der HTML-Ansicht
     let cardsId = cards.find(card => card.id === id);
     console.log(cardsId['user']);
     cardsId['user'] = currentChecktContact;
@@ -441,14 +419,16 @@ function toggleAssignedToBoard(i) {
 
 
 
-function addTaskHTMLOpen(category) {
+async function addTaskHTMLOpen(category) {
     console.log(category);
     categorys.push(category);
     let openAddTask = document.getElementById('overlay');
     openAddTask.innerHTML = '';
     openAddTask.innerHTML = addTaskHTML();
     openAddTask.classList.remove('d-none');
-    
+    await setItem('newcategory', categorys);
+    categorys = [];
+    updateHTML();
 }
 
 function addTaskHTMLClose() {
@@ -535,7 +515,7 @@ function generateCardHTML(element) {
 }
 
 
-function generateOverviewHTML(element, b) {
+function generateOverviewHTML(element) {
     let id = element['id'];
     
     let prioritySVG = priorityCheck(element);
@@ -759,8 +739,18 @@ function addTaskHTML() {
     <div class="overview">
     <div class="overlayCard overlayAddTaskBorder">
     <div class="contentAddTask overlayAddTask">
+    <div  class="addTaskHeadlineContainer">
     <h1 class="addTaskHeadline">Add Task</h1>
-    <button onclick="addTaskHTMLClose()">Close</button>
+    <svg onclick="addTaskHTMLClose()" class="closeTask" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <mask id="mask0_117793_4210" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="4" width="24" height="24">
+    <rect x="4" y="4" width="24" height="24" fill="#D9D9D9"/>
+    </mask>
+    <g mask="url(#mask0_117793_4210)">
+    <path d="M16 17.4L11.1 22.3C10.9167 22.4834 10.6833 22.575 10.4 22.575C10.1167 22.575 9.88332 22.4834 9.69999 22.3C9.51665 22.1167 9.42499 21.8834 9.42499 21.6C9.42499 21.3167 9.51665 21.0834 9.69999 20.9L14.6 16L9.69999 11.1C9.51665 10.9167 9.42499 10.6834 9.42499 10.4C9.42499 10.1167 9.51665 9.88338 9.69999 9.70005C9.88332 9.51672 10.1167 9.42505 10.4 9.42505C10.6833 9.42505 10.9167 9.51672 11.1 9.70005L16 14.6L20.9 9.70005C21.0833 9.51672 21.3167 9.42505 21.6 9.42505C21.8833 9.42505 22.1167 9.51672 22.3 9.70005C22.4833 9.88338 22.575 10.1167 22.575 10.4C22.575 10.6834 22.4833 10.9167 22.3 11.1L17.4 16L22.3 20.9C22.4833 21.0834 22.575 21.3167 22.575 21.6C22.575 21.8834 22.4833 22.1167 22.3 22.3C22.1167 22.4834 21.8833 22.575 21.6 22.575C21.3167 22.575 21.0833 22.4834 20.9 22.3L16 17.4Z" fill="#2A3647"/>
+    </g>
+    </svg>
+    </div>
+    
 <form onsubmit="createTask(event)">
     <div class="contentLeft-Right">
 

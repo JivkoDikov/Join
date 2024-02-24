@@ -30,7 +30,7 @@
         <div class="boardHeader">
             <div class="headlineAddTaskMobile">
             <h1>Board</h1>
-            <svg class="plusAddTaskMobile d-none" width="40" height="40" viewBox="0 0 40 40" fill="" xmlns="http://www.w3.org/2000/svg">
+            <svg onclick="addTaskHTMLOpen('todo')" class="plusAddTaskMobile d-none" width="40" height="40" viewBox="0 0 40 40" fill="" xmlns="http://www.w3.org/2000/svg">
                 <rect width="40" height="40" rx="10" fill="#2A3647"/>
                 <path d="M20 10V30" stroke="white" stroke-width="2" stroke-linecap="round"/>
                 <path d="M30 20L10.0005 20.138" stroke="white" stroke-width="2" stroke-linecap="round"/>
@@ -64,7 +64,7 @@
             <div class="column">
                 <div class="addKanban">
                     <span>Todo</span>
-                    <svg onclick="addTaskHTMLOpen('todo')" class="addKanbanSVG" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg onclick="addTaskHTMLOpen('todo')" class="addKanbanSVG closeTask" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.33325 1.5V9.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                         <path d="M9.33325 5.57544L1.33325 5.57544" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                         </svg>
@@ -80,7 +80,7 @@
             <div class="column">
                 <div class="addKanban">
                     <span>In progress</span>
-                    <svg onclick="addTaskHTMLOpen('progress')" class="addKanbanSVG" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg onclick="addTaskHTMLOpen('progress')" class="addKanbanSVG closeTask" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.33325 1.5V9.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                         <path d="M9.33325 5.57544L1.33325 5.57544" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                         </svg>
@@ -94,7 +94,7 @@
             <div class="column">
                 <div class="addKanban">
                     <span>Await feedback</span>
-                    <svg onclick="addTaskHTMLOpen('feedback')" class="addKanbanSVG" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg onclick="addTaskHTMLOpen('feedback')" class="addKanbanSVG closeTask" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.33325 1.5V9.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                         <path d="M9.33325 5.57544L1.33325 5.57544" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                     </svg>
@@ -107,7 +107,7 @@
             <div class="column">
                 <div class="addKanban">
                     <span>Done</span>
-                        <svg onclick="addTaskHTMLOpen('done')"  class="addKanbanSVG" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg onclick="addTaskHTMLOpen('done')"  class="addKanbanSVG closeTask" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5.33325 1.5V9.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                             <path d="M9.33325 5.57544L1.33325 5.57544" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                         </svg>

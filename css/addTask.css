@@ -775,3 +775,12 @@ textarea {
 .activePrio0 p{
   color: #FFF;
 }
+
+.addTaskHeadlineContainer{
+  display: flex;
+  justify-content: space-between;
+}
+
+.closeTask{
+  cursor: pointer;
+}

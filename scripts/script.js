@@ -40,6 +40,14 @@ async function loadTasks(userID){
   return tasks[userID];
 }
 
+async function createTaskCategory(){
+  let taskCategory = await getItem('newcategory');
+  let categorys = JSON.parse(taskCategory.data.value);
+  console.log(categorys);
+  return categorys; 
+}
+
+
 async function checkStorageData(key){
   let valueKey = await getItem(key);
   let parsedStorageData = JSON.parse(valueKey.data.value || '{}'); 
