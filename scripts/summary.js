@@ -18,7 +18,7 @@ async function renderSummary(){
     summaryTask = await loadTasks(userID);
     takeInfoSummary(summaryTask);
     prioritySummary(summaryTask);
-    parseDate();
+    parseDate(summaryTask);
     bodySummary();
 }
 
@@ -119,13 +119,17 @@ function prioritySummary(summaryTask) {
     });
 }
 
-function parseDate() {
-    let earliestCard = summaryTask
-    .filter(card => !isNaN(new Date(card.date).getTime()))
-    .sort((a, b) => new Date(a.date) - new Date(b.date))[0]; 
+function parseDate(summaryTask) {
+  
+    let filteredCards = summaryTask.filter(card => card.priority === 2 && !isNaN(new Date(card.date).getTime()));
+    let sortedCards = filteredCards.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-    upcomingDate.push(earliestCard.date); 
+    let earliestCard = sortedCards[0];
+    if (earliestCard) {
+        upcomingDate.push(earliestCard.date);
+    }
 }
+
 
 function bodySummary() {
     let bodySummary = document.getElementById('bodySummaryID');
