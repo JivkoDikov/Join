@@ -17,13 +17,13 @@
     <title>Add Task</title>
   </head>
 
-  <body onload="render()">
+  <body onload="render(), loadTasks()">
     <div class="sideBarBox" w3-include-html="/assets/templates/join_side_bar.html"></div>
     <div class="headerBox" w3-include-html="/assets/templates/header.html"></div>
 
     <div class="contentAddTask">
       <h1 class="addTaskHeadline">Add Task</h1>
-<form onsubmit="createTask(event)">
+<form  onsubmit="createTask(event)" id="newTaskForm">
       <div class="contentLeft-Right">
 
         <div class="contentLeft">

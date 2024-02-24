@@ -1,4 +1,4 @@
-let userLogin = [];
+let userLogin = { user: [] };
 let signupCounter = {
     nameCounter: 0,
     emailCounter: 0,
@@ -33,16 +33,13 @@ function checkLogin(event) {
     }
 }
 
-async function loadUser(){
-    let users = await getItem('users');
-    userLogin = JSON.parse(users.data.value);
-    //userLogin = users.data.value
-    // let user1 = userLogin.user[1].email
-    // let pw = userLogin.user[1].password
-    // console.log(user1 +" & "+ pw)
-}
 
-
+async function loadUser() {
+        let key = 'users';
+        let [boolean, storageData] = await checkStorageData(key);
+        if(boolean == true){
+        userLogin = storageData;
+        }}
 
 function guestLogin(){
     localStorage.setItem('user', 'guest');
@@ -65,8 +62,12 @@ async function signup(event){
 }
 
 async function checkUserDatabase(emailValue){
+    if (userLogin && Array.isArray(userLogin.user)){
     let emailExists = userLogin.user.findIndex(user => user.email === emailValue);
-    return emailExists
+    return emailExists}
+    else{
+        return -1;
+    }
   }
 
 function setUser(name, email, password){

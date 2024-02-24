@@ -4,26 +4,28 @@ let currentDraggedElement;
 let currentChecktContact = [];
 let user = [];
 
+let categorys = [];
+
 async function initBoard(){  
     render();
-    await load_tasks_from_webstorage();
     updateHTML();
 }
 
-async function load_tasks_from_webstorage(){
-    let cardsValue = await getItem('tasks');
-    cards = JSON.parse(cardsValue.data.value);
-  }
+// async function load_tasks_from_webstorage(){
+//     let cardsValue = await getItem('tasks');
+//     cards = JSON.parse(cardsValue.data.value);
+//   }
 
 
-  async function load_contacts_from_webstorage(){
-    let contactsValue = await getItem('contacts');
-    contacts = JSON.parse(contactsValue.data.value)
-  }
+//   async function load_contacts_from_webstorage(){
+//     let contactsValue = await getItem('contacts');
+//     contacts = JSON.parse(contactsValue.data.value)
+//   }
 
   
 
 async function updateHTML() {
+    cards = await loadTasks(userID);
     const categories = ['todo', 'progress', 'feedback', 'done'];
     for (const category of categories) {
         let categoryElements = cards.filter(t => t['category'] === category);
@@ -33,17 +35,15 @@ async function updateHTML() {
             document.getElementById(category).innerHTML += generateCardHTML(element);
             updateProgressBar(element);        
             assignIcon(element);
-            await setItem('tasks', cards);
+            
         }
     }
     emptyCategory();
-  await setItem('board', cards);
-    
 
 }
 
 function startDragging(id) {
-    currentDraggedElement = id;
+    currentDraggedElement = cards.find(card => card.id === id);
 }
 
 
@@ -52,10 +52,11 @@ function allowDrop(ev) {
 }
 
 
-function moveTo(category) {
-    cards[currentDraggedElement]['category'] = category;
-    updateHTML();
-}
+async function moveTo(category) {
+        currentDraggedElement.category = category;
+        await setItem('tasks', tasks)    
+        updateHTML(); 
+    }
 
 
 function search() {
@@ -86,7 +87,7 @@ function updateCategory(card, category, search) {
 }
 
 
-function emptyCategory() {
+function emptyCategory(id) {
     let emptytodo = document.getElementById('todo');
     let emptyprogress = document.getElementById('progress');
     let emptyfeedback = document.getElementById('feedback');
@@ -94,7 +95,7 @@ function emptyCategory() {
 
     if(emptytodo.innerHTML === "") {
         emptytodo.innerHTML += `
-                <div class="dropWindow" id="todo" ondrop="moveTo('todo')" ondragover="allowDrop(event)">
+                <div class="dropWindow" id="todo" ondrop="moveTo( 'todo')" ondragover="allowDrop(event)">
                     <div class="empty">
                         <span>No task To do</span>
                     </div>
@@ -104,7 +105,7 @@ function emptyCategory() {
 
     if(emptyprogress.innerHTML === "") {
         emptyprogress.innerHTML += `
-                <div class="dropWindow" id="progress" ondrop="moveTo('progress')" ondragover="allowDrop(event)">
+                <div class="dropWindow" id="progress" ondrop="moveTo( 'progress')" ondragover="allowDrop(event)">
                     <div class="empty">
                         <span>No task Progress</span>
                     </div>
@@ -114,7 +115,7 @@ function emptyCategory() {
 
     if(emptyfeedback.innerHTML === "") {
         emptyfeedback.innerHTML += `
-                <div class="dropWindow" id="feedback" ondrop="moveTo('feedback')" ondragover="allowDrop(event)">
+                <div class="dropWindow" id="feedback" ondrop="moveTo( 'feedback')" ondragover="allowDrop(event)">
                     <div class="empty">
                         <span>No task Feedback</span>
                     </div>
@@ -124,7 +125,7 @@ function emptyCategory() {
 
     if(emptydone.innerHTML === "") {
         emptydone.innerHTML += `
-                <div class="dropWindow" id="done" ondrop="moveTo('done')" ondragover="allowDrop(event)">
+                <div class="dropWindow" id="done" ondrop="moveTo( 'done')" ondragover="allowDrop(event)">
                     <div class="empty">
                         <span>No task Done</span>
                     </div>
@@ -153,13 +154,28 @@ function closeOverview() {
 }
 
 
-function subtasksCheck(idOfCard) {
-    let id = idOfCard['id'];
-    let subtasks = idOfCard['subtask'] ? idOfCard['subtask'].length : 0;       // überprüft ob subtask definiert ist
+// function subtasksCheck(idOfCard) {
+//     let id = idOfCard['id'];
+//     let subtasks = idOfCard['subtask'] ? idOfCard['subtask'].length : 0;       // überprüft ob subtask definiert ist
+//     let trueCount = 0;
+//     for (let i = 0; i < subtasks; i++) {            // Iteration bis zur Länge des subtask-Arrays oder 0, wenn es nicht definiert ist
+//         let check = idOfCard['subtask'][i]['done'];
+//         if(check === true){
+//             trueCount++;
+//             console.log(trueCount);
+//         }
+//     } 
+//     let subtaskHTMLCount = document.getElementById(`subtaskBar${id}`);
+//     subtaskHTMLCount.innerHTML = `<span>${trueCount}/${subtasks} Subtasks</span>`;
+// }
+
+
+function subtasksCheck(element) {
+    let id = element.id;
+    let subtasks = element.subtasks ? element.subtasks.length : 0;
     let trueCount = 0;
-    for (let i = 0; i < subtasks; i++) {            // Iteration bis zur Länge des subtask-Arrays oder 0, wenn es nicht definiert ist
-        let check = idOfCard['subtask'][i]['done'];
-        if(check === true){
+    for (let i = 0; i < subtasks; i++) {           
+        if(element.subtasks[i].done === true){
             trueCount++;
             console.log(trueCount);
         }
@@ -168,40 +184,48 @@ function subtasksCheck(idOfCard) {
     subtaskHTMLCount.innerHTML = `<span>${trueCount}/${subtasks} Subtasks</span>`;
 }
 
-
 function subtaskLoad(id) {
-    console.log(cards[id]['subtask']);
-    if (cards[id] && cards[id]['subtask']) {
-        for (let i = 0; i < cards[id]['subtask'].length; i++) {
-            const specificSubtask = cards[id]['subtask'][i]['name'];
-            const isDone = cards[id]['subtask'][i]['done'];
+    let card = cards.find(card => card.id === id);
+    if (card && Array.isArray(card.subtasks) && card.subtasks.length > 0) {
+        for (let i = 0; i < card.subtasks.length; i++) {
+            const specificSubtask = card.subtasks[i].name;
+            const isDone = card.subtasks[i].done;
 
-            let subtaskHTML = document.getElementById('unorderedListOfSubtask');
+        let subtaskHTML = document.getElementById('unorderedListOfSubtask');
             subtaskHTML.innerHTML += `<li><input type="checkbox" id="check${i}" ${isDone ? 'checked' : ''} onclick="subtasksCheckForTrue(${id}, ${i})">${specificSubtask}</li>`;
-        }
-    }
+    }}
 }
 
 
 
-function subtasksCheckForTrue(id, subtaskId) {
-    const checkbox = document.getElementById(`check${subtaskId}`);
-        cards[id]['subtask'][subtaskId]['done'] = checkbox.checked;
+function subtasksCheckForTrue(cardId, subtaskID) {
+    let checkbox = document.getElementById(`check${subtaskID}`).checked;
+    let card = cards.find(card => card.id === cardId);
+
+        if(checkbox === true) {
+            card.subtasks[subtaskID].done = true;
+        }else if(checkbox === false) {
+            card.subtasks[subtaskID].done = false;}
+        
+
+    subtasksCheck(card);
+    updateProgressBar(card);
 }
 
 
 function subtasksCheckForTrue(id) {
     let checkForTrue = 0;
-    let element = cards[id];
-    for (let i = 0; i < cards[id]['subtask'].length; i++) {
+    let element = cards.find(card => card.id === id);
+    console.log(element);
+    for (let i = 0; i < element['subtasks'].length; i++) {
         let checkboxClick = document.getElementById(`check${i}`).checked
         if(checkboxClick === true) {
-            cards[id]['subtask'][i]['done'] = true;
+            cards[id]['subtasks'][i]['done'] = true;
             checkForTrue++;
             cards[id]['checkForTrue'] = checkForTrue;
         }else if(checkboxClick === false) {
-            cards[id]['subtask'][i]['done'] = false;}
-        if(checkboxClick && cards[id]['subtask'][i]['done'] === false) {
+            cards[id]['subtasks'][i]['done'] = false;}
+        if(checkboxClick && cards[id]['subtasks'][i]['done'] === false) {
             checkForTrue--; }
     }
     cards[id]['checkForTrue'] = checkForTrue;
@@ -211,11 +235,17 @@ function subtasksCheckForTrue(id) {
 
 
 function updateProgressBar(element) {
-    
-    
-    let currentProgress = element['checkForTrue'];
-    let percent = currentProgress / element['subtask'].length ;
+    let currentProgress = 0;
+    let percent = 0;
+    if(Array.isArray(element.subtasks) && element.subtasks.length > 0){
+        for(let i = 0; i < element.subtasks.length; i++){
+            if(element.subtasks[i].done === true){
+                currentProgress++
+            }
+        }
+        percent = currentProgress / element.subtasks.length ;
         percent = Math.round(percent * 100);
+    }
 
      let progressBarId = `myProgressBar${element['id']}`;
      let progressBar = document.getElementById(`progressBarId${element['id']}`);
@@ -223,18 +253,17 @@ function updateProgressBar(element) {
     
     progressBar.style = `width: ${percent}%`;
     progressBar.innerText = ''; 
-   console.log(percent); 
 }
 
 
 
-function editCard(i) {
+function editCard(cardId) {
 
-    let infoArrayCard = cards[i];
+    let infoArrayCard = cards.find(card => card.id === cardId);
 
     let overlay = document.getElementById('overlay');
     overlay.innerHTML = '';
-    overlay.innerHTML = overviewEditHTML(i);
+    overlay.innerHTML = overviewEditHTML(cardId);
     overlay.classList.remove('d-none');
 
     let title = document.getElementById('editTitle');
@@ -248,17 +277,18 @@ function editCard(i) {
 
 
 
-async function CardEditForm(event,i) {
+async function CardEditForm(event,cardId) {
     event.preventDefault();
-    let infoArrayCard = cards[i];
+    let infoArrayCard = cards.find(card => card.id === cardId);
 
     let titleEdit = document.getElementById('editTitle').value;
     let textareaEdit = document.getElementById('editTextarea').value;
     let dateEdit = document.getElementById('editDate').value;
 
-    infoArrayCard['headline'] = titleEdit;
-    infoArrayCard['text'] = textareaEdit;
-    infoArrayCard['date'] = dateEdit;
+    infoArrayCard.headline = titleEdit;
+    infoArrayCard.text = textareaEdit;
+    infoArrayCard.date = dateEdit;
+    await setItem('tasks', tasks)
     closeOverview();
     updateHTML();
     
@@ -269,42 +299,40 @@ async function deleteCard(id) {
     let index = cards.findIndex((card) => card.id === id);
     if (index !== -1) {
         cards.splice(index, 1);
-        await setItem('tasks', cards);
+        await setItem('tasks', tasks);
         updateHTML();
         closeOverview();
-    } else {
-        console.error("Card not found");
     }
 }
 
 
-async function prioEdit(prio, i, event) {
-    event.preventDefault();
-    let infoArrayCard = cards[i];
-    infoArrayCard['priority'] = prio;
-    await setItem('tasks', cards);
-}
-
-function updatePrio(buttonId, event) {
-    event.preventDefault();
+function prioEdit(prioID,cardId, event){
+    event.preventDefault()
+    const buttonCount = 3;
+    let card = cards.find(card => card.id === cardId)
+    card.priority = prioID
+   
     let selectedPrio0 = document.getElementById('btnUrgent');
     let selectedPrio1 = document.getElementById('btnMedium');
     let selectedPrio2 = document.getElementById('btnLow');
-      prioArray = buttonId;
-    if(buttonId === 0){
+      prioArray = prioID;
+    if(prioArray === 0){
       selectedPrio0.classList.add('activePrio0');
       selectedPrio1.classList.remove('activePrio1');
       selectedPrio2.classList.remove('activePrio2');
-    }else if (buttonId === 1) {
+    }else if (prioArray === 1) {
       selectedPrio0.classList.remove('activePrio0');
       selectedPrio1.classList.add('activePrio1');
       selectedPrio2.classList.remove('activePrio2');
-    } else if (buttonId === 2) {
+    } else if (prioArray === 2) {
       selectedPrio0.classList.remove('activePrio0');
       selectedPrio1.classList.remove('activePrio1');
       selectedPrio2.classList.add('activePrio2');
     } 
-  }
+    }
+
+
+
 
 
 function assignedToEdit(element, b) {
@@ -326,7 +354,7 @@ function assignedToEdit(element, b) {
 
 function assignIcon(element) {
     let assignIcon = document.getElementById(`iconProfile${element['id']}`);
-    
+    assignIcon.innerHTML = '';
 
     for (let i = 0; i < element['user'].length; i++) {
         let icon = element['user'][i];
@@ -348,59 +376,82 @@ function toggleAssignedToBoard(i) {
     }
   }
   
-  async function assignedToBoard() {
+  async function assignedToBoard(i) {
     await load_contacts_from_webstorage();
     let contactsBox = document.getElementById('contactsBox');
     contactsBox.innerHTML = '';
-    console.log(contacts);
-    console.log(contacts[userID]);
     let uniqueUsers = {};
-    currentChecktContact = [];
-    for (let i = 0; i < contacts[userID].length; i++) {
-        let users = contacts[userID];
-        for (let j = 0; j < users.length; j++) {
-            let user = users[j];
-            let key = user['name'] + user['bgColor'] + user['initials'];
-
-            if (!uniqueUsers[key]) {
-                uniqueUsers[key] = true;
-                contactsBox.innerHTML += /*html*/`
-                    <div class="assignedContactsContainer">
-                        <div class="assignedContactSVG">
-                            <div class="letterContacts">
-                                <div class="assignedLetters" style="background-color: ${user['bgColor']}">${user['letter']}${user['lastNameLetter']}</div>
-                                <span>${user['name']}</span>
-                            </div>
-                            <input id="assignedToContact_${user['name']}" type="checkbox" onchange="updateSelectedContacts('${user['lastNameLetter']}', '${user['bgColor']}', '${user['name']}', this)">
-                        </div>
-                    </div>`;
-            }
-        }
-    }
-}
-
-
-
-
-
-function updateSelectedContacts(initials, bgColor, name, checkbox) {
-    if (checkbox.checked) {
-        currentChecktContact.push({
-            name: name,
-            bgColor: bgColor,
-            initials: initials
+     // Diese Zeile könnte entfernt werden, wenn Sie die ausgewählten Kontakte beibehalten möchten.
+    let users = contacts[userID];
+    
+    // Bereits zugewiesene Kontakte für diese Karte
+    let assignedContacts = cards[i]['user'] || [];
+  
+    for (let j = 0; j < users.length; j++) {
+        let user = users[j];
+        let key = user['name'] + user['bgColor'];
         
-        });
-    } else {
-        for (let k = 0; k < currentChecktContact.length; k++) {
-            if (currentChecktContact[k].name === name) {
-                currentChecktContact.splice(k, 1);
-                break;
-            }
+        if (!uniqueUsers[key]) {
+            let contactUser = {
+                name: user['name'],
+                bgColor: user['bgColor'],
+                initials: user['lastNameLetter']
+            };
+  
+            // Überprüfen, ob der Kontakt bereits zugewiesen wurde
+            let isChecked = assignedContacts.some(assignedUser => assignedUser.name === contactUser.name && assignedUser.bgColor === contactUser.bgColor) ? 'checked' : '';
+  
+            contactsBox.innerHTML += /*html*/`
+                <div class="assignedContactsContainer">
+                    <div class="assignedContactSVG">
+                        <div class="letterContacts">
+                            <div class="assignedLetters" style="background-color: ${user['bgColor']}">${user['letter']}${user['lastNameLetter']}</div>
+                            <span>${user['name']}</span>
+                        </div>
+                        <input id="assignedToContact_${user['name']}" type="checkbox" ${isChecked} onchange="updateSelectedContactsBoard('${user['lastNameLetter']}', '${user['bgColor']}', '${user['name']}','${i}', this)">
+                    </div>
+                </div>`;
+            uniqueUsers[key] = true;
         }
     }
-  console.log(currentChecktContact);
+  }
+  
+
+
+
+
+
+
+  function updateSelectedContactsBoard(initials, bgColor, name, id, checkbox) {
+    let key = name + bgColor; // Schlüssel zur Identifizierung des Kontakts
+
+    if (checkbox.checked) {
+        // Prüfen, ob der Kontakt bereits im Array ist
+        let isContactAlreadyAdded = currentChecktContact.some(contact => contact.name + contact.bgColor === key);
+
+        // Nur hinzufügen, wenn der Kontakt noch nicht vorhanden ist
+        if (!isContactAlreadyAdded) {
+            currentChecktContact.push({
+                name: name,
+                bgColor: bgColor,
+                initials: initials
+            });
+        }
+    } else {
+        // Kontakt aus dem Array entfernen, wenn das Kontrollkästchen nicht markiert ist
+        // Anstatt das gesamte Array zurückzusetzen, entferne nur den spezifischen Kontakt
+        currentChecktContact = currentChecktContact.filter(contact => !(contact.name === name && contact.bgColor === bgColor));
+    }
+
+    // Aktualisieren des cards-Arrays und der HTML-Ansicht
+    let cardsId = cards.find(card => card.id === id);
+    console.log(cardsId['user']);
+    cardsId['user'] = currentChecktContact;
+    console.log(currentChecktContact);
+    updateHTML();
 }
+
+
 
 function addTaskHTMLOpen(category) {
     console.log(category);

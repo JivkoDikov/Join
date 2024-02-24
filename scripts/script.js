@@ -1,4 +1,7 @@
 let isClicked = false;
+let userID = localStorage.getItem('user');
+
+
 
 async function includeHTML() {
   let includeElements = document.querySelectorAll("[w3-include-html]");
@@ -23,6 +26,33 @@ restoreSelectedLink();
 initials();
 termsBackButton();
 }
+
+
+async function load_contacts_from_webstorage(){
+  let contactsValue = await getItem('contacts');
+  contacts = JSON.parse(contactsValue.data.value)
+}
+
+
+async function loadTasks(userID){
+  let userTask = await getItem('tasks');
+  tasks = JSON.parse(userTask.data.value)
+  return tasks[userID];
+}
+
+async function checkStorageData(key){
+  let valueKey = await getItem(key);
+  let parsedStorageData = JSON.parse(valueKey.data.value || '{}'); 
+
+
+  if (Object.keys(parsedStorageData).length > 0) {
+      return [true, parsedStorageData];
+  } else {
+      return false
+  }
+}
+
+
 
 
 function addActiveStyle(linkId) {

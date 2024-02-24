@@ -1,14 +1,14 @@
 let timeOfDay = ["Good Morning,", "Good Afternoon,", "Good Evening,"];
 let greeting = "";
 let nameUser = localStorage.getItem("name");
-let tasks = [];
+
 
 
 
 function renderSummary(){
     checkWelcomePopup(); 
     hourCheck();
-    //loadTasks();
+    loadTasks();
 }
 
 // Function to generate the greeting based on the current time
@@ -41,14 +41,7 @@ function setUserName(){
     greetingNamePopup.innerHTML = nameUser
 }
 
-async function loadTasks(){
-    //lädt den aktuellen user aus dem Local Storage und speichert ihn in user ab
-    let user = localStorage.getItem("user")
-    //übergibt den aktuellen user an getitem
-    let userTask = await getItem(user);
-    //holt sich alle task für ein user
-    tasks = JSON.parse(userTask.data.value)
-}
+
 
 function checkWelcomePopup(){
     let stateWelcome = sessionStorage.getItem("welcome")

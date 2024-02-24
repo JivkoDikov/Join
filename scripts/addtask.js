@@ -1,12 +1,11 @@
-let tasks = [];
-let IdCounter = 0;
+let IdCounter;
 let subtasksArray =[];
 let categoryArray =[];
 let prioArray = [];
 let editingSubtaskIndex = -1;
 let selectedCategoryId = null;
 let selectedContactDetails = [];
-
+let tasks = {};
 
 
 async function createTask(event){
@@ -15,24 +14,28 @@ async function createTask(event){
     let text = document.getElementById("enterDescription").value;
     let date = document.getElementById("enterDate").value;
     
-
+    if (!tasks[userID]) {
+      tasks[userID] = []; 
+    }
     
   let newTask = {
-    id: IdCounter++,
+    id: tasks[userID].length,
     label: categoryArray,
     headline: headline,
     text: text,
     progressBar:"",
-    subtask: subtasksArray,
+    subtasks: subtasksArray,
     user: selectedContactDetails,
     priority: prioArray,
-    category: categorys,
-    date: date,
-    checkForTrue: 0,
+    category: "todo",
+    date: date
   };
   console.log(newTask);
+
+
+  console.log(tasks);
+  tasks[userID].push(newTask);
   
-  tasks.push(newTask);
   await setItem('tasks', tasks)
   document.getElementById("enterTitle").value = "";
   document.getElementById("enterDescription").value = "";
@@ -40,8 +43,7 @@ async function createTask(event){
   document.getElementById("addSubTasks").value = "";
   subtasksArray = [];
   categoryArray = [];
-  categorys = [];
-  
+  updateHTML();
 }
 
 function inputFrame(id){
@@ -57,18 +59,18 @@ function inputFrame(id){
   }
 }
 
-function getCurrentDate() {
-  const currentDate = new Date();
-  const year = currentDate.getFullYear();
-  const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-  const day = currentDate.getDate().toString().padStart(2, '0');
-  return `${year}-${month}-${day}`;
+// function getCurrentDate() {
+//   const currentDate = new Date();
+//   const year = currentDate.getFullYear();
+//   const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+//   const day = currentDate.getDate().toString().padStart(2, '0');
+//   return `${year}-${month}-${day}`;
 
-}
+// }
 
-document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById("enterDate").value = getCurrentDate();
-});
+// document.addEventListener('DOMContentLoaded', function() {
+//   document.getElementById("enterDate").value = getCurrentDate();
+// });
 
  function toggleContacts() {
   

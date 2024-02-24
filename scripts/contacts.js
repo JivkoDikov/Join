@@ -2,7 +2,7 @@ let letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','
 let contacts = {};
 let contactIdCounter = 0;
 let screenSize = []
-let userID = localStorage.getItem('user');
+
 
 
 async function addNewContact() {
