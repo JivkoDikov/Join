@@ -11,18 +11,6 @@ async function initBoard(){
     updateHTML();
 }
 
-// async function load_tasks_from_webstorage(){
-//     let cardsValue = await getItem('tasks');
-//     cards = JSON.parse(cardsValue.data.value);
-//   }
-
-
-//   async function load_contacts_from_webstorage(){
-//     let contactsValue = await getItem('contacts');
-//     contacts = JSON.parse(contactsValue.data.value)
-//   }
-
-  
 
 async function updateHTML() {
     cards = await loadTasks(userID);
