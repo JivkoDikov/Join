@@ -13,8 +13,9 @@ async function initBoard(){
 
 
 async function updateHTML() {
+    
     cards = await loadTasks(userID);
-    console.log(cards);
+
     const categories = ['todo', 'progress', 'feedback', 'done'];
     for (const category of categories) {
         let categoryElements = cards.filter(t => t['category'] === category);
@@ -42,7 +43,7 @@ function allowDrop(ev) {
 
 async function moveTo(category) {
         currentDraggedElement.category = category;
-        await setItem('tasks', tasks)    
+        await setItem('tasks', tasks);    
         updateHTML(); 
     }
 
@@ -75,7 +76,7 @@ function updateCategory(card, category, search) {
 }
 
 
-function emptyCategory(id) {
+function emptyCategory() {
     let emptytodo = document.getElementById('todo');
     let emptyprogress = document.getElementById('progress');
     let emptyfeedback = document.getElementById('feedback');
@@ -188,7 +189,7 @@ function subtasksCheckForTrue(cardId, subtaskID) {
 function subtasksCheckForTrue(id) {
     let checkForTrue = 0;
     let element = cards.find(card => card.id === id);
-    console.log(element);
+    
     for (let i = 0; i < element['subtasks'].length; i++) {
         let checkboxClick = document.getElementById(`check${i}`).checked
         if(checkboxClick === true) {
@@ -391,7 +392,7 @@ function toggleAssignedToBoard(i) {
 
 
 
-  function updateSelectedContactsBoard(initials, bgColor, name, id, checkbox) {
+  function updateSelectedContactsBoard(initials, bgColor, name, i, checkbox) {
     let key = name + bgColor; 
 
     if (checkbox.checked) {
@@ -410,9 +411,9 @@ function toggleAssignedToBoard(i) {
         currentChecktContact = currentChecktContact.filter(contact => !(contact.name === name && contact.bgColor === bgColor));
     }
 
-    let cardsId = cards.find(card => card.id === id);
-    console.log(cardsId['user']);
-    cardsId['user'] = currentChecktContact;
+    let cardIds = cards.find(card => card.id === Number(i));
+
+    cardIds['user'] = currentChecktContact;
     console.log(currentChecktContact);
     updateHTML();
 }
