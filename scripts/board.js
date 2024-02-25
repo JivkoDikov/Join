@@ -75,8 +75,6 @@ function updateCategory(card, category, search) {
     emptyCategory();
 }
 
-
-function emptyCategory() {
 function emptyCategory() {
     let emptytodo = document.getElementById('todo');
     let emptyprogress = document.getElementById('progress');
@@ -978,5 +976,4 @@ function addTaskHTML() {
       </div>
       </div>
     `;
-}
 }
