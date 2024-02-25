@@ -77,6 +77,7 @@ function updateCategory(card, category, search) {
 
 
 function emptyCategory() {
+function emptyCategory() {
     let emptytodo = document.getElementById('todo');
     let emptyprogress = document.getElementById('progress');
     let emptyfeedback = document.getElementById('feedback');
@@ -189,7 +190,7 @@ function subtasksCheckForTrue(cardId, subtaskID) {
 function subtasksCheckForTrue(id) {
     let checkForTrue = 0;
     let element = cards.find(card => card.id === id);
-    console.log(element);
+    
     for (let i = 0; i < element['subtasks'].length; i++) {
         let checkboxClick = document.getElementById(`check${i}`).checked
         if(checkboxClick === true) {
@@ -444,8 +445,8 @@ async function addTaskHTMLOpen(category) {
     await setItem('newcategory', categorys);
     categorys = [];
     updateHTML();
-}
 
+}
 function addTaskHTMLClose() {
     let openAddTask = document.getElementById('overlay');
     openAddTask.innerHTML = '';
@@ -977,4 +978,5 @@ function addTaskHTML() {
       </div>
       </div>
     `;
+}
 }

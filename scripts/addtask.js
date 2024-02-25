@@ -9,6 +9,7 @@ let newcategoryTask = [];
 
 async function createTask(event){
   event.preventDefault();
+  
   newcategoryTask = await createTaskCategory();
   console.log(newcategoryTask);
   let newcategory = newcategoryTask[0];
@@ -49,6 +50,7 @@ async function createTask(event){
   window.location.href = 'board.html';
   // let todocategory = ['todo'];
   // await setItem('newcategory', todocategory);
+  
 }
 
 function inputFrame(id){
