@@ -1,4 +1,4 @@
-let cards = [];
+let cards = {};
 
 let currentDraggedElement;
 let currentChecktContact = [];
@@ -27,6 +27,7 @@ async function updateHTML() {
         }
     }
     emptyCategory();
+
 
 }
 
@@ -75,7 +76,7 @@ function updateCategory(card, category, search) {
 }
 
 
-function emptyCategory(id) {
+function emptyCategory() {
     let emptytodo = document.getElementById('todo');
     let emptyprogress = document.getElementById('progress');
     let emptyfeedback = document.getElementById('feedback');
@@ -408,16 +409,30 @@ function toggleAssignedToBoard(i) {
     } else {
         
         currentChecktContact = currentChecktContact.filter(contact => !(contact.name === name && contact.bgColor === bgColor));
-    }
+      
+    
 
-    let cardsId = cards.find(card => card.id === id);
-    console.log(cardsId['user']);
-    cardsId['user'] = currentChecktContact;
+    updateAssignedUsersInCard(id);
+    
     console.log(currentChecktContact);
-    updateHTML();
 }
 
 
+async function updateAssignedUsersInCard(id) {
+    let cardIndex = cards.findIndex(card => card.id === Number(id));
+    if (cardIndex !== -1) {
+        // Entfernen Sie den Benutzer aus der Karte
+        cards[cardIndex].user = currentChecktContact;
+        // Speichern Sie die aktualisierten Karten
+        await setItem('tasks', cards);
+        // Aktualisieren Sie das UI
+        assignedToEdit(cards[cardIndex], id);
+        assignIcon(cards[cardIndex]);
+        
+    }
+}
+
+  }
 
 async function addTaskHTMLOpen(category) {
     console.log(category);

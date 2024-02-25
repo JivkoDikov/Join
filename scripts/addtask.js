@@ -5,7 +5,6 @@ let prioArray = [];
 let editingSubtaskIndex = -1;
 let selectedCategoryId = null;
 let selectedContactDetails = [];
-let tasks = {};
 let newcategoryTask = [];
 
 async function createTask(event){
@@ -46,7 +45,8 @@ async function createTask(event){
   document.getElementById("addSubTasks").value = "";
   subtasksArray = [];
   categoryArray = [];
-  initBoard();
+//  document.getElementById('overlay').classList.add('d-none');
+  window.location.href = 'board.html';
   // let todocategory = ['todo'];
   // await setItem('newcategory', todocategory);
 }

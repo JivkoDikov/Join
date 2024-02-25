@@ -1,6 +1,6 @@
 let isClicked = false;
 let userID = localStorage.getItem('user');
-
+let tasks = {};
 
 
 async function includeHTML() {
