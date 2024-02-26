@@ -38,6 +38,7 @@ async function loadTasks(userID){
   return tasks[userID];
 }
 
+
 async function createTaskCategory(){
   let taskCategory = await getItem('newcategory');
   let categorys = JSON.parse(taskCategory.data.value);
@@ -50,7 +51,6 @@ async function checkStorageData(key){
   let valueKey = await getItem(key);
   let parsedStorageData = JSON.parse(valueKey.data.value || '{}'); 
 
-
   if (Object.keys(parsedStorageData).length > 0) {
       return [true, parsedStorageData];
   } else {
@@ -59,11 +59,10 @@ async function checkStorageData(key){
 }
 
 
-
-
 function addActiveStyle(linkId) {
   sessionStorage.setItem('selectedMenu', linkId);
 }
+
 
 function termsStatus() {
   let loginStatus = localStorage.getItem("user")
@@ -78,6 +77,7 @@ function termsStatus() {
   }
 }
 
+
 function checkUser() {
   let loginStatus = localStorage.getItem('user');
 
@@ -88,6 +88,7 @@ function checkUser() {
   }
 }
 
+
 function restoreSelectedLink() {
   let selectedLink = sessionStorage.getItem('selectedMenu');
   if (selectedLink === 5 || selectedLink === 6) {
@@ -97,14 +98,13 @@ function restoreSelectedLink() {
   }
 }
 
+
 function sidebarBG(linkId) {
- 
   let links = document.querySelectorAll('.links');
   links.forEach(link => {
       link.classList.remove('active');
   });
 
-
   let selectedLink = document.getElementById(linkId);
   if (selectedLink) {
       selectedLink.classList.add('active');
@@ -112,20 +112,21 @@ function sidebarBG(linkId) {
   }
 }
 
+
 function sidebarBGTerms(linkId) {
- 
   let links = document.querySelectorAll('.linksBottomStyle');
   links.forEach(link => {
       link.classList.remove('active');
   });
 
-
   let selectedLink = document.getElementById(linkId);
   if (selectedLink) {
       selectedLink.classList.add('active');
       addActiveStyle(linkId);
   }
 }
+
+
 function openOrCloseHeaderLinksPopUp(){
   if(isClicked){
    document.getElementById('headerLinkPopUp').classList.remove('d-none');
@@ -135,6 +136,7 @@ function openOrCloseHeaderLinksPopUp(){
    isClicked = true;
   }
  }
+
 
  function initials(){
     let name = localStorage.getItem("name")
@@ -149,6 +151,7 @@ function openOrCloseHeaderLinksPopUp(){
     }
  }
 
+
  function setInitials(initials){
       initialsHeader = document.getElementById("headerInitial");
       initials = initials.join('')
@@ -156,12 +159,14 @@ function openOrCloseHeaderLinksPopUp(){
       initialsHeader.innerHTML = initials
  }
 
+
  function logout(){
     localStorage.removeItem("user");
     localStorage.removeItem("name");
     sessionStorage.removeItem("welcome")
 
  }
+
 
  function termsBackButton(){
   let user = localStorage.getItem("user")
