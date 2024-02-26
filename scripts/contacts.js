@@ -1,9 +1,8 @@
 let letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 let contacts = {};
 let contactIdCounter = 0;
-let screenSize = []
-
-
+let screenSize = [];
+let newContactIdCounter = [0,];
 
 async function addNewContact() {
   document.getElementById("addnewcontact").classList.add("showOverlay-addNewContactPopUpContainer");
@@ -60,6 +59,7 @@ async function initContacts(){
   await load_contacts_from_webstorage();
   showContacts();
   screenSizeUser();
+  updateContacts();
 }
 
 
@@ -407,6 +407,16 @@ async function load_contacts_from_webstorage(){
   contacts = JSON.parse(contactsValue.data.value)
 }
 
+function updateContacts() {
+  
+  for (let i = 0; i < contacts[userID].length; i++) {
+    let idOfContact = contacts[userID][i]['id'];
+    newContactIdCounter.push(Number(idOfContact));
+  }
+  
+  let groessteZahl = Math.max(...newContactIdCounter);
+  contactIdCounter = groessteZahl +1;
+}
 
 
 

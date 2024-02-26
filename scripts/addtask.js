@@ -48,8 +48,8 @@ async function createTask(event){
   categoryArray = [];
 //  document.getElementById('overlay').classList.add('d-none');
   window.location.href = 'board.html';
-  // let todocategory = ['todo'];
-  // await setItem('newcategory', todocategory);
+  let todocategory = ['todo'];
+  await setItem('newcategory', todocategory);
   
 }
 

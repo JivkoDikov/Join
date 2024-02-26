@@ -189,6 +189,7 @@ main {
 }
 
 .content > h3 {
+    line-break: anywhere;
     height: auto; 
     font-size: 16px;
     font-weight: 700;
@@ -261,6 +262,7 @@ main {
 }
 
 .overlayContent > h3 {
+    line-break: anywhere;
     font-size: 61px;
     font-weight: 700;
     color: #000;
@@ -269,6 +271,7 @@ main {
 }
 
 .overlayContent > span {
+    line-break: anywhere;
     font-size: 20px;
     font-weight: 400;
     color: #000;
@@ -541,6 +544,7 @@ input[type=checkbox]:before {
 }
 
 .content span {
+    line-break: anywhere;
     overflow: auto; 
     display: block; 
     max-height: 200px;
