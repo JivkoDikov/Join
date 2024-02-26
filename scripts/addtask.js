@@ -7,51 +7,79 @@ let selectedCategoryId = null;
 let selectedContactDetails = [];
 let newcategoryTask = [];
 
-async function createTask(event){
+async function createTask(event) {
+  preventDefaultBehavior(event);
+  const newCategory = await createAndLogNewCategory();
+  initializeUserTasks();
+  const newTask = createNewTaskObject(newCategory);
+  await addTaskAndSave(newTask);
+  resetInputFields();
+  await updateTasksAndRedirect();
+}
+
+
+function preventDefaultBehavior(event) {
   event.preventDefault();
+}
+
+
+async function createAndLogNewCategory() {
+  const newCategoryTask = await createTaskCategory();
+  console.log(newCategoryTask);
+  return newCategoryTask[0];
+}
+
+
+function initializeUserTasks() {
+  if (!tasks[userID]) {
+    tasks[userID] = [];
+  }
+}
+
+
+function createNewTaskObject(newCategory) {
+  let headline = document.getElementById("enterTitle").value;
+  let text = document.getElementById("enterDescription").value;
+  let date = document.getElementById("enterDate").value;
   
-  newcategoryTask = await createTaskCategory();
-  console.log(newcategoryTask);
-  let newcategory = newcategoryTask[0];
-    let headline = document.getElementById("enterTitle").value;
-    let text = document.getElementById("enterDescription").value;
-    let date = document.getElementById("enterDate").value;
-    
-    if (!tasks[userID]) {
-      tasks[userID] = []; 
-    }
-    
-  let newTask = {
+  return {
     id: tasks[userID].length,
     label: categoryArray,
     headline: headline,
     text: text,
-    progressBar:"",
+    progressBar: "",
     subtasks: subtasksArray,
     user: selectedContactDetails,
     priority: prioArray,
-    category: newcategory,
+    category: newCategory,
     date: date
   };
-  console.log(newTask);
+}
 
 
-  console.log(tasks);
-  tasks[userID].push(newTask);
-  
-  await setItem('tasks', tasks)
+function resetInputFields() {
   document.getElementById("enterTitle").value = "";
   document.getElementById("enterDescription").value = "";
   document.getElementById("enterDate").value = "";
   document.getElementById("addSubTasks").value = "";
   subtasksArray = [];
   categoryArray = [];
-//  document.getElementById('overlay').classList.add('d-none');
-  window.location.href = 'board.html';
-  let todocategory = ['todo'];
-  await setItem('newcategory', todocategory);
-  
 }
+
+
+async function addTaskAndSave(newTask) {
+  tasks[userID].push(newTask);
+  console.log(tasks);
+  await setItem('tasks', tasks);
+}
+
+
+async function updateTasksAndRedirect() {
+  let todoCategory = ['todo'];
+  await setItem('newcategory', todoCategory);
+  window.location.href = 'board.html';
+}
+
 
 function inputFrame(id){
   let inputField = document.getElementById(id);
@@ -68,7 +96,6 @@ function inputFrame(id){
 
 
  function toggleContacts() {
-  
   let contactsBox = document.getElementById('contactsBox');
   if (contactsBox.style.display === 'none' || contactsBox.innerHTML.trim() === '') {
     assignedTo(); 
@@ -78,6 +105,7 @@ function inputFrame(id){
   }
 }
 
+
 async function assignedTo() {
   await load_contacts_from_webstorage();
 
@@ -85,7 +113,7 @@ async function assignedTo() {
   contactsBox.innerHTML = '';
 
   for (let i = 0; i < contacts[userID].length; i++) {
-    const contact = contacts[userID][i];
+    let contact = contacts[userID][i];
     let initials = getInitials(contact.name);
 
     contactsBox.innerHTML += assignedToHTML(contact,initials);
@@ -105,15 +133,15 @@ function updateSelectedContacts(initials, bgColor, name, checkbox) {
     let index = selectedContactDetails.indexOf(initials, bgColor, name);
       selectedContactDetails.splice(index, 1);
   }
-  console.log('Selected Contacts Initials:', selectedContactDetails);
-
 }
+
 
 function getInitials(name) {
   let names = name.split(' ');
   let initials = names.map(name => name[0].toUpperCase());
   return initials.join('');
 }
+
 
 function updatePrio(buttonId, event) {
   event.preventDefault();
@@ -136,6 +164,7 @@ function updatePrio(buttonId, event) {
   } 
 }
 
+
 function toggleCategories() {
   let categoryBox = document.getElementById('categoryBox');
   if (categoryBox.style.display === 'none' || categoryBox.innerHTML.trim() === '') {
@@ -146,16 +175,12 @@ function toggleCategories() {
   }
 }
 
+
 function addCategory() {
   let categoryBox = document.getElementById('categoryBox');
   categoryBox.innerHTML = '';
-
   categoryBox.innerHTML += addCategoryHTML();
 }
-
-
-
-
 
 
 function updateLabels(categoryId) {
@@ -208,9 +233,6 @@ function displaySubtasks() {
 }
 
 
-
-
-
 function editSubTask(index){
   let editSubTasks = document.getElementById('editSubTasksBox');
   editSubTasks.innerHTML = '';
@@ -218,20 +240,18 @@ function editSubTask(index){
   if (index >= 0 && index < subtasksArray.length) {
     let subTaskName = subtasksArray[index].name;
 
-  editSubTasks.innerHTML += editSubTask(index, subTaskName);
+  editSubTasks.innerHTML += editSubTaskHTML(index, subTaskName);
     let editSubTaskInput = document.getElementById('editSubTaskInput');
     editSubTaskInput.addEventListener('input', function () {
       subtasksArray[index].name = editSubTaskInput.value;
     });
-  
-}
-}
-
+}}
 
 
 function closeEditSubTask(index){
   deleteSubTask(index);
 }
+
 
 function saveEditeSubTask(index) {
   let editSubTasks = document.getElementById('editSubTaskContainer');
@@ -254,7 +274,6 @@ function saveEditeSubTask(index) {
 }
 
 
-
 function deleteSubTask(index){
   subtasksArray.splice(index, 1);
   document.getElementById('editSubTaskContainer').innerHTML ='';
@@ -262,13 +281,8 @@ function deleteSubTask(index){
 }
 
 
-
-
-
 function searchContact() {
   let search = document.getElementById('searchContacts').value.toLowerCase();
-  
-  
   updateCategory(contacts, search);
 }
 
