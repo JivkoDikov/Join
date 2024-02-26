@@ -218,8 +218,8 @@ span{
 
 .greetings{
     position: relative;
-    top: -357px;
-    left: 587px;
+    
+    left: 1000px;
     width: auto;
     height: 136px;
     display: inline-flex;

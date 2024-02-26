@@ -14,7 +14,6 @@ async function initBoard(){
 
 async function updateHTML() {
     cards = await loadTasks(userID);
-    console.log(cards);
     const categories = ['todo', 'progress', 'feedback', 'done'];
     for (const category of categories) {
         let categoryElements = cards.filter(t => t['category'] === category);
@@ -411,11 +410,12 @@ function toggleAssignedToBoard(i) {
       
     
 
-    updateAssignedUsersInCard(id);
+    
     
     console.log(currentChecktContact);
 }
-
+    updateAssignedUsersInCard(id);
+  }
 
 async function updateAssignedUsersInCard(id) {
     let cardIndex = cards.findIndex(card => card.id === Number(id));
@@ -425,13 +425,13 @@ async function updateAssignedUsersInCard(id) {
         // Speichern Sie die aktualisierten Karten
         await setItem('tasks', cards);
         // Aktualisieren Sie das UI
-        assignedToEdit(cards[cardIndex], id);
+        // assignedToEdit(cards[cardIndex], id);
         assignIcon(cards[cardIndex]);
         
     }
 }
 
-  }
+  
 
 async function addTaskHTMLOpen(category) {
     console.log(category);
