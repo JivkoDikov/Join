@@ -49,7 +49,7 @@ function assignedToHTML(contact,initials) {
     }
   
   
-    function editSubTask(index, subTaskName) {
+    function editSubTaskHTML(index, subTaskName) {
       return `
       <div id="editSubTaskContainer"class="editSubTaskContainer">
       <input id="editSubTaskInput" class="editSubTasksInput" type="text" value="${subTaskName}">
