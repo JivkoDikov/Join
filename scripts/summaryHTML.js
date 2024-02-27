@@ -21,7 +21,7 @@ function bodySummaryHTML() {
         </div>
       </a>
     </div>
-    <a  href="/assets/templates/board.html"  onclick="addActiveStyle(3)">
+    <a  href="/assets/templates/board.html" class="priocountContainer" onclick="addActiveStyle(3)">
       <div class="summarySelektor2 hoverCube tile">
         <div class="urgent" >
           <div class="group7">

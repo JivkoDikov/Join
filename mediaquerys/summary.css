@@ -101,6 +101,10 @@
     .summarySelektor2{
         gap: 25px;
     }
+
+    .todo, .done{
+        width: 160px;
+    }
 }
 @media screen and (max-width: 488px){
     .bodySummary{
