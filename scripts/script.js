@@ -42,7 +42,6 @@ async function loadTasks(userID){
 async function createTaskCategory(){
   let taskCategory = await getItem('newcategory');
   let categorys = JSON.parse(taskCategory.data.value);
-  console.log(categorys);
   return categorys; 
 }
 

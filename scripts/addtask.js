@@ -25,7 +25,6 @@ function preventDefaultBehavior(event) {
 
 async function createAndLogNewCategory() {
   const newCategoryTask = await createTaskCategory();
-  console.log(newCategoryTask);
   return newCategoryTask[0];
 }
 
@@ -41,8 +40,9 @@ function createNewTaskObject(newCategory) {
   let headline = document.getElementById("enterTitle").value;
   let text = document.getElementById("enterDescription").value;
   let date = document.getElementById("enterDate").value;
-  
-  return {
+
+    
+      return {
     id: tasks[userID].length,
     label: categoryArray,
     headline: headline,
@@ -54,6 +54,8 @@ function createNewTaskObject(newCategory) {
     category: newCategory,
     date: date
   };
+    
+  
 }
 
 
@@ -69,7 +71,6 @@ function resetInputFields() {
 
 async function addTaskAndSave(newTask) {
   tasks[userID].push(newTask);
-  console.log(tasks);
   await setItem('tasks', tasks);
 }
 
@@ -205,7 +206,6 @@ function updateLabels(categoryId) {
       selectTaskCategory.innerText = 'Select task category';
     }
   }
-  console.log('Ausgewählte Kategorien:', categoryArray);
 }
 
 

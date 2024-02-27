@@ -383,7 +383,6 @@ async function updateAssignedUsersInCard(id) {
   
 
 async function addTaskHTMLOpen(category) {
-    console.log(category);
     categorys.push(category);
     let openAddTask = document.getElementById('overlay');
     openAddTask.innerHTML = '';
