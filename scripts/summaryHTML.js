@@ -3,6 +3,7 @@ function bodySummaryHTML() {
     return `<div class="bodySummary">
     <div class="summarySelektor1">
       <a href="/assets/templates/board.html" class="todo tile hoverCube" onclick="addActiveStyle(3)">
+      <div class="pencilCount">
         <div class="doneImg">
           <img src="/assets/img/todo.svg" alt="" class="svgImgNormal">
           <img src="/assets/img/todo_invert.svg" alt="" class="svgImgHoverTodo">
@@ -10,8 +11,10 @@ function bodySummaryHTML() {
         <div class="doneCount hoverCube">
           <p id="todoSummary">${todo.length}<span>To-do</span></p>
         </div>
+        </div>
       </a>
       <a href="/assets/templates/board.html" class="done tile hoverCube" onclick="addActiveStyle(3)">
+      <div class="checkCount">
         <div class="doneImg">
           <img src="/assets/img/done.svg" alt="" class="svgImgNormal">
           <img src="/assets/img/done_invert.svg" alt="" class="svgImgHoverDone">
@@ -19,11 +22,12 @@ function bodySummaryHTML() {
         <div class="doneCount">
           <p id="doneSummary">${done.length}<span>Done</span></p>
         </div>
+        </div>
       </a>
     </div>
     <a  href="/assets/templates/board.html" class="priocountContainer" onclick="addActiveStyle(3)">
       <div class="summarySelektor2 hoverCube tile">
-        <div class="urgent" >
+        <div class="urgentCount" >
           <div class="group7">
             <img src="/assets/img/Prio alta.svg" alt="">
           </div>

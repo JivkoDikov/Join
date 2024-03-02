@@ -1,3 +1,4 @@
+
 @font-face {
     font-family: 'Inter Regular';
     src: url('/fonts/inter-v13-latin-regular.woff2') format('truetype');
@@ -14,17 +15,23 @@
 
 }
 
-/*body{
-    margin: 0;
-    font-family: 'Inter Regular', sans-serif;
-    font-size: 18px;
-    background-color: rgba(246, 247, 248, 1);
-    height: 100vh;
-    
-}*/
-.d-none{
-    display: none;
+.summaryMainContainer{
+    position: absolute;
+    left: 232px;
+    top: 96px;
+    display: flex;
+    height: calc(100% - 96px);
+    width: calc(100% - 232px);
+    overflow-x: hidden;
 }
+
+.content-right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 55px;
+}
+
 
 a{
     text-decoration: none;
@@ -73,75 +80,65 @@ span{
     font-size: 20px;
     color: rgba(42, 54, 71, 1);
     font-family: 'Inter Regular', sans-serif;
-    width: 63px;
+    
 }
 
 .headline {
-    position: relative;
     display: flex;
     align-items: center;
     gap: 30px;
     font-family: 'Inter 700', sans-serif;
-    font-size: 61px;
-    height: 73px;
-    top: 120px;
-    left: 328px;
-    max-width: calc(100vw - 388px);
+    padding: 96px 0px 0px 55px;
+    line-height: 73px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-block: 0;
 }
 
 .headline h2{
     font-size: 61px;
-    width: 270px;
-    height: 73px;
+    margin-block: 0;
 }
 
-.headline div {
+.vector,.vectorMobile {
     height:59px;
     width: 3px;
     background-color: rgba(41, 171, 226, 1);
-    margin-right: 16px;
 }
+
 .headline p{
     font-family: 'Inter 400',sans-serif;
     font-size: 27px;
     color: rgba(42, 54, 71, 1);
+    margin-block: 0;
 }
 
-.bodySummary{
-    position: relative;
-    width: 560px;
-    height: 300px;
-    top: 180px;
-    left: 328px;
-    /*border: 2px solid red;*/
-    
+#bodySummaryID{
+    padding: 32px 0px 0px 55px;
 }
+
+.pencilCount,.checkCount{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+}
+
+
 
 .summarySelektor1{
-    width: 100%;
-    height: 168px;
     display: flex;
     justify-content: space-between;
     margin-bottom: 28px;
 }
-.todo{
-    width: 264px;
-    height: 168px;
-    padding: 38px, 58px, 38px, 58px;
+.todo,.done{
+    padding: 38px 58px 38px 58px;
     gap: 18px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.done{
-    width: 264px;
-    height: 168px;
-    padding: 38px, 58px, 38px, 58px;
-    gap: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
 .doneImg{
     width: 69px;
     height: 69px;
@@ -155,22 +152,18 @@ span{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 101px;
-    width: 50px;
-    gap: 0px;
 }
 
 .summarySelektor2{
     display: flex;
-    height: 80px;
-    padding: 28px 48px;
+    padding: 28px 48px 28px 48px;
     justify-content: center;
     align-items: center;
     gap: 61px;
     margin-bottom: 28px;
 
 }
-.urgent{
+.urgentCount{
     display: flex;
     align-items: center;
     gap: 18px;
@@ -183,6 +176,14 @@ span{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.frame68{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 13px;
 }
 .frame68 span:first-child{
     text-align: left;
@@ -209,25 +210,21 @@ span{
 
 .summarySelektor3{
     display: flex;
-    height: 170px;
     padding-bottom: 25px;
-    justify-content: center;
+    justify-content: space-between;
     align-items: flex-start;
     gap: 28px;
 }
 
 .greetings{
-    position: relative;
-    
-    left: 1000px;
-    width: auto;
-    height: 136px;
-    display: inline-flex;
+    height: 100%;
+    display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: flex-start;
-    gap: 3px;
+    justify-content: center;
+    padding-bottom: 32px;
 }
+
 .greetings p{
     margin-block-start: 0;
     margin-block-end: 0;
@@ -246,7 +243,6 @@ span{
     display: flex;
     flex-direction: column;
     width: 168px;
-    height: 118px;
     align-items: center;
     justify-content: center;
     gap: 13px;
@@ -265,8 +261,6 @@ span{
   }
   
   .square-button .element {
-    position: relative;
-    width: fit-content;
     margin-top: -1px;
     font-family: "Inter-SemiBold", sans-serif;
     font-weight: 600;
@@ -279,8 +273,6 @@ span{
   }
   
   .square-button .tasks-on-board {
-    position: relative;
-    width: fit-content;
     font-family: "Open Sans-Regular", Helvetica;
     font-weight: 400;
     color: #2a3647;
@@ -362,6 +354,12 @@ span{
     margin-block-start: 0;
     margin-block-end: 0;
 }
+
+.d-none{
+    display: none;
+}
+
+
   @keyframes fadeInOut {
     0% { opacity: 1; } /* Anfang: Opazität 0% */
     25% { opacity: 1; } 

@@ -81,4 +81,35 @@
     .dontMatch{
         margin-left: 80px;
     }
+
+    .headlineLoginForm span{
+        margin-top: 0;
+        font-size: 47px;
+    }
+}
+
+@media(max-width:420px){
+    .login{
+        width: 300px;
+    }
+
+    .input-container{
+        width: calc(100% - 80px);
+        gap: 0;
+    }
+
+    .input-container input{
+        width: 100%;
+    }
+
+    .rememberme{
+        margin-left: -110px;
+    }
+     .privacyTerm{
+        margin-left: 0;
+
+    }
+    .arrowLeft {
+        left: 16px;
+    }
 }

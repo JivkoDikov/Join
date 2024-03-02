@@ -1,3 +1,4 @@
+
 @media screen and (max-width: 1440px){
     .greetings p:first-child{
         font-family: 'Inter 500',sans-serif;
@@ -11,166 +12,231 @@
     }
 }
 @media screen and (max-width: 1280px){
-    .greetings{
+    
+    .content-right{
         display: none;
     }
 
+
+
 }
-@media screen and (max-width: 1020px){
+
+@media (max-width:950px){
     .headline h2{
-        font-size: 50px;
-        height: auto;
+        font-size: 48px;
     }
+    }
+
+
+
+@media (max-width:880px){
+    .headline{
+        padding: 96px 0px 0px 42px;
+    }
+
+    .headline p{
+        font-size: 24px;
+    }
+
+    .headline h2{
+        font-size: 38px;
+    }
+
+    .summarySelektor1{
+        justify-content: flex-start;
+        gap: 30px;
     
-    .headline div {
-        height:40px;
-        width: 3px;
-        background-color: rgba(41, 171, 226, 1);
-        margin-right: 16px;
     }
-    .headline p{
-        font-family: 'Inter 400',sans-serif;
-        font-size: 27px;
-        color: rgba(42, 54, 71, 1);
-        width: 350px;
+
+    .summarySelektor2{
+        padding: 28px 38px;
+        gap: 48px;
+        
+    }
+
+    #bodySummaryID{
+        padding: 32px 0px 0px 42px;
+    }
+
+    .todo,.done{
+        padding:28px 38px;
+    }
+
+    .priocountContainer{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .summarySelektor3{
+        justify-content: flex-start;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .square-button{
+        width: 142px;
+    
     }
 
 }
 
-@media screen and (max-width: 971px){
-    .headline {
-        left: 250px;
-    }
-    .bodySummary{
-        left: 250px;
-    }
-    .headline p{
-        font-size: 18px;
-    }
-    .headline h2{
-        font-size: 30px;
-    }
-}
 
 @media screen and (max-width: 800px ) {
-    .bodySummary{
-        left: 120px;
-        top: 140px;
+    .content-right{
+        display: none;
+    }
+
+    .contentLeft{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .summaryMainContainer{
+        left: 0;
+        top: 80px;
+        height: calc(100vh - 160px);
+        width: 100%;
+    }
+
+    .headline{
+        padding: 48px 0px 0px 0px;
+    }
+
+    #bodySummaryID{
+        padding: 24px 16px 0px 16px;
+    }
+
+    
 }
 
-    .headline {
-        left: 120px;
-        height: 215px;
-        flex-direction: column; /* Change to column layout */
+@media (max-width:520px){
+    .contentLeft{
         align-items: flex-start;
-        gap: 0px;
-        margin-top: -80px;
-        margin-bottom: -10px;
     }
 
-    .headline h2{
-        font-size: 65px;
-        width: 320px;
-    }
-    .headline div {
-        height: 3px;
-        width: 140px; /* Switch height and width for rotation */
-        background-color: rgba(41, 171, 226, 1);
-        margin-bottom: 2px;
-        transform: rotate(180deg); /* Rotate by 90 degrees */
-    }
-    .headline p{
-        margin-top: -50px;
-        font-size: 30px;
-        width: 320px;
-    }
+ .vector {
+    height: 3px;
+    width: 140px; /* Switch height and width for rotation */
+    background-color: rgba(41, 171, 226, 1);
+    margin-bottom: 2px;
+    transform: rotate(180deg); /* Rotate by 90 degrees */
+    display: none;
 }
-@media screen and (max-width: 688px){
-    .bodySummary{
-        left: 15px;
-    }
-    .headline{
-        left: 27px;
-    }
-    }
-@media screen and (max-width: 583px){
-    .bodySummary{
-        width: 460px;
-        left: 30px;
-    }
-    .summarySelektor2{
-        gap: 25px;
-    }
 
-    .todo, .done{
-        width: 160px;
-    }
+.vectorMobile{
+    display: inline !important;
+    height: 3px;
+    width: 140px; /* Switch height and width for rotation */
+    background-color: rgba(41, 171, 226, 1);
+    margin-bottom: 2px;
+    transform: rotate(180deg); /* Rotate by 90 degrees */
 }
-@media screen and (max-width: 488px){
-    .bodySummary{
-        width: 360px;
-        left: 20px;
-    }
-    .doneCount p{
-        font-size: 40px;
-    }
-    .square-button .element{
-        font-size: 40px;
-    }
-    .frame68 span:first-child{
-        font-size: 18px !important;
-        width: 157px;
-    }
-    span{
-        font-size: 16px;
-    }
-    .summarySelektor1{
-        gap: 25px;
-    }
-    .square-button{
-        height: 80px;
-    }
-    .square-button .element{
-        line-height: 40px;
-    }
+
+
+.headline{
+    padding: 48px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 16px;
+    line-height: unset;
+}
+
+.headline h2{
+    font-size: 47px;
+}
+
+.headline p{
+    font-size: 20px;
+}
+
+
+#bodySummaryID{
+    padding: 16px 16px 16px 16px;
+    width: calc(100vw - 32px)
+}
+
+
+.todo,.done{
+    padding: 19px 16px;
+    width: 100%;
+
 
 }
-@media screen and (max-width: 432px){
-    .bodySummary{
-        width: 320px;
-    }
-    .headline p{
-        width: 320px;
-    }
-    .summarySelektor2{
-        gap: 11px;
-    }
+
+.summarySelektor1{
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
 }
-@media screen and (max-width: 350px){
-    .bodySummary{
-        width: 318px;
-        left: 0px;
-    }
-    .frame68{
-        margin-left: -15px;
-    }
-    .group7{
-        margin-left: 10px;
-    }
-    .doneCount{
-        margin-left: -15px;
-        margin-right: -15px;
-    }
-    .summarySelektor1{
-        gap: 15px;
-    }
-    .headline p{
-        font-size: 28px;
-    }
+
+.svgImgNormal{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.doneImg,.group7{
+    width: 40px;
+    height: 40px;
+}
+
+.svgImgNormal,.svgImgHoverTodo,.svgImgHoverDone{
+    width: 100%;
+}
+
+#todoSummary,#doneSummary,#urgentSummary{
+    font-size: 47px;
+}
+
+.pencilCount,.checkCount{
+    gap: 4px;
+}
+
+#todoSummary span,#doneSummary span,#urgentSummary span{
+    font-size: 14px;
+}
+
+.priocountContainer{
+    width: 100%;
+}
+
+.summarySelektor2{
+    width: 100%;
+    padding: 19px 16px;
+}
+
+#deadlineSummary{
+    font-size: 16px !important;
+}
+
+.group7 img{
+    width: 22px;
+}
+
+.square-button{
+    padding: 19px 0px;
+}
+.square-button span{
+    font-size: 16px;
+}
+
+.square-button .element{
+font-size: 47px;
+}
+
+.frame68 span{
+    font-size: 14px !important;
+}
+}
+
+@media (max-width:415px){
     .summarySelektor2{
-        gap: 26px;
-    }
-    .headline{
-        left: 9px;
+        gap: 34px;
     }
 }
