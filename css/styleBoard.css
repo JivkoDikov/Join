@@ -1,567 +1,573 @@
-body {
-    overflow-y: unset;
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #d1d1d1;
+  border-radius: 100vw;
+  margin-block: 0.1em;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a09c9c;
+  border-radius: 100vw;
+  border: 2px solid rgba(0, 0, 0, 0.1);
 }
 
 main {
-    position: absolute;
-    top: 96px;
-    left: 232px;
-    height: calc(100vh - 96px);
-    width: calc(100vw - 232px);
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    overflow-y: unset;
+  position: fixed;
+  top: 96px;
+  left: 232px;
+  height: calc(100vh - 96px);
+  width: calc(100vw - 232px);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
-.headlineAddTaskMobile{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.plusAddTaskMobile {
+  width: 40px;
+  height: 40px;
 }
-
-.plusAddTaskMobile{
-    width: 40px;
-    height: 40px;
-}
-
 
 .boardHeader {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
- h1 {
-    font-size: 61px;
-    font-weight: bold;
-    margin-left: 64px;
+h1 {
+  font-size: 61px;
+  font-weight: bold;
+  margin-left: 64px;
 }
 
 .findTask {
-    display: flex;
-    justify-content: space-between;
-    margin-right: 64px;
-    gap: 32px; 
+  display: flex;
+  justify-content: space-between;
+  margin-right: 64px;
+  gap: 32px;
 }
 
 .searchBar {
-    display: flex;
-    justify-content: space-between;
-    width: 280px;
-    border: solid 1px #A8A8A8;
-    border-radius: 10px;
-    background-color: #FFF;
-    padding: 8px 16px 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  width: 280px;
+  border: solid 1px #a8a8a8;
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 8px 16px 8px 16px;
 }
 
 .searchBar > input {
-    border: none;
-    width: 200px;
-    color: #A8A8A8;
+  border: none;
+  width: 200px;
+  color: #a8a8a8;
 }
 
 .searchBar > input:focus {
-    outline: none;
+  outline: none;
 }
 
 .searchBar > .btn-search {
-    border: none;
-    background: none;
+  border: none;
+  background: none;
 }
 
 .btn-AddTask {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 160px;
-    height: 48px;
-    border: solid 1px #2A3647;
-    border-radius: 10px;
-    padding: 8px 16px 8px 16px;
-    font-size: 21px;
-    font-weight: 700;
-    color: #FFF;
-    background-color: #2A3647;
-    gap: 4px;
-    cursor: pointer;
-    border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 160px;
+  height: 48px;
+  border: solid 1px #2a3647;
+  border-radius: 10px;
+  padding: 8px 16px 8px 16px;
+  font-size: 21px;
+  font-weight: 700;
+  color: #fff;
+  background-color: #2a3647;
+  gap: 4px;
+  cursor: pointer;
+  border: none;
 }
 
-.btn-AddTask:hover{
-    background-color: #29ABE2;
+.btn-AddTask:hover {
+  background-color: #29abe2;
 }
 
-.btn-AddTask > svg > path{
-    width: 32px;
-    height: 32px;
-    fill: #FFF;
-    z-index: 3;
+.btn-AddTask > svg > path {
+  width: 32px;
+  height: 32px;
+  fill: #fff;
+  z-index: 3;
 }
 
 .listOfKanban {
-    display: flex;
-    justify-content: space-evenly;
-    width: 1208px;
+  display: flex;
+  justify-content: space-evenly;
+  width: 1208px;
 }
 
 .addKanban {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 252px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 252px;
 }
 
 .addKanban > svg {
-    width: 8px;
-    height: 8px;
-    border: solid 2px #2A3647;
-    border-radius: 8px;
-    padding: 3px;
+  width: 16px;
+  height: 16px;
+  border: solid 2px #2a3647;
+  border-radius: 10px;
+  padding: 3px;
 }
 
 .addKanban > span {
-    font-size: 20px;
-    font-weight: 700;
-    color: #42526E;
+  font-size: 20px;
+  font-weight: 700;
+  color: #42526e;
 }
 
 .boardDistribution {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    margin-left: 64px;
-    width: calc(100vw - 296px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-left: 64px;
+  width: calc(100vw - 296px);
 }
-    
-
 
 .column {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    gap: 16px;
-    width: 252px;
-    margin-top: 20px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 16px;
+  width: 252px;
+  margin-top: 20px;
 }
 
 .cards {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-    width: 220px;
-    border-radius: 24px;
-    box-shadow: 0px 0px 10px 3px #00000014;
-    padding: 16px;
-    margin: 35px 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 220px;
+  border-radius: 24px;
+  box-shadow: 0px 0px 10px 3px #00000014;
+  padding: 16px;
+  margin: 35px 0;
 }
 
 .empty {
-    border-radius: 10px;
-    border: dotted 1px #161616;
-    padding: 16px;
-    width: 220px;
-    background-color: #A8A8A8;
-    margin-top: 35px;
+  border-radius: 10px;
+  border: dotted 1px #161616;
+  padding: 16px;
+  width: 220px;
+  background-color: #a8a8a8;
+  margin-top: 35px;
 }
 
 .empty > span {
-    color: #E7E7E7;
-    font-size: 16px;
-    font-weight: 400;
+  color: #e7e7e7;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .labelsBoardCard {
-    font-size: 16px;
-    font-weight: 400;
-    padding: 4px 16px 4px 16px;
-    margin: 0;
-    border-radius: 8px;
-    background-color: #0038FF;
-    color: #FFF;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 4px 16px 4px 16px;
+  margin: 0;
+  border-radius: 8px;
+  background-color: #0038ff;
+  color: #fff;
 }
 
 .content {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 
 .content > h3 {
-    line-break: anywhere;
-    height: auto; 
-    font-size: 16px;
-    font-weight: 700;
-    color: #2A3647;
-    margin: 0;
-    margin-bottom: 5px;
+  line-break: anywhere;
+  height: auto;
+  font-size: 16px;
+  font-weight: 700;
+  color: #2a3647;
+  margin: 0;
+  margin-bottom: 5px;
 }
 
 .content > span {
-    font-size: 16px;
-    font-weight: 400;
-    color: #A8A8A8;
-    overflow: auto;
-    display: block; 
-    max-height: 200px; 
-    white-space: pre-line;
+  font-size: 16px;
+  font-weight: 400;
+  color: #a8a8a8;
+  overflow: auto;
+  display: block;
+  max-height: 200px;
+  white-space: pre-line;
 }
 
-
 .progressBar {
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .progressBar > span {
-    font-size: 12px;
-    margin-left: 10px;
+  font-size: 12px;
+  margin-left: 10px;
 }
 
 .containerProfile {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .imgProfile {
-    margin-right: -10px;
+  margin-right: -10px;
 }
 
-
 .labelProfile {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 220px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 220px;
 }
 
 .overlayCard {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-    width: 525px;
-    padding: 48px 40px 48px 40px;
-    border-radius: 30px;
-    box-shadow: 0px 0px 4px 0px #00000029;
-    background-color: #FFF;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 525px;
+  padding: 48px 40px 48px 40px;
+  border-radius: 30px;
+  box-shadow: 0px 0px 4px 0px #00000029;
+  background-color: #fff;
 }
 
 .overlayCard > .labelContent {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .overlayContent {
-    margin: 10px 0;
+  margin: 24px 0;
 }
 
 .overlayContent > h3 {
-    line-break: anywhere;
-    font-size: 61px;
-    font-weight: 700;
-    color: #000;
-    margin: 0;
-    margin-bottom: 5px;
+  line-break: anywhere;
+  font-size: 61px;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+  margin-bottom: 5px;
 }
 
 .overlayContent > span {
-    line-break: anywhere;
-    font-size: 20px;
-    font-weight: 400;
-    color: #000;
+  line-break: anywhere;
+  font-size: 20px;
+  font-weight: 400;
+  color: #000;
 }
 
 .overlayDate {
-    display: flex;
-    margin: 25px 0;
+  display: flex;
 }
 
 .overlayDate > span:nth-child(2) {
-    margin-left: 10px;
-    color: #000;
-    font-weight: 400;
-    font-size: 20px;
+  margin-left: 10px;
+  color: #000;
+  font-weight: 400;
+  font-size: 20px;
 }
 
 .overlayDate > span:nth-child(1) {
-    color: #2A3647;
-    font-weight: 400;
-    font-size: 20px;
+  color: #2a3647;
+  font-weight: 400;
+  font-size: 20px;
 }
 
 .overlayPriority {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 24px 0px;
 }
 
 .overlayPriority > span:nth-child(2) {
-    display: flex;
-    align-items: center;
-    margin-left: 25px;
-    font-weight: 400;
-    font-size: 20px;
-    color: #000;
+  display: flex;
+  align-items: center;
+  margin-left: 25px;
+  font-weight: 400;
+  font-size: 20px;
+  color: #000;
 }
 
 .overlayPriority > span:nth-child(1) {
-    display: flex;
-    align-items: center;
-    font-weight: 400;
-    font-size: 20px;
-    color: #2A3647;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  font-size: 20px;
+  color: #2a3647;
 }
 
 .containerProfileName {
-    display: flex;
-    flex-direction: column;
-    margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .containerProfileName > span {
-    font-weight: 400;
-    font-size: 20px;
-    color: #2A3647;
+  font-weight: 400;
+  font-size: 20px;
+  color: #2a3647;
 }
 
 .profileName {
-    display: flex;
-    align-items: center;
-    margin: 8px;
-    color: #000;
-    font-weight: 400;
-    font-size: 20px;
+  display: flex;
+  align-items: center;
+  padding: 8px 16px 8px 16px;
+  color: #000;
+  font-weight: 400;
+  font-size: 19px;
 }
 
 .profileName > span {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .subtasks {
-    margin-top: 8px;
+  margin-top: 24px;
+  width: 100%;
 }
 
 .subtasks > span {
-    font-weight: 400;
-    font-size: 20px;
-    color: #2A3647;
+  font-weight: 400;
+  font-size: 20px;
+  color: #2a3647;
 }
 
 .subtasks > div > ul > li {
-    list-style: none;
-    padding: 6px 16px 6px 16px;
-    color: #000;
-    font-size: 16px;
-    font-weight: 400;
+  list-style: none;
+  padding: 6px 16px 6px 16px;
+  color: #000;
+  font-size: 16px;
+  font-weight: 400;
 }
 
-input[type=checkbox]:before {
-    width: 16px;
-    height: 16px;
-    border: 2px solid #555555;
-    border-radius: 3px;
-    background-color: white;
+input[type="checkbox"]:before {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #555555;
+  border-radius: 3px;
+  background-color: white;
 }
 
 .subtasks > div > ul {
-    padding-left: 5px;
+  padding-inline-start: 0;
 }
 
 .btn-close {
-    background-color: #fff;
-    border: none;
-    cursor: pointer;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
 }
 
 .dropWindow {
-    height: 100%;
-    min-height: 80px;
+  height: 100%;
+  min-height: 80px;
 }
 
-
 .d-none {
-    display: none;
+  display: none;
 }
 
 .overview {
-    background-color: rgba(85, 85, 85, 0.145);
-    z-index: 9999;
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: rgba(85, 85, 85, 0.145);
+  z-index: 9999;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .deleteUedit {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width: 90%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 90%;
 }
 
 .delete {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-right: 15px;
-    color: #2A3647;
-    font-size: 16px;
-    font-weight: 400;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 15px;
+  color: #2a3647;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .edit {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    color: #2A3647;
-    font-size: 16px;
-    font-weight: 400;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: #2a3647;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .deleteEdit {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    color: #2A3647;
-    font-size: 16px;
-    font-weight: 400;
-    width: 85%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: #2a3647;
+  font-size: 16px;
+  font-weight: 400;
+  width: 85%;
 }
 
 .headline {
-    display: flex;
-    flex-direction: column;
-    width: 445px;
+  display: flex;
+  flex-direction: column;
+  width: 445px;
 }
 
-.headline > span{
-    font-size: 20px;
-    font-weight: 400;
-    color: #2A3647;
+.headline > span {
+  font-size: 20px;
+  font-weight: 400;
+  color: #2a3647;
 }
 
-.headline > span{
-    font-size: 20px;
-    font-weight: 400;
-    color: #2A3647;
+.headline > span {
+  font-size: 20px;
+  font-weight: 400;
+  color: #2a3647;
 }
 
 .textarea {
-    display: flex;
-    flex-direction: column;
-    width: 445px;
+  display: flex;
+  flex-direction: column;
+  width: 445px;
 }
 
-.textarea > span{
-    font-size: 20px;
-    font-weight: 400;
-    color: #2A3647;
+.textarea > span {
+  font-size: 20px;
+  font-weight: 400;
+  color: #2a3647;
 }
 
 .dueDate {
-    display: flex;
-    flex-direction: column;
-    width: 445px;
+  display: flex;
+  flex-direction: column;
+  width: 445px;
 }
 
-.dueDate > span{
-    font-size: 20px;
-    font-weight: 400;
-    color: #2A3647;
+.dueDate > span {
+  font-size: 20px;
+  font-weight: 400;
+  color: #2a3647;
 }
 
 .editDropdown {
-    display: flex;
-    flex-direction: column;
-    width: 445px;
+  display: flex;
+  flex-direction: column;
+  width: 445px;
 }
 
-.editDropdown > span{
-    font-size: 20px;
-    font-weight: 400;
-    color: #2A3647;
+.editDropdown > span {
+  font-size: 20px;
+  font-weight: 400;
+  color: #2a3647;
 }
 
 .overlayCardEdit {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
 }
 
 .onsubmitEdit {
-    width: 89px;
-    height: 57px;
-    padding: 16px;
-    gap: 4px;
-    background-color: #2A3647;
-    border-radius: 10px;
-    border: none;
-    color: #FFF;
-    font-size: 21px;
-    font-weight: 700;
+  width: 89px;
+  height: 57px;
+  padding: 16px;
+  gap: 4px;
+  background-color: #2a3647;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  font-size: 21px;
+  font-weight: 700;
 }
 .submitEdit {
-    width: 85%;
-    display: flex;
-    align-items: flex-end;
-    flex-direction: column;
-    margin-top: 20px;
+  width: 85%;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  margin-top: 20px;
 }
 
 .progress-container {
-    width: 128px;
-    height: 8px;
-    background-color: #F4F4F4;
-    border-radius: 8px;
-    overflow: hidden;
+  width: 128px;
+  height: 8px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .progress-bar {
-    width: 0;
-    height: 8px;
-    background-color: #4589FF;
-    color: #F4F4F4;
-    text-align: center;
-    
-    border-radius: 16px;
-    transition: width 0.3s ease-in-out;
+  width: 0;
+  height: 8px;
+  background-color: #4589ff;
+  color: #f4f4f4;
+  text-align: center;
+
+  border-radius: 16px;
+  transition: width 0.3s ease-in-out;
 }
 
 .overlayCardEditForm {
-    width: 85%;
+  width: 85%;
 }
 
 .content span {
-    line-break: anywhere;
-    overflow: auto; 
-    display: block; 
-    max-height: 200px;
-    white-space: pre-line; 
+  line-break: anywhere;
+  overflow: auto;
+  display: block;
+  max-height: 200px;
+  white-space: pre-line;
 }
 
 .overlayAddTask {
-    width: unset!important;
-    padding: 0!important;
-    background-color: unset!important;
-    overflow-y: unset!important; 
+  width: unset !important;
+  padding: 0 !important;
+  background-color: unset !important;
+  overflow-y: unset !important;
 }
 .overlayAddTaskBorder {
-    width: unset!important;
-    padding: 18px!important;
+  width: unset !important;
+  padding: 18px !important;
 }
 
-.closeTask{
-    cursor: pointer;
-  }
+.closeTask {
+  cursor: pointer;
+}
+
+.assignedProfileName,.unsortedListOfSubtask{
+    max-height: 110px;
+    width: 100%;
+    overflow-x: auto;
+}

@@ -15,6 +15,27 @@
 
 }
 
+
+
+::-webkit-scrollbar{
+    width: 10px;
+    height: 10px;
+    
+  }
+  
+  ::-webkit-scrollbar-track{
+    background: #d1d1d1;
+    border-radius: 100vw;
+    margin-block: .1em;
+  }
+  
+  ::-webkit-scrollbar-thumb{
+    background: #a09c9c;
+    border-radius: 100vw;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+  
+  }
+
 .summaryMainContainer{
     position: absolute;
     left: 232px;

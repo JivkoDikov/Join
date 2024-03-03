@@ -1,14 +1,32 @@
+
+
+::-webkit-scrollbar{
+  width: 10px;
+  height: 10px;
+  
+}
+
+::-webkit-scrollbar-track{
+  background: #d1d1d1;
+  border-radius: 100vw;
+  margin-block: .1em;
+}
+
+::-webkit-scrollbar-thumb{
+  background: #a09c9c;
+  border-radius: 100vw;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+
+}
+
 .contentContact {
-  position: absolute;
+  position: fixed;
   left: 232px;
   top: 96px;
   display: flex;
-  height: calc(100% - 96px);
-  width: calc(100% - 232px);
-  overflow-y: hidden;
+  height: calc(100vh - 96px);
+  width: calc(100vw - 232px);
   overflow-x: hidden;
-
-  
 }
 
 .addcontactContainer {
@@ -19,15 +37,16 @@
 }
 
 .addContactButtonContacts{
-  overflow-y: scroll;
   padding: 32px 24px;
   height: 100%;
+  overflow-y: auto;
 }
 
 .renderContactContainer {
   display: flex;
   flex-direction: column;
   gap: 10px;
+ 
 }
 
 #letterBox {
@@ -76,7 +95,6 @@
 
 .contactContainer {
   width: 100%;
-  overflow-y: scroll;
   overflow-x: hidden;
 }
 

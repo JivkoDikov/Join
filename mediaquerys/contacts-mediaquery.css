@@ -159,7 +159,7 @@
   
     .createCheckBtn {
       width: 202px;
-      height: 51px;
+      height: 56px;
       padding: 18px, 10px;
       border-radius: 10px;
       gap: 4px;
@@ -442,8 +442,7 @@
   
     .createCheckBtn {
       width: 202px;
-      height: 51px;
-      padding: 18px, 10px;
+      height: 56px;
       border-radius: 10px;
       gap: 4px;
     }
@@ -492,5 +491,8 @@
     .iconNameEmail{
       padding: 15px 8px;
 
+    }
+    .createCheckBtn{
+      width: 100px;
     }
   }

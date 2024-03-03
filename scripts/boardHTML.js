@@ -115,7 +115,7 @@ function generateOverviewHTML(element) {
             </div>
             <div class="containerProfileName">
                 <span>Assigned To:</span>
-                <div id="assignedProfileName${id}" >
+                <div id="assignedProfileName${id}" class="assignedProfileName" >
                 
                 </div>
 
@@ -125,7 +125,7 @@ function generateOverviewHTML(element) {
             <div class="subtasks">
                 <span>Subtasks</span>
                 <div>
-                    <ul id="unorderedListOfSubtask">
+                    <ul id="unorderedListOfSubtask" class="unsortedListOfSubtask">
                         
                     </ul>
                 </div>
