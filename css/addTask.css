@@ -26,7 +26,7 @@ form textarea:focus {
 .contentAddTask {
   width: calc(100vw - 232px);
   height: calc(100vh - 96px);
-  position: fixed;
+  position: absolute;
   left: 232px;
   top: 96px;
   background-color: #f6f7f8;
@@ -797,4 +797,9 @@ textarea {
 
 .closeTask{
   cursor: pointer;
+}
+
+.deletePosition{
+  position: unset;
+  height: calc(100vh - 270px);
 }

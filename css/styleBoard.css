@@ -16,7 +16,7 @@
 }
 
 main {
-  position: fixed;
+  position: absolute;
   top: 96px;
   left: 232px;
   height: calc(100vh - 96px);
