@@ -72,8 +72,7 @@ width: 190px;
         width: calc(100vw - 46px);
         display: flex;
         flex-direction: column;
-        height: 100%;
-        padding: 20px 16px 0px 16px;
+        padding: 20px 16px 55px 16px;
         flex-wrap: unset;
     }
 
