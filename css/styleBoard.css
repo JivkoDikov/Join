@@ -574,6 +574,13 @@ input[type="checkbox"]:before {
 
 .closeTask {
   cursor: pointer;
+  margin: 0.67em;
+}
+
+.closeTask:hover{
+  background-color: #eeeeee;
+  border-radius: 56px;
+  
 }
 
 .assignedProfileName,.unsortedListOfSubtask{
