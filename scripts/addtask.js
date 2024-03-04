@@ -1,7 +1,7 @@
 let IdCounter;
 let subtasksArray =[];
 let categoryArray =[];
-let prioArray = [];
+let prioArray = 1;
 let editingSubtaskIndex = -1;
 let selectedCategoryId = null;
 let selectedContactDetails = [];
@@ -40,7 +40,7 @@ function createNewTaskObject(newCategory) {
   let headline = document.getElementById("enterTitle").value;
   let text = document.getElementById("enterDescription").value;
   let date = document.getElementById("enterDate").value;
-
+console.log(prioArray);
     
       return {
     id: tasks[userID].length,

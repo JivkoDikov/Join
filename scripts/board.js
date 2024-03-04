@@ -12,6 +12,7 @@ async function initBoard(){
 
 async function updateHTML() {
     cards = await loadTasks(userID);
+    console.log(cards);
     const categories = ['todo', 'progress', 'feedback', 'done'];
     for (const category of categories) {
         let categoryElements = cards.filter(t => t['category'] === category);
@@ -19,8 +20,10 @@ async function updateHTML() {
         for (let i = 0; i < categoryElements.length; i++) {
             let element = categoryElements[i];
             document.getElementById(category).innerHTML += generateCardHTML(element);
+            userTags(element);
             updateProgressBar(element);        
             assignIcon(element);
+            
         }
     }
     emptyCategory();
@@ -269,19 +272,21 @@ function prioEdit(prioID,cardId, event){
     let selectedPrio2 = document.getElementById('btnLow');
       prioArray = prioID;
     if(prioArray === 0){
-      selectedPrio0.classList.add('activePrio0');
-      selectedPrio1.classList.remove('activePrio1');
-      selectedPrio2.classList.remove('activePrio2');
-    }else if (prioArray === 1) {
-      selectedPrio0.classList.remove('activePrio0');
-      selectedPrio1.classList.add('activePrio1');
-      selectedPrio2.classList.remove('activePrio2');
-    } else if (prioArray === 2) {
-      selectedPrio0.classList.remove('activePrio0');
-      selectedPrio1.classList.remove('activePrio1');
-      selectedPrio2.classList.add('activePrio2');
-    } 
+    selectedPrio2.classList.add('activePrio2');
+    selectedPrio1.classList.remove('activePrio1');
+    selectedPrio0.classList.remove('activePrio0');
+  }else if (prioArray === 1) {
+    selectedPrio2.classList.remove('activePrio2');
+    selectedPrio1.classList.add('activePrio1');
+    selectedPrio0.classList.remove('activePrio0');
+  } else if (prioArray === 2) {
+    selectedPrio2.classList.remove('activePrio2');
+    selectedPrio1.classList.remove('activePrio1');
+    selectedPrio0.classList.add('activePrio0');
+  } 
     }
+
+    
 
 
 function assignedToEdit(element, b) {
@@ -380,7 +385,6 @@ async function updateAssignedUsersInCard(id) {
     }
 }
 
-  
 
 async function addTaskHTMLOpen(category) {
     categorys.push(category);
@@ -393,8 +397,27 @@ async function addTaskHTMLOpen(category) {
     updateHTML();
 
 }
+
+
 function addTaskHTMLClose() {
     let openAddTask = document.getElementById('overlay');
     openAddTask.innerHTML = '';
     openAddTask.classList.add('d-none');
+}
+
+
+function userTags(element) {
+    let elementID = element['id'];
+    let labelsID = 'labelsBoard'+elementID;
+    let labelID = cards.find(card => card.id === elementID);
+    let userLabel = labelID['label'];
+    let tagName = 'User Story';
+    if (userLabel[0] === tagName) {
+        let userLabelStory = document.getElementById(labelsID);
+        userLabelStory.classList.add('userStory');
+    }else {
+        let userLabelStory = document.getElementById(labelsID);
+        userLabelStory.classList.add('technicalTask');
+    }
+
 }
