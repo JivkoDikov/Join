@@ -269,7 +269,6 @@ function updateImageBasedOnResolution(logo) {
 
 }
 
-
 document.addEventListener("DOMContentLoaded", function() {
     // Elemente nach dem vollständigen Laden des DOM abrufen
     inputFieldName = document.getElementById('nameInput');
@@ -285,3 +284,12 @@ document.addEventListener("DOMContentLoaded", function() {
         animateLogo(logoImage, logo);
     }
 });
+
+
+function checkLoginTrue() {
+
+    if (userLogin === true) {
+        console.log(true);
+    }
+
+}

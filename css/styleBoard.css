@@ -182,8 +182,16 @@ h1 {
   padding: 4px 16px 4px 16px;
   margin: 0;
   border-radius: 8px;
-  background-color: #0038ff;
+  
   color: #fff;
+}
+
+.userStory{
+  background-color: #0038ff;
+}
+
+.technicalTask{
+  background-color: #00880b;
 }
 
 .content {
