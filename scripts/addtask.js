@@ -40,21 +40,23 @@ function createNewTaskObject(newCategory) {
   let headline = document.getElementById("enterTitle").value;
   let text = document.getElementById("enterDescription").value;
   let date = document.getElementById("enterDate").value;
-console.log(tasks[userID].length);
-    
-      return {
-    id: tasks[userID].length,
-    label: categoryArray,
-    headline: headline,
-    text: text,
-    progressBar: "",
-    subtasks: subtasksArray,
-    user: selectedContactDetails,
-    priority: prioArray,
-    category: newCategory,
-    date: date
+
+  let uniqueId = Date.now() + Math.floor(Math.random() * 100);
+
+  return {
+      id: uniqueId,
+      label: categoryArray,
+      headline: headline,
+      text: text,
+      progressBar: "",
+      subtasks: subtasksArray,
+      user: selectedContactDetails,
+      priority: prioArray,
+      category: newCategory,
+      date: date
   };
 }
+
 
 
 function resetInputFields() {

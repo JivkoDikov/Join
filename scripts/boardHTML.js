@@ -481,11 +481,6 @@ function addTaskHTML() {
                   </div>
 
               </div>
-               
-      
-
-                  
-
                   </div>
                   <div class="footerTask footerTaskMobile">
                       <div class="textButtonsContainer">

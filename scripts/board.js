@@ -202,16 +202,13 @@ function isSubTaskTrue(card) {
 
 
 function updateProgressBar(element) {
-    // Überprüfen, ob Subtasks vorhanden sind
     if (Array.isArray(element.subtasks) && element.subtasks.length > 0) {
-        // Berechnen des Fortschritts
         let currentProgress = element.subtasks.filter(subtask => subtask.done).length;
         let percent = Math.round((currentProgress / element.subtasks.length) * 100);
 
-        // Erstellen der Fortschrittsleiste, wenn sie noch nicht existiert
         let progressBarContainer = document.getElementById(`progressBarId${element.id}`);
         if (!progressBarContainer) {
-            let container = document.getElementById('isSubTaskTrue'); // Annahme: Es gibt ein Element mit dieser ID, um die Fortschrittsleiste einzufügen
+            let container = document.getElementById('isSubTaskTrue');
             container.innerHTML = `
             <div class="progress-container">
                 <div class="progress-bar" id="progressBarId${element.id}" style="width: ${percent}%"></div>
@@ -219,14 +216,12 @@ function updateProgressBar(element) {
             <div id="subtaskBar${element.id}"><span>${currentProgress}/${element.subtasks.length} Subtasks</span></div>
             `;
         } else {
-            // Aktualisieren der Fortschrittsleiste, wenn sie bereits existiert
             progressBarContainer.style.width = `${percent}%`;
             let subtaskHTMLCount = document.getElementById(`subtaskBar${element.id}`);
             subtaskHTMLCount.innerHTML = `<span>${currentProgress}/${element.subtasks.length} Subtasks</span>`;
         }
     }
 }
-
 
 
 function editCard(cardId) {
@@ -342,6 +337,7 @@ function toggleAssignedToBoard(i) {
     }
   }
   
+
   async function assignedToBoard(i) {
     await load_contacts_from_webstorage();
     let contactsBox = document.getElementById('contactsBox');
@@ -368,7 +364,6 @@ function toggleAssignedToBoard(i) {
     }
   }
   
-
 
   function updateSelectedContactsBoard(initials, bgColor, name, id, checkbox) {
     let key = name + bgColor; 
