@@ -801,5 +801,5 @@ textarea {
 
 .deletePosition{
   position: unset;
-  height: calc(100vh - 270px);
+  height: calc(100vh - 200px);
 }

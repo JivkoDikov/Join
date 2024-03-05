@@ -300,8 +300,8 @@ function addTaskHTML() {
     <div class="overview">
     <div class="overlayCard overlayAddTaskBorder">
     <div class="contentAddTask overlayAddTask deletePosition">
-    <div  class="addTaskHeadlineContainer">
-    <h1 class="addTaskHeadline">Add Task</h1>
+    <div  class="addTaskHeadlineContainer addTaskMobile">
+    <h1 class="addTaskHeadline h1Mobile">Add Task</h1>
     <svg onclick="addTaskHTMLClose()" class="closeTask" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
     <mask id="mask0_117793_4210" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="4" width="24" height="24">
     <rect x="4" y="4" width="24" height="24" fill="#D9D9D9"/>
@@ -312,8 +312,8 @@ function addTaskHTML() {
     </svg>
     </div>
     
-<form onsubmit="createTask(event)">
-    <div class="contentLeft-Right">
+<form onsubmit="createTask(event)" class="formBoardTask">
+    <div class="contentLeft-Right formMobile">
 
       <div class="contentLeft">
           <div class="titleInputContainer">
@@ -491,7 +491,7 @@ function addTaskHTML() {
                   
 
                   </div>
-                  <div class="footerTask">
+                  <div class="footerTask footerTaskMobile">
                       <div class="textButtonsContainer">
                           <div class="textContainer">
                           <p class="star">*</p>
