@@ -44,9 +44,9 @@ function priorityCheck(element) {
 
 function generateCardHTML(element) {
     let prioritySVG = priorityCheck(element);
-    
+    let elementData = encodeURIComponent(JSON.stringify(element));
     return `
-    <div class="cards" draggable="true" ondragstart="startDragging(${element['id']})" onclick="openOverview(${element['id']})">
+    <div class="cards" draggable="true" ondragstart="startDragging(${element['id']})" onclick="openOverview(${element['id']}, this.getAttribute('data-element'))" data-element='${elementData}'>
     <h2 id="labelsBoard${element['id']}" class="labelsBoardCard">${element['label']}</h2>
     <div class="content">
         <h3>${element['headline']}</h3>
@@ -86,7 +86,7 @@ function generateOverviewHTML(element) {
     <div class="overview">
     <div class="overlayCard ">
             <div class="labelContent">
-                <h2 id="labelsBoard${element['id']}" class="labelsBoardCard">${element['label']}</h2>
+                <h2 id="labelsBoardOver${element['id']}" class="labelsBoardCard">${element['label']}</h2>
                 <button class="btn-close" onclick="closeOverview()">
                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <mask id="mask0_117793_4210" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="4" width="24" height="24">

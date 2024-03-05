@@ -118,16 +118,18 @@ function emptyCategory() {
 }
 
 
-function openOverview(i) {
+function openOverview(i, elementData) {
     let infoArrayCard = cards.find(task => {
         return task.id == i;
     });
+    let element = JSON.parse(decodeURIComponent(elementData));
     let removeClass = document.getElementById('overlay');
     removeClass.innerHTML = '';
     removeClass.innerHTML = generateOverviewHTML(infoArrayCard);
     removeClass.classList.remove('d-none');
     subtaskLoad(i);
     assignedToEdit(infoArrayCard, i);
+    userTagsOver(element);
 }
 
 
@@ -419,5 +421,35 @@ function userTags(element) {
         let userLabelStory = document.getElementById(labelsID);
         userLabelStory.classList.add('technicalTask');
     }
+}
 
+
+function userTags(element) {
+    let elementID = element['id'];
+    let labelsID = 'labelsBoard' + elementID;
+    let labelID = cards.find(card => card.id === elementID);
+    let userLabel = labelID['label'];
+    let tagName = 'User Story';
+    if (userLabel[0] === tagName) {
+        let userLabelStory = document.getElementById(labelsID);
+        userLabelStory.classList.add('userStory');
+    }else {
+        let userLabelStory = document.getElementById(labelsID);
+        userLabelStory.classList.add('technicalTask');
+    }
+}
+
+function userTagsOver(element) {
+    let elementID = element['id'];
+    let labelsID = 'labelsBoardOver' + elementID;
+    let labelID = cards.find(card => card.id === elementID);
+    let userLabel = labelID['label'];
+    let tagName = 'User Story';
+    if (userLabel[0] === tagName) {
+        let userLabelStory = document.getElementById(labelsID);
+        userLabelStory.classList.add('userStory');
+    }else {
+        let userLabelStory = document.getElementById(labelsID);
+        userLabelStory.classList.add('technicalTask');
+    }
 }
