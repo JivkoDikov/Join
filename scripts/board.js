@@ -244,6 +244,8 @@ function editCard(cardId) {
     title.value = infoArrayCard['headline'];  
     textarea.value = infoArrayCard['text']; 
     data.value = infoArrayCard['date']; 
+   
+    prioEdit(infoArrayCard['priority'], cardId, event);
 }
 
 
@@ -284,7 +286,7 @@ function prioEdit(prioID,cardId, event){
     let selectedPrio1 = document.getElementById('btnMedium');
     let selectedPrio2 = document.getElementById('btnLow');
       prioArray = prioID;
-    if(prioArray === 0){
+    if(prioArray === 2){
     selectedPrio2.classList.add('activePrio2');
     selectedPrio1.classList.remove('activePrio1');
     selectedPrio0.classList.remove('activePrio0');
@@ -292,15 +294,13 @@ function prioEdit(prioID,cardId, event){
     selectedPrio2.classList.remove('activePrio2');
     selectedPrio1.classList.add('activePrio1');
     selectedPrio0.classList.remove('activePrio0');
-  } else if (prioArray === 2) {
+  } else if (prioArray === 0) {
     selectedPrio2.classList.remove('activePrio2');
     selectedPrio1.classList.remove('activePrio1');
     selectedPrio0.classList.add('activePrio0');
   } 
     }
-
     
-
 
 function assignedToEdit(element, b) {
     let assignProfil = document.getElementById(`assignedProfileName${b}`);

@@ -2,7 +2,7 @@ function priorityCheck(element) {
     if (element && element['priority'] !== undefined) {
         const priority = element['priority'];
     
-    if (priority === 0) {
+    if (priority === 2) {
         return `<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_122331_4841)">
         <path d="M15.9997 17.2452C15.8003 17.2456 15.606 17.1837 15.4455 17.0686L7.877 11.6347C7.77852 11.5639 7.69535 11.475 7.63223 11.373C7.5691 11.2709 7.52726 11.1578 7.5091 11.0401C7.47241 10.8023 7.53439 10.5601 7.68138 10.3667C7.82838 10.1734 8.04835 10.0447 8.29292 10.0091C8.53749 9.97339 8.78661 10.0336 8.98549 10.1766L15.9997 15.2075L23.014 10.1766C23.1125 10.1058 23.2243 10.0546 23.3431 10.0258C23.462 9.9971 23.5855 9.9914 23.7066 10.0091C23.8277 10.0267 23.944 10.0674 24.0489 10.1288C24.1538 10.1901 24.2453 10.271 24.3181 10.3667C24.3909 10.4625 24.4436 10.5712 24.4731 10.6868C24.5027 10.8023 24.5085 10.9224 24.4904 11.0401C24.4722 11.1578 24.4304 11.2709 24.3672 11.373C24.3041 11.475 24.221 11.5639 24.1225 11.6347L16.554 17.0686C16.3934 17.1837 16.1992 17.2456 15.9997 17.2452Z" fill="#7AE229"/>
@@ -26,7 +26,7 @@ function priorityCheck(element) {
         </clipPath>
         </defs>
         </svg>`;
-    } else if (priority === 2) {
+    } else if (priority === 0) {
         return `<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_122331_4781)">
         <path d="M16.0003 14.7548C16.1997 14.7544 16.394 14.8163 16.5545 14.9314L24.123 20.3653C24.2215 20.4361 24.3046 20.525 24.3678 20.627C24.4309 20.7291 24.4727 20.8422 24.4909 20.9599C24.5276 21.1977 24.4656 21.4399 24.3186 21.6333C24.1716 21.8266 23.9516 21.9553 23.7071 21.9909C23.4625 22.0266 23.2134 21.9664 23.0145 21.8234L16.0003 16.7925L8.98602 21.8234C8.88754 21.8942 8.7757 21.9454 8.65687 21.9742C8.53803 22.0029 8.41455 22.0086 8.29345 21.9909C8.17235 21.9733 8.05602 21.9326 7.95109 21.8712C7.84616 21.8099 7.75469 21.729 7.68191 21.6333C7.60912 21.5375 7.55644 21.4288 7.52688 21.3132C7.49732 21.1977 7.49146 21.0776 7.50962 20.9599C7.52779 20.8422 7.56963 20.7291 7.63275 20.627C7.69588 20.525 7.77905 20.4361 7.87752 20.3653L15.446 14.9314C15.6066 14.8163 15.8008 14.7544 16.0003 14.7548Z" fill="#FF3D00"/>
@@ -45,7 +45,6 @@ function priorityCheck(element) {
 function generateCardHTML(element) {
     let prioritySVG = priorityCheck(element);
     let elementData = encodeURIComponent(JSON.stringify(element));
-    // Überprüfen, ob Subtasks vorhanden sind und eine Fortschrittsleiste nur dann hinzufügen
     let progressBarHTML = Array.isArray(element.subtasks) && element.subtasks.length > 0
         ? `<div class="progressContainer"><div class="progress-container" id="progressBarContainer${element.id}"><div class="progress-bar" id="progressBarId${element.id}"></div></div><div id="subtaskBar${element.id}"></div></div>`
         : '';
@@ -119,7 +118,7 @@ function generateOverviewHTML(element) {
             </div>
 
             <div class="subtasks">
-            <div id="isSubTask">${isSubTask}</div>
+            <div id="isSubTask" class="subtasks">${isSubTask}</div>
                 
                 <div>
                     <ul id="unorderedListOfSubtask" class="unsortedListOfSubtask">
@@ -205,7 +204,7 @@ function overviewEditHTML(i) {
         <div class="prioContainer">
             <p class="title">Prio</p>
             <div class="prioButtonContainer">
-                <button class="btnUrgent" id="btnUrgent" onclick="prioEdit(2, ${i},event),updatePrio(0, event)">
+                <button class="btnUrgent" id="btnUrgent" onclick="prioEdit(0, ${i},event),updatePrio(0, event)">
                     <div class="urgentSVGText">
                     <p class="urgentText">Urgent</p>
                     <svg id="svgUrgent"width="20" height="20" viewBox="0 0 32 32" fill="" xmlns="http://www.w3.org/2000/svg">
@@ -239,7 +238,7 @@ function overviewEditHTML(i) {
                     </div>
                         
                 </button>
-                <button class="btnLow" id="btnLow" onclick="prioEdit(0, ${i},event), updatePrio(2, event)">
+                <button class="btnLow" id="btnLow" onclick="prioEdit(2, ${i},event), updatePrio(2, event)">
                     <div class="lowSVGText">
                     <p class="lowText">Low</p>
                     <svg  id="svgLow"width="20" height="20" viewBox="0 0 32 32" fill="" xmlns="http://www.w3.org/2000/svg">
