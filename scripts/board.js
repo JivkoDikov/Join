@@ -65,12 +65,17 @@ function updateCategory(card, category, search) {
     card.innerHTML = '';
     for (let i = 0; i < cards.length; i++) {
         const element = cards[i];
-        if (element['category'] === category && (element['headline'].toLowerCase().includes(search) || search === '')) {
-            card.innerHTML += generateCardHTML(element);           
+        if (element['category'] === category && 
+            (element['headline'].toLowerCase().includes(search) || 
+             element['text'].toLowerCase().includes(search) || 
+             search === '')) {
+            card.innerHTML += generateCardHTML(element); 
+            userTags(element);          
         }       
     }
     emptyCategory();
 }
+
 
 
 function emptyCategory() {
@@ -168,54 +173,60 @@ function subtaskLoad(id) {
 function subtasksCheckForTrue(cardId, subtaskID) {
     let checkbox = document.getElementById(`check${subtaskID}`).checked;
     let card = cards.find(card => card.id === cardId);
+    if (card.subtasks[subtaskID].length > 0) {
+        
+    }
         if(checkbox === true) {
             card.subtasks[subtaskID].done = true;
         }else if(checkbox === false) {
             card.subtasks[subtaskID].done = false;}
+
     subtasksCheck(card);
     updateProgressBar(card);
 }
 
-
-function subtasksCheckForTrue(id) {
-    let checkForTrue = 0;
-    let element = cards.find(card => card.id === id);
-    
-    for (let i = 0; i < element['subtasks'].length; i++) {
-        let checkboxClick = document.getElementById(`check${i}`).checked
-        if(checkboxClick === true) {
-            cards[id]['subtasks'][i]['done'] = true;
-            checkForTrue++;
-            cards[id]['checkForTrue'] = checkForTrue;
-        }else if(checkboxClick === false) {
-            cards[id]['subtasks'][i]['done'] = false;}
-        if(checkboxClick && cards[id]['subtasks'][i]['done'] === false) {
-            checkForTrue--; }
+function isSubTaskTrue(card) {
+    console.log(card.subtasks.length);
+    if (card.subtasks.length > 0) {
+        document.getElementById('isSubTaskTrue').innerHTML = `
+        <div class="progress-container">
+        <div class="progress-bar" id="progressBarId${card['id']}">
+        
+        </div>
+        </div>
+        <div id="subtaskBar${card['id']}">
+        `;
     }
-    cards[id]['checkForTrue'] = checkForTrue;
-    subtasksCheck(element);
-    updateProgressBar(element);
+    
 }
 
 
 function updateProgressBar(element) {
-    let currentProgress = 0;
-    let percent = 0;
-    if(Array.isArray(element.subtasks) && element.subtasks.length > 0){
-        for(let i = 0; i < element.subtasks.length; i++){
-            if(element.subtasks[i].done === true){
-                currentProgress++
-            }
+    // Überprüfen, ob Subtasks vorhanden sind
+    if (Array.isArray(element.subtasks) && element.subtasks.length > 0) {
+        // Berechnen des Fortschritts
+        let currentProgress = element.subtasks.filter(subtask => subtask.done).length;
+        let percent = Math.round((currentProgress / element.subtasks.length) * 100);
+
+        // Erstellen der Fortschrittsleiste, wenn sie noch nicht existiert
+        let progressBarContainer = document.getElementById(`progressBarId${element.id}`);
+        if (!progressBarContainer) {
+            let container = document.getElementById('isSubTaskTrue'); // Annahme: Es gibt ein Element mit dieser ID, um die Fortschrittsleiste einzufügen
+            container.innerHTML = `
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBarId${element.id}" style="width: ${percent}%"></div>
+            </div>
+            <div id="subtaskBar${element.id}"><span>${currentProgress}/${element.subtasks.length} Subtasks</span></div>
+            `;
+        } else {
+            // Aktualisieren der Fortschrittsleiste, wenn sie bereits existiert
+            progressBarContainer.style.width = `${percent}%`;
+            let subtaskHTMLCount = document.getElementById(`subtaskBar${element.id}`);
+            subtaskHTMLCount.innerHTML = `<span>${currentProgress}/${element.subtasks.length} Subtasks</span>`;
         }
-        percent = currentProgress / element.subtasks.length ;
-        percent = Math.round(percent * 100);
     }
-    let progressBarId = `myProgressBar${element['id']}`;
-    let progressBar = document.getElementById(`progressBarId${element['id']}`);
-    progressBar.innerHTML = `<div class="progress-bar" id="${progressBarId}"></div>`;
-    progressBar.style = `width: ${percent}%`;
-    progressBar.innerText = ''; 
 }
+
 
 
 function editCard(cardId) {

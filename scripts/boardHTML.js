@@ -45,35 +45,29 @@ function priorityCheck(element) {
 function generateCardHTML(element) {
     let prioritySVG = priorityCheck(element);
     let elementData = encodeURIComponent(JSON.stringify(element));
+    // Überprüfen, ob Subtasks vorhanden sind und eine Fortschrittsleiste nur dann hinzufügen
+    let progressBarHTML = Array.isArray(element.subtasks) && element.subtasks.length > 0
+        ? `<div class="progressContainer"><div class="progress-container" id="progressBarContainer${element.id}"><div class="progress-bar" id="progressBarId${element.id}"></div></div><div id="subtaskBar${element.id}"></div></div>`
+        : '';
+    
     return `
-    <div class="cards" draggable="true" ondragstart="startDragging(${element['id']})" onclick="openOverview(${element['id']}, this.getAttribute('data-element'))" data-element='${elementData}'>
-    <h2 id="labelsBoard${element['id']}" class="labelsBoardCard">${element['label']}</h2>
-    <div class="content">
-        <h3>${element['headline']}</h3>
-        <span>${element['text']}</span>
-    </div>
-    <div class="progressBar">
-        <div class="progress-container">
-        <div class="progress-bar" id="progressBarId${element['id']}">
-        
+    <div class="cards" draggable="true" ondragstart="startDragging(${element.id})" onclick="openOverview(${element.id}, this.getAttribute('data-element'))" data-element='${elementData}'>
+        <h2 id="labelsBoard${element.id}" class="labelsBoardCard">${element.label}</h2>
+        <div class="content">
+            <h3>${element.headline}</h3>
+            <span>${element.text}</span>
         </div>
+        ${progressBarHTML} 
+        <div class="labelProfile">
+            <div class="containerProfile" id="iconProfile${element.id}">
+            </div>
+            <div id="priority">
+            ${prioritySVG}
+            </div>
         </div>
-        <div id="subtaskBar${element['id']}">
-        
-        </div>
-    </div>
-    <div class="labelProfile">
-        <div class="containerProfile" id="iconProfile${element['id']}">
-             
-        </div>
-
-        <div id="priority">
-        ${prioritySVG}
-        </div>
-    </div>
-    </div>
-    `; 
+    </div>`;
 }
+
 
 
 function generateOverviewHTML(element) {
@@ -400,7 +394,7 @@ function addTaskHTML() {
                               </div>
                               
                       </button>
-                      <button id="btnMedium" class="btnMedium" onclick="updatePrio(1, event)">
+                      <button id="btnMedium" class="btnMedium activePrio1" onclick="updatePrio(1, event)">
                           <div class="mediumSVGText">
                           <p class="mediumText">Medium</p>
                           <svg id="svgMedium" class="svgMedium"width="20" height="20" viewBox="0 0 32 32" fill="" xmlns="http://www.w3.org/2000/svg">
@@ -526,6 +520,8 @@ function addTaskHTML() {
 }
 
 function assignedToBoardHTML(user, isChecked, i) {
+    const userNameForId = user['name'].replace(/\s+/g, '_');
+
     return `
     <div class="assignedContactsContainer">
         <div class="assignedContactSVG">
@@ -533,7 +529,7 @@ function assignedToBoardHTML(user, isChecked, i) {
                 <div class="assignedLetters" style="background-color: ${user['bgColor']}">${user['letter']}${user['lastNameLetter']}</div>
                 <span>${user['name']}</span>
             </div>
-            <input id="assignedToContact_${user['name']}" type="checkbox" ${isChecked} onchange="updateSelectedContactsBoard('${user['lastNameLetter']}', '${user['bgColor']}', '${user['name']}','${i}', this)">
+            <input id="assignedToContact_${userNameForId}" type="checkbox" ${isChecked} onchange="updateSelectedContactsBoard('${user['lastNameLetter']}', '${user['bgColor']}', '${user['name']}', '${i}', this)">
         </div>
-    </div>`
-  }
+    </div>`;
+}

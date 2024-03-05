@@ -1,15 +1,19 @@
-function assignedToHTML(contact,initials) {
-    return `
-    <div class="assignedContactsContainer">
-      <div class="assignedContactSVG">
-        <div class="letterContacts">
-          <div class="assignedLetters" style="background-color: ${contact.bgColor}">${initials}</div>
-          <span>${contact.name}</span>
-        </div>
-        <input id="assignedToContact_${contact.name}" type="checkbox" onchange="updateSelectedContacts('${initials}','${contact.bgColor}','${contact.name}', this)">
+function assignedToHTML(contact, initials, isChecked) {
+ 
+  const checkedAttribute = isChecked ? 'checked' : '';
+  
+  return `
+  <div class="assignedContactsContainer">
+    <div class="assignedContactSVG">
+      <div class="letterContacts">
+        <div class="assignedLetters" style="background-color: ${contact.bgColor}">${initials}</div>
+        <span>${contact.name}</span>
       </div>
-    </div>`;
-    }
+      <input id="assignedToContact_${contact.name.replace(/\s+/g, '_')}" type="checkbox" onchange="updateSelectedContacts('${initials}','${contact.bgColor}','${contact.name}', this)" ${checkedAttribute}>
+    </div>
+  </div>`;
+}
+
   
   
     function saveEditeSubTaskHTML(subtask, i) {

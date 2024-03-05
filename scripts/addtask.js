@@ -40,7 +40,7 @@ function createNewTaskObject(newCategory) {
   let headline = document.getElementById("enterTitle").value;
   let text = document.getElementById("enterDescription").value;
   let date = document.getElementById("enterDate").value;
-console.log(prioArray);
+console.log(tasks[userID].length);
     
       return {
     id: tasks[userID].length,
@@ -54,8 +54,6 @@ console.log(prioArray);
     category: newCategory,
     date: date
   };
-    
-  
 }
 
 
@@ -96,15 +94,17 @@ function inputFrame(id){
 }
 
 
- function toggleContacts() {
+function toggleContacts() {
   let contactsBox = document.getElementById('contactsBox');
+  // Überprüfen, ob das Element sichtbar ist oder nicht
   if (contactsBox.style.display === 'none' || contactsBox.innerHTML.trim() === '') {
-    assignedTo(); 
-    contactsBox.style.display = 'block';
+    assignedTo(); // Ruft die Funktion auf, um die Kontakte mit den aktuellen Zuständen anzuzeigen
+    contactsBox.style.display = 'block'; // Zeigt die Kontakte an
   } else {
-    contactsBox.style.display = 'none';
+    contactsBox.style.display = 'none'; // Blendet die Kontakte aus
   }
 }
+
 
 
 async function assignedTo() {
@@ -113,28 +113,34 @@ async function assignedTo() {
   let contactsBox = document.getElementById('contactsBox');
   contactsBox.innerHTML = '';
 
-  for (let i = 0; i < contacts[userID].length; i++) {
-    let contact = contacts[userID][i];
+  contacts[userID].forEach(contact => {
     let initials = getInitials(contact.name);
-
-    contactsBox.innerHTML += assignedToHTML(contact,initials);
-  }
+    let isChecked = selectedContactDetails.some(c => c.name === contact.name && c.bgColor === contact.bgColor);
+    contactsBox.innerHTML += assignedToHTML(contact, initials, isChecked);
+  });
 }
 
 
 
+
+
+
 function updateSelectedContacts(initials, bgColor, name, checkbox) {
-  if (checkbox.checked) {
+  let contactExistsIndex = selectedContactDetails.findIndex(c => c.name === name && c.bgColor === bgColor);
+
+  if (checkbox.checked && contactExistsIndex === -1) {
+    // Fügt den Kontakt hinzu, wenn er noch nicht existiert
     selectedContactDetails.push({
       name: name,
       bgColor: bgColor,
       initials: initials
     });
-  } else {
-    let index = selectedContactDetails.indexOf(initials, bgColor, name);
-      selectedContactDetails.splice(index, 1);
+  } else if (!checkbox.checked && contactExistsIndex !== -1) {
+    // Entfernt den Kontakt, wenn das Kontrollkästchen deaktiviert wurde
+    selectedContactDetails.splice(contactExistsIndex, 1);
   }
 }
+
 
 
 function getInitials(name) {
