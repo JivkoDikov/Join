@@ -71,6 +71,7 @@ function generateCardHTML(element) {
 
 function generateOverviewHTML(element) {
     let id = element['id'];
+    
     let isSubTask = Array.isArray(element.subtasks) && element.subtasks.length > 0
     ? `<span>Subtasks</span>`
         : '';

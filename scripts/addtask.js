@@ -36,15 +36,22 @@ function initializeUserTasks() {
 }
 
 
+function getNextTaskId() {
+  if (!tasks[userID] || tasks[userID].length === 0) {
+      return 0; 
+  } else {
+      const maxId = tasks[userID].reduce((max, task) => Math.max(max, task.id), 0);
+      return maxId + 1;
+  }
+}
+
 function createNewTaskObject(newCategory) {
   let headline = document.getElementById("enterTitle").value;
   let text = document.getElementById("enterDescription").value;
   let date = document.getElementById("enterDate").value;
-
-  let uniqueId = Date.now() + Math.floor(Math.random() * 100);
-
+  
   return {
-      id: uniqueId,
+      id: getNextTaskId(),
       label: categoryArray,
       headline: headline,
       text: text,
@@ -56,6 +63,7 @@ function createNewTaskObject(newCategory) {
       date: date
   };
 }
+
 
 
 

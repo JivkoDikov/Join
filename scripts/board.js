@@ -338,31 +338,34 @@ function toggleAssignedToBoard(i) {
   }
   
 
-  async function assignedToBoard(i) {
+  async function assignedToBoard(cardId) {
     await load_contacts_from_webstorage();
     let contactsBox = document.getElementById('contactsBox');
     contactsBox.innerHTML = '';
-    let uniqueUsers = {};
     let users = contacts[userID];
-    
-    let assignedContacts = cards[i]['user'] || [];
-  
+
+    let card = cards.find(card => card.id === cardId);
+
+    if (!card) {
+        console.error("Karte mit ID " + cardId + " nicht gefunden.");
+        return; 
+    }
+
+    let assignedContacts = card.user || [];
+
+    let uniqueUsers = {};
     for (let j = 0; j < users.length; j++) {
         let user = users[j];
         let key = user['name'] + user['bgColor'];
-        
+
         if (!uniqueUsers[key]) {
-            let contactUser = {
-                name: user['name'],
-                bgColor: user['bgColor'],
-                initials: user['lastNameLetter']
-            };
-            let isChecked = assignedContacts.some(assignedUser => assignedUser.name === contactUser.name && assignedUser.bgColor === contactUser.bgColor) ? 'checked' : '';
-            contactsBox.innerHTML += assignedToBoardHTML(user, isChecked, i);
+            let isChecked = assignedContacts.some(assignedUser => assignedUser.name === user.name && assignedUser.bgColor === user.bgColor) ? 'checked' : '';
+            contactsBox.innerHTML += assignedToBoardHTML(user, isChecked, cardId); // Verwenden Sie cardId, um die Konsistenz zu bewahren
             uniqueUsers[key] = true;
         }
     }
-  }
+}
+
   
 
   function updateSelectedContactsBoard(initials, bgColor, name, id, checkbox) {
