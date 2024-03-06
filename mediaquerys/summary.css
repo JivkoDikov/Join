@@ -220,10 +220,10 @@
 }
 
 .square-button{
-    padding: 19px 0px;
+    padding: 12px 0px;
 }
 .square-button span{
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .square-button .element{
@@ -232,6 +232,10 @@ font-size: 47px;
 
 .frame68 span{
     font-size: 14px !important;
+}
+
+.square-button .element{
+    line-height: 54px;
 }
 }
 

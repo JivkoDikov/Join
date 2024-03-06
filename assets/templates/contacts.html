@@ -142,29 +142,33 @@
                 <div class="inputButtonsContainer">
                 <form onsubmit="createContact(event)">
                 <div class="contactInput">
-                
+                <div class="inputIconsContainerMessage">
                 <div class="inputIconsContainer">
                 <div class="contactDetails">
-                <input required minlength="3" id="name"class="input"  type="text" placeholder="Name" autocomplete="name">
+                <input  minlength="3" id="name"class="input"  type="text" placeholder="Name" autocomplete="name">
                 <img class="inputIcons"src="/assets/img/person.png" alt="">
                 </div>
                 </div>
-
+                <div id="requiredMessageName" class="requiredMessage">This fiels is required</div>
+                </div>
+                <div class="inputIconsContainerMessage">
                 <div class="inputIconsContainer">
                 <div class="contactDetails">
-                <input required id="email"class="input"   type="email" placeholder="Email" autocomplete="email">
+                <input  id="email"class="input"   type="email" placeholder="Email" autocomplete="email">
                 <img class="inputIcons"src="/assets/img/mail.png" alt="">
                 </div>
                 </div>
-
+                <div id="requiredMessageMail"class="requiredMessage">This fiels is required</div>
+                </div>
+                <div class="inputIconsContainerMessage">
                 <div class="inputIconsContainer">
                 <div class="contactDetails">
-                <input required id="tel"class="input"  type="tel" placeholder="Phone" autocomplete="tel">
+                <input  id="tel"class="input"  type="tel" placeholder="Phone" autocomplete="tel">
                 <img class="inputIcons"src="/assets/img/call.png" alt="">
                 </div>
-                
                 </div>
-                
+                <div id="requiredMessageTel" class="requiredMessage">This fiels is required</div>
+                </div>
                 </div>
                 
 

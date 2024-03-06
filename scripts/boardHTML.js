@@ -177,7 +177,7 @@ function overviewEditHTML(i) {
             <p class="title">Title</p><p class="star">*</p>
             </div>
             <div class="inputTitleRequiredContainer">
-            <input class="inputTitle"type="text" required="true" id="editTitle" placeholder="Enter a Title">
+            <input class="inputTitle overTaskWidth" type="text" required="true" id="editTitle" placeholder="Enter a Title">
             <p class="requiredField"></p>
             </div>
         </div>

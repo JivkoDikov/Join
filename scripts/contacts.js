@@ -316,3 +316,17 @@ function updateContacts() {
   let groessteZahl = Math.max(...newContactIdCounter);
   contactIdCounter = groessteZahl +1;
 }
+
+
+function inputFrame(id){
+  let inputField = document.getElementById(id);
+  let required = document.getElementById(id+"Class")
+
+  if(inputField.value){
+    inputField.style.border = "1px solid #29abe2";
+    required.classList.add("d-none")
+  } else{
+    inputField.style.border = "1px solid red";
+    required.classList.remove("d-none")
+  }
+}

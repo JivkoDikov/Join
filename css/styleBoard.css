@@ -524,7 +524,7 @@ input[type="checkbox"]:before {
   font-weight: 700;
 }
 .submitEdit {
-  width: 85%;
+  width: 100%;
   display: flex;
   align-items: flex-end;
   flex-direction: column;
@@ -599,4 +599,10 @@ input[type="checkbox"]:before {
 
 .drag-area-highlight {
   background-color: rgba(243, 243, 243, 0.959);
+  min-height: 250px;
+  min-width: 250px;
+}
+
+.overTaskWidth{
+  width: calc(100% - 32px) !important;
 }
