@@ -280,6 +280,15 @@ form {
 .profileContact {
   width: 120px;
   height: 120px;
+  border: 3px solid white;
+  border-radius: 70px;
+  font-size: 47px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-family: 'Inter',sans-serif;
+  line-height: 56.4px;
 }
 
 .inputButtonsContainer {

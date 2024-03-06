@@ -220,9 +220,19 @@ function getEditContact(selectedContact, id) {
   document.getElementById("editemail").value = selectedContact.email;
   document.getElementById("edittel").value = selectedContact.tel;
   document.getElementById("editname").dataset.contactId = id;
+  const initials = selectedContact.name.split(' ').map(word => word.charAt(0)).join('');
+  const bgColor = selectedContact.bgColor;
+  setProfileContact(initials, bgColor);
   document.getElementById("deleteContactButton").addEventListener("click", function() {
     deleteContact(id);
   });
+}
+
+
+function setProfileContact(initials, bgColor) {
+  const profileContactDiv = document.getElementById("profileContact");
+  profileContactDiv.style.backgroundColor = bgColor;
+  profileContactDiv.textContent = initials;
 }
 
 

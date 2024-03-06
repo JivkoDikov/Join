@@ -165,20 +165,17 @@ function updatePrio(buttonId, event) {
   let selectedPrio0 = document.getElementById('btnUrgent');
   let selectedPrio1 = document.getElementById('btnMedium');
   let selectedPrio2 = document.getElementById('btnLow');
-    prioArray = buttonId;
-    if(buttonId === 2){
-      selectedPrio2.classList.add('activePrio2');
-      selectedPrio1.classList.remove('activePrio1');
-      selectedPrio0.classList.remove('activePrio0');
-    }else if (buttonId === 1) {
-      selectedPrio2.classList.remove('activePrio2');
-      selectedPrio1.classList.add('activePrio1');
-      selectedPrio0.classList.remove('activePrio0');
-    } else if (buttonId === 0) {
-      selectedPrio2.classList.remove('activePrio2');
-      selectedPrio1.classList.remove('activePrio1');
-      selectedPrio0.classList.add('activePrio0');
-    } 
+  prioArray = buttonId;
+  selectedPrio0.classList.remove('activePrio0');
+  selectedPrio1.classList.remove('activePrio1');
+  selectedPrio2.classList.remove('activePrio2');
+  if (buttonId === 2) {
+    selectedPrio2.classList.add('activePrio2');
+  } else if (buttonId === 1) {
+    selectedPrio1.classList.add('activePrio1');
+  } else if (buttonId === 0) {
+    selectedPrio0.classList.add('activePrio0');
+  }
 }
 
 
@@ -319,4 +316,21 @@ function updateCategory(card, search) {
 async function load_contacts_from_webstorage(){
   let contactsValue = await getItem('contacts');
   contacts = JSON.parse(contactsValue.data.value)
+}
+
+function clearForm() {
+  document.getElementById("newTaskForm").reset();
+  selectedContactDetails = [];
+  let contactCheckboxes = document.querySelectorAll('.contactCheckbox');
+  contactCheckboxes.forEach(checkbox => {
+    checkbox.checked = false;
+  });
+  document.getElementById("contactsBox").innerHTML = "";
+  document.getElementById("categoryBox").innerHTML = "";
+  document.getElementById("subTasksBox").innerHTML = "";
+  document.getElementById('selectTaskCategory').innerHTML = "Select Task Category";
+  document.getElementById("btnUrgent").classList.remove("activePrio0");
+  document.getElementById("btnLow").classList.remove("activePrio2");
+  document.getElementById("btnMedium").classList.add("activePrio1");
+    
 }
