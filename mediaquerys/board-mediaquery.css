@@ -46,8 +46,7 @@
     top: 80px;
     left: unset;
     height: calc(100vh - 160px);
-    width: 100vw;
-    overflow-y: scroll;
+    width: 100vw;   
     overflow-x: hidden;
   }
 
@@ -109,6 +108,16 @@
     width: calc(100vw - 60px);
     padding: 0px 0px 42px 0px !important;
   }
+
+  .overlayCard{
+    width: calc(100vw - 36px);
+    height: calc(100vh - 194px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    gap: 16px;
+    padding: 18px;
+    border-radius: 0;
+  }
 }
 
 @media (max-width: 600px) {
@@ -150,4 +159,11 @@
   .plusAddTaskMobile:hover rect {
     fill: #29abe2;
   }
+}
+
+@media(max-width:380px){
+  .overlayContent h3{
+    font-size: 38px;
+  }
+
 }

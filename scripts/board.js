@@ -43,7 +43,17 @@ function allowDrop(ev) {
 async function moveTo(category) {
         currentDraggedElement.category = category;
         await setItem('tasks', tasks)    
-        updateHTML(); 
+        updateHTML();
+        removeHighlight(category);
+    }
+
+    function highlight(id) {
+        document.getElementById(id).classList.add('drag-area-highlight');
+    }
+    
+    function removeHighlight(id) {
+        document.getElementById(id).classList.remove('drag-area-highlight');
+        document.getElementById(id).style.backgroundColor = '';
     }
 
 

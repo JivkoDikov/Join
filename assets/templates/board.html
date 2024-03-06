@@ -71,7 +71,7 @@
                         <path d="M9.33325 5.57544L1.33325 5.57544" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                         </svg>
                 </div>
-                <div class="dropWindow" id="todo" ondrop="moveTo( 'todo')" ondragover="allowDrop(event)">
+                <div class="dropWindow" id="todo" ondrop="moveTo( 'todo')" ondragleave="removeHighlight('todo')" ondragover="allowDrop(event); highlight('todo')">
                     <div class="empty">
                         <span>No task To do</span>
                     </div>
@@ -87,7 +87,7 @@
                         <path d="M9.33325 5.57544L1.33325 5.57544" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                         </svg>
                 </div>
-                <div class="dropWindow" id="progress" ondrop="moveTo('progress')" ondragover="allowDrop(event)"></div>
+                <div class="dropWindow" id="progress" ondrop="moveTo('progress')" ondragleave="removeHighlight('progress')" ondragover="allowDrop(event);  highlight('progress')"></div>
 
                 
             </div>
@@ -101,7 +101,7 @@
                         <path d="M9.33325 5.57544L1.33325 5.57544" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                     </svg>
                 </div>
-               <div class="dropWindow" id="feedback" ondrop="moveTo('feedback')" ondragover="allowDrop(event)"></div>
+               <div class="dropWindow" id="feedback" ondrop="moveTo('feedback')" ondragleave="removeHighlight('feedback')" ondragover="allowDrop(event);  highlight('feedback')"></div>
 
                 
             </div>
@@ -114,7 +114,7 @@
                             <path d="M9.33325 5.57544L1.33325 5.57544" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                         </svg>
                 </div>
-                <div  class="dropWindow" id="done" ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>  
+                <div  class="dropWindow" id="done" ondrop="moveTo('done')" ondragleave="removeHighlight('done')" ondragover="allowDrop(event);  highlight('done')"></div>  
             </div>
 
 
