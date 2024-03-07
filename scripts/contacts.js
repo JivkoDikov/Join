@@ -17,8 +17,8 @@ function closeAddNewContact() {
   document.getElementById('tel').value = '';
 }
 
-function createContact(event) {
-  event.preventDefault();
+function createContact() {
+  
   closeAddContactPopup();
   showSuccessOverlay();
 
@@ -338,5 +338,43 @@ function inputFrame(id){
   } else{
     inputField.style.border = "1px solid red";
     required.classList.remove("d-none")
+  }
+}
+
+function checkNewContact(event) {
+  event.preventDefault();
+  let newName = document.getElementById('name').value;
+  let newEmail = document.getElementById('email').value;
+  let newPhone = document.getElementById('tel').value;
+
+  let isNameValid = true;
+  let isEmailValid = true;
+  let isPhoneValid = true;
+  ifCheckContact(isNameValid,isEmailValid,isPhoneValid,newName,newEmail,newPhone);
+  
+}
+
+
+function ifCheckContact(isNameValid,isEmailValid,isPhoneValid,newName,newEmail,newPhone) {
+  if (newName === '') {
+    document.getElementById('requiredMessageName').innerHTML = `<span class="requiredMessage">This field is required*</span>`;
+    isNameValid = false;
+  } else {
+    document.getElementById('requiredMessageName').innerHTML = '';
+  }
+  if (newEmail === '') {
+    document.getElementById('requiredMessageMail').innerHTML = `<span class="requiredMessage">This field is required*</span>`;
+    isEmailValid = false;
+  } else {
+    document.getElementById('requiredMessageMail').innerHTML = '';
+  }
+  if (newPhone === '') {
+    document.getElementById('requiredMessageTel').innerHTML = `<span class="requiredMessage">This field is required*</span>`;
+    isPhoneValid = false;
+  } else {
+    document.getElementById('requiredMessageTel').innerHTML = '';
+  }
+  if (isNameValid && isEmailValid && isPhoneValid) {
+    createContact();
   }
 }

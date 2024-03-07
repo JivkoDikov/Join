@@ -8,6 +8,14 @@ let selectedContactDetails = [];
 let newcategoryTask = [];
 let contacts = {};
 
+
+function activForm(event) {
+  
+  addTaskHTMLOpen('todo');
+  createTask(event);
+  addActiveStyle(3);
+}
+
 async function createTask(event) {
   preventDefaultBehavior(event);
   const newCategory = await createAndLogNewCategory();
@@ -89,18 +97,18 @@ async function updateTasksAndRedirect() {
 }
 
 
-function inputFrame(id){
-  let inputField = document.getElementById(id);
-  let required = document.getElementById(id+"Class")
+// function inputFrame(id){
+//   let inputField = document.getElementById(id);
+//   let required = document.getElementById(id+"Class")
 
-  if(inputField.value){
-    inputField.style.border = "1px solid #29abe2";
-    required.classList.add("d-none")
-  } else{
-    inputField.style.border = "1px solid red";
-    required.classList.remove("d-none")
-  }
-}
+//   if(inputField.value){
+//     inputField.style.border = "1px solid #29abe2";
+//     required.classList.add("d-none")
+//   } else{
+//     inputField.style.border = "1px solid red";
+//     required.classList.remove("d-none")
+//   }
+// }
 
 
 function toggleContacts() {
@@ -329,4 +337,48 @@ function clearForm() {
   document.getElementById("btnUrgent").classList.remove("activePrio0");
   document.getElementById("btnLow").classList.remove("activePrio2");
   document.getElementById("btnMedium").classList.add("activePrio1");
+}
+
+
+function checkNewTasks(event) {
+  event.preventDefault();
+  let newTitle = document.getElementById('enterTitle').value;
+  let newDescription = document.getElementById('enterDescription').value;
+  let newDate = document.getElementById('enterDate').value;
+  let newCategory = categoryArray;
+  
+  let isTitleValid = true;
+  let isDescriptionValid = true;
+  let isDateValid = true;
+  
+  ifCheckTasks(isTitleValid,isDescriptionValid,isDateValid,newTitle,newDescription,newDate,event,newCategory);
+  
+}
+
+
+function ifCheckTasks(isTitleValid,isDescriptionValid,isDateValid,newTitle,newDescription,newDate,event,newCategory) {
+  if (newTitle === '') {
+    document.getElementById('requiredMessageTitle').innerHTML = `<span class="requiredField">This fiels is required</span>`;
+    isTitleValid = false;
+  } else {
+    document.getElementById('requiredMessageTitle').innerHTML = '';
+  }
+  if (newDescription === '') {
+    document.getElementById('requiredMessageDescription').innerHTML = `<span class="requiredField">This fiels is required</span>`;
+    isDescriptionValid = false;
+  } else {
+    document.getElementById('requiredMessageDescription').innerHTML = '';
+  }
+  if (newDate === '') {
+    document.getElementById('requiredMessageDate').innerHTML = `<span class="requiredField">This fiels is required</span>`;
+    isDateValid = false;} else {
+    document.getElementById('requiredMessageDate').innerHTML = '';}
+  if (newCategory.length < 1) {
+    document.getElementById('requiredMessageCategory').innerHTML = `<span class="requiredField">This fiels is required</span>`;
+  } else {
+    document.getElementById('requiredMessageCategory').innerHTML = '';
+  }
+  if (isTitleValid && isDescriptionValid && isDateValid && newCategory.length >= 1) {
+    activForm(event);
+  }
 }

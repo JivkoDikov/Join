@@ -598,7 +598,7 @@ input[type="checkbox"]:before {
 }
 
 .drag-area-highlight {
-  background-color: rgba(243, 243, 243, 0.959);
+  background-color: rgba(224, 223, 223, 0.601);
   min-height: 250px;
   min-width: 250px;
 }

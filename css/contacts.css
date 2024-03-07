@@ -901,3 +901,7 @@ text-align: left;
 .imgArrow{
   display: none;
 }
+
+.requiredMessage {
+  color: red;
+}

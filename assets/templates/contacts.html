@@ -140,34 +140,34 @@
                   <p onclick="closeAddNewContact()"class="closeAddContact">x</p>
                 </div>
                 <div class="inputButtonsContainer">
-                <form onsubmit="createContact(event)">
+                <form onsubmit="checkNewContact(event)">
                 <div class="contactInput">
                 <div class="inputIconsContainerMessage">
                 <div class="inputIconsContainer">
                 <div class="contactDetails">
-                <input  minlength="3" id="name"class="input"required  type="text" placeholder="Name" autocomplete="name">
+                <input id="name"class="input"  type="text" placeholder="Name" autocomplete="name">
                 <img class="inputIcons"src="/assets/img/person.png" alt="">
                 </div>
                 </div>
-                <div id="requiredMessageName" class="requiredMessage">This fiels is required</div>
+                <div id="requiredMessageName"></div>
                 </div>
                 <div class="inputIconsContainerMessage">
                 <div class="inputIconsContainer">
                 <div class="contactDetails">
-                <input  id="email"class="input"required   type="email" placeholder="Email" autocomplete="email">
+                <input  id="email"class="input"   type="email" placeholder="Email" autocomplete="email">
                 <img class="inputIcons"src="/assets/img/mail.png" alt="">
                 </div>
                 </div>
-                <div id="requiredMessageMail"class="requiredMessage">This fiels is required</div>
+                <div id="requiredMessageMail"></div>
                 </div>
                 <div class="inputIconsContainerMessage">
                 <div class="inputIconsContainer">
                 <div class="contactDetails">
-                <input  id="tel"class="input" required type="tel" placeholder="Phone" autocomplete="tel">
+                <input  id="tel"class="input" type="number" placeholder="Phone" autocomplete="tel">
                 <img class="inputIcons"src="/assets/img/call.png" alt="">
                 </div>
                 </div>
-                <div id="requiredMessageTel" class="requiredMessage">This fiels is required</div>
+                <div id="requiredMessageTel"></div>
                 </div>
                 </div>
                 
