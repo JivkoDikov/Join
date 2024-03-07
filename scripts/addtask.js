@@ -1,3 +1,4 @@
+let contacts = [];
 let IdCounter;
 let subtasksArray =[];
 let categoryArray =[];

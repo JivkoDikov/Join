@@ -376,7 +376,6 @@ function toggleAssignedToBoard(i) {
     }
 }
 
-  
 
   function updateSelectedContactsBoard(initials, bgColor, name, id, checkbox) {
     let key = name + bgColor; 
