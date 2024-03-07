@@ -162,7 +162,7 @@ function overviewEditHTML(i) {
     <div class="overlayCard" id="overlayEdit">
     <div class="overlayCardEdit">
     <div class="deleteEdit">
-        <svg onclick="deleteCard(${i})" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="deleteCard" onclick="deleteCard(${i})" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <mask id="mask0_119188_3520" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
             <rect width="24" height="24" fill="#D9D9D9"/>
             </mask>
@@ -309,7 +309,7 @@ function addTaskHTML() {
     </svg>
     </div>
     
-<form onsubmit="checkNewTasks(event)" class="formBoardTask">
+<form id="newTaskForm" onsubmit="checkNewTasks(event)" class="formBoardTask">
     <div class="contentLeft-Right formMobile">
 
       <div class="contentLeft">
@@ -493,7 +493,7 @@ function addTaskHTML() {
                       </div>
           
                               <div class="cancelCreateContactButtons">
-                                  <button type="reset" class="cancelBtn">
+                                  <button type="reset" class="cancelBtn" onclick="clearForm()">
                                       <span class="cancelX">
                                   <p class="cancelText">Clear</p>
                                   <p class="x">x</p>
