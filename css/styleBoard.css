@@ -131,7 +131,7 @@ main {
 .addKanban > span {
   font-size: 20px;
   font-weight: 700;
-  color: #42526e;
+  color: rgb(66, 82, 110);
 }
 
 .boardDistribution {

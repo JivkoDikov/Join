@@ -301,6 +301,10 @@ function displaySubtasks() {
 }
 
 
+/**
+ * Opens the edit interface for a specified subtask, allowing the user to modify its name.
+ * @param {number} index - The index of the subtask in the subtasksArray to be edited.
+ */
 function editSubTask(index){
   let editSubTasks = document.getElementById('editSubTasksBox');
   editSubTasks.innerHTML = '';
@@ -316,11 +320,18 @@ function editSubTask(index){
 }}
 
 
+/**
+ * Deletes a subtask from the subtasksArray and updates the displayed list of subtasks.
+ * @param {number} index - The index of the subtask to be deleted.
+ */
 function closeEditSubTask(index){
   deleteSubTask(index);
 }
 
 
+/**
+ * Loads contacts from web storage and updates the contacts object.
+ */
 function saveEditeSubTask(index) {
   let editSubTasks = document.getElementById('editSubTaskContainer');
   let editSubTaskInput = document.getElementById('editSubTaskInput');
@@ -342,11 +353,15 @@ function saveEditeSubTask(index) {
 }
 
 
+/**
+ * Resets the task form to its default state, clearing all input fields, selections, and temporary data arrays.
+ */
 function deleteSubTask(index){
   subtasksArray.splice(index, 1);
   document.getElementById('editSubTaskContainer').innerHTML ='';
   displaySubtasks();
 }
+
 
 
 function searchContact() {
@@ -394,7 +409,11 @@ function clearForm() {
   document.getElementById("requiredMessageCategory").innerHTML = "";
 }
 
-
+/**
+ * Validates the new task's details (title, description, date, and category) before proceeding with form submission.
+ * Displays appropriate messages if validation fails.
+ * @param {Event} event - The event triggered by the form submission attempt.
+ */
 function checkNewTasks(event) {
   event.preventDefault();
   let newTitle = document.getElementById('enterTitle').value;
@@ -409,7 +428,18 @@ function checkNewTasks(event) {
   ifCheckTasks(isTitleValid,isDescriptionValid,isDateValid,newTitle,newDescription,newDate,event,newCategory);
 }
 
-
+/**
+ * Performs further actions based on the validity of task details. 
+ * This function is structured to potentially include more complex validation or additional actions based on the task details' validity.
+ * @param {boolean} isTitleValid - Indicates if the title field has passed validation.
+ * @param {boolean} isDescriptionValid - Indicates if the description field has passed validation.
+ * @param {boolean} isDateValid - Indicates if the date field has passed validation.
+ * @param {string} newTitle - The new task's title.
+ * @param {string} newDescription - The new task's description.
+ * @param {string} newDate - The new task's due date.
+ * @param {Event} event - The event associated with form submission or validation.
+ * @param {Array} newCategory - The selected category for the new task.
+ */
 function ifCheckTasks(isTitleValid,isDescriptionValid,isDateValid,newTitle,newDescription,newDate,event,newCategory) {
   if (newTitle === '') {
     document.getElementById('requiredMessageTitle').innerHTML = `<span class="requiredField">This fiels is required</span>`;

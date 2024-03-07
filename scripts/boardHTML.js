@@ -319,7 +319,7 @@ function addTaskHTML() {
               </div>
               <div class="inputTitleRequiredContainer">
                   <div class="inputTitleContainer">
-              <input oninput="inputFrame(id)" id="enterTitle"class="inputTitle"type="text"  placeholder="Enter a Title">
+              <input id="enterTitle"class="inputTitle"type="text"  placeholder="Enter a Title">
                   </div>
                   <div id="requiredMessageTitle"></div>
               </div>
@@ -327,7 +327,7 @@ function addTaskHTML() {
           <div class="textareaDescription">
               <p class="title">Description</p>
               <div class="textareaTitleRequiredContainer">
-              <textarea oninput="inputFrame(id)" id="enterDescription" cols="30" rows="10"  placeholder="Enter a Description"></textarea>
+              <textarea  id="enterDescription" cols="30" rows="10"  placeholder="Enter a Description"></textarea>
               <div id="requiredMessageDescription"></div>
               </div>
           </div>
@@ -370,7 +370,7 @@ function addTaskHTML() {
               </div>
               <div class="dateInputRequiredContainer">
                   <div class="dateInputImg">
-              <input oninput="inputFrame(id)" id="enterDate" class="inputMonth"type="date"  placeholder="dd/mm/yyyy" value="">
+              <input id="enterDate" class="inputMonth"type="date"  placeholder="dd/mm/yyyy" value="">
               
                   </div>
                   <div id="requiredMessageDate"></div>
