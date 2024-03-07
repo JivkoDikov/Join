@@ -7,6 +7,7 @@ let editingSubtaskIndex = -1;
 let selectedCategoryId = null;
 let selectedContactDetails = [];
 let newcategoryTask = [];
+let contacts = {};
 
 async function createTask(event) {
   preventDefaultBehavior(event);
@@ -117,19 +118,23 @@ function toggleContacts() {
 }
 
 
-
 async function assignedTo() {
-    await load_contacts_from_webstorage();
-  
-    let contactsBox = document.getElementById('contactsBox');
-    contactsBox.innerHTML = '';
-  
-    contacts[userID].forEach(contact => {
-      let initials = getInitials(contact.name);
-      let isChecked = selectedContactDetails.some(c => c.name === contact.name && c.bgColor === contact.bgColor);
-      contactsBox.innerHTML += assignedToHTML(contact, initials, isChecked);
-    });
+  await load_contacts_from_webstorage();
+
+  let contactsBox = document.getElementById('contactsBox');
+  contactsBox.innerHTML = '';
+
+  if (contacts[userID] && contacts[userID].length > 0) {
+      contacts[userID].forEach(contact => {
+          if (contact && contact.name) { 
+              let initials = getInitials(contact.name); 
+              let isChecked = selectedContactDetails.some(c => c.name === contact.name && c.bgColor === contact.bgColor);
+              contactsBox.innerHTML += assignedToHTML(contact, initials, isChecked);
+          }
+      });
+  }
 }
+
 
 
 

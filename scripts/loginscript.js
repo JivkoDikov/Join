@@ -29,7 +29,7 @@ function checkLogin(event) {
         localStorage.setItem('name', findUser.name);
         window.location.href = '/assets/templates/summary.html';
     } else {
-        alert("Falsche Daten");
+        document.getElementById('invalidValue').innerHTML = '" invalid values pleace insert your correct values "';
     }
 }
 
