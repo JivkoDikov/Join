@@ -309,7 +309,7 @@ function addTaskHTML() {
     </svg>
     </div>
     
-<form onsubmit="createTask(event)" class="formBoardTask">
+<form onsubmit="checkNewTasks(event)" class="formBoardTask">
     <div class="contentLeft-Right formMobile">
 
       <div class="contentLeft">
@@ -319,16 +319,16 @@ function addTaskHTML() {
               </div>
               <div class="inputTitleRequiredContainer">
                   <div class="inputTitleContainer">
-              <input oninput="inputFrame(id)" id="enterTitle"class="inputTitle"type="text" required="true" placeholder="Enter a Title">
+              <input oninput="inputFrame(id)" id="enterTitle"class="inputTitle"type="text"  placeholder="Enter a Title">
                   </div>
-              <p id="enterTitleClass" class="requiredField d-none">This fiels is required</p>
+                  <div id="requiredMessageTitle"></div>
               </div>
           </div>
           <div class="textareaDescription">
               <p class="title">Description</p>
               <div class="textareaTitleRequiredContainer">
-              <textarea oninput="inputFrame(id)" id="enterDescription" cols="30" rows="10" required="true" placeholder="Enter a Description"></textarea>
-              <p id="enterDescriptionClass" class="requiredField d-none">This fiels is required</p>
+              <textarea oninput="inputFrame(id)" id="enterDescription" cols="30" rows="10"  placeholder="Enter a Description"></textarea>
+              <div id="requiredMessageDescription"></div>
               </div>
           </div>
 
@@ -370,10 +370,10 @@ function addTaskHTML() {
               </div>
               <div class="dateInputRequiredContainer">
                   <div class="dateInputImg">
-              <input oninput="inputFrame(id)" id="enterDate" class="inputMonth"type="date" required="true" placeholder="dd/mm/yyyy" value="">
+              <input oninput="inputFrame(id)" id="enterDate" class="inputMonth"type="date"  placeholder="dd/mm/yyyy" value="">
               
                   </div>
-                  <p id="enterDateClass" class="requiredField d-none">This fiels is required</p>
+                  <div id="requiredMessageDate"></div>
                   </div>
           </div>
 
@@ -454,6 +454,7 @@ function addTaskHTML() {
                   <div id="categoryBox" class="categoryBox">
                       
                   </div>
+                  <div id="requiredMessageCategory"></div>
               </div>
               
 
@@ -487,7 +488,7 @@ function addTaskHTML() {
                       <div class="textButtonsContainer">
                           <div class="textContainer">
                           <p class="star">*</p>
-                          <p class="text">This field id required</p>
+                          <p class="text">This field is required</p>
                           </div>
                       </div>
           
@@ -499,7 +500,7 @@ function addTaskHTML() {
                                     </span>
                               
                                   </button>
-                                 <button type="submit" class="createCheckBtn" onclick="createTask(event)">
+                                 <button type="submit" class="createCheckBtn" >
                                   <span class="createCheck">
                                   <p class="createText">Create Task</p>
                                   <img src="/assets/img/check.png" alt="">

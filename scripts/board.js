@@ -394,6 +394,7 @@ function toggleAssignedToBoard(i) {
     updateAssignedUsersInCard(id);
   }
 
+  
 async function updateAssignedUsersInCard(id) {
     let cardIndex = cards.findIndex(card => card.id === Number(id));
     if (cardIndex !== -1) {

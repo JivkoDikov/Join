@@ -128,6 +128,7 @@ form textarea:focus {
   width: calc(100% - 32px);
 }
 
+
 .inputTitle:focus {
   border: 1px solid #ff8190;
 }

@@ -11,7 +11,7 @@ let contacts = {};
 
 function activForm(event) {
   
-  addTaskHTMLOpen('todo');
+  
   createTask(event);
   addActiveStyle(3);
 }
@@ -95,20 +95,6 @@ async function updateTasksAndRedirect() {
   await setItem('newcategory', todoCategory);
   window.location.href = 'board.html';
 }
-
-
-// function inputFrame(id){
-//   let inputField = document.getElementById(id);
-//   let required = document.getElementById(id+"Class")
-
-//   if(inputField.value){
-//     inputField.style.border = "1px solid #29abe2";
-//     required.classList.add("d-none")
-//   } else{
-//     inputField.style.border = "1px solid red";
-//     required.classList.remove("d-none")
-//   }
-// }
 
 
 function toggleContacts() {
@@ -352,7 +338,6 @@ function checkNewTasks(event) {
   let isDateValid = true;
   
   ifCheckTasks(isTitleValid,isDescriptionValid,isDateValid,newTitle,newDescription,newDate,event,newCategory);
-  
 }
 
 
@@ -374,11 +359,12 @@ function ifCheckTasks(isTitleValid,isDescriptionValid,isDateValid,newTitle,newDe
     isDateValid = false;} else {
     document.getElementById('requiredMessageDate').innerHTML = '';}
   if (newCategory.length < 1) {
-    document.getElementById('requiredMessageCategory').innerHTML = `<span class="requiredField">This fiels is required</span>`;
+    document.getElementById('requiredMessageCategory').innerHTML = `<span class="requiredField2">This fiels is required</span>`;
   } else {
     document.getElementById('requiredMessageCategory').innerHTML = '';
   }
   if (isTitleValid && isDescriptionValid && isDateValid && newCategory.length >= 1) {
+    
     activForm(event);
   }
 }

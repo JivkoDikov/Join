@@ -25,7 +25,7 @@
 
     <div class="contentAddTask">
       <h1 class="addTaskHeadline">Add Task</h1>
-<form  onsubmit="checkNewTasks(event)" id="newTaskForm">
+<form  onsubmit="checkNewTasks(event), addTaskHTMLOpen('todo');" id="newTaskForm">
       <div class="contentLeft-Right">
 
         <div class="contentLeft">
@@ -173,10 +173,6 @@
                     <div id="requiredMessageCategory"></div>
                 </div>
                 
-
-
-
-
                     <div class="subtasksContainer">
                         <p class="title">Subtasks</p>
                         <div class="addNewSubtask">
@@ -200,10 +196,6 @@
 
                 </div>
                  
-        
-
-                    
-
                     </div>
                     <div class="footerTask">
                         <div class="textButtonsContainer">
@@ -230,19 +222,9 @@
                                     </div>
                                 </div>
     </div>
-    
-            </form>
-            
-        </div>
-        
-
-
-       
-    
+            </form>    
+        </div>  
 </div>
-       
-   
-      
     </div>
   </body>
 </html>
