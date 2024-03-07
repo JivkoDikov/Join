@@ -28,7 +28,7 @@ function showContactsHTML(filteredContact, bgColor, letter, lastNameLetter) {
       </div>
       <div class="addContactPopUpRightContainer">
           <div class="profileContactContainer">
-          <div id="profileContact" class="profileContact"></div>
+          <div id="profileContact" class="profileContactEdit"></div>
           </div>
             <div class="closeInputButtonsContainer">
               <div class="xContactButton">
