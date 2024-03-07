@@ -96,7 +96,7 @@ function emptyCategory() {
 
     if(emptytodo.innerHTML === "") {
         emptytodo.innerHTML += `
-                <div class="dropWindow" id="todo" ondrop="moveTo( 'todo')" ondragover="allowDrop(event)">
+                <div">
                     <div class="empty">
                         <span>No task To do</span>
                     </div>
@@ -105,7 +105,7 @@ function emptyCategory() {
     }
     if(emptyprogress.innerHTML === "") {
         emptyprogress.innerHTML += `
-                <div class="dropWindow" id="progress" ondrop="moveTo( 'progress')" ondragover="allowDrop(event)">
+                <div">
                     <div class="empty">
                         <span>No task Progress</span>
                     </div>
@@ -114,7 +114,7 @@ function emptyCategory() {
     }
     if(emptyfeedback.innerHTML === "") {
         emptyfeedback.innerHTML += `
-                <div class="dropWindow" id="feedback" ondrop="moveTo( 'feedback')" ondragover="allowDrop(event)">
+                <div">
                     <div class="empty">
                         <span>No task Feedback</span>
                     </div>
@@ -123,7 +123,7 @@ function emptyCategory() {
     }
     if(emptydone.innerHTML === "") {
         emptydone.innerHTML += `
-                <div class="dropWindow" id="done" ondrop="moveTo( 'done')" ondragover="allowDrop(event)">
+                <div>
                     <div class="empty">
                         <span>No task Done</span>
                     </div>

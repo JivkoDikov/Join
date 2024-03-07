@@ -1,4 +1,3 @@
-let contacts = [];
 let IdCounter;
 let subtasksArray =[];
 let categoryArray =[];
@@ -65,8 +64,6 @@ function createNewTaskObject(newCategory) {
       date: date
   };
 }
-
-
 
 
 function resetInputFields() {
@@ -136,11 +133,6 @@ async function assignedTo() {
 }
 
 
-
-
-
-
-
 function updateSelectedContacts(initials, bgColor, name, checkbox) {
   let contactExistsIndex = selectedContactDetails.findIndex(c => c.name === name && c.bgColor === bgColor);
 
@@ -156,7 +148,6 @@ function updateSelectedContacts(initials, bgColor, name, checkbox) {
     selectedContactDetails.splice(contactExistsIndex, 1);
   }
 }
-
 
 
 function getInitials(name) {
@@ -226,7 +217,6 @@ function updateLabels(categoryId) {
     }
   }
 }
-
 
 
 function addSubTask() {
@@ -324,6 +314,7 @@ async function load_contacts_from_webstorage(){
   contacts = JSON.parse(contactsValue.data.value)
 }
 
+
 function clearForm() {
   document.getElementById("newTaskForm").reset();
   selectedContactDetails = [];
@@ -338,5 +329,4 @@ function clearForm() {
   document.getElementById("btnUrgent").classList.remove("activePrio0");
   document.getElementById("btnLow").classList.remove("activePrio2");
   document.getElementById("btnMedium").classList.add("activePrio1");
-    
 }
