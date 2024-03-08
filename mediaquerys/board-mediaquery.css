@@ -118,6 +118,10 @@
     padding: 18px;
     border-radius: 0;
   }
+
+  .mobileArrow {
+    display: block;
+    }
 }
 
 @media (max-width: 600px) {

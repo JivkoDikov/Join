@@ -666,3 +666,7 @@ input[type="checkbox"]:before {
   padding: 5px 10px;
   border-radius: 2px;
 }
+
+.mobileArrow {
+display: none;
+}

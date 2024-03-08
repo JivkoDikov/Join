@@ -588,25 +588,15 @@ function mobileCategory(event, id) {
 
     if (openCategory.style.display === 'none') {        
         openCategory.style.display = 'block';
-        openCategory.innerHTML = `
-        <div class="mobileCategoryOn" onclick="newCategoryHTMLOpen('todo',event,${id})">ToDo</div>
-        <div class="mobileCategoryOn" onclick="newCategoryHTMLOpen('progress',event,${id})">Progress</div>
-        <div class="mobileCategoryOn" onclick="newCategoryHTMLOpen('feedback',event,${id})">Feedback</div>
-        <div class="mobileCategoryOn" onclick="newCategoryHTMLOpen('done',event,${id})">Done</div>
-        `;
+        openCategory.innerHTML = mobileCategoryHTML(id);
     }else {
-        
         openCategory.style.display = 'none'; 
     }
 }
 
 async function newCategoryHTMLOpen(categorys,event,id) {
     event.stopPropagation();
-    let cardID = cards.find(card => card.id === id);
     currentDraggedElement = cards.find(card => card.id === id);
-    // cardID.category = categorys;
-    
-
     currentDraggedElement.category = categorys;
         await setItem('tasks', tasks);
         updateHTML();
