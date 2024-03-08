@@ -51,7 +51,22 @@ function generateCardHTML(element) {
     
     return `
     <div class="cards" draggable="true" ondragstart="startDragging(${element.id})" onclick="openOverview(${element.id}, this.getAttribute('data-element'))" data-element='${elementData}'>
-        <h2 id="labelsBoard${element.id}" class="labelsBoardCard">${element.label}</h2>
+    <div class="forMobileDrag">    
+    <h2 id="labelsBoard${element.id}" class="labelsBoardCard">${element.label}</h2>
+    <div id="forMobileDragArrow">    
+    <svg onclick="mobileCategory(event,${element.id})" class="svgArrow" width="24" height="24" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
+        <mask id="mask0_123060_2330" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+        <rect width="24" height="24" fill="#D9D9D9"/>
+        </mask>
+        <g mask="url(#mask0_123060_2330)">
+        <path d="M11.3 14.3L8.69998 11.7C8.38331 11.3833 8.31248 11.0208 8.48748 10.6125C8.66248 10.2042 8.97498 10 9.42498 10H14.575C15.025 10 15.3375 10.2042 15.5125 10.6125C15.6875 11.0208 15.6166 11.3833 15.3 11.7L12.7 14.3C12.6 14.4 12.4916 14.475 12.375 14.525C12.2583 14.575 12.1333 14.6 12 14.6C11.8666 14.6 11.7416 14.575 11.625 14.525C11.5083 14.475 11.4 14.4 11.3 14.3Z" fill="#2A3647"/>
+        </g>
+        </svg>
+        
+    </div>
+    <div class="categoryOpenMobile" id="categoryOpenMobile${element.id}">
+    </div>
+    </div>
         <div class="content">
             <h3>${element.headline}</h3>
             <span>${element.text}</span>
@@ -82,7 +97,11 @@ function generateOverviewHTML(element) {
     <div class="overview">
     <div class="overlayCard ">
             <div class="labelContent">
+                <div>
                 <h2 id="labelsBoardOver${element['id']}" class="labelsBoardCard">${element['label']}</h2>
+
+                </div>
+                
                 <button class="btn-close" onclick="closeOverview()">
                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <mask id="mask0_117793_4210" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="4" width="24" height="24">
@@ -277,9 +296,11 @@ function overviewEditHTML(i) {
         
     </div>  
     <div id="contactsBox" class="contactsBox">
-       
     </div>
-</div>
+    </div>
+        <div class="subtasksContainer" id="subtasksContainerEdit" onclick="stopPropagation(event)">
+
+        </div>
     <div class="submitEdit">
             <button class="onsubmitEdit">Ok</button>
         </div>
@@ -531,4 +552,27 @@ function assignedToBoardHTML(user, isChecked, i) {
             <input id="assignedToContact_${userNameForId}" type="checkbox" ${isChecked} onchange="updateSelectedContactsBoard('${user['lastNameLetter']}', '${user['bgColor']}', '${user['name']}', '${i}', this)">
         </div>
     </div>`;
+}
+
+
+function editSubTaskContainerInBoardHTML() {
+
+    return`                
+                        <p class="title">Subtasks</p>
+                        <div class="addNewSubtask">
+                            <div class="addNewSubtasksContainer">
+                            <input id="addSubTasks" type="text" class="subtaskText" placeholder="Add new subtask">
+                            <svg id="addNewSubtask" onclick ="addSubTask()"class="subtaskSVG"width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <mask id="mask0_123060_1727" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
+                                <rect x="0.248535" width="24" height="24" fill="#D9D9D9"/>
+                                </mask>
+                                <g mask="url(#mask0_123060_1727)">
+                                <path d="M11.2485 13H6.24854C5.9652 13 5.7277 12.9042 5.53604 12.7125C5.34437 12.5208 5.24854 12.2833 5.24854 12C5.24854 11.7167 5.34437 11.4792 5.53604 11.2875C5.7277 11.0958 5.9652 11 6.24854 11H11.2485V6C11.2485 5.71667 11.3444 5.47917 11.536 5.2875C11.7277 5.09583 11.9652 5 12.2485 5C12.5319 5 12.7694 5.09583 12.961 5.2875C13.1527 5.47917 13.2485 5.71667 13.2485 6V11H18.2485C18.5319 11 18.7694 11.0958 18.961 11.2875C19.1527 11.4792 19.2485 11.7167 19.2485 12C19.2485 12.2833 19.1527 12.5208 18.961 12.7125C18.7694 12.9042 18.5319 13 18.2485 13H13.2485V18C13.2485 18.2833 13.1527 18.5208 12.961 18.7125C12.7694 18.9042 12.5319 19 12.2485 19C11.9652 19 11.7277 18.9042 11.536 18.7125C11.3444 18.5208 11.2485 18.2833 11.2485 18V13Z" fill="#2A3647"/>
+                                </g>
+                                </svg>
+                            </div>      
+                        </div>
+                        <div id="subTasksBox"class="addSubTasksBox"></div>
+                        <div id="editSubTasksBox" class="editSubTasksBox"></div>                    
+    `;
 }

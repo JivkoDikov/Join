@@ -310,6 +310,7 @@ function editCard(cardId) {
     data.value = infoArrayCard['date']; 
    
     prioEdit(infoArrayCard['priority'], cardId, event);
+    editSubTaskContainerInBoard(cardId,event);
 }
 
 /**
@@ -460,7 +461,17 @@ function toggleAssignedToBoard(i, event) {
             uniqueUsers[key] = true;
         }
     }
+    
 }
+
+function editSubTaskContainerInBoard(cardId,event) {
+    event.stopPropagation();
+    let card = cards.find(card => card.id === cardId);
+    console.log(card);
+    let editSubTaskBorad = document.getElementById('subtasksContainerEdit');
+    editSubTaskBorad.innerHTML = editSubTaskContainerInBoardHTML();
+}
+
 
 /**
  * Updates the list of selected contacts for a task based on user interactions in the assigned user interface.
@@ -568,4 +579,35 @@ function userTagsOver(element) {
         let userLabelStory = document.getElementById(labelsID);
         userLabelStory.classList.add('technicalTask');
     }
+}
+
+
+function mobileCategory(event, id) {
+    event.stopPropagation();
+    let openCategory = document.getElementById(`categoryOpenMobile${id}`);
+
+    if (openCategory.style.display === 'none') {        
+        openCategory.style.display = 'block';
+        openCategory.innerHTML = `
+        <div class="mobileCategoryOn" onclick="newCategoryHTMLOpen('todo',event,${id})">ToDo</div>
+        <div class="mobileCategoryOn" onclick="newCategoryHTMLOpen('progress',event,${id})">Progress</div>
+        <div class="mobileCategoryOn" onclick="newCategoryHTMLOpen('feedback',event,${id})">Feedback</div>
+        <div class="mobileCategoryOn" onclick="newCategoryHTMLOpen('done',event,${id})">Done</div>
+        `;
+    }else {
+        
+        openCategory.style.display = 'none'; 
+    }
+}
+
+async function newCategoryHTMLOpen(categorys,event,id) {
+    event.stopPropagation();
+    let cardID = cards.find(card => card.id === id);
+    currentDraggedElement = cards.find(card => card.id === id);
+    // cardID.category = categorys;
+    
+
+    currentDraggedElement.category = categorys;
+        await setItem('tasks', tasks);
+        updateHTML();
 }

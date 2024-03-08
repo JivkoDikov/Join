@@ -257,6 +257,9 @@ main {
 }
 
 .overlayCard {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 80%;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -641,4 +644,25 @@ input[type="checkbox"]:before {
 
 .overTaskWidth{
   width: calc(100% - 32px) !important;
+}
+
+.forMobileDrag {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.mobileCategoryOn {
+  background-color: #e6e6e6b4;
+  border-radius: 8px;
+  padding: 5px;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.categoryOpenMobile {
+  display: none;
+  background-color: #e1e1e13d;
+  padding: 5px 10px;
+  border-radius: 2px;
 }

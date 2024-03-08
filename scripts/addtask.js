@@ -371,6 +371,7 @@ function saveEditeSubTask(index) {
  * Resets the task form to its default state, clearing all input fields, selections, and temporary data arrays.
  */
 function deleteSubTask(index){
+  event.stopPropagation();
   subtasksArray.splice(index, 1);
   document.getElementById('editSubTaskContainer').innerHTML ='';
   displaySubtasks();
