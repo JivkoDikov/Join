@@ -9,6 +9,7 @@ let categorys = [];
  * This function should be called when the page is loaded or when the tasks need to be refreshed.
  */
 async function initBoard(){  
+    cards = await loadTasks(userID);
     render();
     updateHTML();
 }
@@ -18,8 +19,7 @@ async function initBoard(){
  * This function asynchronously loads tasks for a user and updates each category section on the page.
  */
 async function updateHTML() {
-    cards = await loadTasks(userID);
-    console.log(cards);
+    
     const categories = ['todo', 'progress', 'feedback', 'done'];
     for (const category of categories) {
         let categoryElements = cards.filter(t => t['category'] === category);
@@ -248,7 +248,7 @@ function subtasksCheckForTrue(cardId, subtaskID) {
 }
 
 function isSubTaskTrue(card) {
-    console.log(card.subtasks.length);
+   
     if (card.subtasks.length > 0) {
         document.getElementById('isSubTaskTrue').innerHTML = `
         <div class="progress-container">
@@ -423,7 +423,8 @@ function assignIcon(element) {
  * This allows users to assign or unassign other users to a task directly from the board.
  * @param {number} i - The index or identifier of the task.
  */
-function toggleAssignedToBoard(i) {
+function toggleAssignedToBoard(i, event) {
+    event.stopPropagation();
     let contactsBox = document.getElementById('contactsBox');
     if (contactsBox.style.display === 'none' || contactsBox.innerHTML.trim() === '') {
       assignedToBoard(i);
@@ -445,7 +446,6 @@ function toggleAssignedToBoard(i) {
     let card = cards.find(card => card.id === cardId);
 
     if (!card) {
-        console.error("Karte mit ID " + cardId + " nicht gefunden.");
         return; 
     }
     let assignedContacts = card.user || [];

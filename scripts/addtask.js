@@ -130,7 +130,8 @@ async function updateTasksAndRedirect() {
 /**
  * Toggles the display of the contacts list, showing it if hidden and hiding it if shown.
  */
-function toggleContacts() {
+function toggleContacts(event) {
+  event.stopPropagation();
   let contactsBox = document.getElementById('contactsBox');
   if (contactsBox.style.display === 'none' || contactsBox.innerHTML.trim() === '') {
     assignedTo(); 
@@ -170,16 +171,13 @@ async function assignedTo() {
  */
 function updateSelectedContacts(initials, bgColor, name, checkbox) {
   let contactExistsIndex = selectedContactDetails.findIndex(c => c.name === name && c.bgColor === bgColor);
-
   if (checkbox.checked && contactExistsIndex === -1) {
-    // Fügt den Kontakt hinzu, wenn er noch nicht existiert
     selectedContactDetails.push({
       name: name,
       bgColor: bgColor,
       initials: initials
     });
   } else if (!checkbox.checked && contactExistsIndex !== -1) {
-    // Entfernt den Kontakt, wenn das Kontrollkästchen deaktiviert wurde
     selectedContactDetails.splice(contactExistsIndex, 1);
   }
 }
@@ -223,7 +221,8 @@ function updatePrio(buttonId, event) {
 /**
  * Toggles the display of the category selection box, showing it if hidden and hiding it if shown.
  */
-function toggleCategories() {
+function toggleCategories(event) {
+  event.stopPropagation();
   let categoryBox = document.getElementById('categoryBox');
   if (categoryBox.style.display === 'none' || categoryBox.innerHTML.trim() === '') {
     addCategory();
@@ -233,6 +232,21 @@ function toggleCategories() {
   }
 }
 
+/**
+ * Toggles the display selection box,on hiding it if shown.
+ */
+function dropDownOpen() {
+  let contactsBox = document.getElementById('contactsBox');
+  let categoryBox = document.getElementById('categoryBox');
+  if (contactsBox.style.display === 'block' || categoryBox.style.display === 'block') {
+    contactsBox.style.display = 'none';
+    categoryBox.style.display = 'none';
+  }
+}
+
+function stopPropagation(event) {
+  event.stopPropagation();
+}
 
 /**
  * Populates the category selection box with available categories.
