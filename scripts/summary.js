@@ -132,7 +132,7 @@ async function takeInfoSummary(summaryTask) {
  */
 function prioritySummary(summaryTask) {
     summaryTask.forEach(taskInfo => {
-        if (taskInfo.priority === 2) {
+        if (taskInfo.priority === 0) {
             urgent.push(taskInfo);
         }
     });

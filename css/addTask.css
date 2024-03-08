@@ -805,3 +805,7 @@ textarea {
   position: unset;
   height: calc(100vh - 200px);
 }
+
+.subTaskIconsBox {
+  display: flex;
+}

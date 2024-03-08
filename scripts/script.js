@@ -47,6 +47,7 @@ async function loadTasks(userID){
   return tasks[userID];
 }
 
+
 /**
  * Retrieves and returns task categories from storage.
  */

@@ -159,11 +159,14 @@
   .plusAddTaskMobile:hover rect {
     fill: #29abe2;
   }
+  .overlayContent h3{
+    font-size: 52px;
+  }
 }
 
-@media(max-width:380px){
+@media(max-width:450px){
   .overlayContent h3{
-    font-size: 38px;
+    font-size: 36px;
   }
 
 }
