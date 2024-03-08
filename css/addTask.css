@@ -329,6 +329,7 @@ textarea {
   align-items: center;
   height: 48px;
   width: 100%;
+  cursor: pointer;
 }
 
 .inputMonth {

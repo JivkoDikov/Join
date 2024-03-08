@@ -4,11 +4,18 @@ let contactIdCounter = 0;
 let screenSize = [];
 let newContactIdCounter = [0];
 
+
+/**
+ * Adds a new contact by displaying the contact addition overlay and making the background opaque.
+ */
 async function addNewContact() {
   document.getElementById("addnewcontact").classList.add("showOverlay-addNewContactPopUpContainer");
   document.getElementById("backGroundOpacityContainer").classList.remove("d-none");
 }
 
+/**
+ * Closes the "Add New Contact" overlay and clears input fields for name, email, and telephone number.
+ */
 function closeAddNewContact() {
   document.getElementById("addnewcontact").classList.remove("showOverlay-addNewContactPopUpContainer");
   document.getElementById("backGroundOpacityContainer").classList.add("d-none");
@@ -17,6 +24,9 @@ function closeAddNewContact() {
   document.getElementById('tel').value = '';
 }
 
+/**
+ * Creates a new contact object, initializes user contacts if necessary, and then saves the new contact.
+ */
 function createContact() {
   
   closeAddContactPopup();
@@ -30,11 +40,17 @@ function createContact() {
   saveAndShowContacts(contact.id);
 }
 
+/**
+ * Closes the "Add Contact" popup.
+ */
 function closeAddContactPopup() {
   document.getElementById("addnewcontact").classList.remove("showOverlay-addNewContactPopUpContainer");
   document.getElementById("backGroundOpacityContainer").classList.add("d-none");
 }
 
+/**
+ * Displays a success overlay for a brief period to indicate successful contact creation.
+ */
 function showSuccessOverlay() {
   let popUpSuccessfullyCreated = document.getElementById('popUpSuccesfullyCreated');
   popUpSuccessfullyCreated.classList.add('overlay-successfullyCreated', 'showoverlay-successfullyCreated');
@@ -43,6 +59,10 @@ function showSuccessOverlay() {
   }, 2000);
 }
 
+/**
+ * Creates and returns a new contact object with unique properties such as name, email, and a randomly generated color.
+ * @returns {Object} The newly created contact object.
+ */
 function createContactObject() {
   let name = document.getElementById("name").value;
   let email = document.getElementById("email").value;
@@ -58,26 +78,37 @@ function createContactObject() {
   };
 }
 
+/**
+ * Initializes the user's contacts if they haven't been initialized yet.
+ */
 function initializeUserContacts() {
   if (!contacts[userID]) {
     contacts[userID] = [];
   }
 }
 
+/**
+ * Resets the input fields for adding a new contact to empty strings.
+ */
 function resetInputFields() {
   document.getElementById("name").value = "";
   document.getElementById("email").value = "";
   document.getElementById("tel").value = "";
 }
 
+/**
+ * Saves the newly created contact and displays it along with other existing contacts.
+ * @param {number} contactId - The ID of the newly created contact.
+ */
 function saveAndShowContacts(contactId) {
   setItem('contacts', contacts); 
   showContacts();
   showContact(contactId);
 }
 
-
-
+/**
+ * Initializes contacts by rendering them and loading existing contacts from web storage.
+ */
 async function initContacts(){
   render();
   await load_contacts_from_webstorage();
@@ -86,7 +117,9 @@ async function initContacts(){
   updateContacts();
 }
 
-
+/**
+ * Displays contacts sorted by the initial letter of each contact's name.
+ */
 function showContacts() {
   let letterBox = document.getElementById("letterBox");
   letterBox.innerHTML ='';
@@ -97,6 +130,11 @@ function showContacts() {
 }
 }
 
+/**
+ * Filters and displays contacts that start with a specific letter.
+ * @param {Array} filteredContacts - The contacts filtered by a specific starting letter.
+ * @param {string} letter - The letter used for filtering.
+ */
 function filteredContact(filteredContacts,letter) {
   if(filteredContacts.length > 0){
     document.getElementById("letterBox").innerHTML += /*html*/ `
@@ -111,20 +149,30 @@ function filteredContact(filteredContacts,letter) {
   }
 }
 
-
+/**
+ * Generates and returns a random RGB color value.
+ */
 function generateRandomColor() {
-  var x = Math.floor(Math.random() * 256);
-  var y = Math.floor(Math.random() * 256);
-  var z = Math.floor(Math.random() * 256);
+  let minBrightValue = 70;
+  let range = 206;
+  let x = Math.floor(Math.random() * range) + minBrightValue;
+  let y = Math.floor(Math.random() * range);
+  let z = Math.floor(Math.random() * range) ;
   return `rgb(${x},${y},${z})`;
 }
 
-
+/**
+ * Gets the last letter of a name, intended for sorting or categorization purposes.
+ * @param {string} name - The name from which to extract the last letter.
+ */
 function getLastLetter(name) {
   return name.split(" ").pop().charAt(0).toUpperCase();
 }
 
-
+/**
+ * Displays details of a specific contact and highlights the selected contact in the list.
+ * @param {number} id - The ID of the contact to display.
+ */
 function showContact(id) {
   deselectAllContainers();
   selectClickedContainer(id);
@@ -134,6 +182,9 @@ function showContact(id) {
   showOverlay();
 }
 
+/**
+ * Deselects all contact containers, removing any highlights or selections.
+ */
 function deselectAllContainers() {
   let allContainers = document.querySelectorAll('.iconNameEmailContainer');
   allContainers.forEach(container => {
@@ -141,11 +192,18 @@ function deselectAllContainers() {
   });
 }
 
+/**
+ * Highlights the container of a clicked contact to indicate selection.
+ * @param {number} id - The ID of the selected contact.
+ */
 function selectClickedContainer(id) {
   let clickedContainer = document.getElementById('iconNameEmailContainer_' + id);
   clickedContainer.classList.add('selected');
 }
 
+/**
+ * Toggles the contact view for mobile devices, adapting the UI for smaller screens.
+ */
 function toggleMobileContactView() {
   let mobile = isMobile();
   if (mobile) {
@@ -153,12 +211,19 @@ function toggleMobileContactView() {
   }
 }
 
+/**
+ * Displays the contact details in a dedicated container.
+ */
 function displayContactDetails() {
   let contactDetails = document.getElementById("contactContainer");
   contactDetails.classList.remove("d-none");
   contactDetails.classList.add("backgroundColorContact");
 }
 
+/**
+ * Updates the contact view with the details of a specific contact.
+ * @param {number} id - The ID of the contact to display.
+ */
 function updateContactView(id) {
   const index = contacts[userID].findIndex((contact) => contact.id === id);
   if (index !== -1) {
@@ -171,20 +236,28 @@ function updateContactView(id) {
   }
 }
 
+/**
+ * Displays the edit and delete options for mobile view.
+ * @param {number} id - The ID of the contact for which to show options.
+ */
 function showEditDeleteMobile(id) {
   let editDeleteMobile = document.getElementById('editDeleteContainerMobile');
   editDeleteMobile.innerHTML = editDeleteMobileHTML(id);
 }
 
+/**
+ * Displays an overlay with additional information or options.
+ */
 function showOverlay() {
   setTimeout(() => {
     document.getElementById('contactContainerContact').classList.add('showOverlay-contactContainerContact');
   }, 225);
 }
 
-
-
-
+/**
+ * Deletes a contact and updates the display to reflect this change.
+ * @param {number} id - The ID of the contact to delete.
+ */
 async function deleteContact(id) {
   let index = contacts[userID].findIndex((contact) => contact.id === id);
   if (index !== -1) {
@@ -201,7 +274,10 @@ async function deleteContact(id) {
   }, 2000);
 }
 
-
+/**
+ * Opens the edit contact modal, prefilling it with the contact's current information.
+ * @param {number} id - The ID of the contact to edit.
+ */
 function editContact(id) {
   let addNewContactPopUp = document.getElementById('addNewContactPopUp');
   addNewContactPopUp.innerHTML = editContactHTML(id);
@@ -212,7 +288,11 @@ function editContact(id) {
   }
 }
 
-
+/**
+ * Fills the edit contact form with the selected contact's details for editing.
+ * @param {Object} selectedContact - The contact being edited.
+ * @param {number} id - The ID of the contact being edited.
+ */
 function getEditContact(selectedContact, id) {
   document.getElementById("editcontact").classList.add("showOverlay-addNewContactPopUpContainer");
   document.getElementById("backGroundOpacityContainer").classList.remove("d-none");
@@ -228,14 +308,21 @@ function getEditContact(selectedContact, id) {
   });
 }
 
-
+/**
+ * Sets the profile image or icon for the contact being edited based on initials and background color.
+ * @param {string} initials - The initials of the contact.
+ * @param {string} bgColor - The background color for the contact icon.
+ */
 function setProfileContact(initials, bgColor) {
   const profileContactDiv = document.getElementById("profileContact");
   profileContactDiv.style.backgroundColor = bgColor;
   profileContactDiv.textContent = initials;
 }
 
-
+/**
+ * Deletes the contact being edited and closes the edit contact modal.
+ * @param {number} id - The ID of the contact to delete.
+ */
 function deleteEditContact(id) {
   document.getElementById("editname").value = "";
   document.getElementById("editemail").value = "";
@@ -244,7 +331,9 @@ function deleteEditContact(id) {
   deleteContact(id);
 }
   
-
+/**
+ * Closes the edit contact modal and clears the form fields.
+ */
 function closeEditContact() {
   document.getElementById("editcontact").classList.remove("showOverlay-addNewContactPopUpContainer");
   document.getElementById("backGroundOpacityContainer").classList.add("d-none");
@@ -253,7 +342,10 @@ function closeEditContact() {
   document.getElementById("edittel").value = "";
 }
 
-
+/**
+ * Saves the changes made to a contact in the edit form and updates the display.
+ * @param {number} id - The ID of the contact being edited.
+ */
 function saveEditContact(id) {
   const editedContact = contacts[userID].find((contact) => contact.id === parseInt(id));
   if (editedContact) {
@@ -267,13 +359,16 @@ function saveEditContact(id) {
   }
 }
 
-
+/**
+ * Determines if the current view is on a mobile device based on the screen width.
+ */
 function isMobile(){
   return window.innerWidth <= 800;
-
 }
 
-
+/**
+ * Disables the contact container, usually in preparation for another view or operation.
+ */
 function disableContactContainer(){
   let contactDetails = document.getElementById("addcontactContainer");
   let contactContainerView = document.getElementById("contactContainer")
@@ -285,49 +380,67 @@ function disableContactContainer(){
   hideEditContactMobile();
 }
 
+/**
+ * Adjusts the UI based on the screen size of the user's device, particularly for mobile views.
+ */
 function screenSizeUser(){
   screenSize.push(window.screen.width);
   screenSize.push(window.screen.height);
 }
 
+/**
+ * Changes the view to display contact details prominently, adapting for mobile users.
+ */
 function changeContactView(){
   let contactContainerList = document.getElementById("addcontactContainer");
   let contactContainerView = document.getElementById("contactContainer")
   contactContainerList.classList.add("d-none")
   contactContainerView.style.display = "block";
   contactContainerView.style.width = "100vw";
-  document.getElementById('editContactMobile').classList.remove('d-none');
-  
+  document.getElementById('editContactMobile').classList.remove('d-none'); 
 }
 
+/**
+ * Shows the edit and delete options specifically for mobile users.
+ */
 function showEditContactMobile(){
   document.getElementById('editDeleteContainerMobile').classList.add('showOverlay-editDeleteContainerMobile');
   document.getElementById('editDeleteContainerMobile').classList.remove('overlay-editDeleteContainerMobile');
 
 }
 
+/**
+ * Hides the edit and delete options for mobile users, typically when not needed.
+ */
 function hideEditContactMobile(){
   document.getElementById('editDeleteContainerMobile').classList.remove('showOverlay-editDeleteContainerMobile');
   document.getElementById('editDeleteContainerMobile').classList.add('overlay-editDeleteContainerMobile');
 }
 
-
+/**
+ * Loads existing contacts from web storage into the application.
+ */
 async function load_contacts_from_webstorage(){
   let contactsValue = await getItem('contacts');
   contacts = JSON.parse(contactsValue.data.value)
 }
 
+/**
+ * Updates the internal tracking of contacts to ensure new contacts receive a unique ID.
+ */
 function updateContacts() {
   for (let i = 0; i < contacts[userID].length; i++) {
     let idOfContact = contacts[userID][i]['id'];
     newContactIdCounter.push(Number(idOfContact));
   }
-  
   let groessteZahl = Math.max(...newContactIdCounter);
   contactIdCounter = groessteZahl +1;
 }
 
-
+/**
+ * Validates the input in an input field and changes the frame color based on validity.
+ * @param {string} id - The ID of the input field to validate.
+ */
 function inputFrame(id){
   let inputField = document.getElementById(id);
   let required = document.getElementById(id+"Class")
@@ -341,6 +454,10 @@ function inputFrame(id){
   }
 }
 
+/**
+ * Checks the new contact form for valid inputs before attempting to create a new contact.
+ * @param {Event} event - The event object from the form submission.
+ */
 function checkNewContact(event) {
   event.preventDefault();
   let newName = document.getElementById('name').value;
@@ -351,30 +468,37 @@ function checkNewContact(event) {
   let isEmailValid = true;
   let isPhoneValid = true;
   ifCheckContact(isNameValid,isEmailValid,isPhoneValid,newName,newEmail,newPhone);
-  
 }
 
-
+/**
+ * Validates the inputs for a new contact and creates the contact if all validations pass.
+ * @param {boolean} isNameValid - Indicates if the name input is valid.
+ * @param {boolean} isEmailValid - Indicates if the email input is valid.
+ * @param {boolean} isPhoneValid - Indicates if the phone input is valid.
+ * @param {string} newName - The entered name for the new contact.
+ * @param {string} newEmail - The entered email for the new contact.
+ * @param {string} newPhone - The entered phone number for the new contact.
+ */
 function ifCheckContact(isNameValid,isEmailValid,isPhoneValid,newName,newEmail,newPhone) {
-  if (newName === '') {
+  if(newName === '') {
     document.getElementById('requiredMessageName').innerHTML = `<span class="requiredMessage">This field is required*</span>`;
     isNameValid = false;
-  } else {
+  }else {
     document.getElementById('requiredMessageName').innerHTML = '';
   }
-  if (newEmail === '') {
+  if(newEmail === '') {
     document.getElementById('requiredMessageMail').innerHTML = `<span class="requiredMessage">This field is required*</span>`;
     isEmailValid = false;
-  } else {
+  }else {
     document.getElementById('requiredMessageMail').innerHTML = '';
   }
-  if (newPhone === '') {
+  if(newPhone === '') {
     document.getElementById('requiredMessageTel').innerHTML = `<span class="requiredMessage">This field is required*</span>`;
     isPhoneValid = false;
-  } else {
+  }else {
     document.getElementById('requiredMessageTel').innerHTML = '';
   }
-  if (isNameValid && isEmailValid && isPhoneValid) {
+  if(isNameValid && isEmailValid && isPhoneValid) {
     createContact();
   }
 }

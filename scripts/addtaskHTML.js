@@ -3,7 +3,7 @@ function assignedToHTML(contact, initials, isChecked) {
   const checkedAttribute = isChecked ? 'checked' : '';
   
   return `
-  <div class="assignedContactsContainer">
+  <div class="assignedContactsContainer" onclick="stopPropagation(event)">
     <div class="assignedContactSVG">
       <div class="letterContacts">
         <div class="assignedLetters" style="background-color: ${contact.bgColor}">${initials}</div>

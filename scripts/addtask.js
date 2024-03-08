@@ -9,13 +9,20 @@ let newcategoryTask = [];
 let contacts = {};
 
 
-function activForm(event) {
-  
-  
+/**
+ * Activates the form by creating a task and applying an active style.
+ * @param {Event} event - The triggering event.
+ */
+function activForm(event) {  
   createTask(event);
   addActiveStyle(3);
 }
 
+
+/**
+ * Asynchronously creates a task, preventing the default event action. Initializes user tasks, creates a new task object, and updates the task list.
+ * @param {Event} event - The triggering event.
+ */
 async function createTask(event) {
   preventDefaultBehavior(event);
   const newCategory = await createAndLogNewCategory();
@@ -27,24 +34,35 @@ async function createTask(event) {
 }
 
 
+/**
+ * Prevents the default action of an event.
+ * @param {Event} event - The event to be processed.
+ */
 function preventDefaultBehavior(event) {
   event.preventDefault();
 }
 
 
+/**
+ * Asynchronously creates and logs a new task category.
+ */
 async function createAndLogNewCategory() {
   const newCategoryTask = await createTaskCategory();
   return newCategoryTask[0];
 }
 
-
+/**
+ * Initializes the task list for a user if it does not exist.
+ */
 function initializeUserTasks() {
   if (!tasks[userID]) {
     tasks[userID] = [];
   }
 }
 
-
+/**
+ * Retrieves the next task ID by finding the highest current ID and adding one.
+ */
 function getNextTaskId() {
   if (!tasks[userID] || tasks[userID].length === 0) {
       return 0; 
@@ -54,6 +72,11 @@ function getNextTaskId() {
   }
 }
 
+
+/**
+ * Creates a new task object with details from input fields and selected options.
+ * @param {Object} newCategory - The category for the new task.
+ */
 function createNewTaskObject(newCategory) {
   let headline = document.getElementById("enterTitle").value;
   let text = document.getElementById("enterDescription").value;
@@ -73,7 +96,9 @@ function createNewTaskObject(newCategory) {
   };
 }
 
-
+/**
+ * Resets input fields to their default values and clears arrays storing temporary task data.
+ */
 function resetInputFields() {
   document.getElementById("enterTitle").value = "";
   document.getElementById("enterDescription").value = "";
@@ -83,13 +108,18 @@ function resetInputFields() {
   categoryArray = [];
 }
 
-
+/**
+ * Adds a new task to the user's task list and saves it.
+ * @param {Object} newTask - The new task to add and save.
+ */
 async function addTaskAndSave(newTask) {
   tasks[userID].push(newTask);
   await setItem('tasks', tasks);
 }
 
-
+/**
+ * Updates the task list and redirects the user to the board view.
+ */
 async function updateTasksAndRedirect() {
   let todoCategory = ['todo'];
   await setItem('newcategory', todoCategory);
@@ -97,18 +127,24 @@ async function updateTasksAndRedirect() {
 }
 
 
-function toggleContacts() {
+/**
+ * Toggles the display of the contacts list, showing it if hidden and hiding it if shown.
+ */
+function toggleContacts(event) {
+  event.stopPropagation();
   let contactsBox = document.getElementById('contactsBox');
-  // Überprüfen, ob das Element sichtbar ist oder nicht
   if (contactsBox.style.display === 'none' || contactsBox.innerHTML.trim() === '') {
-    assignedTo(); // Ruft die Funktion auf, um die Kontakte mit den aktuellen Zuständen anzuzeigen
-    contactsBox.style.display = 'block'; // Zeigt die Kontakte an
+    assignedTo(); 
+    contactsBox.style.display = 'block'; 
   } else {
-    contactsBox.style.display = 'none'; // Blendet die Kontakte aus
+    contactsBox.style.display = 'none';
   }
 }
 
 
+/**
+ * Asynchronously loads contacts from web storage and displays them in the contacts box.
+ */
 async function assignedTo() {
   await load_contacts_from_webstorage();
 
@@ -126,24 +162,31 @@ async function assignedTo() {
   }
 }
 
-
+/**
+ * Updates the selected contacts based on user interaction with the contact list checkboxes.
+ * @param {string} initials - The initials of the contact.
+ * @param {string} bgColor - The background color associated with the contact.
+ * @param {string} name - The name of the contact.
+ * @param {HTMLInputElement} checkbox - The checkbox element that triggered the update.
+ */
 function updateSelectedContacts(initials, bgColor, name, checkbox) {
   let contactExistsIndex = selectedContactDetails.findIndex(c => c.name === name && c.bgColor === bgColor);
-
   if (checkbox.checked && contactExistsIndex === -1) {
-    // Fügt den Kontakt hinzu, wenn er noch nicht existiert
     selectedContactDetails.push({
       name: name,
       bgColor: bgColor,
       initials: initials
     });
   } else if (!checkbox.checked && contactExistsIndex !== -1) {
-    // Entfernt den Kontakt, wenn das Kontrollkästchen deaktiviert wurde
     selectedContactDetails.splice(contactExistsIndex, 1);
   }
 }
 
 
+/**
+ * Generates initials from a given name.
+ * @param {string} name - The name to generate initials from.
+ */
 function getInitials(name) {
   let names = name.split(' ');
   let initials = names.map(name => name[0].toUpperCase());
@@ -151,6 +194,11 @@ function getInitials(name) {
 }
 
 
+/**
+ * Updates the task priority based on user selection and applies an active style to the selected priority button.
+ * @param {number} buttonId - The ID of the selected priority button.
+ * @param {Event} event - The event triggered by clicking the priority button.
+ */
 function updatePrio(buttonId, event) {
   event.preventDefault();
   let selectedPrio0 = document.getElementById('btnUrgent');
@@ -170,7 +218,11 @@ function updatePrio(buttonId, event) {
 }
 
 
-function toggleCategories() {
+/**
+ * Toggles the display of the category selection box, showing it if hidden and hiding it if shown.
+ */
+function toggleCategories(event) {
+  event.stopPropagation();
   let categoryBox = document.getElementById('categoryBox');
   if (categoryBox.style.display === 'none' || categoryBox.innerHTML.trim() === '') {
     addCategory();
@@ -180,7 +232,25 @@ function toggleCategories() {
   }
 }
 
+/**
+ * Toggles the display selection box,on hiding it if shown.
+ */
+function dropDownOpen() {
+  let contactsBox = document.getElementById('contactsBox');
+  let categoryBox = document.getElementById('categoryBox');
+  if (contactsBox.style.display === 'block' || categoryBox.style.display === 'block') {
+    contactsBox.style.display = 'none';
+    categoryBox.style.display = 'none';
+  }
+}
 
+function stopPropagation(event) {
+  event.stopPropagation();
+}
+
+/**
+ * Populates the category selection box with available categories.
+ */
 function addCategory() {
   let categoryBox = document.getElementById('categoryBox');
   categoryBox.innerHTML = '';
@@ -188,6 +258,10 @@ function addCategory() {
 }
 
 
+/**
+ * Updates the task category selection based on user input, ensuring only one category is selected at a time.
+ * @param {string} categoryId - The ID of the category checkbox element.
+ */
 function updateLabels(categoryId) {
   let checkbox = document.getElementById(categoryId);
   let selectTaskCategory = document.getElementById('selectTaskCategory');
@@ -213,6 +287,9 @@ function updateLabels(categoryId) {
 }
 
 
+/**
+ * Adds a subtask to the subtasksArray if the input value is not empty, then displays the updated list of subtasks.
+ */
 function addSubTask() {
   let subTaskInput = document.getElementById('addSubTasks');
   if (subTaskInput.value.trim() !== '') {
@@ -225,7 +302,9 @@ function addSubTask() {
   }
 }
 
-
+/**
+ * Displays the list of subtasks in the subTasksBox element, allowing for editing and deletion of each subtask.
+ */
 function displaySubtasks() {
   let subTasksBox = document.getElementById('subTasksBox');
   subTasksBox.innerHTML = '';
@@ -236,6 +315,10 @@ function displaySubtasks() {
 }
 
 
+/**
+ * Opens the edit interface for a specified subtask, allowing the user to modify its name.
+ * @param {number} index - The index of the subtask in the subtasksArray to be edited.
+ */
 function editSubTask(index){
   let editSubTasks = document.getElementById('editSubTasksBox');
   editSubTasks.innerHTML = '';
@@ -251,11 +334,18 @@ function editSubTask(index){
 }}
 
 
+/**
+ * Deletes a subtask from the subtasksArray and updates the displayed list of subtasks.
+ * @param {number} index - The index of the subtask to be deleted.
+ */
 function closeEditSubTask(index){
   deleteSubTask(index);
 }
 
 
+/**
+ * Loads contacts from web storage and updates the contacts object.
+ */
 function saveEditeSubTask(index) {
   let editSubTasks = document.getElementById('editSubTaskContainer');
   let editSubTaskInput = document.getElementById('editSubTaskInput');
@@ -277,11 +367,15 @@ function saveEditeSubTask(index) {
 }
 
 
+/**
+ * Resets the task form to its default state, clearing all input fields, selections, and temporary data arrays.
+ */
 function deleteSubTask(index){
   subtasksArray.splice(index, 1);
   document.getElementById('editSubTaskContainer').innerHTML ='';
   displaySubtasks();
 }
+
 
 
 function searchContact() {
@@ -323,9 +417,17 @@ function clearForm() {
   document.getElementById("btnUrgent").classList.remove("activePrio0");
   document.getElementById("btnLow").classList.remove("activePrio2");
   document.getElementById("btnMedium").classList.add("activePrio1");
+  document.getElementById("requiredMessageDate").innerHTML = "";
+  document.getElementById("requiredMessageDescription").innerHTML = "";
+  document.getElementById("requiredMessageTitle").innerHTML = "";
+  document.getElementById("requiredMessageCategory").innerHTML = "";
 }
 
-
+/**
+ * Validates the new task's details (title, description, date, and category) before proceeding with form submission.
+ * Displays appropriate messages if validation fails.
+ * @param {Event} event - The event triggered by the form submission attempt.
+ */
 function checkNewTasks(event) {
   event.preventDefault();
   let newTitle = document.getElementById('enterTitle').value;
@@ -340,7 +442,18 @@ function checkNewTasks(event) {
   ifCheckTasks(isTitleValid,isDescriptionValid,isDateValid,newTitle,newDescription,newDate,event,newCategory);
 }
 
-
+/**
+ * Performs further actions based on the validity of task details. 
+ * This function is structured to potentially include more complex validation or additional actions based on the task details' validity.
+ * @param {boolean} isTitleValid - Indicates if the title field has passed validation.
+ * @param {boolean} isDescriptionValid - Indicates if the description field has passed validation.
+ * @param {boolean} isDateValid - Indicates if the date field has passed validation.
+ * @param {string} newTitle - The new task's title.
+ * @param {string} newDescription - The new task's description.
+ * @param {string} newDate - The new task's due date.
+ * @param {Event} event - The event associated with form submission or validation.
+ * @param {Array} newCategory - The selected category for the new task.
+ */
 function ifCheckTasks(isTitleValid,isDescriptionValid,isDateValid,newTitle,newDescription,newDate,event,newCategory) {
   if (newTitle === '') {
     document.getElementById('requiredMessageTitle').innerHTML = `<span class="requiredField">This fiels is required</span>`;

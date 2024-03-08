@@ -19,13 +19,13 @@
     <title>Add Task</title>
   </head>
 
-  <body onload="render(), loadTasks()">
+  <body onload="render(), loadTasks()" >
     <div class="sideBarBox" w3-include-html="/assets/templates/join_side_bar.html"></div>
     <div class="headerBox" w3-include-html="/assets/templates/header.html"></div>
 
-    <div class="contentAddTask">
+    <div class="contentAddTask"  onclick="dropDownOpen()">
       <h1 class="addTaskHeadline">Add Task</h1>
-<form  onsubmit="checkNewTasks(event), addTaskHTMLOpen('todo');" id="newTaskForm">
+<form  onsubmit="checkNewTasks(event), addTaskHTMLOpen('todo')" id="newTaskForm">
       <div class="contentLeft-Right">
 
         <div class="contentLeft">
@@ -52,7 +52,7 @@
                 <p class="titleAssigned">Assigned to</p>
                 <div class="inputDropDown">
                     <div class="inputDropDownContainer">
-                        <div onclick="toggleContacts()" class="inputContactsSVG">
+                        <div onclick="toggleContacts(event)" class="inputContactsSVG">
                 <input class="inputContacts" id="searchContacts" type="text" placeholder="Select contacts to assign">
                 <svg class="svgArrow"width="24" height="24" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
                     <mask id="mask0_123060_2330" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
@@ -157,7 +157,7 @@
                     <div class="selectTaskCategoryArrow">
                        <div class="selectTaskCategoryContainer">
                     <div id="selectTaskCategory"class="selectTaskCategory">Select task category</div>
-                    <svg onclick="toggleCategories()" class="svgArrow"width="24" height="24" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
+                    <svg onclick="toggleCategories(event)" class="svgArrow"width="24" height="24" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
                         <mask id="mask0_123060_2330" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                         <rect width="24" height="24" fill="#D9D9D9"/>
                         </mask>

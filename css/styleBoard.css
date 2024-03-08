@@ -133,7 +133,7 @@ main {
 .addKanban > span {
   font-size: 20px;
   font-weight: 700;
-  color: #42526e;
+  color: rgb(66, 82, 110);
 }
 
 .boardDistribution {
@@ -142,6 +142,7 @@ main {
   gap: 24px;
   margin-left: 64px;
   width: calc(100vw - 296px);
+  padding-bottom: 30px;
 }
 
 .column {
@@ -440,6 +441,7 @@ input[type="checkbox"]:before {
   color: #2a3647;
   font-size: 16px;
   font-weight: 400;
+  cursor: pointer;
 }
 
 .delete:hover,.delete:hover path,.edit:hover,.edit:hover path,.deleteEdit:hover path, .deleteEdit:hover{
@@ -457,6 +459,11 @@ input[type="checkbox"]:before {
   color: #2a3647;
   font-size: 16px;
   font-weight: 400;
+  cursor: pointer;
+}
+
+.deleteCard {
+  cursor: pointer;
 }
 
 

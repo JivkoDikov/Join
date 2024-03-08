@@ -159,10 +159,10 @@ function overviewEditHTML(i) {
     
     return `
     <div class="overview">
-    <div class="overlayCard" id="overlayEdit">
+    <div class="overlayCard" id="overlayEdit" onclick="dropDownOpen()">
     <div class="overlayCardEdit">
     <div class="deleteEdit">
-        <svg onclick="deleteCard(${i})" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="deleteCard" onclick="deleteCard(${i})" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <mask id="mask0_119188_3520" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
             <rect width="24" height="24" fill="#D9D9D9"/>
             </mask>
@@ -262,7 +262,7 @@ function overviewEditHTML(i) {
     <p class="titleAssigned">Assigned to</p>
     <div class="inputDropDown">
         <div class="inputDropDownContainer">
-            <div onclick="toggleAssignedToBoard(${i})" class="inputContactsSVG">
+            <div onclick="toggleAssignedToBoard(${i}, event)" class="inputContactsSVG">
     <input class="inputContacts" type="text" placeholder="Select contacts to assign">
     <svg class="svgArrow"width="24" height="24" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
         <mask id="mask0_123060_2330" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
@@ -309,8 +309,8 @@ function addTaskHTML() {
     </svg>
     </div>
     
-<form onsubmit="checkNewTasks(event)" class="formBoardTask">
-    <div class="contentLeft-Right formMobile">
+<form id="newTaskForm" onsubmit="checkNewTasks(event)" class="formBoardTask">
+    <div class="contentLeft-Right formMobile" onclick="dropDownOpen()">
 
       <div class="contentLeft">
           <div class="titleInputContainer">
@@ -319,7 +319,7 @@ function addTaskHTML() {
               </div>
               <div class="inputTitleRequiredContainer">
                   <div class="inputTitleContainer">
-              <input oninput="inputFrame(id)" id="enterTitle"class="inputTitle"type="text"  placeholder="Enter a Title">
+              <input id="enterTitle"class="inputTitle"type="text"  placeholder="Enter a Title">
                   </div>
                   <div id="requiredMessageTitle"></div>
               </div>
@@ -327,7 +327,7 @@ function addTaskHTML() {
           <div class="textareaDescription">
               <p class="title">Description</p>
               <div class="textareaTitleRequiredContainer">
-              <textarea oninput="inputFrame(id)" id="enterDescription" cols="30" rows="10"  placeholder="Enter a Description"></textarea>
+              <textarea  id="enterDescription" cols="30" rows="10"  placeholder="Enter a Description"></textarea>
               <div id="requiredMessageDescription"></div>
               </div>
           </div>
@@ -336,7 +336,7 @@ function addTaskHTML() {
               <p class="titleAssigned">Assigned to</p>
               <div class="inputDropDown">
                   <div class="inputDropDownContainer">
-                      <div onclick="toggleContacts()" class="inputContactsSVG">
+                      <div onclick="toggleContacts(event)" class="inputContactsSVG">
               <input class="inputContacts" id="searchContacts" type="text" placeholder="Select contacts to assign">
               <svg class="svgArrow"width="24" height="24" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
                   <mask id="mask0_123060_2330" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
@@ -370,7 +370,7 @@ function addTaskHTML() {
               </div>
               <div class="dateInputRequiredContainer">
                   <div class="dateInputImg">
-              <input oninput="inputFrame(id)" id="enterDate" class="inputMonth"type="date"  placeholder="dd/mm/yyyy" value="">
+              <input id="enterDate" class="inputMonth"type="date"  placeholder="dd/mm/yyyy" value="">
               
                   </div>
                   <div id="requiredMessageDate"></div>
@@ -441,7 +441,7 @@ function addTaskHTML() {
                   <div class="selectTaskCategoryArrow">
                      <div class="selectTaskCategoryContainer">
                   <div id="selectTaskCategory"class="selectTaskCategory">Select task category</div>
-                  <svg onclick="toggleCategories()" class="svgArrow"width="24" height="24" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
+                  <svg onclick="toggleCategories(event)" class="svgArrow"width="24" height="24" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
                       <mask id="mask0_123060_2330" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                       <rect width="24" height="24" fill="#D9D9D9"/>
                       </mask>
@@ -493,7 +493,7 @@ function addTaskHTML() {
                       </div>
           
                               <div class="cancelCreateContactButtons">
-                                  <button type="reset" class="cancelBtn">
+                                  <button type="reset" class="cancelBtn" onclick="clearForm()">
                                       <span class="cancelX">
                                   <p class="cancelText">Clear</p>
                                   <p class="x">x</p>
@@ -522,7 +522,7 @@ function assignedToBoardHTML(user, isChecked, i) {
     const userNameForId = user['name'].replace(/\s+/g, '_');
 
     return `
-    <div class="assignedContactsContainer">
+    <div class="assignedContactsContainer" onclick="stopPropagation(event)">
         <div class="assignedContactSVG">
             <div class="letterContacts">
                 <div class="assignedLetters" style="background-color: ${user['bgColor']}">${user['letter']}${user['lastNameLetter']}</div>
