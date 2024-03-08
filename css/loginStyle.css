@@ -24,7 +24,6 @@ body {
   margin: 0;
   background-color: #0000000a;
   font-family: "Inter Regular", sans-serif;
-  font-size: 18px;
   overflow: hidden;
 }
 .d-none {
@@ -347,4 +346,7 @@ a:hover {
 .invalidValue {
   color: red;
   margin-left: -40px;
+  width: 100%;
+  font-size: 12px;
+  margin-top: -15px;
 }

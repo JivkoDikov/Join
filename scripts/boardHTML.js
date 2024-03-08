@@ -65,8 +65,9 @@ function generateCardHTML(element) {
 
         
     </div>
-    <div class="categoryOpenMobile" id="categoryOpenMobile${element.id}">
+   
     </div>
+    <div class="categoryOpenMobile" id="categoryOpenMobile${element.id}">
     </div>
         <div class="content">
             <h3>${element.headline}</h3>

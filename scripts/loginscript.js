@@ -31,7 +31,7 @@ function checkLogin(event) {
         localStorage.setItem('name', findUser.name);
         window.location.href = '/assets/templates/summary.html';
     }else {
-        document.getElementById('invalidValue').innerHTML = '" invalid values pleace insert your correct values "';
+        document.getElementById('invalidValue').innerHTML = 'Wrong password Ups! Try again';
     }
 }
 
@@ -67,7 +67,9 @@ async function signup(event){
                     inputFieldEmail.value, 
                     inputFieldPassword.value);
         }else {
-            alert("Email existiert bereits")
+            document.getElementById('emailError').classList.remove('d-none');
+            document.getElementById('emailError').classList.add('dontMatch');
+            document.getElementById('emailError').innerHTML = 'This email already exists choose another email';
         }
 }
 

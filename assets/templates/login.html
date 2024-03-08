@@ -36,6 +36,7 @@
                     <input oninput="checkPasswordInput()" id="passwordInput" required type="password" placeholder="Password">
                     <img src="/assets/img/lock.png" alt="picture of Lock">
                 </div>
+                <div id="invalidValue" class="invalidValue"></div>
                 <div class="footerLoginForm">
                         <div class="rememberme">
                             <input id="rememberCheckbox" type="checkbox">
@@ -43,7 +44,7 @@
                         </div>
                     <a class="d-none"> Forgot my password</a>
                 </div>
-                <div id="invalidValue" class="invalidValue"></div>
+                
                 <div class="loginBtn">
                     <input id="submitButton" class="hoverDarkBtn disableButton" type="submit" value="Log in">
                     <a href="/assets/templates/summary.html" onclick="guestLogin()">Guest Log in</a>
