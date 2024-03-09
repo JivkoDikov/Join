@@ -125,6 +125,10 @@
 }
 
 @media (max-width: 600px) {
+  .emptyContainer{
+    height: 101px;
+  }
+
   .btn-AddTask {
     display: none;
   }

@@ -133,7 +133,7 @@ function emptyCategory() {
 
     if(emptytodo.innerHTML === "") {
         emptytodo.innerHTML += `
-                <div">
+                <div class="emptyContainer">
                     <div class="empty">
                         <span>No task To do</span>
                     </div>
@@ -141,7 +141,7 @@ function emptyCategory() {
     }
     if(emptyprogress.innerHTML === "") {
         emptyprogress.innerHTML += `
-                <div">
+                <div class="emptyContainer">
                     <div class="empty">
                         <span>No task Progress</span>
                     </div>
@@ -149,7 +149,7 @@ function emptyCategory() {
     }
     if(emptyfeedback.innerHTML === "") {
         emptyfeedback.innerHTML += `
-                <div">
+                <div class="emptyContainer">
                     <div class="empty">
                         <span>No task Feedback</span>
                     </div>
@@ -157,7 +157,7 @@ function emptyCategory() {
     }
     if(emptydone.innerHTML === "") {
         emptydone.innerHTML += `
-                <div>
+                <div class="emptyContainer">
                     <div class="empty">
                         <span>No task Done</span>
                     </div>
@@ -308,7 +308,7 @@ function editCard(cardId) {
     title.value = infoArrayCard['headline'];  
     textarea.value = infoArrayCard['text']; 
     data.value = infoArrayCard['date']; 
-   
+    addSubTaskEdit(cardId);
     prioEdit(infoArrayCard['priority'], cardId, event);
     editSubTaskContainerInBoard(cardId,event);
 }
@@ -330,6 +330,7 @@ async function CardEditForm(event,cardId) {
     infoArrayCard.text = textareaEdit;
     infoArrayCard.date = dateEdit;
     await setItem('tasks', tasks)
+    
     closeOverview();
     updateHTML(); 
 }
@@ -464,14 +465,6 @@ function toggleAssignedToBoard(i, event) {
     
 }
 
-function editSubTaskContainerInBoard(cardId,event) {
-    event.stopPropagation();
-    let card = cards.find(card => card.id === cardId);
-    console.log(card);
-    let editSubTaskBorad = document.getElementById('subtasksContainerEdit');
-    editSubTaskBorad.innerHTML = editSubTaskContainerInBoardHTML();
-}
-
 
 /**
  * Updates the list of selected contacts for a task based on user interactions in the assigned user interface.
@@ -600,4 +593,54 @@ async function newCategoryHTMLOpen(categorys,event,id) {
     currentDraggedElement.category = categorys;
         await setItem('tasks', tasks);
         updateHTML();
+}
+
+function editSubTaskContainerInBoard(cardId,event) {
+    event.stopPropagation();
+    let card = cards.find(card => card.id === cardId);
+    console.log(card);
+    let editSubTaskBorad = document.getElementById('subtasksContainerEdit');
+    editSubTaskBorad.innerHTML = editSubTaskContainerInBoardHTML();
+}
+
+function addSubTaskEdit(id) {
+    let subEdit = cards.find(card => card.id === id);
+    for (let i = 0; i < subEdit['subtasks'].length; i++) {
+        let currentSub = subEdit[i];
+        console.log(currentSub);
+        document.getElementById('subtasksContainer').innerHTML += `
+        <div class="subTasksIconsContainer">
+          <div id="subTaskText"class="subTaskText">
+            <li>${currentSub.name}</li>
+          </div>
+          <div class="subTaskIconsBox">
+            <img onclick="editSubTask(${i})"class="subTaskIcon" src="/assets/img/pencel.jpg" alt="">
+            <img onclick="deleteSubTask(${i})"class="subTaskIcon" src="/assets/img/trash.jpg" alt="">
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  function editSubTaskContainerInBoardHTML() {
+
+    return`                
+    <p class="title">Subtasks</p>
+    <div class="addNewSubtask">
+        <div class="addNewSubtasksContainer">
+        <input id="addSubTasks" type="text" class="subtaskText" placeholder="Add new subtask">
+        <svg id="addNewSubtask" onclick ="addSubTask()"class="subtaskSVG"width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask0_123060_1727" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
+            <rect x="0.248535" width="24" height="24" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_123060_1727)">
+            <path d="M11.2485 13H6.24854C5.9652 13 5.7277 12.9042 5.53604 12.7125C5.34437 12.5208 5.24854 12.2833 5.24854 12C5.24854 11.7167 5.34437 11.4792 5.53604 11.2875C5.7277 11.0958 5.9652 11 6.24854 11H11.2485V6C11.2485 5.71667 11.3444 5.47917 11.536 5.2875C11.7277 5.09583 11.9652 5 12.2485 5C12.5319 5 12.7694 5.09583 12.961 5.2875C13.1527 5.47917 13.2485 5.71667 13.2485 6V11H18.2485C18.5319 11 18.7694 11.0958 18.961 11.2875C19.1527 11.4792 19.2485 11.7167 19.2485 12C19.2485 12.2833 19.1527 12.5208 18.961 12.7125C18.7694 12.9042 18.5319 13 18.2485 13H13.2485V18C13.2485 18.2833 13.1527 18.5208 12.961 18.7125C12.7694 18.9042 12.5319 19 12.2485 19C11.9652 19 11.7277 18.9042 11.536 18.7125C11.3444 18.5208 11.2485 18.2833 11.2485 18V13Z" fill="#2A3647"/>
+            </g>
+            </svg>
+        </div>
+            
+    </div>
+    <div id="subTasksBox"class="addSubTasksBox"></div>
+    <div id="editSubTasksBox" class="editSubTasksBox"></div>                   
+    `;
 }
