@@ -321,9 +321,8 @@ function displaySubtasks() {
  */
 function editSubTask(index){
   let editSubTasks = document.getElementById('editSubTasksBox');
-  editSubTasks.innerHTML = '';
-
-  if (index >= 0 && index < subtasksArray.length) {
+   editSubTasks.innerHTML = '';
+ if (index >= 0 && index < subtasksArray.length) {
     let subTaskName = subtasksArray[index].name;
 
   editSubTasks.innerHTML += editSubTaskHTML(index, subTaskName);

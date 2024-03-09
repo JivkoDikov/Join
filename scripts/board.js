@@ -311,6 +311,7 @@ function editCard(cardId) {
    
     prioEdit(infoArrayCard['priority'], cardId, event);
     editSubTaskContainerInBoard(cardId,event);
+    renderSubtasksInEditPopup(infoArrayCard);
 }
 
 /**
@@ -332,6 +333,25 @@ async function CardEditForm(event,cardId) {
     await setItem('tasks', tasks)
     closeOverview();
     updateHTML(); 
+   
+}
+
+/**
+ * Rendert die Subtasks im Bearbeitungspopup ("Edit") für eine bestimmte Karte.
+ * @param {Object} card - Die Karte, für die die Subtasks gerendert werden sollen.
+ */
+function renderSubtasksInEditPopup(card) {
+    let editSubTasksBox = document.getElementById('subTasksBox');
+    editSubTasksBox.innerHTML = ''; 
+
+    if (card.subtasks && Array.isArray(card.subtasks) && card.subtasks.length > 0) {
+        card.subtasks.forEach((subtask, index) => {
+            let subtaskHTML = displaySubtasksHTML(subtask, index);
+            editSubTasksBox.innerHTML += subtaskHTML;
+        });
+    } else {
+        editSubTasksBox.innerHTML = '<p>No subtasks found for this task.</p>';
+    }
 }
 
 /**
@@ -601,3 +621,4 @@ async function newCategoryHTMLOpen(categorys,event,id) {
         await setItem('tasks', tasks);
         updateHTML();
 }
+
