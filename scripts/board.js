@@ -295,7 +295,7 @@ function updateProgressBar(element) {
  */
 function editCard(cardId) {
     let infoArrayCard = cards.find(card => card.id === cardId);
-
+    currentDraggedElement = cards.find(card => card.id === cardId);
     let overlay = document.getElementById('overlay');
     overlay.innerHTML = '';
     overlay.innerHTML = overviewEditHTML(cardId);
@@ -622,25 +622,29 @@ function editSubTaskContainerInBoard(cardId,event) {
     let editSubTaskBorad = document.getElementById('subtasksContainerEdit');
     editSubTaskBorad.innerHTML = editSubTaskContainerInBoardHTML();
 }
-
 function addSubTaskEdit(id) {
     let subEdit = cards.find(card => card.id === id);
-    for (let i = 0; i < subEdit['subtasks'].length; i++) {
-        let currentSub = subEdit[i];
-        console.log(currentSub);
-        document.getElementById('subtasksContainer').innerHTML += `
-        <div class="subTasksIconsContainer">
-          <div id="subTaskText"class="subTaskText">
-            <li>${currentSub.name}</li>
-          </div>
-          <div class="subTaskIconsBox">
-            <img onclick="editSubTask(${i})"class="subTaskIcon" src="/assets/img/pencel.jpg" alt="">
-            <img onclick="deleteSubTask(${i})"class="subTaskIcon" src="/assets/img/trash.jpg" alt="">
-          </div>
-        </div>
-      `;
+    if (subEdit && subEdit.subtasks && subEdit.subtasks.length > 0) {
+        for (let i = 0; i < subEdit.subtasks.length; i++) {
+            let currentSub = subEdit.subtasks[i];
+            console.log(currentSub);
+            document.getElementById('subtasksContainerEdit').innerHTML += `
+            <div class="subTasksIconsContainer">
+                <div id="subTaskText" class="subTaskText">
+                    <li>${currentSub.name}</li>
+                </div>
+                <div class="subTaskIconsBox">
+                    <img onclick="editSubTask(${i})" class="subTaskIcon" src="/assets/img/pencel.jpg" alt="">
+                    <img onclick="deleteSubTask(${i})" class="subTaskIcon" src="/assets/img/trash.jpg" alt="">
+                </div>
+            </div>
+            `;
+        }
+    } else {
+        document.getElementById('subtasksContainerEdit').innerHTML = '<p>No subtasks found for this task.</p>';
     }
-  }
+}
+
 
   function editSubTaskContainerInBoardHTML() {
 
@@ -664,3 +668,21 @@ function addSubTaskEdit(id) {
     <div id="editSubTasksBox" class="editSubTasksBox"></div>                   
     `;
 }
+
+/**
+ * Deletes a specific subtask from the task being edited and updates the display.
+ * This function is triggered when a user clicks the trash icon next to a subtask in the edit popup.
+ * @param {number} subtaskIndex - The index of the subtask to delete.
+ */
+function deleteSubTask(subtaskIndex) {
+    let subtasksContainer = document.getElementById('subtasksContainerEdit');
+    let subtaskElements = subtasksContainer.querySelectorAll('.subTasksIconsContainer');
+    let subtaskToDelete = subtaskElements[subtaskIndex];
+    subtaskToDelete.remove();
+    if (currentDraggedElement.subtasks && currentDraggedElement.subtasks.length > subtaskIndex) {
+        currentDraggedElement.subtasks.splice(subtaskIndex, 1);
+    }
+}
+
+
+
