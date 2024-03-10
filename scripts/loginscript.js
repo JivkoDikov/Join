@@ -99,7 +99,7 @@ function setUser(name, email, password){
     localStorage.setItem("name", name)
     localStorage.setItem("user", email)
     setTimeout(function() {
-        window.location.href = '/assets/templates/summary.html';
+        window.location.href = '/assets/templates/login.html';
     }, 1000);
 }
 
