@@ -322,7 +322,7 @@ function displaySubtasks() {
  * Opens the edit interface for a specified subtask, allowing the user to modify its name.
  * @param {number} index - The index of the subtask in the subtasksArray to be edited.
  */
-function editSubTask(index){
+function editSubTask(subID, taskID, index){
   let editSubTasks = document.getElementById('editSubTasksBox');
    editSubTasks.innerHTML = '';
  if (index >= 0 && index < subtasksArray.length) {

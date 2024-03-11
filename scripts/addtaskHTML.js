@@ -88,7 +88,7 @@ function assignedToHTML(contact, initials, isChecked) {
           <li>${subtask.name}</li>
         </div>
         <div class="subTaskIconsBox">
-          <img onclick="editSubTask( ${i})"class="subTaskIcon" src="/assets/img/pencel.jpg" alt="">
+          <img onclick="editSubTask(${subtask.subID}, ${subtask.taskID}, ${i})"class="subTaskIcon" src="/assets/img/pencel.jpg" alt="">
           <img onclick="deleteSubTask(${subtask.subID}, ${subtask.taskID})"class="subTaskIcon" src="/assets/img/trash.jpg" alt="">
         </div>
       </div>
