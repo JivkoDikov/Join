@@ -702,7 +702,7 @@ function editSubTask(subtaskIndex, id) {
     <div id="editSubTaskContainer"class="editSubTaskContainer">
     <input id="editSubTaskInput" class="editSubTasksInput" type="text" value="${subtaskText}">
     <div class="editSubTasksIcons">
-    <svg onclick="closeEditSubTask(${subtaskIndex},${id})" class="editSubTasksClose"width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg onclick="closeEditSubTask(${subtaskIndex}, ${id})" class="editSubTasksClose"width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
   <mask id="mask0_117793_4210" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="4" width="24" height="24">
   <rect x="4" y="4" width="24" height="24" fill="#D9D9D9"/>
   </mask>
@@ -710,7 +710,7 @@ function editSubTask(subtaskIndex, id) {
   <path d="M16 17.4L11.1 22.3C10.9167 22.4834 10.6833 22.575 10.4 22.575C10.1167 22.575 9.88332 22.4834 9.69999 22.3C9.51665 22.1167 9.42499 21.8834 9.42499 21.6C9.42499 21.3167 9.51665 21.0834 9.69999 20.9L14.6 16L9.69999 11.1C9.51665 10.9167 9.42499 10.6834 9.42499 10.4C9.42499 10.1167 9.51665 9.88338 9.69999 9.70005C9.88332 9.51672 10.1167 9.42505 10.4 9.42505C10.6833 9.42505 10.9167 9.51672 11.1 9.70005L16 14.6L20.9 9.70005C21.0833 9.51672 21.3167 9.42505 21.6 9.42505C21.8833 9.42505 22.1167 9.51672 22.3 9.70005C22.4833 9.88338 22.575 10.1167 22.575 10.4C22.575 10.6834 22.4833 10.9167 22.3 11.1L17.4 16L22.3 20.9C22.4833 21.0834 22.575 21.3167 22.575 21.6C22.575 21.8834 22.4833 22.1167 22.3 22.3C22.1167 22.4834 21.8833 22.575 21.6 22.575C21.3167 22.575 21.0833 22.4834 20.9 22.3L16 17.4Z" fill="#2A3647"/>
   </g>
   </svg>
-    <svg onclick="saveEditeSubTask(${subtaskIndex})" class="editsubTasksSVG" width="24" height="24" viewBox="0 0 24 25" fill="#000000" xmlns="http://www.w3.org/2000/svg">
+    <svg onclick="saveEditeSubTask(${subtaskIndex}, ${id})" class="editsubTasksSVG" width="24" height="24" viewBox="0 0 24 25" fill="#000000" xmlns="http://www.w3.org/2000/svg">
   <mask id="mask0_131179_1277" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
   <rect y="0.5" width="24" height="24" fill="#000000"/>
   </mask>
@@ -725,13 +725,14 @@ function editSubTask(subtaskIndex, id) {
 }
 
 function closeEditSubTask(subtaskIndex, id) {
+    console.log(id);
     let editSubTaskBox = document.getElementById('editSubTasksBox');
     editSubTaskBox.innerHTML = '';
     deleteSubTask(id);
     }
 
 
-    function saveEditeSubTask(subtaskIndex) {
+    function saveEditeSubTask(subtaskIndex, id) {
         let editSubTaskInput = document.getElementById('editSubTaskInput').value;
     
         // Aktualisiere das 'cards' Array direkt mit dem neuen Subtask-Namen

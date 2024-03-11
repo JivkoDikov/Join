@@ -16,15 +16,15 @@ function assignedToHTML(contact, initials, isChecked) {
 
   
   
-    function saveEditeSubTaskHTML(subtask, i) {
+    function saveEditeSubTaskHTML(subtask, i, subID) {
       return `
       <div class="subTasksIconsContainer">
         <div class="subTaskText">
           <li>${subtask.name}</li>
         </div>
         <div class="subTaskIconsBox">
-          <img onclick="editSubTask(${i})" class="subTaskIcon" src="/assets/img/pencel.jpg" alt="">
-          <img onclick="deleteSubTask(${i})" class="subTaskIcon" src="/assets/img/trash.jpg" alt="">
+          <img onclick="editSubTask(${i}, ${subID})" class="subTaskIcon" src="/assets/img/pencel.jpg" alt="">
+          <img onclick="deleteSubTask(${i}, ${subID})" class="subTaskIcon" src="/assets/img/trash.jpg" alt="">
         </div>
       </div>
     `;
@@ -88,8 +88,8 @@ function assignedToHTML(contact, initials, isChecked) {
           <li>${subtask.name}</li>
         </div>
         <div class="subTaskIconsBox">
-          <img onclick="editSubTask(${i})"class="subTaskIcon" src="/assets/img/pencel.jpg" alt="">
-          <img onclick="deleteSubTask(${i})"class="subTaskIcon" src="/assets/img/trash.jpg" alt="">
+          <img onclick="editSubTask(${subtask.subID})"class="subTaskIcon" src="/assets/img/pencel.jpg" alt="">
+          <img onclick="deleteSubTask(${subtask.subID})"class="subTaskIcon" src="/assets/img/trash.jpg" alt="">
         </div>
       </div>
     `;

@@ -347,25 +347,27 @@ function closeEditSubTask(index){
 /**
  * Loads contacts from web storage and updates the contacts object.
  */
-function saveEditeSubTask(index) {
-  let editSubTasks = document.getElementById('editSubTaskContainer');
-  let editSubTaskInput = document.getElementById('editSubTaskInput');
-  let subTasksBox = document.getElementById('subTasksBox');
+function deleteSubTask(taskID, subtaskID) {
+  // Finde das Task-Objekt anhand der taskID
+  let task = cards.find(card => card.id === taskID);
+  if (task && task.subtasks) {
+      // Finde den Index der Subtask basierend auf der subtaskID
+      const subtaskIndex = task.subtasks.findIndex(subtask => subtask.subID === subtaskID);
 
-  if (index >= 0 && index < subtasksArray.length && editSubTaskInput) {
-    subtasksArray[index].name = editSubTaskInput.value;
-    editSubTasks.innerHTML = '';
-    displaySubtasks();
+      if (subtaskIndex !== -1) {
+          // Entferne die Subtask, wenn sie gefunden wurde
+          task.subtasks.splice(subtaskIndex, 1);
 
-    if (subTasksBox) {
-      subTasksBox.innerHTML = '';
-      for (let i = 0; i < subtasksArray.length; i++) {
-        let subtask = subtasksArray[i];
-        subTasksBox.innerHTML += saveEditeSubTaskHTML(subtask, i);
+          // Aktualisiere die Anzeige (dies könnte die Anzeige der Subtasks neu laden oder ähnliches beinhalten)
+          // Zum Beispiel:
+          displaySubtasksInBoard(taskID); // Angenommen, diese Funktion aktualisiert die Subtask-Anzeige
+
+          // Optional: Persistiere die Änderungen, wenn du ein Backend oder eine Form von Speicher verwendest
+          // saveUpdatedTasks(); // Deine Funktion, die das aktualisierte 'cards' Array speichert
       }
-    }
   }
 }
+
 
 
 /**
