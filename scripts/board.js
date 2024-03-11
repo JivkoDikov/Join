@@ -3,6 +3,7 @@ let currentDraggedElement;
 let currentChecktContact = [];
 let user = [];
 let categorys = [];
+let subtasksArrayEditTask = [];
 
 /**
  * Initializes the board by rendering tasks and updating the HTML layout.
@@ -321,6 +322,7 @@ function editCard(cardId) {
  * @param {number} cardId - The ID of the task being edited.
  */
 async function CardEditForm(event,cardId) {
+    event.stopPropagation();
     event.preventDefault();
     let infoArrayCard = cards.find(card => card.id === cardId);
     let titleEdit = document.getElementById('editTitle').value;
@@ -620,13 +622,15 @@ function editSubTaskContainerInBoard(cardId,event) {
     let card = cards.find(card => card.id === cardId);
     console.log(card);
     let editSubTaskBorad = document.getElementById('subtasksContainerEdit');
-    editSubTaskBorad.innerHTML = editSubTaskContainerInBoardHTML();
+    editSubTaskBorad.innerHTML = editSubTaskContainerInBoardHTML(cardId);
 }
 function addSubTaskEdit(id) {
     let subEdit = cards.find(card => card.id === id);
     if (subEdit && subEdit.subtasks && subEdit.subtasks.length > 0) {
         for (let i = 0; i < subEdit.subtasks.length; i++) {
             let currentSub = subEdit.subtasks[i];
+            let currentID = currentSub['subID'];
+            console.log(currentID);
             console.log(currentSub);
             document.getElementById('subtasksContainerEdit').innerHTML += `
             <div class="subTasksIconsContainer">
@@ -634,8 +638,8 @@ function addSubTaskEdit(id) {
                     <li>${currentSub.name}</li>
                 </div>
                 <div class="subTaskIconsBox">
-                    <img onclick="editSubTask(${i})" class="subTaskIcon" src="/assets/img/pencel.jpg" alt="">
-                    <img onclick="deleteSubTask(${i})" class="subTaskIcon" src="/assets/img/trash.jpg" alt="">
+                    <img onclick="editSubTask(${i}, ${currentID})" class="subTaskIcon" src="/assets/img/pencel.jpg" alt="">
+                    <img onclick="deleteSubTask(${i}, ${currentID})" class="subTaskIcon" src="/assets/img/trash.jpg" alt="">
                 </div>
             </div>
             `;
@@ -646,14 +650,14 @@ function addSubTaskEdit(id) {
 }
 
 
-  function editSubTaskContainerInBoardHTML() {
+  function editSubTaskContainerInBoardHTML(cardId) {
 
     return`                
     <p class="title">Subtasks</p>
     <div class="addNewSubtask">
         <div class="addNewSubtasksContainer">
         <input id="addSubTasks" type="text" class="subtaskText" placeholder="Add new subtask">
-        <svg id="addNewSubtask" onclick ="addSubTask()"class="subtaskSVG"width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg id="addNewSubtask" onclick ="addSubTaskNewTask(${cardId})"class="subtaskSVG"width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <mask id="mask0_123060_1727" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
             <rect x="0.248535" width="24" height="24" fill="#D9D9D9"/>
             </mask>
@@ -685,4 +689,92 @@ function deleteSubTask(subtaskIndex) {
 }
 
 
+function editSubTask(subtaskIndex, id) {
+    console.log(id);
+    let subtasksContainer = document.getElementById('subtasksContainerEdit');
+    let subtaskElements = subtasksContainer.querySelectorAll('.subTasksIconsContainer');
+    let subtaskToEdit = subtaskElements[subtaskIndex];
+    let subtaskText = subtaskToEdit.querySelector('.subTaskText').innerText;
+    
+    let editSubTaskBox = document.getElementById('editSubTasksBox');
+    editSubTaskBox.innerHTML = '';
+    editSubTaskBox.innerHTML = `
+    <div id="editSubTaskContainer"class="editSubTaskContainer">
+    <input id="editSubTaskInput" class="editSubTasksInput" type="text" value="${subtaskText}">
+    <div class="editSubTasksIcons">
+    <svg onclick="closeEditSubTask(${subtaskIndex},${id})" class="editSubTasksClose"width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <mask id="mask0_117793_4210" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="4" width="24" height="24">
+  <rect x="4" y="4" width="24" height="24" fill="#D9D9D9"/>
+  </mask>
+  <g mask="url(#mask0_117793_4210)">
+  <path d="M16 17.4L11.1 22.3C10.9167 22.4834 10.6833 22.575 10.4 22.575C10.1167 22.575 9.88332 22.4834 9.69999 22.3C9.51665 22.1167 9.42499 21.8834 9.42499 21.6C9.42499 21.3167 9.51665 21.0834 9.69999 20.9L14.6 16L9.69999 11.1C9.51665 10.9167 9.42499 10.6834 9.42499 10.4C9.42499 10.1167 9.51665 9.88338 9.69999 9.70005C9.88332 9.51672 10.1167 9.42505 10.4 9.42505C10.6833 9.42505 10.9167 9.51672 11.1 9.70005L16 14.6L20.9 9.70005C21.0833 9.51672 21.3167 9.42505 21.6 9.42505C21.8833 9.42505 22.1167 9.51672 22.3 9.70005C22.4833 9.88338 22.575 10.1167 22.575 10.4C22.575 10.6834 22.4833 10.9167 22.3 11.1L17.4 16L22.3 20.9C22.4833 21.0834 22.575 21.3167 22.575 21.6C22.575 21.8834 22.4833 22.1167 22.3 22.3C22.1167 22.4834 21.8833 22.575 21.6 22.575C21.3167 22.575 21.0833 22.4834 20.9 22.3L16 17.4Z" fill="#2A3647"/>
+  </g>
+  </svg>
+    <svg onclick="saveEditeSubTask(${subtaskIndex})" class="editsubTasksSVG" width="24" height="24" viewBox="0 0 24 25" fill="#000000" xmlns="http://www.w3.org/2000/svg">
+  <mask id="mask0_131179_1277" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
+  <rect y="0.5" width="24" height="24" fill="#000000"/>
+  </mask>
+  <g mask="url(#mask0_131179_1277)">
+  <path d="M9.55057 15.65L18.0256 7.175C18.2256 6.975 18.4631 6.875 18.7381 6.875C19.0131 6.875 19.2506 6.975 19.4506 7.175C19.6506 7.375 19.7506 7.6125 19.7506 7.8875C19.7506 8.1625 19.6506 8.4 19.4506 8.6L10.2506 17.8C10.0506 18 9.81724 18.1 9.55057 18.1C9.28391 18.1 9.05057 18 8.85057 17.8L4.55057 13.5C4.35057 13.3 4.25474 13.0625 4.26307 12.7875C4.27141 12.5125 4.37557 12.275 4.57557 12.075C4.77557 11.875 5.01307 11.775 5.28807 11.775C5.56307 11.775 5.80057 11.875 6.00057 12.075L9.55057 15.65Z" fill="white"/>
+  </g>
+  </svg>
+  
+     </div>
+    
+    `;
+}
 
+function closeEditSubTask(subtaskIndex, id) {
+    let editSubTaskBox = document.getElementById('editSubTasksBox');
+    editSubTaskBox.innerHTML = '';
+    deleteSubTask(id);
+    }
+
+
+    function saveEditeSubTask(subtaskIndex) {
+        let editSubTaskInput = document.getElementById('editSubTaskInput').value;
+    
+        // Aktualisiere das 'cards' Array direkt mit dem neuen Subtask-Namen
+        if (currentDraggedElement && currentDraggedElement.subtasks && currentDraggedElement.subtasks[subtaskIndex]) {
+            currentDraggedElement.subtasks[subtaskIndex].name = editSubTaskInput;
+            // Persistiere die Änderungen (ersetze 'setItem' durch deine Funktion zum Speichern)
+            // saveTasks(); // Annahme: Du hast eine Funktion, die deine Tasks persistiert
+        }
+    
+        // Schließe und leere das Bearbeitungsfeld
+        document.getElementById('editSubTasksBox').innerHTML = '';
+    }
+    
+    
+    function addSubTaskNewTask(cardId) {
+        let subTaskInput = document.getElementById('addSubTasks').value.trim();
+        if (subTaskInput) {
+            let card = cards.find(card => card.id === cardId);
+            if (!card.subtasks) {
+                card.subtasks = [];
+            }
+            // Generiere eine pseudo-einzigartige ID durch Kombination von Datum und Zufallszahl
+            let newSubID = Date.now();
+            card.subtasks.push({ name: subTaskInput, done: false, subID: newSubID });
+    
+            document.getElementById('addSubTasks').value = '';
+            displaySubtasksInBoard(cardId);
+        }
+    }
+    
+    
+
+    function displaySubtasksInBoard(cardId) {
+        let card = cards.find(card => card.id === cardId);
+        let subTasksBox = document.getElementById('subTasksBox');
+        subTasksBox.innerHTML = ''; // Bereinige das Subtask-Display
+    
+        if (card && card.subtasks) {
+            for (let i = 0; i < card.subtasks.length; i++) {
+                const subtask = card.subtasks[i];
+                // Füge hier die Logik zum Anzeigen der Subtasks ein, z.B.:
+                subTasksBox.innerHTML += displaySubtasksHTML(subtask, i);
+            }
+        }
+    }
+    

@@ -293,10 +293,12 @@ function updateLabels(categoryId) {
 function addSubTask() {
   let subTaskInput = document.getElementById('addSubTasks');
   if (subTaskInput.value.trim() !== '') {
+    let newSubID = Date.now();
     subtasksArray.push({
-      name:subTaskInput.value.trim(),
-      done:false
-    })
+      name: subTaskInput.value.trim(),
+      done: false,
+      subID: newSubID
+    });
     subTaskInput.value = '';
     displaySubtasks();
   }
