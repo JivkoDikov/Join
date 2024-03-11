@@ -678,18 +678,21 @@ function addSubTaskEdit(id) {
  * This function is triggered when a user clicks the trash icon next to a subtask in the edit popup.
  * @param {number} subtaskIndex - The index of the subtask to delete.
  */
-function deleteSubTask(subtaskIndex) {
-    let subtasksContainer = document.getElementById('subtasksContainerEdit');
-    let subtaskElements = subtasksContainer.querySelectorAll('.subTasksIconsContainer');
-    let subtaskToDelete = subtaskElements[subtaskIndex];
-    subtaskToDelete.remove();
-    if (currentDraggedElement.subtasks && currentDraggedElement.subtasks.length > subtaskIndex) {
-        currentDraggedElement.subtasks.splice(subtaskIndex, 1);
+function deleteSubTask(subtaskID, taskID) {
+    let task = cards.find(card => card.id === taskID);
+    if (task && task.subtasks) {
+        const subtaskIndex = task.subtasks.findIndex(subtask => subtask.subID === subtaskID);
+
+        if (subtaskIndex !== -1) {
+            task.subtasks.splice(subtaskIndex, 1);
+            displaySubtasksInBoard(taskID);
+        }
     }
 }
 
 
-function editSubTask(subtaskIndex, id) {
+
+function editSubTask(id) {
     console.log(id);
     let subtasksContainer = document.getElementById('subtasksContainerEdit');
     let subtaskElements = subtasksContainer.querySelectorAll('.subTasksIconsContainer');
@@ -751,12 +754,12 @@ function closeEditSubTask(subtaskIndex, id) {
         let subTaskInput = document.getElementById('addSubTasks').value.trim();
         if (subTaskInput) {
             let card = cards.find(card => card.id === cardId);
+            console.log(card)
             if (!card.subtasks) {
                 card.subtasks = [];
             }
-            // Generiere eine pseudo-einzigartige ID durch Kombination von Datum und Zufallszahl
             let newSubID = Date.now();
-            card.subtasks.push({ name: subTaskInput, done: false, subID: newSubID });
+            card.subtasks.push({ name: subTaskInput, done: false, subID: newSubID, taskID: cardId });
     
             document.getElementById('addSubTasks').value = '';
             displaySubtasksInBoard(cardId);
