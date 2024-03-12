@@ -203,7 +203,9 @@ function overviewEditHTML(i) {
             </div>
         </div>
         <div class="textareaDescription">
-            <p class="title">Description</p>
+        <div class="titleStar">
+        <p class="title">Description</p><p class="star">*</p>
+    </div>
             <div class="textareaTitleRequiredContainer">
             <textarea name="" id="editTextarea" cols="30" rows="10" placeholder="Enter a Description"></textarea>
             <p class="requiredField"></p>
@@ -303,6 +305,12 @@ function overviewEditHTML(i) {
         <div class="subtasksContainer" id="subtasksContainerEdit" onclick="stopPropagation(event)">
 
         </div>
+        <div id="renderSubs" onclick="stopPropagation(event)">
+
+        </div>
+        <div id="editSubTaskContainer"class="editSubTaskContainer">
+
+        </div>
     <div class="submitEdit">
             <button class="onsubmitEdit">Ok</button>
         </div>
@@ -348,7 +356,9 @@ function addTaskHTML() {
               </div>
           </div>
           <div class="textareaDescription">
-              <p class="title">Description</p>
+          <div class="titleStar">
+          <p class="title">Description</p><p class="star">*</p>
+      </div>
               <div class="textareaTitleRequiredContainer">
               <textarea  id="enterDescription" cols="30" rows="10"  placeholder="Enter a Description"></textarea>
               <div id="requiredMessageDescription"></div>
@@ -541,17 +551,18 @@ function addTaskHTML() {
     `;
 }
 
-function assignedToBoardHTML(user, isChecked, i) {
-    const userNameForId = user['name'].replace(/\s+/g, '_');
+function assignedToBoardHTML(user, isChecked, cardId) {
+    const initials = getInitials(user.name); 
+    const userNameForId = user.name.replace(/\s+/g, '_');
 
     return `
     <div class="assignedContactsContainer" onclick="stopPropagation(event)">
         <div class="assignedContactSVG">
             <div class="letterContacts">
-                <div class="assignedLetters" style="background-color: ${user['bgColor']}">${user['letter']}${user['lastNameLetter']}</div>
-                <span>${user['name']}</span>
+                <div class="assignedLetters" style="background-color: ${user.bgColor}">${initials}</div>
+                <span>${user.name}</span>
             </div>
-            <input id="assignedToContact_${userNameForId}" type="checkbox" ${isChecked} onchange="updateSelectedContactsBoard('${user['lastNameLetter']}', '${user['bgColor']}', '${user['name']}', '${i}', this)">
+            <input id="assignedToContact_${userNameForId}" type="checkbox" ${isChecked} onchange="updateSelectedContactsBoard('${initials}', '${user.bgColor}', '${user.name}', '${cardId}', this)">
         </div>
     </div>`;
 }
@@ -565,5 +576,66 @@ function mobileCategoryHTML(id) {
         <div class="mobileCategoryOn" onclick="newCategoryHTMLOpen('progress',event,${id})">Progress</div>
         <div class="mobileCategoryOn" onclick="newCategoryHTMLOpen('feedback',event,${id})">Feedback</div>
         <div class="mobileCategoryOn" onclick="newCategoryHTMLOpen('done',event,${id})">Done</div>
+    `;
+}
+
+
+function loadSubOfArrayHTML(subName, subID, taskID) {
+    return `<div class="subTasksIconsContainer">
+    <div id="subTaskText"class="subTaskText">
+      <li>${subName}</li>
+    </div>
+    <div class="subTaskIconsBox">
+      <img onclick="editSubTaskInBoardCard(${subID}, '${subName}', ${taskID})"class="subTaskIcon" src="/assets/img/pencel.jpg" alt="">
+      <img onclick="deleteSubTaskInBoardCard(${subID}, ${taskID})"class="subTaskIcon" src="/assets/img/trash.jpg" alt="">
+    </div>
+  </div> `;
+}
+
+
+function editSubTaskInBoardCardHTML(subID, subName, taskID) {
+    return `
+    <input id="editSubTaskInput" class="editSubTasksInput" type="text" value="${subName}">
+    <div class="editSubTasksIcons">
+    <svg onclick="closeEditSubTaskInBoardCard()" class="editSubTasksClose"width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <mask id="mask0_117793_4210" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="4" width="24" height="24">
+  <rect x="4" y="4" width="24" height="24" fill="#D9D9D9"/>
+  </mask>
+  <g mask="url(#mask0_117793_4210)">
+  <path d="M16 17.4L11.1 22.3C10.9167 22.4834 10.6833 22.575 10.4 22.575C10.1167 22.575 9.88332 22.4834 9.69999 22.3C9.51665 22.1167 9.42499 21.8834 9.42499 21.6C9.42499 21.3167 9.51665 21.0834 9.69999 20.9L14.6 16L9.69999 11.1C9.51665 10.9167 9.42499 10.6834 9.42499 10.4C9.42499 10.1167 9.51665 9.88338 9.69999 9.70005C9.88332 9.51672 10.1167 9.42505 10.4 9.42505C10.6833 9.42505 10.9167 9.51672 11.1 9.70005L16 14.6L20.9 9.70005C21.0833 9.51672 21.3167 9.42505 21.6 9.42505C21.8833 9.42505 22.1167 9.51672 22.3 9.70005C22.4833 9.88338 22.575 10.1167 22.575 10.4C22.575 10.6834 22.4833 10.9167 22.3 11.1L17.4 16L22.3 20.9C22.4833 21.0834 22.575 21.3167 22.575 21.6C22.575 21.8834 22.4833 22.1167 22.3 22.3C22.1167 22.4834 21.8833 22.575 21.6 22.575C21.3167 22.575 21.0833 22.4834 20.9 22.3L16 17.4Z" fill="#2A3647"/>
+  </g>
+  </svg>
+    <svg onclick="saveEditeSubTaskInBoardCard(${subID}, ${taskID})" class="editsubTasksSVG" width="24" height="24" viewBox="0 0 24 25" fill="#000000" xmlns="http://www.w3.org/2000/svg">
+  <mask id="mask0_131179_1277" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
+  <rect y="0.5" width="24" height="24" fill="#000000"/>
+  </mask>
+  <g mask="url(#mask0_131179_1277)">
+  <path d="M9.55057 15.65L18.0256 7.175C18.2256 6.975 18.4631 6.875 18.7381 6.875C19.0131 6.875 19.2506 6.975 19.4506 7.175C19.6506 7.375 19.7506 7.6125 19.7506 7.8875C19.7506 8.1625 19.6506 8.4 19.4506 8.6L10.2506 17.8C10.0506 18 9.81724 18.1 9.55057 18.1C9.28391 18.1 9.05057 18 8.85057 17.8L4.55057 13.5C4.35057 13.3 4.25474 13.0625 4.26307 12.7875C4.27141 12.5125 4.37557 12.275 4.57557 12.075C4.77557 11.875 5.01307 11.775 5.28807 11.775C5.56307 11.775 5.80057 11.875 6.00057 12.075L9.55057 15.65Z" fill="white"/>
+  </g>
+  </svg>
+  `;
+}
+
+function renderInputSubTaskHTML(taskID) {
+    return `<div class="subtasksContainer">
+    <p class="title">Subtasks</p>
+    <div class="addNewSubtask">
+        <div class="addNewSubtasksContainer">
+        <input id="addSubTasks" type="text" class="subtaskText" placeholder="Add new subtask">
+        <svg id="addNewSubtask" onclick ="addSubTaskToTheBoardCard(${taskID})"class="subtaskSVG"width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask0_123060_1727" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
+            <rect x="0.248535" width="24" height="24" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_123060_1727)">
+            <path d="M11.2485 13H6.24854C5.9652 13 5.7277 12.9042 5.53604 12.7125C5.34437 12.5208 5.24854 12.2833 5.24854 12C5.24854 11.7167 5.34437 11.4792 5.53604 11.2875C5.7277 11.0958 5.9652 11 6.24854 11H11.2485V6C11.2485 5.71667 11.3444 5.47917 11.536 5.2875C11.7277 5.09583 11.9652 5 12.2485 5C12.5319 5 12.7694 5.09583 12.961 5.2875C13.1527 5.47917 13.2485 5.71667 13.2485 6V11H18.2485C18.5319 11 18.7694 11.0958 18.961 11.2875C19.1527 11.4792 19.2485 11.7167 19.2485 12C19.2485 12.2833 19.1527 12.5208 18.961 12.7125C18.7694 12.9042 18.5319 13 18.2485 13H13.2485V18C13.2485 18.2833 13.1527 18.5208 12.961 18.7125C12.7694 18.9042 12.5319 19 12.2485 19C11.9652 19 11.7277 18.9042 11.536 18.7125C11.3444 18.5208 11.2485 18.2833 11.2485 18V13Z" fill="#2A3647"/>
+            </g>
+            </svg>
+        </div>
+            
+    </div>
+    <div id="subTasksBox"class="addSubTasksBox"></div>
+    <div id="editSubTasksBox" class="editSubTasksBox"></div>
+
+</div>
     `;
 }

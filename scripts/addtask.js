@@ -190,7 +190,7 @@ function updateSelectedContacts(initials, bgColor, name, checkbox) {
 function getInitials(name) {
   let names = name.split(' ');
   let initials = names.map(name => name[0].toUpperCase());
-  return initials.join('');
+  return initials.length > 1 ? initials[0] + initials[1] : initials[0];
 }
 
 
@@ -238,8 +238,12 @@ function toggleCategories(event) {
 function dropDownOpen() {
   let contactsBox = document.getElementById('contactsBox');
   let categoryBox = document.getElementById('categoryBox');
-  if (contactsBox.style.display === 'block' || categoryBox.style.display === 'block') {
+
+  if (contactsBox && (contactsBox.style.display === 'block')) {
     contactsBox.style.display = 'none';
+  }
+
+  if (categoryBox && (categoryBox.style.display === 'block')) {
     categoryBox.style.display = 'none';
   }
 }
@@ -294,6 +298,7 @@ function addSubTask() {
   let subTaskInput = document.getElementById('addSubTasks');
   if (subTaskInput.value.trim() !== '') {
     let newSubID = Date.now();
+    
     subtasksArray.push({
       name: subTaskInput.value.trim(),
       done: false,
@@ -322,10 +327,11 @@ function displaySubtasks() {
  * Opens the edit interface for a specified subtask, allowing the user to modify its name.
  * @param {number} index - The index of the subtask in the subtasksArray to be edited.
  */
-function editSubTask(subID, taskID, index){
+function editSubTask(index){
   let editSubTasks = document.getElementById('editSubTasksBox');
-   editSubTasks.innerHTML = '';
- if (index >= 0 && index < subtasksArray.length) {
+  editSubTasks.innerHTML = '';
+
+  if (index >= 0 && index < subtasksArray.length) {
     let subTaskName = subtasksArray[index].name;
 
   editSubTasks.innerHTML += editSubTaskHTML(index, subTaskName);
@@ -340,8 +346,10 @@ function editSubTask(subID, taskID, index){
  * Deletes a subtask from the subtasksArray and updates the displayed list of subtasks.
  * @param {number} index - The index of the subtask to be deleted.
  */
-function closeEditSubTask(index){
-  deleteSubTask(index);
+function closeEditSubTask(subID, taskID){
+  let subEdit = document.getElementById('editSubTaskContainer');
+  subEdit.innerHTML = '';
+  
 }
 
 
@@ -364,7 +372,7 @@ function saveEditeSubTask(index) {
         let subtask = subtasksArray[i];
         let subtaskID = subtasksArray[i]['subID'];
         let taskID = subtasksArray[i]['taskID'];
-        subTasksBox.innerHTML += saveEditeSubTaskHTML(subtask, taskID, subtaskID);
+        subTasksBox.innerHTML += saveEditeSubTaskHTML(subtask, taskID, subtaskID,i);
       }
     }
   }
@@ -374,12 +382,13 @@ function saveEditeSubTask(index) {
 /**
  * Resets the task form to its default state, clearing all input fields, selections, and temporary data arrays.
  */
-function deleteSubTask(index){
-  event.stopPropagation();
-  subtasksArray.splice(index, 1);
-  document.getElementById('editSubTaskContainer').innerHTML ='';
-  displaySubtasks();
+function deleteSubTask(subtaskID,taskID) {
+  let index = subtasksArray.findIndex(task => task.subID === subtaskID);
+  
+      subtasksArray.splice(index, 1);
+      displaySubtasks();
 }
+
 
 
 
@@ -445,6 +454,7 @@ function checkNewTasks(event) {
   let isDateValid = true;
   
   ifCheckTasks(isTitleValid,isDescriptionValid,isDateValid,newTitle,newDescription,newDate,event,newCategory);
+  
 }
 
 /**

@@ -309,10 +309,9 @@ function editCard(cardId) {
     title.value = infoArrayCard['headline'];  
     textarea.value = infoArrayCard['text']; 
     data.value = infoArrayCard['date']; 
-    addSubTaskEdit(cardId);
+    
     prioEdit(infoArrayCard['priority'], cardId, event);
-    editSubTaskContainerInBoard(cardId,event);
-    renderSubtasksInEditPopup(infoArrayCard);
+    renderSubTaskInBoard(infoArrayCard);
 }
 
 /**
@@ -349,7 +348,7 @@ function renderSubtasksInEditPopup(card) {
 
     if (card.subtasks && Array.isArray(card.subtasks) && card.subtasks.length > 0) {
         card.subtasks.forEach((subtask, index) => {
-            let subtaskHTML = displaySubtasksHTML(subtask, index);
+            let subtaskHTML = saveEditeSubTaskHTML(subtask, index,);
             editSubTasksBox.innerHTML += subtaskHTML;
         });
     } else {
@@ -596,7 +595,11 @@ function userTagsOver(element) {
     }
 }
 
-
+/**
+ * Handles the display toggle of a mobile category section based on its current visibility state.
+ * @param {Event} event - The event object to prevent event propagation.
+ * @param {string} id - The unique identifier for the category to be toggled.
+ */
 function mobileCategory(event, id) {
     event.stopPropagation();
     let openCategory = document.getElementById(`categoryOpenMobile${id}`);
@@ -609,6 +612,13 @@ function mobileCategory(event, id) {
     }
 }
 
+/**
+ * Assigns a new category to a task and updates the tasks in storage and UI.
+ * @async
+ * @param {string} categorys - The new category to assign to the task.
+ * @param {Event} event - The event object to prevent event propagation.
+ * @param {string} id - The unique identifier of the task to update.
+ */
 async function newCategoryHTMLOpen(categorys,event,id) {
     event.stopPropagation();
     currentDraggedElement = cards.find(card => card.id === id);
@@ -617,166 +627,120 @@ async function newCategoryHTMLOpen(categorys,event,id) {
         updateHTML();
 }
 
-function editSubTaskContainerInBoard(cardId,event) {
-    event.stopPropagation();
-    let card = cards.find(card => card.id === cardId);
-    console.log(card);
-    let editSubTaskBorad = document.getElementById('subtasksContainerEdit');
-    editSubTaskBorad.innerHTML = editSubTaskContainerInBoardHTML(cardId);
-}
-function addSubTaskEdit(id) {
-    let subEdit = cards.find(card => card.id === id);
-    if (subEdit && subEdit.subtasks && subEdit.subtasks.length > 0) {
-        for (let i = 0; i < subEdit.subtasks.length; i++) {
-            let currentSub = subEdit.subtasks[i];
-            let currentID = currentSub['subID'];
-            console.log(currentID);
-            console.log(currentSub);
-            document.getElementById('subtasksContainerEdit').innerHTML += `
-            <div class="subTasksIconsContainer">
-                <div id="subTaskText" class="subTaskText">
-                    <li>${currentSub.name}</li>
-                </div>
-                <div class="subTaskIconsBox">
-                    <img onclick="editSubTask(${i}, ${currentID}, ${subEdit})" class="subTaskIcon" src="/assets/img/pencel.jpg" alt="">
-                    <img onclick="deleteSubTask(${i}, ${currentID})" class="subTaskIcon" src="/assets/img/trash.jpg" alt="">
-                </div>
-            </div>
-            `;
-        }
-    } else {
-        document.getElementById('subtasksContainerEdit').innerHTML = '<p>No subtasks found for this task.</p>';
+/**
+ * Renders the subtasks of a given task in the board.
+ * @param {Object} infoArrayCard - The task object containing subtasks to render.
+ */
+function renderSubTaskInBoard(infoArrayCard) {
+    renderInputSubTask(infoArrayCard);
+    subtasksArrayEditTask = [];
+    for (let i = 0; i < infoArrayCard['subtasks'].length; i++) {
+        let nameOfSubTask = infoArrayCard['subtasks'][i]['name'];
+        subtasksArrayEditTask.push(infoArrayCard['subtasks'][i]);
     }
-}
-
-
-  function editSubTaskContainerInBoardHTML(cardId) {
-
-    return`                
-    <p class="title">Subtasks</p>
-    <div class="addNewSubtask">
-        <div class="addNewSubtasksContainer">
-        <input id="addSubTasks" type="text" class="subtaskText" placeholder="Add new subtask">
-        <svg id="addNewSubtask" onclick ="addSubTaskNewTask(${cardId})"class="subtaskSVG"width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <mask id="mask0_123060_1727" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
-            <rect x="0.248535" width="24" height="24" fill="#D9D9D9"/>
-            </mask>
-            <g mask="url(#mask0_123060_1727)">
-            <path d="M11.2485 13H6.24854C5.9652 13 5.7277 12.9042 5.53604 12.7125C5.34437 12.5208 5.24854 12.2833 5.24854 12C5.24854 11.7167 5.34437 11.4792 5.53604 11.2875C5.7277 11.0958 5.9652 11 6.24854 11H11.2485V6C11.2485 5.71667 11.3444 5.47917 11.536 5.2875C11.7277 5.09583 11.9652 5 12.2485 5C12.5319 5 12.7694 5.09583 12.961 5.2875C13.1527 5.47917 13.2485 5.71667 13.2485 6V11H18.2485C18.5319 11 18.7694 11.0958 18.961 11.2875C19.1527 11.4792 19.2485 11.7167 19.2485 12C19.2485 12.2833 19.1527 12.5208 18.961 12.7125C18.7694 12.9042 18.5319 13 18.2485 13H13.2485V18C13.2485 18.2833 13.1527 18.5208 12.961 18.7125C12.7694 18.9042 12.5319 19 12.2485 19C11.9652 19 11.7277 18.9042 11.536 18.7125C11.3444 18.5208 11.2485 18.2833 11.2485 18V13Z" fill="#2A3647"/>
-            </g>
-            </svg>
-        </div>
-            
-    </div>
-    <div id="subTasksBox"class="addSubTasksBox"></div>
-    <div id="editSubTasksBox" class="editSubTasksBox"></div>                   
-    `;
+    loadSubOfArray();
 }
 
 /**
- * Deletes a specific subtask from the task being edited and updates the display.
- * This function is triggered when a user clicks the trash icon next to a subtask in the edit popup.
- * @param {number} subtaskIndex - The index of the subtask to delete.
+ * Initializes the subtask rendering process by clearing existing subtasks and setting up for new input.
  */
-function deleteSubTask(subtaskID, taskID) {
-    let task = cards.find(card => card.id === taskID);
-    if (task && task.subtasks) {
-        const subtaskIndex = task.subtasks.findIndex(subtask => subtask.subID === subtaskID);
-
-        if (subtaskIndex !== -1) {
-            task.subtasks.splice(subtaskIndex, 1);
-            displaySubtasksInBoard(taskID);
-        }
+function loadSubOfArray() {
+    let renderTask = document.getElementById('renderSubs');
+    renderTask.innerHTML = '';
+    for (let j = 0; j < subtasksArrayEditTask.length; j++) {
+        let subName = subtasksArrayEditTask[j]['name'];
+        let subID = subtasksArrayEditTask[j]['subID'];
+        let taskID = subtasksArrayEditTask[j]['taskID'];
+        console.log(subName);  
+        renderTask.innerHTML += loadSubOfArrayHTML(subName, subID, taskID);
     }
 }
 
 
-
-function editSubTask(subEdit, cardId, i) {
-    console.log(cardId);
-    let card = cards.find(card => card.id === cardId);
-    let subtasksContainer = document.getElementById('subtasksContainerEdit');
-    let subtaskElements = subtasksContainer.querySelectorAll('.subTasksIconsContainer');
-    let subtaskToEdit = subtaskElements[i];
-
-    console.log(subtaskToEdit);
-    let subtaskText = subtaskToEdit.querySelector('.subTaskText').innerText;
-    
-    let editSubTaskBox = document.getElementById('editSubTasksBox');
-    editSubTaskBox.innerHTML = '';
-    editSubTaskBox.innerHTML = `
-    <div id="editSubTaskContainer"class="editSubTaskContainer">
-    <input id="editSubTaskInput" class="editSubTasksInput" type="text" value="${subtaskText}">
-    <div class="editSubTasksIcons">
-    <svg onclick="closeEditSubTask(${cardId},${subEdit})" class="editSubTasksClose"width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <mask id="mask0_117793_4210" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="4" width="24" height="24">
-  <rect x="4" y="4" width="24" height="24" fill="#D9D9D9"/>
-  </mask>
-  <g mask="url(#mask0_117793_4210)">
-  <path d="M16 17.4L11.1 22.3C10.9167 22.4834 10.6833 22.575 10.4 22.575C10.1167 22.575 9.88332 22.4834 9.69999 22.3C9.51665 22.1167 9.42499 21.8834 9.42499 21.6C9.42499 21.3167 9.51665 21.0834 9.69999 20.9L14.6 16L9.69999 11.1C9.51665 10.9167 9.42499 10.6834 9.42499 10.4C9.42499 10.1167 9.51665 9.88338 9.69999 9.70005C9.88332 9.51672 10.1167 9.42505 10.4 9.42505C10.6833 9.42505 10.9167 9.51672 11.1 9.70005L16 14.6L20.9 9.70005C21.0833 9.51672 21.3167 9.42505 21.6 9.42505C21.8833 9.42505 22.1167 9.51672 22.3 9.70005C22.4833 9.88338 22.575 10.1167 22.575 10.4C22.575 10.6834 22.4833 10.9167 22.3 11.1L17.4 16L22.3 20.9C22.4833 21.0834 22.575 21.3167 22.575 21.6C22.575 21.8834 22.4833 22.1167 22.3 22.3C22.1167 22.4834 21.8833 22.575 21.6 22.575C21.3167 22.575 21.0833 22.4834 20.9 22.3L16 17.4Z" fill="#2A3647"/>
-  </g>
-  </svg>
-    <svg onclick="saveEditeSubTask(${cardId}, ${i})" class="editsubTasksSVG" width="24" height="24" viewBox="0 0 24 25" fill="#000000" xmlns="http://www.w3.org/2000/svg">
-  <mask id="mask0_131179_1277" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
-  <rect y="0.5" width="24" height="24" fill="#000000"/>
-  </mask>
-  <g mask="url(#mask0_131179_1277)">
-  <path d="M9.55057 15.65L18.0256 7.175C18.2256 6.975 18.4631 6.875 18.7381 6.875C19.0131 6.875 19.2506 6.975 19.4506 7.175C19.6506 7.375 19.7506 7.6125 19.7506 7.8875C19.7506 8.1625 19.6506 8.4 19.4506 8.6L10.2506 17.8C10.0506 18 9.81724 18.1 9.55057 18.1C9.28391 18.1 9.05057 18 8.85057 17.8L4.55057 13.5C4.35057 13.3 4.25474 13.0625 4.26307 12.7875C4.27141 12.5125 4.37557 12.275 4.57557 12.075C4.77557 11.875 5.01307 11.775 5.28807 11.775C5.56307 11.775 5.80057 11.875 6.00057 12.075L9.55057 15.65Z" fill="white"/>
-  </g>
-  </svg>
-  
-     </div>
-    
-    `;
+/**
+ * Prepares the input area for adding or editing subtasks for a specific task.
+ * @param {Object} infoArrayCard - The task object for which subtasks are being edited or added.
+ */
+function renderInputSubTask(infoArrayCard) {
+    let taskID = infoArrayCard['id'];
+    let renderInputTasks = document.getElementById('subtasksContainerEdit');
+    renderInputTasks.innerHTML = '';
+    renderInputTasks.innerHTML = renderInputSubTaskHTML(taskID);
 }
 
-function closeEditSubTask(cardId,subEdit) {
-    console.log(cardId);
-    let editSubTaskBox = document.getElementById('editSubTasksBox');
-    editSubTaskBox.innerHTML = '';
-    deleteSubTask(cardId,subEdit);
-    }
+/**
+ * Displays the edit interface for a specific subtask.
+ * @param {string} subID - The unique identifier of the subtask to edit.
+ * @param {string} subName - The current name of the subtask to be edited.
+ * @param {string} taskID - The unique identifier of the task to which the subtask belongs.
+ */
+function editSubTaskInBoardCard(subID, subName, taskID) {
+    let editSubBar = document.getElementById('editSubTaskContainer');
+    editSubBar.innerHTML = editSubTaskInBoardCardHTML(subID, subName, taskID);
+}
 
 
-    function saveEditeSubTask(cardId, i) {
-        let editSubTaskInput = document.getElementById('editSubTaskInput').value;
-        let card = cards.find(card => card.id === cardId);
-        card['subtasks'][i]['name'] = editSubTaskInput
-       
-        document.getElementById('editSubTasksBox').innerHTML = '';
-        displaySubtasksInBoard(cardId);
-    }
-    
-    
-    function addSubTaskNewTask(cardId) {
-        let subTaskInput = document.getElementById('addSubTasks').value.trim();
-        if (subTaskInput) {
-            let card = cards.find(card => card.id === cardId);
-            console.log(card)
-            if (!card.subtasks) {
-                card.subtasks = [];
-            }
-            let newSubID = Date.now();
-            card.subtasks.push({ name: subTaskInput, done: false, subID: newSubID, taskID: cardId });
-    
-            document.getElementById('addSubTasks').value = '';
-            displaySubtasksInBoard(cardId);
-        }
-    }
-    
-    
+/**
+ * Closes the edit interface for subtasks.
+ */
+function closeEditSubTaskInBoardCard() {
+    let colseEditSubBar = document.getElementById('editSubTaskContainer');
+    colseEditSubBar.innerHTML = '';
+}
 
-    function displaySubtasksInBoard(cardId) {
-        let card = cards.find(card => card.id === cardId);
-        let subTasksBox = document.getElementById('subTasksBox');
-        subTasksBox.innerHTML = ''; // Bereinige das Subtask-Display
-    
-        if (card && card.subtasks) {
-            for (let i = 0; i < card.subtasks.length; i++) {
-                const subtask = card.subtasks[i];
-                // Füge hier die Logik zum Anzeigen der Subtasks ein, z.B.:
-                subTasksBox.innerHTML += displaySubtasksHTML(subtask, i);
-            }
-        }
-    }
-    
+/**
+ * Saves the edited subtask to the board and updates the UI.
+ * @param {string} subID - The unique identifier of the subtask being edited.
+ * @param {string} taskID - The unique identifier of the task to which the subtask belongs.
+ */
+function saveEditeSubTaskInBoardCard(subID,taskID) {
+    let subTask = subtasksArrayEditTask.find(subtasksArrayEditTask => subtasksArrayEditTask.subID === subID);
+    console.log(subTask);
+    let valueOfInput = document.getElementById('editSubTaskInput').value;
+    subTask.name = valueOfInput;
+    loadSubOfArray();
+    closeEditSubTaskInBoardCard();
+    saveNewSubTaskToBoard(subID, taskID);
+}
+
+/**
+ * Saves the current state of subtasks to a specific task.
+ * @param {string} subID - The unique identifier of the subtask.
+ * @param {string} taskID - The unique identifier of the task to which the subtasks belong.
+ */
+function saveNewSubTaskToBoard(subID, taskID) {
+   let card = cards.find(card => card.id === taskID);
+   card['subtasks'] = subtasksArrayEditTask;
+}
+
+/**
+ * Deletes a subtask from the board and updates the task accordingly.
+ * @param {string} subID - The unique identifier of the subtask to be deleted.
+ * @param {string} taskID - The unique identifier of the task from which the subtask will be deleted.
+ */
+function deleteSubTaskInBoardCard(subID, taskID) {
+    let subTask = subtasksArrayEditTask.find(subtasksArrayEditTask => subtasksArrayEditTask.subID === subID);
+    subtasksArrayEditTask.splice(subTask, 1);
+    loadSubOfArray();
+    saveNewSubTaskToBoard(subID, taskID);
+}
+
+/**
+ * Adds a new subtask to a task on the board.
+ * @param {string} taskID - The unique identifier of the task to which the new subtask will be added.
+ */
+function addSubTaskToTheBoardCard(taskID) {
+    let valueOfNewTask = document.getElementById('addSubTasks');
+    if (valueOfNewTask.value.trim() !== '') {
+      let newSubID = Date.now();
+      subtasksArrayEditTask.push({
+        name: valueOfNewTask.value.trim(),
+        done: false,
+        subID: newSubID,
+        taskID: taskID,
+      });
+      valueOfNewTask.value = '';
+      saveNewSubTaskToBoard(newSubID, taskID);
+}
+    loadSubOfArray();
+}
