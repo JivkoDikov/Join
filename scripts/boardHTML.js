@@ -96,8 +96,8 @@ function generateOverviewHTML(element) {
     
     return `
     
-    <div class="overview">
-    <div class="overlayCard ">
+    <div class="overview" onclick="closeOverview()">
+    <div class="overlayCard " onclick="event.stopPropagation()">
             <div class="labelContent">
                 <div>
                 <h2 id="labelsBoardOver${element['id']}" class="labelsBoardCard">${element['label']}</h2>
@@ -179,8 +179,8 @@ function generateOverviewHTML(element) {
 function overviewEditHTML(i) {
     
     return `
-    <div class="overview">
-    <div class="overlayCard" id="overlayEdit" onclick="dropDownOpen()">
+    <div class="overview" onclick="closeOverview()">
+    <div class="overlayCard" id="overlayEdit" onclick="dropDownOpen(), event.stopPropagation()">
     <div class="overlayCardEdit">
     <div class="deleteEdit">
         <svg class="deleteCard" onclick="deleteCard(${i})" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
