@@ -719,11 +719,14 @@ function saveNewSubTaskToBoard(subID, taskID) {
  * @param {string} taskID - The unique identifier of the task from which the subtask will be deleted.
  */
 function deleteSubTaskInBoardCard(subID, taskID) {
-    let subTask = subtasksArrayEditTask.find(subtasksArrayEditTask => subtasksArrayEditTask.subID === subID);
-    subtasksArrayEditTask.splice(subTask, 1);
+    let index = subtasksArrayEditTask.findIndex(subtasksArrayEditTask => subtasksArrayEditTask.subID === subID);
+    if (index !== -1) { // Stelle sicher, dass das Element gefunden wurde
+        subtasksArrayEditTask.splice(index, 1);
+    }
     loadSubOfArray();
     saveNewSubTaskToBoard(subID, taskID);
 }
+
 
 /**
  * Adds a new subtask to a task on the board.
