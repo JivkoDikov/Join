@@ -267,7 +267,7 @@ function isSubTaskTrue(card) {
  * This provides a visual representation of overall task progress.
  * @param {Object} element - The task element whose progress bar should be updated.
  */
-function updateProgressBar(element) {
+async function updateProgressBar(element) {
     if (Array.isArray(element.subtasks) && element.subtasks.length > 0) {
         let currentProgress = element.subtasks.filter(subtask => subtask.done).length;
         let percent = Math.round((currentProgress / element.subtasks.length) * 100);
@@ -287,6 +287,7 @@ function updateProgressBar(element) {
             subtaskHTMLCount.innerHTML = `<span>${currentProgress}/${element.subtasks.length} Subtasks</span>`;
         }
     }
+    await setItem('tasks', tasks);
 }
 
 /**
