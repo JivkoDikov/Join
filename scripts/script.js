@@ -53,10 +53,11 @@ async function load_contacts_from_webstorage(){
  */
 async function loadTasks(userID){
   let userTask = await getItem('tasks');
-  
+  console.log(userTask);
   tasks = JSON.parse(userTask.data.value || '{}');
   console.log(tasks);
   return tasks[userID] || [];
+  
 }
 
 

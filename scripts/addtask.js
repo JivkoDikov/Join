@@ -14,6 +14,11 @@ async function initTasks(){
   
 }
 
+function addTaskForm(event){
+  checkNewTasks(event);
+  addTaskHTMLOpen('todo');
+}
+
 /**
  * Activates the form by creating a task and applying an active style.
  * @param {Event} event - The triggering event.
