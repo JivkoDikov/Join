@@ -1,4 +1,4 @@
-let cards = {};
+let cards = [];
 let currentDraggedElement;
 let currentChecktContact = [];
 let user = [];
@@ -10,7 +10,6 @@ let subtasksArrayEditTask = [];
  * This function should be called when the page is loaded or when the tasks need to be refreshed.
  */
 async function initBoard(){  
-    cards = await loadTasks(userID);
     render();
     updateHTML();
 }
@@ -20,9 +19,15 @@ async function initBoard(){
  * This function asynchronously loads tasks for a user and updates each category section on the page.
  */
 async function updateHTML() {
-    
+    cards = await loadTasks(userID);
+    if (!Array.isArray(cards)) {
+        console.error('Expected cards to be an array, but got:', typeof cards);
+        cards = []; // Fallback to an empty array
+      }
+      
     const categories = ['todo', 'progress', 'feedback', 'done'];
     for (const category of categories) {
+        console.log(cards);
         let categoryElements = cards.filter(t => t['category'] === category);
         document.getElementById(category).innerHTML = '';
         for (let i = 0; i < categoryElements.length; i++) {

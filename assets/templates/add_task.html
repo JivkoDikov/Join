@@ -15,11 +15,12 @@
     <script defer src="/scripts/board.js"></script>
     <script defer src="/scripts/script.js"></script>
     <script defer src="/scripts/addtaskHTML.js"></script>
+    <script defer src="/scripts/boardHTML.js"></script>
     <script defer src="/scripts/addtask.js"></script>
     <title>Add Task</title>
   </head>
 
-  <body onload="render(), loadTasks()" >
+  <body onload="initTasks()">
     <div class="sideBarBox" w3-include-html="/assets/templates/join_side_bar.html"></div>
     <div class="headerBox" w3-include-html="/assets/templates/header.html"></div>
 
@@ -69,9 +70,8 @@
                     </div>
                     
                 </div>  
-                <div id="contactsBox" class="contactsBox">
-                   
-                </div>
+                <div id="contactsBox" class="contactsBox"></div>
+                <div id="renderSelectedContacts" class="renderSelectedContacts"></div>
             </div>
 
         </div>

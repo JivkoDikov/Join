@@ -20,20 +20,29 @@ sessionStorage.removeItem("checkPasswordValue");
  */
 function checkLogin(event) {
     event.preventDefault();
-    let loginString = inputFieldEmail.value+inputFieldPassword.value;
+    let loginString = inputFieldEmail.value + inputFieldPassword.value;
 
     let findUser = userLogin.user.find(function(user) {
         let concat = user.email + user.password;
         return loginString === concat;
     });
+
     if (findUser) {
+        
+        const maxId = nameCounter.reduce((max, nameCounter) => Math.max(max, nameCounter.length), 0);
+        let id = maxId + 1; 
+
         localStorage.setItem('user', findUser.email);
         localStorage.setItem('name', findUser.name);
+        localStorage.setItem('userID', id); 
         window.location.href = '/assets/templates/summary.html';
-    }else {
-        document.getElementById('invalidValue').innerHTML = 'Wrong password Ups! Try again';
+    } else {
+        document.getElementById('invalidValue').innerHTML = 'Wrong password! Try again.';
     }
 }
+
+
+
 
 /**
  * Asynchronously loads user data from storage and initializes the user login state.
@@ -51,6 +60,7 @@ async function loadUser() {
 function guestLogin(){
     localStorage.setItem('user', 'guest');
     localStorage.setItem('name', 'Guest');
+    localStorage.setItem('userID', 0); 
 }
 
 /**

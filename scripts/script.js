@@ -1,7 +1,7 @@
 let isClicked = false;
-let userID = localStorage.getItem('user');
-let tasks = {};
-
+let tasks = [];
+let userID = parseInt(localStorage.getItem('userID'), 10);
+let newTask = tasks[userID];
 /**
  * Dynamically includes HTML from external files into the current page.
  */
@@ -34,8 +34,18 @@ termsBackButton();
  */
 async function load_contacts_from_webstorage(){
   let contactsValue = await getItem('contacts');
-  contacts = JSON.parse(contactsValue.data.value)
+  
+  if (contactsValue && contactsValue.data && contactsValue.data.value) {
+    contacts = JSON.parse(contactsValue.data.value) || {};
+  } else {
+    contacts = {};
+  }
+  
+  if (!Array.isArray(contacts[userID])) {
+    contacts[userID] = [];
+  }
 }
+
 
 /**
  * Fetches tasks for a specific user from storage.
@@ -43,9 +53,12 @@ async function load_contacts_from_webstorage(){
  */
 async function loadTasks(userID){
   let userTask = await getItem('tasks');
-  tasks = JSON.parse(userTask.data.value);
-  return tasks[userID];
+  
+  tasks = JSON.parse(userTask.data.value || '{}');
+  console.log(tasks);
+  return tasks[userID] || [];
 }
+
 
 
 /**
@@ -187,12 +200,15 @@ function openOrCloseHeaderLinksPopUp(){
  * Sets the user's initials in the header element.
  * @param {Array<string>} initials - The initials to set in the header.
  */
- function setInitials(initials){
-      initialsHeader = document.getElementById("headerInitial");
-      initials = initials.join('')
+function setInitials(initials) {
+  const initialsHeader = document.getElementById("headerInitial");
+  if (initialsHeader) { // Überprüft, ob das Element gefunden wurde
+      initials = initials.join('');
       initials = initials.replace(/[^A-Za-z]/g, '');
-      initialsHeader.innerHTML = initials
- }
+      initialsHeader.innerHTML = initials;
+  }
+}
+
 
 /**
  * Logs out the user by clearing relevant information from local storage and session storage.
@@ -223,3 +239,17 @@ function openOrCloseHeaderLinksPopUp(){
  * Executes the `render` function once the DOM content is fully loaded.
  */
 document.addEventListener('DOMContentLoaded', render);
+document.addEventListener("DOMContentLoaded", function() {
+  // Ihr Code hier
+  initials();
+});
+
+/*document.addEventListener('DOMContentLoaded', () => {
+  const contactElements = document.querySelectorAll('.assignedContactsContainer');
+  contactElements.forEach(element => {
+      element.addEventListener('click', (event) => {
+          const { initials, bgColor, name, checkboxId } = element.dataset; 
+          toggleContactSelection(initials, bgColor, name, checkboxId, event);
+      });
+  });
+});*/

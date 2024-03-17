@@ -1,5 +1,5 @@
 let letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-let contacts = {};
+let contacts = [];
 let contactIdCounter = 0;
 let screenSize = [];
 let newContactIdCounter = [0];
@@ -120,13 +120,19 @@ async function initContacts(){
 /**
  * Displays contacts sorted by the initial letter of each contact's name.
  */
+
 function showContacts() {
   let letterBox = document.getElementById("letterBox");
   letterBox.innerHTML ='';
-  for (let i = 0; i < letters.length; i++) {
-    const letter = letters[i];
-    let filteredContacts = contacts[userID].filter((contact) => contact["name"].charAt(0).toUpperCase() == letter);
+  if (contacts[userID] === undefined) {
+      return;
+    }else {
+      for (let i = 0; i < letters.length; i++) {
+        const letter = letters[i];
+      let filteredContacts = contacts[userID].filter((contact) => contact["name"].charAt(0).toUpperCase() == letter);
     filteredContact(filteredContacts,letter);
+    }
+    
 }
 }
 
@@ -429,12 +435,16 @@ async function load_contacts_from_webstorage(){
  * Updates the internal tracking of contacts to ensure new contacts receive a unique ID.
  */
 function updateContacts() {
-  for (let i = 0; i < contacts[userID].length; i++) {
+  if (contacts[userID] === undefined) {
+    
+  }else {
+    for (let i = 0; i < contacts[userID].length; i++) {
     let idOfContact = contacts[userID][i]['id'];
     newContactIdCounter.push(Number(idOfContact));
   }
   let groessteZahl = Math.max(...newContactIdCounter);
   contactIdCounter = groessteZahl +1;
+  }
 }
 
 /**

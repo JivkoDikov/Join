@@ -1,15 +1,16 @@
 function assignedToHTML(contact, initials, isChecked) {
- 
   const checkedAttribute = isChecked ? 'checked' : '';
-  
+  // ID für die Checkbox generieren, um Duplikate zu vermeiden und die Eindeutigkeit sicherzustellen
+  const checkboxId = `assignedToContact_${contact.name.replace(/\s+/g, '_')}`;
+
   return `
-  <div class="assignedContactsContainer" onclick="stopPropagation(event)">
+  <div class="assignedContactsContainer" onclick="toggleContactSelection('${initials}', '${contact.bgColor}', '${contact.name}', '${checkboxId}', event)">
     <div class="assignedContactSVG">
       <div class="letterContacts">
         <div class="assignedLetters" style="background-color: ${contact.bgColor}">${initials}</div>
         <span>${contact.name}</span>
       </div>
-      <input id="assignedToContact_${contact.name.replace(/\s+/g, '_')}" type="checkbox" onchange="updateSelectedContacts('${initials}','${contact.bgColor}','${contact.name}', this)" ${checkedAttribute}>
+      <input id="${checkboxId}" type="checkbox" class="hidden-checkbox" ${checkedAttribute} onclick="event.stopPropagation()">
     </div>
   </div>`;
 }

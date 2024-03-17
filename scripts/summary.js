@@ -14,10 +14,12 @@ let upcomingDate = [];
  * Renders the summary page by loading tasks, setting greetings based on the time of day, and displaying relevant task information.
  */
 async function renderSummary(){
+    summaryTask = await loadTasks(userID);
+    console.log(userID);
+    console.log(summaryTask);
     checkWelcomePopup(); 
     hourCheck();
-    loadTasks();
-    summaryTask = await loadTasks(userID);
+        
     takeInfoSummary(summaryTask);
     prioritySummary(summaryTask);
     parseDate(summaryTask);

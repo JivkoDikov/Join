@@ -263,11 +263,20 @@ textarea {
 
 }
 
+.renderSelectedContacts{
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+
 .assignedContactsContainer {
   width: 100%;
 }
 
-.assignedLetters {
+.assignedLetters, .renderSelectedContactdetails {
   border: 2px solid white;
   color: #ffffff;
   border-radius: 50%;
@@ -696,6 +705,12 @@ textarea {
   border-radius: 5px;
 }
 
+.subTaskIcon:hover{
+  cursor: pointer;
+  transform: scale(0.9);
+
+}
+
 .subTasksIconsContainer{
   display: flex;
   justify-content: space-between;
@@ -808,4 +823,5 @@ textarea {
 
 .subTaskIconsBox {
   display: flex;
+  gap: 4px;
 }

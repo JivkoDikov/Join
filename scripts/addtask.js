@@ -8,6 +8,11 @@ let selectedContactDetails = [];
 let newcategoryTask = [];
 let contacts = {};
 
+async function initTasks(){
+  render();
+  loadTasks(userID);
+  
+}
 
 /**
  * Activates the form by creating a task and applying an active style.
@@ -18,7 +23,6 @@ function activForm(event) {
   addActiveStyle(3);
 }
 
-
 /**
  * Asynchronously creates a task, preventing the default event action. Initializes user tasks, creates a new task object, and updates the task list.
  * @param {Event} event - The triggering event.
@@ -26,13 +30,13 @@ function activForm(event) {
 async function createTask(event) {
   preventDefaultBehavior(event);
   const newCategory = await createAndLogNewCategory();
-  initializeUserTasks();
+  
   const newTask = createNewTaskObject(newCategory);
   await addTaskAndSave(newTask);
+  await initializeUserTasks(newTask);
   resetInputFields();
   await updateTasksAndRedirect();
 }
-
 
 /**
  * Prevents the default action of an event.
@@ -41,7 +45,6 @@ async function createTask(event) {
 function preventDefaultBehavior(event) {
   event.preventDefault();
 }
-
 
 /**
  * Asynchronously creates and logs a new task category.
@@ -54,7 +57,7 @@ async function createAndLogNewCategory() {
 /**
  * Initializes the task list for a user if it does not exist.
  */
-function initializeUserTasks() {
+async function initializeUserTasks() {
   if (!tasks[userID]) {
     tasks[userID] = [];
   }
@@ -71,7 +74,6 @@ function getNextTaskId() {
       return maxId + 1;
   }
 }
-
 
 /**
  * Creates a new task object with details from input fields and selected options.
@@ -94,6 +96,7 @@ function createNewTaskObject(newCategory) {
       category: newCategory,
       date: date
   };
+  
 }
 
 /**
@@ -117,6 +120,7 @@ async function addTaskAndSave(newTask) {
   await setItem('tasks', tasks);
 }
 
+
 /**
  * Updates the task list and redirects the user to the board view.
  */
@@ -126,7 +130,6 @@ async function updateTasksAndRedirect() {
   window.location.href = 'board.html';
 }
 
-
 /**
  * Toggles the display of the contacts list, showing it if hidden and hiding it if shown.
  */
@@ -134,13 +137,36 @@ function toggleContacts(event) {
   event.stopPropagation();
   let contactsBox = document.getElementById('contactsBox');
   if (contactsBox.style.display === 'none' || contactsBox.innerHTML.trim() === '') {
-    assignedTo(); 
-    contactsBox.style.display = 'block'; 
+    assignedTo(); // Kontakte generieren und anzeigen
+    contactsBox.style.display = 'block';
   } else {
-    contactsBox.style.display = 'none';
+    contactsBox.style.display = 'none'; // Kontaktbox ausblenden
   }
 }
 
+// This function toggles the selection of a contact when the surrounding div is clicked.
+function toggleContactSelection(initials, bgColor, name, checkboxId, event) {
+  event.stopPropagation();
+  const checkbox = document.getElementById(checkboxId);
+  if (!checkbox) return; // Exits the function early if the checkbox was not found
+
+  // Toggles the checked status of the checkbox
+  checkbox.checked = !checkbox.checked;
+
+  // Call updateSelectedContacts with the new state
+  updateSelectedContacts(initials, bgColor, name, checkbox);
+}
+
+function closeContactsBoxOnClickOutside(event) {
+  let contactsBox = document.getElementById('contactsBox');
+  if (event.target.closest('#contactsBox') === null) {
+    // Klick erfolgte außerhalb der Kontaktliste
+    contactsBox.style.display = 'none';
+    // Listener entfernen, da die Box nun geschlossen ist
+    document.removeEventListener('click', closeContactsBoxOnClickOutside);
+  }
+
+}
 
 /**
  * Asynchronously loads contacts from web storage and displays them in the contacts box.
@@ -180,8 +206,8 @@ function updateSelectedContacts(initials, bgColor, name, checkbox) {
   } else if (!checkbox.checked && contactExistsIndex !== -1) {
     selectedContactDetails.splice(contactExistsIndex, 1);
   }
+  renderSelectedContacts();
 }
-
 
 /**
  * Generates initials from a given name.
@@ -193,6 +219,19 @@ function getInitials(name) {
   return initials.length > 1 ? initials[0] + initials[1] : initials[0];
 }
 
+function renderSelectedContacts() {
+  let renderSelectedContacts = document.getElementById('renderSelectedContacts');
+  renderSelectedContacts.innerHTML = ''; // Bestehenden Inhalt löschen
+
+  // Überprüfung, ob selectedContactDetails definiert und nicht leer ist
+  if (selectedContactDetails && selectedContactDetails.length >= 0) {
+    for (let i = 0; i < selectedContactDetails.length; i++) {
+      const contact = selectedContactDetails[i];
+      renderSelectedContacts.innerHTML += `
+      <div class="renderSelectedContactdetails" style="background-color: ${contact.bgColor};"> ${getInitials(contact.name)}</div>`;
+    }
+  }
+}
 
 /**
  * Updates the task priority based on user selection and applies an active style to the selected priority button.
@@ -216,7 +255,6 @@ function updatePrio(buttonId, event) {
     selectedPrio0.classList.add('activePrio0');
   }
 }
-
 
 /**
  * Toggles the display of the category selection box, showing it if hidden and hiding it if shown.
@@ -261,7 +299,6 @@ function addCategory() {
   categoryBox.innerHTML += addCategoryHTML();
 }
 
-
 /**
  * Updates the task category selection based on user input, ensuring only one category is selected at a time.
  * @param {string} categoryId - The ID of the category checkbox element.
@@ -289,7 +326,6 @@ function updateLabels(categoryId) {
     }
   }
 }
-
 
 /**
  * Adds a subtask to the subtasksArray if the input value is not empty, then displays the updated list of subtasks.
@@ -322,7 +358,6 @@ function displaySubtasks() {
   }
 }
 
-
 /**
  * Opens the edit interface for a specified subtask, allowing the user to modify its name.
  * @param {number} index - The index of the subtask in the subtasksArray to be edited.
@@ -341,7 +376,6 @@ function editSubTask(index){
     });
 }}
 
-
 /**
  * Deletes a subtask from the subtasksArray and updates the displayed list of subtasks.
  * @param {number} index - The index of the subtask to be deleted.
@@ -351,7 +385,6 @@ function closeEditSubTask(subID, taskID){
   subEdit.innerHTML = '';
   
 }
-
 
 /**
  * Loads contacts from web storage and updates the contacts object.
@@ -378,7 +411,6 @@ function saveEditeSubTask(index) {
   }
 }
 
-
 /**
  * Resets the task form to its default state, clearing all input fields, selections, and temporary data arrays.
  */
@@ -389,14 +421,10 @@ function deleteSubTask(subtaskID,taskID) {
       displaySubtasks();
 }
 
-
-
-
 function searchContact() {
   let search = document.getElementById('searchContacts').value.toLowerCase();
   updateCategory(contacts, search);
 }
-
 
 function updateCategory(card, search) {
   card.innerHTML = '';
@@ -410,12 +438,10 @@ function updateCategory(card, search) {
   emptyCategory();
 }
 
-
 async function load_contacts_from_webstorage(){
   let contactsValue = await getItem('contacts');
   contacts = JSON.parse(contactsValue.data.value)
 }
-
 
 function clearForm() {
   document.getElementById("newTaskForm").reset();
@@ -442,7 +468,7 @@ function clearForm() {
  * Displays appropriate messages if validation fails.
  * @param {Event} event - The event triggered by the form submission attempt.
  */
-function checkNewTasks(event) {
+async function checkNewTasks(event) {
   event.preventDefault();
   let newTitle = document.getElementById('enterTitle').value;
   let newDescription = document.getElementById('enterDescription').value;
@@ -454,7 +480,7 @@ function checkNewTasks(event) {
   let isDateValid = true;
   
   ifCheckTasks(isTitleValid,isDescriptionValid,isDateValid,newTitle,newDescription,newDate,event,newCategory);
-  
+  // createTask(event);
 }
 
 /**
