@@ -112,12 +112,12 @@
   .overlayCard{
     width: calc(100vw - 36px);
     height: calc(100vh - 194px);
-    overflow-y: auto;
     overflow-x: hidden;
     gap: 16px;
     padding: 18px;
     border-radius: 0;
   }
+  
 
   .mobileArrow {
     display: block;

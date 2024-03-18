@@ -245,7 +245,7 @@ document.addEventListener("DOMContentLoaded", function() {
   initials();
 });
 
-/*document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
   const contactElements = document.querySelectorAll('.assignedContactsContainer');
   contactElements.forEach(element => {
       element.addEventListener('click', (event) => {
@@ -253,4 +253,4 @@ document.addEventListener("DOMContentLoaded", function() {
           toggleContactSelection(initials, bgColor, name, checkboxId, event);
       });
   });
-});*/
+});

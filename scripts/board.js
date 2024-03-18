@@ -443,6 +443,10 @@ function assignIcon(element) {
     }
 }
 
+function toggleCategoriesBoard(event){
+    toggleCategories(event);
+}
+
 /**
  * Toggles the display of an assigned user selection interface for a task on the board.
  * This allows users to assign or unassign other users to a task directly from the board.
