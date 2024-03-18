@@ -273,9 +273,12 @@ main {
 
 .contentEditCard{
   overflow-y: scroll;
+  overflow-x: hidden;
   padding-right: 10px;
   width: 100%;
 }
+
+
 
 .labelContent{
   display: flex;

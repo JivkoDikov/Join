@@ -63,8 +63,8 @@ async function createAndLogNewCategory() {
  * Initializes the task list for a user if it does not exist.
  */
 async function initializeUserTasks() {
-  if (!tasks[userID]) {
-    tasks[userID] = [];
+  if (!tasks) {
+    tasks = [];
   }
 }
 
@@ -72,10 +72,10 @@ async function initializeUserTasks() {
  * Retrieves the next task ID by finding the highest current ID and adding one.
  */
 function getNextTaskId() {
-  if (!tasks[userID] || tasks[userID].length === 0) {
+  if (!tasks || tasks.length === 0) {
       return 0; 
   } else {
-      const maxId = tasks[userID].reduce((max, task) => Math.max(max, task.id), 0);
+      const maxId = tasks.reduce((max, task) => Math.max(max, task.id), 0);
       return maxId + 1;
   }
 }
@@ -120,7 +120,7 @@ function resetInputFields() {
  * @param {Object} newTask - The new task to add and save.
  */
 async function addTaskAndSave(newTask) {
-  tasks[userID].push(newTask);
+  tasks.push(newTask);
   await setItem('tasks', tasks);
 }
 
@@ -212,10 +212,12 @@ function updateSelectedContacts(initials, bgColor, name, checkbox) {
  * @param {string} name - The name to generate initials from.
  */
 function getInitials(name) {
-  let names = name.split(' ');
+  let names = name.split(' ').filter(n => n !== ''); // Filter leere Zeichenfolgen heraus
+  console.log(names);
   let initials = names.map(name => name[0].toUpperCase());
-  return initials.length > 1 ? initials[0] + initials[1] : initials[0];
+  return initials.length > 1 ? initials.join('') : initials[0];
 }
+
 
 function renderSelectedContacts() {
   let renderSelectedContacts = document.getElementById('renderSelectedContacts');

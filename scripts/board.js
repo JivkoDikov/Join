@@ -314,6 +314,7 @@ function editCard(cardId) {
     
     prioEdit(infoArrayCard['priority'], cardId, event);
     renderSubTaskInBoard(infoArrayCard);
+    assignIconEdit();
 }
 
 /**
@@ -441,11 +442,37 @@ function assignIcon(element) {
             <div class="assignedLetters" style="background-color: ${icon['bgColor']}">${icon['initials']}</div>
         </div>`;
     }
+    
 }
 
 function toggleCategoriesBoard(event){
     toggleCategories(event);
 }
+
+function toggleCheckboxAndTriggerOnChange(userNameForId, event,initials,bgColor,name, cardId) {
+   
+    const checkboxId = `assignedToContact_${userNameForId}`;
+    const checkbox = document.getElementById(checkboxId);
+    if (checkbox) {
+        checkbox.checked = !checkbox.checked; 
+        updateSelectedContactsBoard(initials, bgColor, name, cardId, checkbox, event);
+    }
+}
+
+function assignIconEdit() {
+    let assignIcon = document.getElementById(`renderSelectedContacts`);
+    assignIcon.innerHTML = '';
+
+    
+    for (let i = 0; i < currentChecktContact.length; i++) {
+        let icon = currentChecktContact[i];
+        assignIcon.innerHTML +=`
+        <div class="imgProfile">
+            <div class="assignedLetters" style="background-color: ${icon['bgColor']}">${icon['initials']}</div>
+        </div>`;
+    }
+}
+
 
 /**
  * Toggles the display of an assigned user selection interface for a task on the board.
@@ -501,7 +528,8 @@ function toggleAssignedToBoard(i, event) {
  * @param {number} id - The ID of the task being updated.
  * @param {HTMLInputElement} checkbox - The checkbox input indicating whether the user is selected.
  */
-  function updateSelectedContactsBoard(initials, bgColor, name, id, checkbox) {
+  function updateSelectedContactsBoard(initials, bgColor, name, id, checkbox, event) {
+    event.stopPropagation();
     let key = name + bgColor; 
     if (checkbox.checked) {
         let isContactAlreadyAdded = currentChecktContact.some(contact => contact.name + contact.bgColor === key);
@@ -516,6 +544,7 @@ function toggleAssignedToBoard(i, event) {
         currentChecktContact = currentChecktContact.filter(contact => !(contact.name === name && contact.bgColor === bgColor));
     }
     updateAssignedUsersInCard(id);
+    assignIconEdit(id);
   }
 
  /**

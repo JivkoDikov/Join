@@ -10,7 +10,7 @@ let inputFieldName;
 let inputFieldEmail;
 let inputFieldPassword;
 let inputFieldPasswordConfirm;
-
+let IdCounterContact = 0;
 sessionStorage.removeItem("checkEmailValue");
 sessionStorage.removeItem("checkPasswordValue");
 
@@ -24,13 +24,14 @@ function checkLogin(event) {
 
     let findUser = userLogin.user.find(function(user) {
         let concat = user.email + user.password;
+        signupCounter.length = IdCounterContact;
         return loginString === concat;
+        
     });
 
     if (findUser) {
-        
-        const maxId = nameCounter.reduce((max, nameCounter) => Math.max(max, nameCounter.length), 0);
-        let id = maxId + 1; 
+        IdCounterContact ++;
+       let id = IdCounterContact;
 
         localStorage.setItem('user', findUser.email);
         localStorage.setItem('name', findUser.name);

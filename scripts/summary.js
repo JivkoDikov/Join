@@ -24,6 +24,7 @@ async function renderSummary(){
     prioritySummary(summaryTask);
     parseDate(summaryTask);
     bodySummary();
+    addActiveStyle(1);
 }
 
 /**

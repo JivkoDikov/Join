@@ -304,7 +304,7 @@ function overviewEditHTML(i) {
         
     </div>  
     <div id="contactsBox" class="contactsBox"></div>
-    <div id="renderSelectedContacts"></div>
+    <div id="renderSelectedContacts" class="renderSelectedContacts"></div>
     </div>
         <div class="subtasksContainer" id="subtasksContainerEdit" onclick="stopPropagation(event)">
 
@@ -559,18 +559,19 @@ function addTaskHTML() {
 function assignedToBoardHTML(user, isChecked, cardId) {
     const initials = getInitials(user.name); 
     const userNameForId = user.name.replace(/\s+/g, '_');
-
+    // Fügen Sie dem umschließenden div onclick hinzu
     return `
-    <div class="assignedContactsContainer" onclick="stopPropagation(event)">
-        <div class="assignedContactSVG">
+    <div class="assignedContactsContainer">
+        <div class="assignedContactSVG" onclick="toggleCheckboxAndTriggerOnChange('${userNameForId}', event,'${initials}', '${user.bgColor}', '${user.name}', '${cardId}')">
             <div class="letterContacts">
                 <div class="assignedLetters" style="background-color: ${user.bgColor}">${initials}</div>
                 <span>${user.name}</span>
             </div>
-            <input id="assignedToContact_${userNameForId}" type="checkbox" ${isChecked} onchange="updateSelectedContactsBoard('${initials}', '${user.bgColor}', '${user.name}', '${cardId}', this)">
+            <input id="assignedToContact_${userNameForId}" type="checkbox" ${isChecked} onchange="event.stopPropagation();">
         </div>
     </div>`;
 }
+
 
 
 
