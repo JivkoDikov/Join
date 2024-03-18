@@ -272,7 +272,7 @@ main {
 }
 
 .contentEditCard{
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   padding-right: 10px;
   width: 100%;

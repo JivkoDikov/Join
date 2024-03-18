@@ -118,7 +118,10 @@
     border-radius: 0;
   }
   
-
+  .overview{
+    background-color: unset;
+  }
+  
   .mobileArrow {
     display: block;
     }
