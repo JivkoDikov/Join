@@ -34,7 +34,7 @@ function assignedToHTML(contact, initials, isChecked) {
   
     function addCategoryHTML() {
       return `
-      <div class="categoryTaskContainer">
+      <div class="categoryTaskContainer" onclick="toggleCategorySelection('technicalTaskCheckbox')">
         <div class="selectCategoryContainer">
           <div class="selectCategory">
             <span id="technicalTask">Technical Task</span>
@@ -42,7 +42,7 @@ function assignedToHTML(contact, initials, isChecked) {
           <input id="technicalTaskCheckbox" type="checkbox" onchange="updateLabels('technicalTaskCheckbox')">
         </div>
       </div>
-      <div class="categoryTaskContainer">
+      <div class="categoryTaskContainer" onclick="toggleCategorySelection('userStoryCheckbox')">
         <div class="selectCategoryContainer">
           <div class="selectCategory">
             <span id="userStory">User Story</span>
@@ -50,8 +50,9 @@ function assignedToHTML(contact, initials, isChecked) {
           <input id="userStoryCheckbox" type="checkbox" onchange="updateLabels('userStoryCheckbox')">
         </div>
       </div>
-    `;
+      `;
     }
+    
   
   
     function editSubTaskHTML(index, subTaskName) {

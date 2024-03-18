@@ -20,11 +20,6 @@ async function initBoard(){
  */
 async function updateHTML() {
     cards = await loadTasks(userID);
-    if (!Array.isArray(cards)) {
-        console.error('Expected cards to be an array, but got:', typeof cards);
-        cards = []; // Fallback to an empty array
-      }
-      
     const categories = ['todo', 'progress', 'feedback', 'done'];
     for (const category of categories) {
         console.log(cards);
@@ -445,6 +440,10 @@ function assignIcon(element) {
             <div class="assignedLetters" style="background-color: ${icon['bgColor']}">${icon['initials']}</div>
         </div>`;
     }
+}
+
+function toggleCategoriesBoard(event){
+    toggleCategories(event);
 }
 
 /**
