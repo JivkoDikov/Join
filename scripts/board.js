@@ -314,7 +314,9 @@ function editCard(cardId) {
     
     prioEdit(infoArrayCard['priority'], cardId, event);
     renderSubTaskInBoard(infoArrayCard);
-    assignIconEdit();
+    assignIconEditRender(cardId);
+    
+    
 }
 
 /**
@@ -334,11 +336,11 @@ async function CardEditForm(event,cardId) {
     infoArrayCard.headline = titleEdit;
     infoArrayCard.text = textareaEdit;
     infoArrayCard.date = dateEdit;
-    await setItem('tasks', tasks)
-    
+    await setItem('tasks', tasks);
+    currentChecktContact = [];
     closeOverview();
     updateHTML(); 
-   
+    
 }
 
 /**
@@ -424,6 +426,7 @@ function assignedToEdit(element, b) {
         </div>`;
     }
     assignIcon(element);
+    
 }
 
 /**
@@ -462,8 +465,7 @@ function toggleCheckboxAndTriggerOnChange(userNameForId, event,initials,bgColor,
 function assignIconEdit() {
     let assignIcon = document.getElementById(`renderSelectedContacts`);
     assignIcon.innerHTML = '';
-
-    
+  
     for (let i = 0; i < currentChecktContact.length; i++) {
         let icon = currentChecktContact[i];
         assignIcon.innerHTML +=`
@@ -472,6 +474,28 @@ function assignIconEdit() {
         </div>`;
     }
 }
+function assignIconEditRender(cardId) {
+    let card = cards.find(card => card.id === cardId);
+    console.log(card['user']);
+    let assignIcon = document.getElementById(`renderSelectedContacts`);
+    assignIcon.innerHTML = '';
+  
+    for (let i = 0; i < card['user'].length; i++) {
+        console.log(card['user'][i]['initials']);
+        
+        currentChecktContact.push({
+            name: card['user'][i]['name'],
+            bgColor: card['user'][i]['bgColor'],
+            initials: card['user'][i]['initials']
+        });
+
+        assignIcon.innerHTML +=`
+        <div class="imgProfile">
+            <div class="assignedLetters" style="background-color: ${card['user'][i]['bgColor']}">${card['user'][i]['initials']}</div>
+        </div>`;
+    }
+}
+
 
 
 /**
@@ -488,6 +512,7 @@ function toggleAssignedToBoard(i, event) {
     } else {
       contactsBox.style.display = 'none'; 
     }
+    
   }
   
 /**
@@ -558,6 +583,7 @@ async function updateAssignedUsersInCard(id) {
         cards[cardIndex].user = currentChecktContact;
         await setItem('tasks', cards);
         assignIcon(cards[cardIndex]);   
+        
     }
 }
 
