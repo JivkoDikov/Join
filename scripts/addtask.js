@@ -75,7 +75,7 @@ function getNextTaskId() {
   if (!tasks[userID] || tasks[userID].length === 0) {
       return 0; 
   } else {
-      const maxId = tasks.reduce((max, task) => Math.max(max, task.id), 0);
+      const maxId = tasks[userID].reduce((max, task) => Math.max(max, task.id), 0);
       return maxId + 1;
   }
 }

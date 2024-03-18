@@ -272,6 +272,8 @@ main {
 }
 
 .contentEditCard{
+  overflow-y: scroll;
+  padding-right: 10px;
   width: 100%;
 }
 

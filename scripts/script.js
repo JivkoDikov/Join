@@ -47,7 +47,6 @@ async function load_contacts_from_webstorage(){
   }
 }
 
-
 /**
  * Fetches tasks for a specific user from storage.
  * @param {string} userID - The user ID for which tasks are being loaded.
@@ -57,10 +56,10 @@ async function loadTasks(userID){
   console.log(userTask);
   tasks = JSON.parse(userTask.data.value || '{}');
   console.log(tasks);
-  return tasks[userID] || [];
+  console.log([tasks[userID]]);
+  console.log(tasks[userID]);
+  return tasks || [];
 }
-
-
 
 /**
  * Retrieves and returns task categories from storage.
