@@ -28,11 +28,9 @@ function checkLogin(event) {
         return loginString === concat;
         
     });
-
     if (findUser) {
         IdCounterContact ++;
        let id = IdCounterContact;
-
         localStorage.setItem('user', findUser.email);
         localStorage.setItem('name', findUser.name);
         localStorage.setItem('userID', id); 
@@ -42,9 +40,6 @@ function checkLogin(event) {
     }
 }
 
-
-
-
 /**
  * Asynchronously loads user data from storage and initializes the user login state.
  */
@@ -53,7 +48,7 @@ async function loadUser() {
     let [boolean, storageData] = await checkStorageData(key);
     if(boolean == true){
     userLogin = storageData;
-    }}
+}}
 
 /**
  * Logs in a user as a guest, setting the appropriate values in local storage.

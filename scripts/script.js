@@ -52,12 +52,8 @@ async function load_contacts_from_webstorage(){
  * @param {string} userID - The user ID for which tasks are being loaded.
  */
 async function loadTasks(userID){
-  let userTask = await getItem('tasks');
-  console.log(userTask);
+  let userTask = await getItem(`tasks`);
   tasks = JSON.parse(userTask.data.value || '{}');
-  console.log(tasks);
-  console.log([tasks[userID]]);
-  console.log(tasks[userID]);
   return tasks || [];
 }
 

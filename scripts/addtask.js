@@ -8,12 +8,21 @@ let selectedContactDetails = [];
 let newcategoryTask = [];
 let contacts = {};
 
+
+/**
+ * Initializes the tasks view by rendering the UI and loading tasks for the current user.
+ * This function is typically called when the tasks page is loaded to ensure that the user's tasks are displayed.
+ */
 async function initTasks(){
   render();
   loadTasks(userID);
   
 }
 
+/**
+ * Handles the form submission for adding a new task, including validation and opening the add task modal with a default category.
+ * @param {Event} event - The event object associated with the form submission.
+ */
 function addTaskForm(event){
   checkNewTasks(event);
   addTaskHTMLOpen('todo');
@@ -121,7 +130,7 @@ function resetInputFields() {
  */
 async function addTaskAndSave(newTask) {
   tasks.push(newTask);
-  await setItem('tasks', tasks);
+  await setItem(`tasks`, tasks);
 }
 
 
@@ -218,7 +227,11 @@ function getInitials(name) {
   return initials.length > 1 ? initials.join('') : initials[0];
 }
 
-
+/**
+ * Renders the currently selected contacts for a task, displaying their initials on a background color indicative of their selection.
+ * This function iterates over the `selectedContactDetails` array and dynamically updates the DOM to display each selected contact.
+ * Contacts are visually represented by their initials set against a background color, both properties derived from the contact details.
+ */
 function renderSelectedContacts() {
   let renderSelectedContacts = document.getElementById('renderSelectedContacts');
   renderSelectedContacts.innerHTML = ''; 
@@ -420,7 +433,9 @@ function saveEditeSubTask(index) {
 }
 
 /**
- * Resets the task form to its default state, clearing all input fields, selections, and temporary data arrays.
+ * Removes a specified subtask from the task list based on its unique subtask ID and updates the display of subtasks.
+ * @param {number} subtaskID - The unique identifier of the subtask to be removed.
+ * @param {number} taskID - The unique identifier of the task to which the subtask belongs.
  */
 function deleteSubTask(subtaskID,taskID) {
   let index = subtasksArray.findIndex(task => task.subID === subtaskID);
@@ -429,11 +444,20 @@ function deleteSubTask(subtaskID,taskID) {
       displaySubtasks();
 }
 
+/**
+ * Filters the contact list based on a search query and updates the display to only show matching contacts.
+ */
 function searchContact() {
   let search = document.getElementById('searchContacts').value.toLowerCase();
   updateCategory(contacts, search);
 }
 
+/**
+ * Updates the display of a specific category of tasks based on a search query.
+ * This function dynamically updates the task display, showing only tasks that match the search criteria within the specified category.
+ * @param {HTMLElement} card - The card element representing the category to update.
+ * @param {string} search - The search query used for filtering tasks.
+ */
 function updateCategory(card, search) {
   card.innerHTML = '';
 
@@ -446,11 +470,18 @@ function updateCategory(card, search) {
   emptyCategory();
 }
 
+/**
+ * Asynchronously loads contacts from web storage and updates the contacts state.
+ */
 async function load_contacts_from_webstorage(){
   let contactsValue = await getItem('contacts');
   contacts = JSON.parse(contactsValue.data.value)
 }
 
+/**
+ * Resets the task form to its default state, clearing all input fields, selections, and temporary data arrays.
+ * This function is typically called after a task is successfully added or when the user wishes to clear the form.
+ */
 function clearForm() {
   document.getElementById("newTaskForm").reset();
   selectedContactDetails = [];

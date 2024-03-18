@@ -20,10 +20,10 @@ async function initBoard(){
  * This function asynchronously loads tasks for a user and updates each category section on the page.
  */
 async function updateHTML() {
-    cards = await loadTasks(userID);
+    cards = await loadTasks();
     const categories = ['todo', 'progress', 'feedback', 'done'];
     for (const category of categories) {
-        console.log(cards);
+       
         let categoryElements = cards.filter(t => t['category'] === category);
         document.getElementById(category).innerHTML = '';
         for (let i = 0; i < categoryElements.length; i++) {
@@ -244,13 +244,11 @@ function subtasksCheckForTrue(cardId, subtaskID) {
         card.subtasks[subtaskID].done = true;
     }else if(checkbox === false) {
         card.subtasks[subtaskID].done = false;}
-
     subtasksCheck(card);
     updateProgressBar(card);
 }
 
 function isSubTaskTrue(card) {
-   
     if (card.subtasks.length > 0) {
         document.getElementById('isSubTaskTrue').innerHTML = `
         <div class="progress-container">
@@ -311,12 +309,9 @@ function editCard(cardId) {
     title.value = infoArrayCard['headline'];  
     textarea.value = infoArrayCard['text']; 
     data.value = infoArrayCard['date']; 
-    
     prioEdit(infoArrayCard['priority'], cardId, event);
     renderSubTaskInBoard(infoArrayCard);
     assignIconEditRender(cardId);
-    
-    
 }
 
 /**
@@ -385,7 +380,6 @@ async function deleteCard(id) {
  */
 function prioEdit(prioID,cardId,event){
     event.preventDefault()
-
     let card = cards.find(card => card.id === cardId)
     card.priority = prioID
     
@@ -416,7 +410,6 @@ function prioEdit(prioID,cardId,event){
 function assignedToEdit(element, b) {
     let assignProfil = document.getElementById(`assignedProfileName${b}`);
         assignProfil.innerHTML = '';
-
     for (let i = 0; i < element['user'].length; i++) {
         let userInitials = element['user'][i];
         assignProfil.innerHTML +=`
@@ -425,8 +418,7 @@ function assignedToEdit(element, b) {
             <span>${userInitials['name']}</span>
         </div>`;
     }
-    assignIcon(element);
-    
+    assignIcon(element); 
 }
 
 /**
@@ -437,23 +429,35 @@ function assignedToEdit(element, b) {
 function assignIcon(element) {
     let assignIcon = document.getElementById(`iconProfile${element['id']}`);
     assignIcon.innerHTML = '';
-
     for (let i = 0; i < element['user'].length; i++) {
         let icon = element['user'][i];
         assignIcon.innerHTML +=`
         <div class="imgProfile">
             <div class="assignedLetters" style="background-color: ${icon['bgColor']}">${icon['initials']}</div>
         </div>`;
-    }
-    
+    } 
 }
 
+/**
+ * Toggles the display of categories on the board based on a user event.
+ * This function is a wrapper around the `toggleCategories` function, ensuring it can be easily called from UI events.
+ * @param {Event} event - The event that triggered the toggle action.
+ */
 function toggleCategoriesBoard(event){
     toggleCategories(event);
 }
 
+/**
+ * Toggles the checkbox state for an assigned contact and triggers an update to the board's display based on this change.
+ * This function is specifically designed to handle user interactions with contact checkboxes in the task assignment UI.
+ * @param {string} userNameForId - A unique identifier for the user, used to construct the checkbox ID.
+ * @param {Event} event - The event that triggered the action.
+ * @param {string} initials - The initials of the user related to the checkbox.
+ * @param {string} bgColor - The background color associated with the user, for UI display.
+ * @param {string} name - The full name of the user.
+ * @param {number} cardId - The ID of the card to which the user is being assigned or unassigned.
+ */
 function toggleCheckboxAndTriggerOnChange(userNameForId, event,initials,bgColor,name, cardId) {
-   
     const checkboxId = `assignedToContact_${userNameForId}`;
     const checkbox = document.getElementById(checkboxId);
     if (checkbox) {
@@ -462,6 +466,10 @@ function toggleCheckboxAndTriggerOnChange(userNameForId, event,initials,bgColor,
     }
 }
 
+/**
+ * Updates the assigned user icons for editing a task. This function refreshes the display of assigned user icons
+ * in the task editing interface, showing the current state of user assignments based on `currentChecktContact`.
+ */
 function assignIconEdit() {
     let assignIcon = document.getElementById(`renderSelectedContacts`);
     assignIcon.innerHTML = '';
@@ -474,6 +482,12 @@ function assignIconEdit() {
         </div>`;
     }
 }
+
+/**
+ * Renders the assigned user icons in the task editing interface for a specific task.
+ * This function pulls the current assigned users from the specified task and updates the display accordingly.
+ * @param {number} cardId - The ID of the task for which to render assigned user icons.
+ */
 function assignIconEditRender(cardId) {
     let card = cards.find(card => card.id === cardId);
     console.log(card['user']);
@@ -496,8 +510,6 @@ function assignIconEditRender(cardId) {
     }
 }
 
-
-
 /**
  * Toggles the display of an assigned user selection interface for a task on the board.
  * This allows users to assign or unassign other users to a task directly from the board.
@@ -513,7 +525,7 @@ function toggleAssignedToBoard(i, event) {
       contactsBox.style.display = 'none'; 
     }
     
-  }
+}
   
 /**
  * Populates and displays the assigned user selection interface for a task, allowing users to be assigned to the task.
@@ -525,7 +537,6 @@ function toggleAssignedToBoard(i, event) {
     contactsBox.innerHTML = '';
     let users = contacts[userID];
     let card = cards.find(card => card.id === cardId);
-
     if (!card) {
         return; 
     }
@@ -543,7 +554,6 @@ function toggleAssignedToBoard(i, event) {
     }
     
 }
-
 
 /**
  * Updates the list of selected contacts for a task based on user interactions in the assigned user interface.
@@ -597,7 +607,6 @@ async function addTaskHTMLOpen(category) {
     if (!openAddTask) {
         return;
     }
-
     openAddTask.innerHTML = '';
     openAddTask.innerHTML = addTaskHTML();
     openAddTask.classList.remove('d-none');
@@ -605,7 +614,6 @@ async function addTaskHTMLOpen(category) {
     categorys = [];
     updateHTML();
 }
-
 
 /**
  * Closes the add task overlay or modal, discarding any input and returning to the board view.
@@ -717,7 +725,6 @@ function loadSubOfArray() {
     }
 }
 
-
 /**
  * Prepares the input area for adding or editing subtasks for a specific task.
  * @param {Object} infoArrayCard - The task object for which subtasks are being edited or added.
@@ -739,7 +746,6 @@ function editSubTaskInBoardCard(subID, subName, taskID) {
     let editSubBar = document.getElementById('editSubTaskContainer');
     editSubBar.innerHTML = editSubTaskInBoardCardHTML(subID, subName, taskID);
 }
-
 
 /**
  * Closes the edit interface for subtasks.
@@ -787,7 +793,6 @@ function deleteSubTaskInBoardCard(subID, taskID) {
     loadSubOfArray();
     saveNewSubTaskToBoard(subID, taskID);
 }
-
 
 /**
  * Adds a new subtask to a task on the board.
