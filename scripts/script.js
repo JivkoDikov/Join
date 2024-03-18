@@ -1,3 +1,4 @@
+
 let isClicked = false;
 let tasks = [];
 let userID = parseInt(localStorage.getItem('userID'), 10);
@@ -57,7 +58,6 @@ async function loadTasks(userID){
   tasks = JSON.parse(userTask.data.value || '{}');
   console.log(tasks);
   return tasks[userID] || [];
-  
 }
 
 

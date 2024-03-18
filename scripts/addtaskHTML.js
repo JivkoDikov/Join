@@ -1,6 +1,6 @@
+
 function assignedToHTML(contact, initials, isChecked) {
   const checkedAttribute = isChecked ? 'checked' : '';
-  // ID für die Checkbox generieren, um Duplikate zu vermeiden und die Eindeutigkeit sicherzustellen
   const checkboxId = `assignedToContact_${contact.name.replace(/\s+/g, '_')}`;
 
   return `

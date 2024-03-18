@@ -101,7 +101,6 @@ function createNewTaskObject(newCategory) {
       category: newCategory,
       date: date
   };
-  
 }
 
 /**

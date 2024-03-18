@@ -1,3 +1,4 @@
+
 let cards = [];
 let currentDraggedElement;
 let currentChecktContact = [];
