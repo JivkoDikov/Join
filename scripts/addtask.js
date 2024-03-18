@@ -142,10 +142,10 @@ function toggleContacts(event) {
   event.stopPropagation();
   let contactsBox = document.getElementById('contactsBox');
   if (contactsBox.style.display === 'none' || contactsBox.innerHTML.trim() === '') {
-    assignedTo(); // Kontakte generieren und anzeigen
+    assignedTo(); 
     contactsBox.style.display = 'block';
   } else {
-    contactsBox.style.display = 'none'; // Kontaktbox ausblenden
+    contactsBox.style.display = 'none'; 
   }
 }
 
@@ -153,21 +153,15 @@ function toggleContacts(event) {
 function toggleContactSelection(initials, bgColor, name, checkboxId, event) {
   event.stopPropagation();
   const checkbox = document.getElementById(checkboxId);
-  if (!checkbox) return; // Exits the function early if the checkbox was not found
-
-  // Toggles the checked status of the checkbox
+  if (!checkbox) return;
   checkbox.checked = !checkbox.checked;
-
-  // Call updateSelectedContacts with the new state
   updateSelectedContacts(initials, bgColor, name, checkbox);
 }
 
 function closeContactsBoxOnClickOutside(event) {
   let contactsBox = document.getElementById('contactsBox');
   if (event.target.closest('#contactsBox') === null) {
-    // Klick erfolgte außerhalb der Kontaktliste
     contactsBox.style.display = 'none';
-    // Listener entfernen, da die Box nun geschlossen ist
     document.removeEventListener('click', closeContactsBoxOnClickOutside);
   }
 
@@ -226,9 +220,8 @@ function getInitials(name) {
 
 function renderSelectedContacts() {
   let renderSelectedContacts = document.getElementById('renderSelectedContacts');
-  renderSelectedContacts.innerHTML = ''; // Bestehenden Inhalt löschen
+  renderSelectedContacts.innerHTML = ''; 
 
-  // Überprüfung, ob selectedContactDetails definiert und nicht leer ist
   if (selectedContactDetails && selectedContactDetails.length >= 0) {
     for (let i = 0; i < selectedContactDetails.length; i++) {
       const contact = selectedContactDetails[i];
@@ -328,13 +321,12 @@ function updateLabels(categoryId) {
   let selectTaskCategory = document.getElementById('selectTaskCategory');
 
   if (checkbox.checked) {
-    categoryArray = [categoryText]; // Speichert die aktuell ausgewählte Kategorie
+    categoryArray = [categoryText]; 
     selectTaskCategory.innerText = categoryText;
   } else {
-    categoryArray = []; // Leert das Array, wenn keine Kategorie ausgewählt ist
+    categoryArray = [];
     selectTaskCategory.innerText = 'Select task category';
   }
-  // Stellt sicher, dass nur ein Kontrollkästchen gleichzeitig markiert sein kann
   document.querySelectorAll('input[type="checkbox"]').forEach(otherCheckbox => {
     if (otherCheckbox.id !== categoryId) {
       otherCheckbox.checked = false;
